@@ -78,4 +78,6 @@ theme: vexo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://hazelwu2.github.io/22mm/
+  branch: master
