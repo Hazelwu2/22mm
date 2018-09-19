@@ -1,10 +1,12 @@
 ---
 title: 為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。
-date: 2017-12-23 06:11:59
+date: 2018-07-23 23:11:59
 tags:
 ---
 我用Ruby on Rails寫了一個CRUD網路相簿的網站，主機採用Heroku提供的服務。但是有一個缺點，Heroku不提供檔案儲存的空間，每過一段時間就會洗白一次。
 講白話一點就是：我上傳的相片過一段時間就會不見了，我得為我的相片找新的空間存放才行。這裡使用的是Amazon S3 storage服務，可以自動上傳到S3空間
+
+- `20180723` 更新，Amazon 有更改介面，故 S3 Access key指引教學也有更新內容。
 
 ----------
 廢話不多說，開始教學吧
@@ -50,12 +52,15 @@ end
 
 
 #### AWS S3 KEY 要去哪裡找？
+*20180723 更新，Amazon 有更改介面，更新要怎麼從 Amazon 找到 S3 Access key*
 1. AWS 登入後
-2. My Account
-3. Security Credentials
-4.  Access keys (access key ID and secret access key)
-
-
+2. 點開選單，點擊 `Security Credentials`
+![S3 Security Credentials](https://i.imgur.com/efIyId3.png)
+3. 側邊選單點 Users，並建立一個 User 帳戶
+4. 點擊 `你剛建立的User帳號`，標籤選 `Security Credentials`
+5. Create Access Key
+![20180723 update. how to find Amazon S3 access key](https://i.imgur.com/B4DTXAi.png)
+在 Create Access Key的過程便會 Show出 ID 與 KEY 囉。
 
 #### Region設定方式查詢：[查詢AWS區域代號](http://docs.aws.amazon.com/general/latest/gr/rande.html "查詢AWS區域代號")
 
@@ -76,14 +81,34 @@ How to setting localhost & Heroku environment variable ?
 本機 Rails 環境變數設定 AWS S3 KEY
 
 ```
-export S3_ACCESS_KEY_ID= "your access key id"
-export S3_SECRET_ACCESS_KEY= "your secret access key"
+export S3_KEY= "your access key id"
+export S3_SECRET= "your secret access key"
+```
+範例程式碼如下，請不要複製，皆為虛假，請真正填上你S3的資訊。
+```
+export S3_KEY='AKIAI2XXX24DGFCDNCQ'
+export S3_SECRET='nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T'
+export S3_BUCKET='restaurant-review'
 ```
 
-Heroku 遠端設定 AWS S3 KEY
+### Heroku 遠端設定 AWS S3 KEY
+若沒有在heroku上設定S3 KEY，直接`git push heroku master`推到heroku上，會發現推不上去哦！
+錯誤訊息會這樣顯示
+> ArgumentError: Missing required arguments: aws_access_key_id, aws_secret_access_key
+> Precompiling assets failed.
+所以還是要乖乖的先把這步驟做完，遠端連線到Heroku Server並設定好Key後，即可順利推上去。
 
-`$ heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy`
+
+`$ heroku config:set S3_KEY=xxx S3_SECRET=yyy S3_BUCKET=zzz`
+以下程式碼僅為參考用，非正確可使用的KEY。
+```
+heroku config:set S3_KEY=AKIAI2XXX24DGFCDNCQ
+heroku config:set S3_SECRET=nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T
+heroku config:set S3_BUCKET=restaurant-review
+```
 ![Setting-AWS-S3-loaclhost](https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/23163331/setting-aws-s3-1024x356.png)
+
+
 
 #### 設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧
 
