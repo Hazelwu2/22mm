@@ -80,11 +80,20 @@ root: /22mm/
 ```
 
 ### 有個人網域 設定
-有個人網域的話，將url設定成自己購買的網址，記得`/`不要省略
+有個人網域的話，開啟 _config.yml，並將url設定成自己購買的網址，記得`/`不要省略
 ```
 url: http://wualnz.com/
 root: /
 ```
+最後，再回到github你的repo內，設定 Custom Domain
+
+1. 進入github，點 Hexo 的 Repo，並進入設定
+2. GitHub Pages 下的 Custom domain
+3. 修改成你購買的網域。（要與CNAME檔案設定一致）
+
+（例：我的網域是wualnz）
+![Github 設定 Custom Domain Hexo](https://i.imgur.com/kbEuK16.png)
+
 
 以上步驟完成後，便綁定個人網域成功。
 <br>
