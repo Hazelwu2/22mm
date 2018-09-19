@@ -1,8 +1,7 @@
 ---
 title: Canvas：前端特效動畫的基礎
 date: 2018-09-13 11:21:09
-tags: 
-  - canvas
+tags: "canvas"
 ---
 ## Canvas 基礎特性
 ![像素圖示範](http://bpic.588ku.com/element_pic/12/03/20/1656e3909271e51.jpg)
