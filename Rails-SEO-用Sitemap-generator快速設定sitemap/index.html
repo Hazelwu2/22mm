@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Rails SEO-用Sitemap-generator快速設定sitemap | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Rails SEO-用Sitemap-generator快速設定sitemap</h2>
+  <p class="post-date">2017-11-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="Rails-SEO-用Sitemap-generator快速設定sitemap"><a href="#Rails-SEO-用Sitemap-generator快速設定sitemap" class="headerlink" title="Rails SEO-用Sitemap-generator快速設定sitemap"></a>Rails SEO-用Sitemap-generator快速設定sitemap</h1><p>如何用gem gitemap外掛，將Rails整體專案產出sitemap</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'sitemap_generator'</span> </span><br><span class="line"><span class="comment"># 在Gemfile加入此行</span></span><br><span class="line">bundle install          </span><br><span class="line"><span class="comment"># 安裝套件</span></span><br><span class="line">rake <span class="symbol">sitemap:</span>install</span><br><span class="line">自動生成 APP/config/sitemap.rb</span><br><span class="line"><span class="comment"># 開啟sitemap.rb，已自動生成好格式</span></span><br><span class="line">SitemapGenerator::Sitemap.create <span class="keyword">do</span></span><br><span class="line"><span class="comment"># 必要設定default_host</span></span><br><span class="line">SitemapGenerator::Sitemap.default_host = <span class="string">"http://www.你的網站.com"</span></span><br><span class="line"><span class="comment"># 接下來就是自由設定你自己Style的map了!</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="設定robot-txt，爬蟲能夠爬得到Sitemap"><a href="#設定robot-txt，爬蟲能夠爬得到Sitemap" class="headerlink" title="設定robot.txt，爬蟲能夠爬得到Sitemap"></a><strong>設定robot.txt，爬蟲能夠爬得到Sitemap</strong></h3><p><strong>在public/robot.txt輸入</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sitemap: http://www.你的網站.com/sitemap.xml.gz</span><br></pre></td></tr></table></figure>
+<h3 id="在本端產生sitemap-xml，測試路徑是否正確"><a href="#在本端產生sitemap-xml，測試路徑是否正確" class="headerlink" title="在本端產生sitemap.xml，測試路徑是否正確"></a>在本端產生sitemap.xml，測試路徑是否正確</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rake sitemap:refresh:no_ping  #測試，故不提交給搜尋引擎</span><br><span class="line">localhost:3000/sitemap.xml.gz #瀏覽器</span><br><span class="line">#自動下載下來後用瀏覽器重新開啟</span><br></pre></td></tr></table></figure>
+<h3 id="測試沒問題了！Deploy-到-Heroku跑看看"><a href="#測試沒問題了！Deploy-到-Heroku跑看看" class="headerlink" title="測試沒問題了！Deploy 到 Heroku跑看看"></a>測試沒問題了！Deploy 到 Heroku跑看看</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am &apos;Added sitemap to SEO&apos;</span><br><span class="line">git push heroku master</span><br><span class="line">heroku run sitemap:refresh</span><br></pre></td></tr></table></figure>
+<p>Heroku傳回console.log訊息是有建立成功，但真的測試會發現找不到sitemap。原因出在Heroku採用臨時文件系統，需要找一個容器來裝檔案才行。以下是Heroku官網說明：關於Ephemeral filesystem。</p>
+<blockquote>
+<h4 id="Heroku-採用Ephemeral-filesystem（臨時文件系統）"><a href="#Heroku-採用Ephemeral-filesystem（臨時文件系統）" class="headerlink" title="Heroku 採用Ephemeral filesystem（臨時文件系統）"></a>Heroku 採用Ephemeral filesystem（臨時文件系統）</h4><p>當重新部署或動態管理時，導致資料會重新歸0<br>During the dyno’s lifetime its running processes can use the filesystem as a temporary scratchpad, <strong>but no files that are written are visible to processes in any other dyno and any files written will be discarded the moment the dyno is stopped or restarted.</strong> For example, <strong>this occurs any time a dyno is replaced due to application deployment and approximately once a day as part of normal dyno management.</strong></p>
+</blockquote>
+<h2 id="那就放在Amazon-S3吧！"><a href="#那就放在Amazon-S3吧！" class="headerlink" title="那就放在Amazon S3吧！"></a>那就放在Amazon S3吧！</h2><blockquote>
+<p><strong>寫入S3前，請先完成幾個步驟</strong></p>
+<p>1.註冊AWS會員，並登錄信用卡，才可以用Aws的免費額度。</p>
+<p>2.開啟AWS S3的服務，建立一個Bucket</p>
+<p>3.在本機環境設定先設好AWS相關的API帳密設定，接下來會用到，若沒設定好會出錯。</p>
+</blockquote>
+<h3 id="使用CarrierWave-上傳到-AWS-S3"><a href="#使用CarrierWave-上傳到-AWS-S3" class="headerlink" title="使用CarrierWave 上傳到 AWS S3"></a>使用CarrierWave 上傳到 AWS S3</h3><p>Rails含有豐富的Gem世界，Sitemaps支援多種外掛上傳到遠端空間，包含以下幾鐘：FileAdapter、FogAdapter、S3Adapter、AwsSdkAdapter、WaveAdapter，參考頁面：<a href="https://github.com/kjvarga/sitemap_generator#supported-adapters" target="_blank" rel="noopener">官方頁面Supported Adapters</a><br>藉由Gem CarrierWave來上傳到S3，請先安裝好CarrierWave的Gem</p>
+<p><strong>在sitemap.rb內修改</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">require &apos;carrierwave&apos;</span><br><span class="line">require &apos;sitemap_generator&apos;</span><br><span class="line"></span><br><span class="line">SitemapGenerator::Sitemap.default_host = &quot;你的網址&quot;</span><br><span class="line"></span><br><span class="line"># 你的AWS S3空間網址，創建的bucket-name</span><br><span class="line">SitemapGenerator::Sitemap.sitemaps_host = &quot;http://s3.amazonaws.com/你的bucket-name/&quot;</span><br><span class="line"># AWS S3 的bucket底下建立一個資料夾sitemaps</span><br><span class="line">SitemapGenerator::Sitemap.sitemaps_path = &apos;sitemaps/&apos;</span><br><span class="line"># 會放在heroku伺服器內的public/tmp資料架底下</span><br><span class="line">SitemapGenerator::Sitemap.public_path = &apos;tmp/&apos;</span><br><span class="line"></span><br><span class="line"># 使用WaveAdapter來上傳到AWS S3</span><br><span class="line">SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new</span><br><span class="line"></span><br><span class="line">SitemapGenerator::Sitemap.create do</span><br><span class="line">	add &apos;/about&apos;, :changefreq =&gt; &apos;monthly&apos;</span><br><span class="line">	add &apos;/news&apos;, :changefreq =&gt; &apos;monthly&apos;</span><br><span class="line">	add &apos;/article&apos;</span><br><span class="line">	Post.find_each do |post|</span><br><span class="line">	    add post_path(post.friendly_id), :lastmod =&gt; post.updated_at</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>新增home#controller，設定sitemap路徑</p>
+<pre><code>rails controller -g home
+</code></pre><p>在home_controller.rb內設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def robots                                             </span><br><span class="line"> robots = File.read(Rails.root + &quot;config/robots.#&#123;Rails.env&#125;.txt&quot;)</span><br><span class="line"> render :text =&gt; robots, :layout =&gt; false, :content_type =&gt; &quot;text/plain&quot;</span><br><span class="line">end</span><br><span class="line">def sitemap</span><br><span class="line">  redirect_to &apos;https://s3-ap-northeast-1.amazonaws.com/你的bucket-name/sitemaps/sitemap.xml.gz&apos;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>在routes設定路徑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get &apos;/sitemaps.xml.gz&apos; =&gt; &apos;home#sitemap&apos;</span><br><span class="line">get &apos;/robots.txt&apos; =&gt; &apos;home#robots&apos;</span><br></pre></td></tr></table></figure>
+<p>再重新Deploy到heroku測試看看。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am <span class="string">'Add home#controller &amp; Setting routes &amp; Sitemap use Wave Adapter'</span></span><br><span class="line">git push heroku master</span><br><span class="line">heroku run <span class="symbol">sitemap:</span>refresh</span><br></pre></td></tr></table></figure>
+<p>查看看你的AWS S3空間有沒有多出新的資料夾叫「sitemap」，有的話代表上傳成功囉！<br>接著就是去Google Console提交你的Sitemap啦！</p>
+<h4 id="更新robots-txt，上傳到heroku後未抓到更改後的版本。"><a href="#更新robots-txt，上傳到heroku後未抓到更改後的版本。" class="headerlink" title="更新robots.txt，上傳到heroku後未抓到更改後的版本。"></a><strong>更新robots.txt，上傳到heroku後未抓到更改後的版本。</strong></h4><p>在production.rb上加入後重新Deploy到heroku，就抓得到新的版本囉</p>
+<pre><code>config.static_cache_control = &quot;public, max-age=2592000&quot;
+</code></pre><h4 id="指令介紹"><a href="#指令介紹" class="headerlink" title="指令介紹"></a>指令介紹</h4><hr>
+<p><code>rake sitemap:install</code> 第一步安裝，會自動生成<strong>sitemap.rb</strong>在config目錄底下</p>
+<p><code>rake sitemap:refresh</code> 更新sitemap.xml.gz，並提交到搜尋引擎Google等</p>
+<p><code>rake sitemap:refresh:no_ping</code> 更新sitemap.xml.gz，但<strong>不提交</strong>到搜尋引擎（可在本機development環境下測試）</p>
+<p><code>sitemap:create</code>    建立空白的sitemap，未設定自動提交到搜尋引擎</p>
+<h3 id="關於連結設定"><a href="#關於連結設定" class="headerlink" title="關於連結設定"></a>關於連結設定</h3><p>網址若是localhost:3000/welcome，則add就是設 ‘/welcome’<br>若要使用welcome_path，這種helper需要加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SitemapGenerator::Interpreter.send :include, RoutingHelper</span><br></pre></td></tr></table></figure>
+<h3 id="關於參數"><a href="#關於參數" class="headerlink" title="關於參數"></a>關於參數</h3><p><code>changefreq</code>：這個頁面頻繁更新的次數，預設是一星期一次<br>    &gt;可設定的參數<br>    &gt;’always’, ‘hourly’, ‘daily’, ‘weekly’, ‘monthly’, ‘yearly’ or ‘never’</p>
+<p><code>lastmod</code>：告訴搜尋引擎，上次修改的時間和日期，預設是Time.now<br><code>host</code>：若不同網域主機需要用:host參數特別指定。預設為default_host所設定的網域<br><code>priority</code>： 排名URL優先權，範圍是0到1，預設為0.5</p>
+<h3 id="關於Post（循環文章）的Sitemap"><a href="#關於Post（循環文章）的Sitemap" class="headerlink" title="關於Post（循環文章）的Sitemap"></a>關於Post（循環文章）的Sitemap</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add &apos;/article&apos;</span><br><span class="line">Post.find_each do |post|</span><br><span class="line">  add post_path(post.friendly_id), :lastmod =&gt; post.updated_at</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h4 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h4><ol>
+<li><a href="https://github.com/kjvarga/sitemap_generator#rails" target="_blank" rel="noopener">Github Sitemap_generator#rails</a></li>
+<li><a href="https://www.scrivinor.com/article/rails-seo-%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E9%97%9C%E6%96%BC-sitemap?locale=zh-TW" target="_blank" rel="noopener">Rails SEO 第二步: 關於 sitemap</a></li>
+<li><a href="https://www.cookieshq.co.uk/posts/creating-a-sitemap-with-ruby-on-rails-and-upload-it-to-amazon-s3" target="_blank" rel="noopener">Creating a sitemap with Ruby on Rails and uploading it to Amazon S3</a></li>
+<li><a href="https://www.sitepoint.com/start-your-seo-right-with-sitemaps-on-rails/" target="_blank" rel="noopener">Start Your SEO Right with Sitemaps on Rails</a></li>
+<li><a href="https://stackoverflow.com/questions/23389609/robots-txt-file-on-rails-heroku-app-not-updating?answertab=votes#tab-top" target="_blank" rel="noopener">Robots.txt file on Rails heroku app not updating</a></li>
+</ol>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Gulp-學習紀錄、常用指令/">
+        <span class="nav-arrow">← </span>
+        
+          Gulp 學習紀錄、常用指令
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/GitPage-上-getJSON讀取不到json，出現-404-ERROR/">
+        
+          GitPage 上$.getJSON讀取不到json，出現 404 ERROR
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Rails-SEO-用Sitemap-generator快速設定sitemap"><span class="toc-nav-text">Rails SEO-用Sitemap-generator快速設定sitemap</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#設定robot-txt，爬蟲能夠爬得到Sitemap"><span class="toc-nav-text">設定robot.txt，爬蟲能夠爬得到Sitemap</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在本端產生sitemap-xml，測試路徑是否正確"><span class="toc-nav-text">在本端產生sitemap.xml，測試路徑是否正確</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#測試沒問題了！Deploy-到-Heroku跑看看"><span class="toc-nav-text">測試沒問題了！Deploy 到 Heroku跑看看</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Heroku-採用Ephemeral-filesystem（臨時文件系統）"><span class="toc-nav-text">Heroku 採用Ephemeral filesystem（臨時文件系統）</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#那就放在Amazon-S3吧！"><span class="toc-nav-text">那就放在Amazon S3吧！</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用CarrierWave-上傳到-AWS-S3"><span class="toc-nav-text">使用CarrierWave 上傳到 AWS S3</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#更新robots-txt，上傳到heroku後未抓到更改後的版本。"><span class="toc-nav-text">更新robots.txt，上傳到heroku後未抓到更改後的版本。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指令介紹"><span class="toc-nav-text">指令介紹</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#關於連結設定"><span class="toc-nav-text">關於連結設定</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#關於參數"><span class="toc-nav-text">關於參數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#關於Post（循環文章）的Sitemap"><span class="toc-nav-text">關於Post（循環文章）的Sitemap</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#"><span class="toc-nav-text"> </span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#參考網站"><span class="toc-nav-text">參考網站</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Rails-SEO-用Sitemap-generator快速設定sitemap/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Rails SEO-用Sitemap-generator快速設定sitemap",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//Rails-SEO-用Sitemap-generator快速設定sitemap/';
+   this.language = "zh-TW";
+   this.page.identifier = '//Rails-SEO-用Sitemap-generator快速設定sitemap/';
+   this.page.title = 'Rails SEO-用Sitemap-generator快速設定sitemap';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Canvas：前端特效動畫的基礎 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Canvas：前端特效動畫的基礎</h2>
+  <p class="post-date">2018-09-13</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="Canvas-基礎特性"><a href="#Canvas-基礎特性" class="headerlink" title="Canvas 基礎特性"></a>Canvas 基礎特性</h2><p><img src="http://bpic.588ku.com/element_pic/12/03/20/1656e3909271e51.jpg" alt="像素圖示範"></p>
+<ol>
+<li>可以自由繪製的元件區域</li>
+<li>可以控制每個像素的顏色與繪製</li>
+<li>有很高的操控度，就像遙控器</li>
+<li>可以把他當成一張動態隨時可更動的圖片</li>
+</ol>
+<h2 id="掌握-Canvas"><a href="#掌握-Canvas" class="headerlink" title="掌握 Canvas"></a>掌握 Canvas</h2><ol>
+<li>繪製圖型</li>
+<li>向量概念</li>
+<li>三角函數數學</li>
+<li>物件導向開發（拆成函件或物件變成小零件，來操作。方便除錯與維護）</li>
+</ol>
+<h2 id="點線面構成圖形"><a href="#點線面構成圖形" class="headerlink" title="點線面構成圖形"></a>點線面構成圖形</h2><ol>
+<li>用點和線連成面</li>
+<li>根據路徑填色或畫線</li>
+</ol>
+<h2 id="Canvas-的座標系方向"><a href="#Canvas-的座標系方向" class="headerlink" title="Canvas 的座標系方向"></a>Canvas 的座標系方向</h2><ol>
+<li>原點預設在左上角(0,0)<br>也因為原點在左上角，因此 Y軸 增加是往下跑的<br>2 . 角度方向是逆時鐘的</li>
+</ol>
+<h2 id="如何開始畫-Canvas"><a href="#如何開始畫-Canvas" class="headerlink" title="如何開始畫 Canvas"></a>如何開始畫 Canvas</h2><ol>
+<li><p>初始化 Init Canvas Element</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>)</span><br><span class="line"><span class="keyword">var</span> cvs = canvas.getContext(<span class="string">'2d'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Setting Canvas 畫布尺寸</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>開始畫圖，構成三角形</p>
+<ul>
+<li>我要開始新的路徑<br><code>cvs.beginPath()</code></li>
+<li>點移到多少<br><code>cvs.moveTo(50, 50)</code></li>
+<li>線填滿<br><code>cvs.lineTo(100, 100)</code><br><code>cvs.lineTo(250, 20)</code> </li>
+<li>關閉路徑<br><code>cvs.closePath()</code></li>
+<li>填滿顏色<br><code>cvs.fillStyle=&#39;black&#39;</code><br><code>cvs.fill()</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="Canvas-矩形繪圖函數"><a href="#Canvas-矩形繪圖函數" class="headerlink" title="Canvas 矩形繪圖函數"></a>Canvas 矩形繪圖函數</h3><ul>
+<li>填滿矩形<br><code>fillRect(x,y,w,h)</code></li>
+<li>繪製線框矩形（正方形但沒有填滿、只有邊框）<br><code>strokeRect(x,y,w,h)</code></li>
+<li>清除矩形範圍<br>清除指定矩形區域內的內容，使其變為全透明。<br><code>clearRect(x,y,w,h)</code></li>
+</ul>
+<blockquote>
+<p>(x,y,w,h)各代表什麼意思？<br>x,y 表示從原點（左上角）為出發的座標位置<br>width, height表示矩形的寬與高</p>
+</blockquote>
+<h3 id="路徑繪圖"><a href="#路徑繪圖" class="headerlink" title="路徑繪圖"></a>路徑繪圖</h3><p>路徑開始與封閉：beginPath / closePath<br>移動與畫線：moveTo / lineTo / arc<br>指定填色或線條顏色： fillStyle / lineStyle<br>把路徑填色或描出來 stroke / fill</p>
+<h3 id="轉移"><a href="#轉移" class="headerlink" title="轉移"></a>轉移</h3><ul>
+<li>Translate(x,y)</li>
+<li>Rotate(deg)<br>以當下為中心做旋轉</li>
+<li>scale(x,y)</li>
+</ul>
+<h3 id="狀態的保存與還原"><a href="#狀態的保存與還原" class="headerlink" title="狀態的保存與還原"></a>狀態的保存與還原</h3><p>將所有繪製的畫布放在 ctx.save()和ctx.restore()，能預防被污染。</p>
+<ul>
+<li>ctx.save()<br>儲存當下的座標</li>
+<li>ctx.restore()<br>還原上一個儲存的狀態</li>
+</ul>
+<p>還原的原則：先進後出(stack)，像是小畫家回上一步的狀態</p>
+<p>範例：<br>利用儲存狀態，將函數產生的座標變化限制在函數內<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawSomething</span>(<span class="params">x, y, angle</span>) </span>&#123;</span><br><span class="line">  ctx.save()</span><br><span class="line">  ctx.translate(x, y)</span><br><span class="line">  ctx.rotate(deg)</span><br><span class="line">  ctx.restore()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="矩陣"><a href="#矩陣" class="headerlink" title="矩陣"></a>矩陣</h3><p>利用 setTransform 來設定矩陣<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.setTransform(A, B, C, D, E, F)</span><br></pre></td></tr></table></figure></p>
+<p>重設狀態：<br>ctx.setTransform(1, 0, 0, 1, 0, 0)</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes" target="_blank" rel="noopener">Web APIs Canvas 介紹 | MDN</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#canvas" >
+    <span class="tag-code">canvas</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/為什麼前端要學Vue-js？/">
+        <span class="nav-arrow">← </span>
+        
+          為什麼前端要學Vue.js？
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">
+        
+          CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Canvas-基礎特性"><span class="toc-nav-text">Canvas 基礎特性</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#掌握-Canvas"><span class="toc-nav-text">掌握 Canvas</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#點線面構成圖形"><span class="toc-nav-text">點線面構成圖形</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Canvas-的座標系方向"><span class="toc-nav-text">Canvas 的座標系方向</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#如何開始畫-Canvas"><span class="toc-nav-text">如何開始畫 Canvas</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Canvas-矩形繪圖函數"><span class="toc-nav-text">Canvas 矩形繪圖函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#路徑繪圖"><span class="toc-nav-text">路徑繪圖</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#轉移"><span class="toc-nav-text">轉移</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#狀態的保存與還原"><span class="toc-nav-text">狀態的保存與還原</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#矩陣"><span class="toc-nav-text">矩陣</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Canvas：前端特效動畫的基礎/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Canvas：前端特效動畫的基礎",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//Canvas：前端特效動畫的基礎/';
+   this.language = "zh-TW";
+   this.page.identifier = '//Canvas：前端特效動畫的基礎/';
+   this.page.title = 'Canvas：前端特效動畫的基礎';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

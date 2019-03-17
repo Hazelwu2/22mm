@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      快來架設超潮的NodeBB論壇在Heroku上 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>快來架設超潮的NodeBB論壇在Heroku上</h2>
+  <p class="post-date">2018-12-10</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="架設-NodeBB-論壇-在-Heroku-上"><a href="#架設-NodeBB-論壇-在-Heroku-上" class="headerlink" title="架設 NodeBB 論壇 在 Heroku 上"></a>架設 NodeBB 論壇 在 Heroku 上</h1><p>This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.<br>I look up official document, and step by step do it, but has some error. I’m spending much more time to fixing them.<br>So I write this topic. I hope this tutorial can help somebody.</p>
+<p>架設Nodebb論壇照著<a href="(https://docs.nodebb.org/installing/cloud/heroku/">官方文件</a>的步驟一步步做，但仍出現一些狀況無法順利架設在 Heroku上，因此寫下筆記記錄下來。</p>
+<p>下列教學總共會分成幾個步驟</p>
+<ol>
+<li>將NodeBB原始碼下載到電腦上</li>
+<li>架設環境在本機上</li>
+<li>建立專案在Heroku 上</li>
+<li>設定專案連接到 MLab （Mango）資料庫</li>
+</ol>
+<h2 id="架設環境"><a href="#架設環境" class="headerlink" title="架設環境"></a>架設環境</h2><ul>
+<li>架設環境 為Mac 10.14 OS</li>
+</ul>
+<h2 id="安裝前必備品"><a href="#安裝前必備品" class="headerlink" title="安裝前必備品"></a>安裝前必備品</h2><p>下列將列出如何安裝 NodeBB在本機環境下，且架設在heroku上，請先確保您有以下環境、知識。</p>
+<ol>
+<li>安裝 <a href="https://toolbelt.heroku.com/" target="_blank" rel="noopener">Heroku Cli</a>，可以在終端機執行像<code>heroku create</code>、<code>heroku login</code>等指令。</li>
+<li>具備基本的 Github 知識</li>
+<li>Mac 已有安裝 HomeBrew</li>
+<li>Heroku 已擁有帳號</li>
+</ol>
+<h2 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h2><h3 id="NodeBB-下載到本機"><a href="#NodeBB-下載到本機" class="headerlink" title="NodeBB 下載到本機"></a>NodeBB 下載到本機</h3><p>Download NodeBB to your localhost.<br>首先先把專案載入到電腦本機上，開啟終端機並移動到桌面，輸入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NodeBB/NodeBB.git</span><br><span class="line">cd NodeBB</span><br></pre></td></tr></table></figure></p>
+<p>便會在你的桌面上建立一個NodeBB資料夾，裡面便是原始碼。</p>
+<h3 id="安裝MongoDB"><a href="#安裝MongoDB" class="headerlink" title="安裝MongoDB"></a>安裝MongoDB</h3><p>若你已有安裝，可跳過這步驟。<br>若你系統尚未有<a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">HomeBrew</a>套件管理工具，請移駕至Homebrew官網下載並安裝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
+<p>安裝完以後，系統並不會直接開啟，需要輸入以下指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb</span><br></pre></td></tr></table></figure></p>
+<p>輸入後，mongodb才能在系統上使用哦！</p>
+<h3 id="Heroku-建立專案"><a href="#Heroku-建立專案" class="headerlink" title="Heroku 建立專案"></a>Heroku 建立專案</h3><p>首先先確保你有安裝Heroku Cli，若沒有請先Google查詢先安裝，否則下列指令皆無法執行。</p>
+<p>我們先在終端機上輸入以下指令，登入自己的heroku帳號<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku login</span><br></pre></td></tr></table></figure></p>
+<p>接著會提示你輸入帳號及密碼，輸入完沒有打錯的話，便會成功登入。<br>接著在Heroku上直接建立專案，nodebb-forum可以自行取名，或著直接打heroku create也可以，heroku便會隨機幫你建立一個名稱。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku create twlesmatches-forum</span><br></pre></td></tr></table></figure></p>
+<p>建立好專案後，我們要去設定MLab MongoDB 與自己的heroku帳號 建立連結，可以先選擇SendBox的免費專案<br><a href="https://elements.heroku.com/addons/mongolab" target="_blank" rel="noopener">MLab建立連接</a><br>點擊上列連接，並找到按鈕「Install mLab MongoDB」進入頁面<br><img src="https://i.imgur.com/EaecwAu.png" alt="Picture install mLab Mongo DB">。<br>他會要求你登入帳號，並選擇要連接的專案。<br>像我剛剛在heroku上建立專案叫twlesmatches-forum，便在這個視窗輸入tw，便會跳出來囉，選好專案後便點擊按鈕「Provision add-on」即可加入至專案。<br><img src="https://i.imgur.com/H5BY7Rt.png" alt="Find project"><br>或是比較省事一點，直接在終端機輸入以下指令，並選擇sandbox的免費專案。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku addons:create mongolab:sandbox</span><br></pre></td></tr></table></figure></p>
+<h3 id="NodeBB-與-Mongo資料庫-連接"><a href="#NodeBB-與-Mongo資料庫-連接" class="headerlink" title="NodeBB 與 Mongo資料庫 連接"></a>NodeBB 與 Mongo資料庫 連接</h3><p>成功連接後，我們便來設定與資料庫連接<br>在終端機上輸入以下指令，請記得必須要在NodeBB的根目錄才行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nodebb setup</span><br></pre></td></tr></table></figure></p>
+<p>如果輸入setup指令後，出現ERROR訊息：<br><code>error: NodeBB could not connect to your Mongo database. Mongo returned the following error: Authentication failed.</code><br>這段Error訊息，是說專案沒辦法連接本機上的Mongo，是因為權限不夠高的關係。</p>
+<p>請在終端機上輸入以下指令，進入mongo資料庫的介面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure></p>
+<p>如果無法順利進入mongo的介面，請先檢查是否有安裝成功mongoDB或著是<code>brew service restart mongo</code>，將服務重啟。</p>
+<p>順利進入介面後，請再輸入以下指令<br>便可成功切換到nodebb的資料庫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; use nodebb</span><br><span class="line">switched to db nodebb</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mongo-簡單指令"><a href="#Mongo-簡單指令" class="headerlink" title="Mongo 簡單指令"></a>Mongo 簡單指令</h3><p>mongo介面下列有幾個指令可以檢查這個nodebb資料庫的使用者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.getUsers() <span class="comment"># 查詢所有使用者</span></span><br><span class="line">show roles; <span class="comment"># 秀出所有的權限角色，像readWrite, userAdmin</span></span><br></pre></td></tr></table></figure></p>
+<p>輸入上面的指令像是db.getUsers()會發現，nodeBB資料庫內沒有任何一個使用者，所以我們要建立一個使用者，並且有足夠高的權限可以操作，角色為userAdmin。</p>
+<p>我們在終端機上輸入以下指令，在輸入前，請將<code>username</code>, <code>password</code>替換成你想要設定的名稱及密碼，這組設定將會是你本機上連接資料庫時的帳號及密碼，要記得！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;user:&apos;username&apos;, pwd:&apos;password&apos;, roles:[&#123;role:&apos;userAdmin&apos;, db:&apos;db-name&apos;&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>若想要設定其他權限，可以輸入<code>show roles;</code>，查詢資料庫內其他角色的權限，再輸入一次上述指令，將<code>role: &#39;userAdmin&#39;</code>改成其他你想要的role即可。</p>
+<p>設定好之後，並重新再跑一次setup指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nodebb setup</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/6q8KRLi.png" alt="runing setup"><br>輸入後他會跑一下子，接著會要求你設定一些選項，這邊非常重要<br>關係到你能不能架設在Heroku上連接資料庫成功，所以輸入時要提高注意力一下XD，不能全部都按Enter！！<br>（我第一次架失敗時就是全部都按Enter XD）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL used to access this NodeB(http://localhost:4567) https://twlesmatches-forum.herokuapp.com/</span><br></pre></td></tr></table></figure></p>
+<p>首先要設定的是URL，請在這裡填上你的heroku application的url，不知道的話請開新的終端機視窗輸入<code>heroku open</code>便會跳出你專案的網址，格式會像是這樣：<code>https://twlesmatches-forum.herokuapp.com/</code></p>
+<p>接著要你設定 NodeBB secret，不用理她，Enter跳過！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Please enter a NodeBB secret (ca7c68c3-edce-4a7d-80f8-7e5e757ca5ca)</span><br></pre></td></tr></table></figure></p>
+<p>接著會詢問你要使用的Database是什麼？由於NodeBB只允許Mongo或Redis這兩款資料庫可使用，我們前面辛苦安裝Mongo了，就直接Enter吧XD。（Enter代表輸入他預設的指令）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Which database to use (mongo)</span><br></pre></td></tr></table></figure></p>
+<p>接著會出現重頭戲！這個NodeBB要連接的資料庫網址是什麼？也有出現提示格式如何輸入。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2018-12-10T14:52:49.320Z [14213] - info:</span><br><span class="line">Now configuring mongo database:</span><br><span class="line">MongoDB connection URI: (leave blank <span class="keyword">if</span> you wish to specify host, port, username/password and database individually)</span><br><span class="line">Format: mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</span><br></pre></td></tr></table></figure></p>
+<p>這很簡單，開啟Heroku網站，並登入帳號後選擇你剛剛建立的application專案，進入專案後到Setting找到Config Vars，就有資料庫網址了！把他複製貼上到終端機上即可囉。（也可直接輸入heroku config，便會出現資料庫的網址）<br><img src="https://i.imgur.com/QospqAE.png" alt="示意圖"><br>輸入完後，便會自動跑完安裝啦<br><img src="https://i.imgur.com/JtTVSQF.png" alt="tutorial for nodebb and heroku"><br>跑完安裝後要注意，會有個提示訊息告知你的Admin系統管理員帳號及密碼是多少，不要忽略了哦</p>
+<p>接著剩下最後兩個步驟了，快大功告成啦！<br>請在終端機輸入以下指令，建立Procfile在Heroku上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web node app.js --no-daemon</span><br></pre></td></tr></table></figure></p>
+<p>教學文件是打loader.js，但照著打反而出錯，爬文後發現打app.js才能成功架設。<br>輸入完後，請git commit做紀錄後推上去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add -f Procfile config.json package.json build &amp;&amp; git commit -am &quot;adding Procfile and configs for Heroku&quot;</span><br><span class="line">git push heroku master</span><br></pre></td></tr></table></figure></p>
+<p>推上去heroku master要稍等一會兒時間。<br>推完後，請再輸入終端機，將dyno設定為1（free）的等級<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku ps:scale web=1</span><br></pre></td></tr></table></figure></p>
+<p>大功告成，快上去看看架設成功了沒！輸入下列指令會自動開啟專案的網站哦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku open</span><br></pre></td></tr></table></figure></p>
+<p>如果上述教學有任何錯誤或是需要糾正的地方，請務必留言告訴我，謝謝各位^_^</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://docs.nodebb.org/installing/cloud/heroku/" target="_blank" rel="noopener">官方文件：install nodebb in heroku</a></li>
+<li><a href="http://zhangwenli.com/blog/2016/04/19/installing-nodebb-on-mac-os/" target="_blank" rel="noopener">Install NodeBB in Heroku</a></li>
+<li><a href="https://andyyou.github.io/2016/10/31/process-types-and-profile/" target="_blank" rel="noopener">Heroku 運行類別、 Procfile、常用指令筆記</a></li>
+<li><a href="https://www.kancloud.cn/a632079/nodebb-cn/content" target="_blank" rel="noopener">NodeBB 基礎使用與開發</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#node.js" >
+    <span class="tag-code">node.js</span>
+  </a>
+
+  <a href="/tags#forum" >
+    <span class="tag-code">forum</span>
+  </a>
+
+  <a href="/tags#heroku" >
+    <span class="tag-code">heroku</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Vue-元件化概念/">
+        <span class="nav-arrow">← </span>
+        
+          Vue 元件化概念
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/FrameWork-7-與-H5邂逅的雷坑/">
+        
+          FrameWork 7 與 H5 邂逅的雷坑
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#架設-NodeBB-論壇-在-Heroku-上"><span class="toc-nav-text">架設 NodeBB 論壇 在 Heroku 上</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#架設環境"><span class="toc-nav-text">架設環境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安裝前必備品"><span class="toc-nav-text">安裝前必備品</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#開始安裝"><span class="toc-nav-text">開始安裝</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#NodeBB-下載到本機"><span class="toc-nav-text">NodeBB 下載到本機</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#安裝MongoDB"><span class="toc-nav-text">安裝MongoDB</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Heroku-建立專案"><span class="toc-nav-text">Heroku 建立專案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#NodeBB-與-Mongo資料庫-連接"><span class="toc-nav-text">NodeBB 與 Mongo資料庫 連接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Mongo-簡單指令"><span class="toc-nav-text">Mongo 簡單指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//快來架設超潮的NodeBB論壇在Heroku上/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "快來架設超潮的NodeBB論壇在Heroku上",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//快來架設超潮的NodeBB論壇在Heroku上/';
+   this.language = "zh-TW";
+   this.page.identifier = '//快來架設超潮的NodeBB論壇在Heroku上/';
+   this.page.title = '快來架設超潮的NodeBB論壇在Heroku上';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JavaScript30/08 | Fun With HTML Canvas 筆記 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JavaScript30/08 | Fun With HTML Canvas 筆記</h2>
+  <p class="post-date">2018-10-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>JavaScript30/08 | Fun With HTML Canvas 筆記</p>
+<h2 id="Demo-效果"><a href="#Demo-效果" class="headerlink" title="Demo 效果"></a>Demo 效果</h2><p><img src="https://github.com/Hazelwu2/JavaScript30/blob/master/day8-fun-with-html5-canvas/demo.gif?raw=true" alt="demo"></p>
+<h2 id="完成-Day8-需要用到的屬性"><a href="#完成-Day8-需要用到的屬性" class="headerlink" title="完成 Day8 需要用到的屬性"></a>完成 Day8 需要用到的屬性</h2><ul>
+<li>Canvas<br>基本屬性<ul>
+<li>getContext()</li>
+<li>lineCap</li>
+<li>lineJoin</li>
+<li>beginPath()<br>調整色彩、寬度</li>
+<li>lineWidth</li>
+<li>fillStyle</li>
+<li>strokeStyle<br>繪製屬性</li>
+<li>beginPath()</li>
+<li>lineTo(x, y)</li>
+<li>stroke()</li>
+</ul>
+</li>
+<li>Event：用各種事件來控制 isDrawing 開關<ul>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>mouseout</li>
+<li>mousemove<br><br></li>
+</ul>
+</li>
+</ul>
+<h4 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h4><ol>
+<li>將 Canvas 元素存入變數，設定 Canvas 寬與高</li>
+<li>利用 getContext(‘2d’)，來獲取值 ctx</li>
+<li>設定 ctx 的基本屬性<ul>
+<li>線條顏色（hsl）</li>
+<li>線條寬度（lineWidth)</li>
+<li>線條末端的形狀</li>
+</ul>
+</li>
+<li>繪畫效果<ul>
+<li>設定繪圖中的開關（isDrawing）</li>
+<li>監聽滑鼠事件，根據不同事件，將開關設定為 true 或 false</li>
+</ul>
+</li>
+<li>動態設定彩虹漸變（利用 hsl 的 h 值，以 h++更改顏色）</li>
+<li>動態設定：當繪畫時，線條由細到粗、由粗到細</li>
+</ol>
+<h4 id="Canvas-起手式"><a href="#Canvas-起手式" class="headerlink" title="Canvas 起手式"></a>Canvas 起手式</h4><p>以下為 Canvas 的基本用法<br>將 Canvas 元素存入變數 canvas內，並設定 Canvas 寬與高<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">'draw'</span> <span class="attr">width</span>=<span class="string">'800'</span> <span class="attr">height</span>=<span class="string">'800'</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>設定 Canvas 寬高</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'#draw'</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight;</span><br></pre></td></tr></table></figure>
+<p>接著，設定用來 ctx 吧</p>
+<ul>
+<li>lineCap：筆觸的形狀，可以設為 round、butt、square</li>
+<li>lineJoin：線條比較方式</li>
+<li>lineWidth：線條寬度</li>
+<li>strokeStyle：線條顏色</li>
+<li>fillStyle：填充顏色<br><br><br>用 ctx 繪製 Canvas</li>
+<li>beginPath()：開始畫新的路徑 </li>
+<li>stroke()：繪製線條</li>
+<li>moveTo(x,y)：以x軸、y軸為座標位置，操作起點</li>
+<li>lineTo(x,y)：同樣以x,y軸為坐標，從moveTo到lineTo會畫出一條線</li>
+</ul>
+<h4 id="設定繪圖開關"><a href="#設定繪圖開關" class="headerlink" title="設定繪圖開關"></a>設定繪圖開關</h4><p>理想結果是像小畫家一樣，當點滑鼠左鍵便開始畫線條，直到放開左鍵，所以我們要做一個叫isDrawing的開關，用來控制 繪圖中 / 結束繪圖的狀態。<br><br></p>
+<ul>
+<li>當點擊左鍵，表示正在畫畫，isDrawing =&gt; true，isDrawing開啟。</li>
+<li>當放開左鍵，表示結束畫畫，isDrawing =&gt; flase，isDrawing關閉。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isDrawing = <span class="literal">false</span>;</span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, isDrawing = ture);</span><br><span class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, draw);</span><br><span class="line">canvas.addEventListener(<span class="string">'mouseup'</span>, isDrawing = <span class="literal">false</span>);</span><br><span class="line">canvas.addEventListener(<span class="string">'mouseout'</span>, isDrawing = <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>當點擊滑鼠左鍵開始畫圖，便是mousedown，一但點擊左鍵，將isDrawing開關變成 ture。<br>當滑鼠開始移動時，便執行draw function，裡面將會做一些 Canvas的繪製屬性動作，像是beginTo, lineTo, moveTo<br>而滑鼠放掉（mouseup）、滑鼠移出canvas的範圍時（mouseout），便將isDrawing變更為 false，代表使用者已不在繪畫中狀態。<br><br></p>
+<h3 id="線條銜接問題"><a href="#線條銜接問題" class="headerlink" title="線條銜接問題"></a>線條銜接問題</h3><p>若第一次畫完後，想再畫第二次，會發現銜接的線條是從上一次開始。但我們希望理想結果是：不要銜接上一次畫的線條<br><br><br>為了解決這樣的狀況，我們需要更新lastX, lastY，意味著最後滑鼠的x, y軸的座標位置。</p>
+<h4 id="要更新座標位置的有兩處"><a href="#要更新座標位置的有兩處" class="headerlink" title="要更新座標位置的有兩處"></a>要更新座標位置的有兩處</h4><ul>
+<li>當正在繪圖中（isDrawing = ture）時，draw function需更新座標。</li>
+<li>監聽點擊滑鼠左鍵時，要開始繪圖時，需更新最後位置狀態<br>如下列程式碼所展現，e.offsetX, e.offsetY 則為滑鼠在網頁上的座標位置，宣告變數lastX, lastY並指定給他們，即可解決線條銜接問題，每一次點擊滑鼠左鍵都是新的開始囉！</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> draw = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(lastX, lastY);</span><br><span class="line">  ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, (e) =&gt; &#123;</span><br><span class="line">  isDrawing = ture;</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="動態變動線條顏色、粗細"><a href="#動態變動線條顏色、粗細" class="headerlink" title="動態變動線條顏色、粗細"></a>動態變動線條顏色、粗細</h3><p>線條顏色我們以hsl(0, 100%, 50%)來表示，hsl(0, 100%, 50%)，這三組數字個別代表的是色相 Hue、飽和度 Saturation、亮度 Lightness，我們將會把色相替代為動態變數，以變更顏色。<br><br><br>對 hsl 想要最快速了解，可以前往<a href="http://mothereffinghsl.com/" target="_blank" rel="noopener">Mother-Effing</a>，直接展示給你看 hsl的數值及呈現顏色。</p>
+<h4 id="動態設定筆觸顏色"><a href="#動態設定筆觸顏色" class="headerlink" title="動態設定筆觸顏色"></a>動態設定筆觸顏色</h4><p>今天想要做到的理想效果是：隨著滑鼠移動畫線條時，顏色也會跟著改變，很簡單，只要將其中一個數值（0, 100%, 50%）改為變數，並將變數每次畫完時都遞增。<br><br><br>粗細也是囉，Canvas 用 lineWidth來控制線條的粗細程度，將固定數值改為動態變數取代，並將動態變數遞增即可。</p>
+<p>要注意的是 hsl值的色相（hue）值最大為 360，所以也需要另外設條件是 當 hue &gt; 360，hue = 0 歸零開始。<br><br></p>
+<h4 id="動態設定筆觸粗細"><a href="#動態設定筆觸粗細" class="headerlink" title="動態設定筆觸粗細"></a>動態設定筆觸粗細</h4><p>至於控制筆觸大小，設定判斷式：當超過某值時便將變數遞減，當小於某值時便把變數遞增即可達成囉。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hue = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> controlLineWidth = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = <span class="string">`hsl(<span class="subst">$&#123;hue&#125;</span>, 44%, 50%)`</span>;</span><br><span class="line">ctx.lineWidth = controlLineWidth;</span><br><span class="line">ctx.beginPath(); <span class="comment">// 開新的路徑</span></span><br><span class="line">ctx.moveTo(lastX, lastY);</span><br><span class="line">ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">ctx.stroke(); <span class="comment">// 畫線</span></span><br><span class="line"></span><br><span class="line">hue++; <span class="comment">// 畫線結束後，將動態變數hue遞增</span></span><br><span class="line">hue &gt; <span class="number">360</span> ? hue = <span class="number">0</span> : <span class="string">''</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制筆觸粗細大小，設定判斷式</span></span><br><span class="line"><span class="keyword">let</span> direction = ture;</span><br><span class="line"><span class="keyword">if</span> (ctx.lineWidth &gt; <span class="number">100</span> || ctx.lineWidth &lt; <span class="number">80</span> ) &#123;</span><br><span class="line">  direction = !diection;</span><br><span class="line">&#125;</span><br><span class="line">direction ? controlLineWidth++ : controlLineWidth--;</span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="http://mothereffinghsl.com/" target="_blank" rel="noopener">Mother-Effing 查詢 HSL</a></li>
+<li><a href="https://github.com/soyaine/JavaScript30/tree/master/08%20-%20Fun%20with%20HTML5%20Canvas" target="_blank" rel="noopener">08 HTML5 Canvas 实现彩虹画笔绘画板指南</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#js30" >
+    <span class="tag-code">js30</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Call-Back-Hell：Promise誕生/">
+        <span class="nav-arrow">← </span>
+        
+          Call Back Hell：Promise誕生
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/ES6-Object-Literal-Upgrades：動態命名/">
+        
+          JavaScript ES6 物件 Literal Upgrades：動態命名
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Demo-效果"><span class="toc-nav-text">Demo 效果</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#完成-Day8-需要用到的屬性"><span class="toc-nav-text">完成 Day8 需要用到的屬性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#步驟"><span class="toc-nav-text">步驟</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Canvas-起手式"><span class="toc-nav-text">Canvas 起手式</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#設定繪圖開關"><span class="toc-nav-text">設定繪圖開關</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#線條銜接問題"><span class="toc-nav-text">線條銜接問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#要更新座標位置的有兩處"><span class="toc-nav-text">要更新座標位置的有兩處</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#動態變動線條顏色、粗細"><span class="toc-nav-text">動態變動線條顏色、粗細</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#動態設定筆觸顏色"><span class="toc-nav-text">動態設定筆觸顏色</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#動態設定筆觸粗細"><span class="toc-nav-text">動態設定筆觸粗細</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//JavaScript30-08-Fun-With-HTML-Canvas-筆記/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "JavaScript30/08 | Fun With HTML Canvas 筆記",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//JavaScript30-08-Fun-With-HTML-Canvas-筆記/';
+   this.language = "zh-TW";
+   this.page.identifier = '//JavaScript30-08-Fun-With-HTML-Canvas-筆記/';
+   this.page.title = 'JavaScript30/08 | Fun With HTML Canvas 筆記';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

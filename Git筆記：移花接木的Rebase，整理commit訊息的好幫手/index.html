@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Git筆記：移花接木的Rebase，整理commit訊息的好幫手 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Git筆記：移花接木的Rebase，整理commit訊息的好幫手</h2>
+  <p class="post-date">2018-03-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04182817/rEBASE.png" target="_blank" rel="noopener"><img class="size-full wp-image-334 aligncenter" src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04182817/rEBASE.png" alt="" width="560" height="397"></a><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04193721/rEBASE-1.png" target="_blank" rel="noopener"><br></a>Git 有個神奇的功能叫：Rebase，中文翻譯叫「變動基底」，簡單來說就是移花接木，把某一個樹枝（Branch）接到Master的主幹上等等功能，指定的節點可以重新 commit，花了一點時間做功課，把自己的理解的寫下來</p>
+<h1 id="為什麼要用-Rebase-？變動基底的話不就很危險嗎"><a href="#為什麼要用-Rebase-？變動基底的話不就很危險嗎" class="headerlink" title="為什麼要用 Rebase ？變動基底的話不就很危險嗎"></a>為什麼要用 Rebase ？變動基底的話不就很危險嗎</h1><p>Rebase 的好處 &gt; 壞處，接著養成好習慣，在每次做Rebase之前，開一個backup的branch，以防改爛時還可以回溯，這樣就什麼都不怕啦！</p>
+<h2 id="Rebase能做什麼？"><a href="#Rebase能做什麼？" class="headerlink" title="Rebase能做什麼？"></a>Rebase能做什麼？</h2><ul>
+<li>可以修改 commit 訊息 （Reword）</li>
+<li>可以修改 commit 內容（Edit），甚至可以拆成兩個 commit 紀錄、合併commit</li>
+<li>重新 commit ( <code>Pick</code>)</li>
+<li>更換 commit 順序（<strong>做這個要很小心，可能會把你的專案搞爛</strong>）</li>
+<li>修改 commit 順序 (<code>Edit</code>)</li>
+<li>拆解 commit (把多個commit紀錄變成一個commit)</li>
+<li>壓縮 commit，合併 commit 訊息 (<code>Squash</code>)</li>
+<li>刪除 commit (<code>Skip</code>)<br>即使列出來還是不懂Rebase的好處嗎？在此示範，我常常會有種鬼打牆的狀況…..<h3 id="亂糟糟的Commit紀錄"><a href="#亂糟糟的Commit紀錄" class="headerlink" title="亂糟糟的Commit紀錄"></a>亂糟糟的Commit紀錄</h3><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04183630/Screen-Shot-2018-03-04-at-6.34.30-PM.png" alt=""></li>
+</ul>
+<p>你看到的git log有好幾處幾乎是有重複的commit紀錄，這時就有必要性整理commit紀錄了！</p>
+<h3 id="用rebase來整理commit紀錄"><a href="#用rebase來整理commit紀錄" class="headerlink" title="用rebase來整理commit紀錄"></a>用rebase來整理commit紀錄</h3><p>由於我是在develop的branch開發的，所以整理commit message自然也要在develop上做<br>首先先git log 查看你想要塗改的commit紀錄，最好是在前面好幾個紀錄前<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04183958/Screen-Shot-2018-03-04-at-6.38.01-PM-1024x478.png" alt=""></p>
+<p>如果說要重新commit的話就是選你的要的那一行commit，預設都是pick<br><code>輸入git rebase -i 968cada</code></p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04184958/Screen-Shot-2018-03-04-at-6.48.27-PM-1024x670.png" alt=""></p>
+<p>那我把第二行的commit 調整首頁區塊 <code>pick</code> 修改成 <code>squash</code><br><code>squahs</code>代表將這個commit紀錄，合併到上一個commit裡面</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185313/Screen-Shot-2018-03-04-at-6.49.21-PM-1024x743.png" alt=""></p>
+<p>接著會跳出視窗：請你修改commit message &lt;<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185325/Screen-Shot-2018-03-04-at-6.50.13-PM-1024x668.png" alt=""></p>
+<p>我不想要留下那個commit訊息，我要直接合併，因此我將第二個commit message那一行全部刪除</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185343/Screen-Shot-2018-03-04-at-6.50.35-PM-1024x403.png" alt=""></p>
+<h3 id="如何在Vim編輯器下存檔、離開？"><a href="#如何在Vim編輯器下存檔、離開？" class="headerlink" title="如何在Vim編輯器下存檔、離開？"></a>如何在Vim編輯器下存檔、離開？</h3><blockquote>
+<p>下圖為<code>Vim</code>編輯器下，如果你還不太會用Vim編輯器，只要記得下列兩個超實用的指令就可走遍半個江湖<br>如何修改：按鍵盤的<code>i</code>即會出現游標，便可以開始修改。修改完成後按下<code>ESC</code>鍵，並輸出<code>:wq</code>即可存檔<br>不想存檔？想要直接離開，一樣先按下<code>ESC</code>並輸入<code>:q</code>即可不存檔離開</p>
+</blockquote>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185813/Screen-Shot-2018-03-04-at-6.56.36-PM-1024x251.png" alt=""></p>
+<p>接著就成功的合併commit紀錄啦！</p>
+<p>如果覺得還是醜醜的可以繼續rebase整理完再合併到master上</p>
+<p>接著就是切換到<code>master</code> =&gt; <code>git checout master</code> =&gt; 合併 <code>git merge develop</code></p>
+<p>&nbsp;</p>
+<p>如果選擇其他的像reword、edit的選項（修改commit訊息、或是一個commit拆成多個commit）<br>他會自動跳到你當時儲存的節點當成是HEAD<br>接著再<code>git add 你想要分的檔案</code> <code>git commit -m</code> 就可以拆分commit紀錄了</p>
+<p>&nbsp;</p>
+<p>整理完develop的commit紀錄後，再<code>git merge master</code>就可以囉</p>
+<p>別忘了在rebase前，記得開一個backup的branch，以防萬一啊！</p>
+<h3 id="練習試試看，推薦Learn-Git-Branching，"><a href="#練習試試看，推薦Learn-Git-Branching，" class="headerlink" title="練習試試看，推薦Learn Git Branching，"></a>練習試試看，推薦Learn Git Branching，</h3><p>我非常推薦一個非常棒的Github教學網站：<a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">Learn Git Branching</a><br>要學Git往往最困難的是要準備此情境的檔案，因為很懶（誤）…<br>但在這個<code>Learn Git Branching</code>直接幫你準備好，甚至很變態的在網站上輸入git指令就可以馬上看到結果。<br><img src="https://i.imgur.com/tK5aKJG.png" alt="Learn Git Branching"><br>這邊還可以學到reset, revert, rebase, cherry-pick<br><img src="https://i.imgur.com/i1PAyAw.png" alt="Learn Git Branching"><br>根據你想要學的單元，他會給你一個目標進而完成關卡。<br><img src="https://i.imgur.com/QFENxyW.png" alt="Learn Git Branching"><br>他的介面是這樣，動手在左邊視窗輸入指令，右邊的圖便會照著你的指令移動</p>
+<blockquote>
+<p>看再多的教學，都只是用眼睛看而已，一定要動手實作看看，才真的可以吸收進去，快點點進去吧XD</p>
+</blockquote>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">
+        <span class="nav-arrow">← </span>
+        
+          Git push repo失敗： Could not resolve host: github.com
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">
+        
+          前端永遠的課題：字體－呈現一致性的跨裝置
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#為什麼要用-Rebase-？變動基底的話不就很危險嗎"><span class="toc-nav-text">為什麼要用 Rebase ？變動基底的話不就很危險嗎</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Rebase能做什麼？"><span class="toc-nav-text">Rebase能做什麼？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#亂糟糟的Commit紀錄"><span class="toc-nav-text">亂糟糟的Commit紀錄</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#用rebase來整理commit紀錄"><span class="toc-nav-text">用rebase來整理commit紀錄</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#如何在Vim編輯器下存檔、離開？"><span class="toc-nav-text">如何在Vim編輯器下存檔、離開？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#練習試試看，推薦Learn-Git-Branching，"><span class="toc-nav-text">練習試試看，推薦Learn Git Branching，</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Git筆記：移花接木的Rebase，整理commit訊息的好幫手/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Git筆記：移花接木的Rebase，整理commit訊息的好幫手",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//Git筆記：移花接木的Rebase，整理commit訊息的好幫手/';
+   this.language = "zh-TW";
+   this.page.identifier = '//Git筆記：移花接木的Rebase，整理commit訊息的好幫手/';
+   this.page.title = 'Git筆記：移花接木的Rebase，整理commit訊息的好幫手';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

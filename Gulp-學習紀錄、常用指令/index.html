@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Gulp 學習紀錄、常用指令 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Gulp 學習紀錄、常用指令</h2>
+  <p class="post-date">2017-11-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="Gulp-學習紀錄、常用指令"><a href="#Gulp-學習紀錄、常用指令" class="headerlink" title="Gulp 學習紀錄、常用指令"></a>Gulp 學習紀錄、常用指令</h1><p>紀錄學習Gulp的歷程，及gulp常用的指令</p>
+<h3 id="第一次安裝Gulp"><a href="#第一次安裝Gulp" class="headerlink" title="第一次安裝Gulp"></a>第一次安裝Gulp</h3><ol>
+<li>npm install -g gulp</li>
+<li>npm init</li>
+<li>在目錄下touch gulpfile.js</li>
+<li>npm install 外掛名稱 —save-dev</li>
+</ol>
+<h3 id="之後使用Gulp"><a href="#之後使用Gulp" class="headerlink" title="之後使用Gulp"></a>之後使用Gulp</h3><ol>
+<li>移動到目錄後，npm init，創造package.json檔</li>
+<li>貼上已設定的package.json</li>
+<li>npm install -l 自動安裝package.json列表上的外掛</li>
+<li>複製已設定好的腳本gulpfile.js</li>
+</ol>
+<h3 id="常用外掛清單"><a href="#常用外掛清單" class="headerlink" title="常用外掛清單"></a>常用外掛清單</h3><ul>
+<li><p>SASS/SCSS編譯成CSS gulp-sass</p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-minify-css" target="_blank" rel="noopener">CSS 壓縮迷你化 gulp-minify-css</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-plumber" target="_blank" rel="noopener">遇錯時不會中斷 gulp-plumber</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-postcss" target="_blank" rel="noopener">後處理器 gulp-postcss</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/autoprefixer" target="_blank" rel="noopener">根據不同瀏覽器版本，自動補上前綴詞 autoprefixer</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-load-plugins" target="_blank" rel="noopener">不用寫一大堆的變數，用$取代 gulp-load-plugins</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-babel" target="_blank" rel="noopener">JavaScript ES6 編譯 gulp-babel</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-sourcemaps" target="_blank" rel="noopener">壓縮合併程式碼後可以找出原始頭是誰 gulp-sourcemaps</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-concat" target="_blank" rel="noopener">合併程式碼 gulp-concat</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-order" target="_blank" rel="noopener">外部載入的套件需要排序 gulp-order</a><br>(對jquery,bootstrap常載入的是必備品)</p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/browser-sync" target="_blank" rel="noopener">Web Server，即時預覽檔案，安裝後即不用裝liverRoad  ：Browser Sync</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/main-bower-files" target="_blank" rel="noopener">Gulp 串接 Bower 工具 main-bower-files</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-uglify" target="_blank" rel="noopener">JavaScript 壓縮工具 gulp-uglify</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/minimist" target="_blank" rel="noopener">gulp 流程控制 minimist</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-if" target="_blank" rel="noopener">設定任務，可加入判斷式 gulp-if</a></p>
+</li>
+</ul>
+<h3 id="在學習Gulp時遇到的障礙"><a href="#在學習Gulp時遇到的障礙" class="headerlink" title="在學習Gulp時遇到的障礙"></a>在學習Gulp時遇到的障礙</h3><p>在安裝gulp時出現以下訊息</p>
+<p><code>npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue</code></p>
+<ul>
+<li><p>npm WARN已棄用<a href="mailto:minimatch@2.0.10" target="_blank" rel="noopener">minimatch@2.0.10</a>：請更新至最低3.0.2或更高版本以避免RegExp DoS問題</p>
+</li>
+<li><p>解決辦法：npm install minimatch@“3.0.2”<br>或著不用理他也沒有關係的</p>
+</li>
+</ul>
+<hr>
+<h3 id="Gulp-常用指令"><a href="#Gulp-常用指令" class="headerlink" title="Gulp 常用指令"></a>Gulp 常用指令</h3><p><code>Npm init</code></p>
+<ul>
+<li>輸入npm init，進行這個空白專案的初始化，同時也會生成一個基本的package.json，這個package.json非常重要，因為它定義了這個 Node.js 專案裏頭會需要用到的模組與套件 ( Node modules )，輸入npm init之後，基本上可以填寫一些名稱或描述，不然其實也可以直接一直 enter 按下去就會建立完成。</li>
+</ul>
+<p><code>touch gulpfile.js</code></p>
+<ul>
+<li>建立gulpfile.js，要寫的任務、套件全部都是寫在這裡面</li>
+</ul>
+<p><code>npm install</code></p>
+<ul>
+<li>會安裝專案內的 package.json 所列出的需要元件。</li>
+</ul>
+<p><code>npm install -l</code></p>
+<ul>
+<li>把package.json腳本設定好，建立新專案時輸入即可依照package.json上列出的套件，全部自動化安裝完</li>
+</ul>
+<h3 id="npm-相關指令整理"><a href="#npm-相關指令整理" class="headerlink" title="npm 相關指令整理"></a>npm 相關指令整理</h3><ul>
+<li><a href="http://dreamerslab.com/blog/tw/npm-basic-commands/" target="_blank" rel="noopener">http://dreamerslab.com/blog/tw/npm-basic-commands/</a></li>
+<li><a href="https://www.youtube.com/watch?v=1rw9MfIleEg" target="_blank" rel="noopener">跟著教學操作的youtube</a></li>
+</ul>
+<h3 id="Reference-參考網站"><a href="#Reference-參考網站" class="headerlink" title="Reference | 參考網站"></a>Reference | 參考網站</h3><ul>
+<li><a href="http://www.oxxostudio.tw/articles/201503/gulp-install-webserver.html" target="_blank" rel="noopener">http://www.oxxostudio.tw/articles/201503/gulp-install-webserver.html</a></li>
+<li><a href="https://gulpjs.com/" target="_blank" rel="noopener">https://gulpjs.com/</a></li>
+<li><a href="https://987.tw/gulpru-men-zhi-nan/" target="_blank" rel="noopener">https://987.tw/gulpru-men-zhi-nan/</a></li>
+<li><a href="http://www.gulpjs.com.cn/docs/getting-started/" target="_blank" rel="noopener">http://www.gulpjs.com.cn/docs/getting-started/</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10185565" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10185565</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/">
+        <span class="nav-arrow">← </span>
+        
+          教你如何快速設定綁定網域在 Byehost 虛擬主機商
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Rails-SEO-用Sitemap-generator快速設定sitemap/">
+        
+          Rails SEO-用Sitemap-generator快速設定sitemap
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Gulp-學習紀錄、常用指令"><span class="toc-nav-text">Gulp 學習紀錄、常用指令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第一次安裝Gulp"><span class="toc-nav-text">第一次安裝Gulp</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#之後使用Gulp"><span class="toc-nav-text">之後使用Gulp</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用外掛清單"><span class="toc-nav-text">常用外掛清單</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在學習Gulp時遇到的障礙"><span class="toc-nav-text">在學習Gulp時遇到的障礙</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Gulp-常用指令"><span class="toc-nav-text">Gulp 常用指令</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#npm-相關指令整理"><span class="toc-nav-text">npm 相關指令整理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference-參考網站"><span class="toc-nav-text">Reference | 參考網站</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Gulp-學習紀錄、常用指令/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Gulp 學習紀錄、常用指令",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//Gulp-學習紀錄、常用指令/';
+   this.language = "zh-TW";
+   this.page.identifier = '//Gulp-學習紀錄、常用指令/';
+   this.page.title = 'Gulp 學習紀錄、常用指令';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

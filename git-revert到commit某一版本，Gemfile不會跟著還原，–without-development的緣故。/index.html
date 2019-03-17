@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。</h2>
+  <p class="post-date">2017-11-11</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="bundle-install-with-development-使用注意事項"><a href="#bundle-install-with-development-使用注意事項" class="headerlink" title="bundle install -with development 使用注意事項"></a>bundle install -with development 使用注意事項</h2><blockquote>
+<p>某次經驗談：準備將Rails的專案部署Deploy到遠端VPS Server，改檔案改到爛掉於是只好gir revert 還原到上上上上上次的版本，結果囧了發現Gemfile,database.yml不會跟著還原，原本資料庫設定是pg，因要更改production環境時的資料庫變成Mysql2<br><a id="more"></a></p>
+</blockquote>
+<h3 id="git-revert-還原到上上上次版本-使用情境"><a href="#git-revert-還原到上上上次版本-使用情境" class="headerlink" title="git revert 還原到上上上次版本 使用情境"></a>git revert 還原到上上上次版本 使用情境</h3><ul>
+<li>deploy到 Linode，發現掉進無底洞，全部都壞光光</li>
+<li>production的資料庫預設pg，要更改成Mysql2</li>
+<li>修bug修到不知道更改了哪些內容</li>
+<li>還原後發現重run bundle install後無法安裝該有的東西</li>
+<li>發現是因為曾經下過的指令 bundle install –without    development</li>
+</ul>
+<p>突然想起曾經有下過指令是<code>bundle install --without development</code><br>它非常聰明把你紀錄下來，以後執行bundle install的時候都會附加上–without development</p>
+<h3 id="下過指令後，要如何取消？"><a href="#下過指令後，要如何取消？" class="headerlink" title="下過指令後，要如何取消？"></a>下過指令後，要如何取消？</h3><p>下過bundle install –without development指令後，要如何取消？</p>
+<ul>
+<li><p>可以開啟<code>.bundle/config</code>就知道了，電腦很聰明的把設定寫在裡面，所以要刪除這個設定就是把它刪掉，刪掉後重新執行bundle install就不會限制任何環境了。</p>
+</li>
+<li><p>或是執行<code>bundle install  –without development</code></p>
+</li>
+</ul>
+<h3 id="奇怪？為什麼我-git-revert-某版本回去了"><a href="#奇怪？為什麼我-git-revert-某版本回去了" class="headerlink" title="奇怪？為什麼我 git revert 某版本回去了"></a>奇怪？為什麼我 git revert 某版本回去了</h3><p>輸入rails s 在本機上跑都失敗？<br>跑出ERROR說我sqlite3的gem沒有安裝成功，請重新安裝<br>載入無數次的bundle install都一樣，現在終於知道了</p>
+<ul>
+<li>先前輸入過指令 bundle install –without development</li>
+<li>導致無法完整安裝gem，因為gem的sqlite3寫在development</li>
+</ul>
+<h4 id="又因為git-revert到很前面的版本，導致git-push的時候會出現錯誤訊息"><a href="#又因為git-revert到很前面的版本，導致git-push的時候會出現錯誤訊息" class="headerlink" title="又因為git revert到很前面的版本，導致git push的時候會出現錯誤訊息"></a>又因為git revert到很前面的版本，導致git push的時候會出現錯誤訊息</h4><p><code>Updates were rejected because the tip of your current branch is behind</code></p>
+<h4 id="良心建議"><a href="#良心建議" class="headerlink" title="良心建議"></a>良心建議</h4><p>git pull然後一個一個慢慢解決衝突版本<br>不過這專案只有我一人在做，在那邊pull真的是會拉到死又浪費時間，只好使出大絕招</p>
+<p><code>git push -u origin master -f</code></p>
+<p>強制push上去蓋掉前面的紀錄，不過會導致遠端的git res會有些變動遺失就是，要用請謹慎小心。</p>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Rails5使用-Facebook-分享按鈕API，第一次無法正常載入頁面，解決辦法/">
+        <span class="nav-arrow">← </span>
+        
+          Rails 5使用 Facebook 分享按鈕API，第一次無法正常載入頁面，解決辦法
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/warning-LF-will-be-replaced-by-CRLF-in-files？這什麼東西啦！/">
+        
+          warning: LF will be replaced by CRLF in files？這什麼東西啦！
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#bundle-install-with-development-使用注意事項"><span class="toc-nav-text">bundle install -with development 使用注意事項</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#git-revert-還原到上上上次版本-使用情境"><span class="toc-nav-text">git revert 還原到上上上次版本 使用情境</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#下過指令後，要如何取消？"><span class="toc-nav-text">下過指令後，要如何取消？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#奇怪？為什麼我-git-revert-某版本回去了"><span class="toc-nav-text">奇怪？為什麼我 git revert 某版本回去了</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#又因為git-revert到很前面的版本，導致git-push的時候會出現錯誤訊息"><span class="toc-nav-text">又因為git revert到很前面的版本，導致git push的時候會出現錯誤訊息</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#良心建議"><span class="toc-nav-text">良心建議</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/';
+   this.language = "zh-TW";
+   this.page.identifier = '//git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/';
+   this.page.title = 'git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

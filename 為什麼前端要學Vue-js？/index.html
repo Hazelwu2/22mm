@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      為什麼前端要學Vue.js？ | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>為什麼前端要學Vue.js？</h2>
+  <p class="post-date">2018-09-12</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="Vue-js-解決了什麼問題？"><a href="#Vue-js-解決了什麼問題？" class="headerlink" title="Vue.js 解決了什麼問題？"></a>Vue.js 解決了什麼問題？</h2><p>當考慮要不要學習新技術時，要先問自己幾個問題</p>
+<ol>
+<li>這個技術解決了什麼樣的問題？<br>羊毛出在羊身上，這個技術之所以被研發出來，必有其因。</li>
+<li>這個技術有沒有同類型的替代品？比較各自的優缺點</li>
+<li>我花時間成本去學習這個技術，對我有什麼好處？同樣的時間花去學別的技術，是不是更好？</li>
+<li>有什麼實際的問題我可以實用這項技術直接解決？</li>
+</ol>
+<h3 id="定義目標"><a href="#定義目標" class="headerlink" title="定義目標"></a>定義目標</h3><p>以上這些問題是定義目標，除了增強學習動力之外，也是防止浪費時間學一門沒什麼用的技術。<br>人的時間與精力有限，於是「選擇」變得很重要。<br>要將有限的時間、精力投其所好。</p>
+<h3 id="為什麼要使用-Vue-js？"><a href="#為什麼要使用-Vue-js？" class="headerlink" title="為什麼要使用 Vue.js？"></a>為什麼要使用 Vue.js？</h3><ol>
+<li>讓資料與 HTML 能夠完整分離</li>
+<li>將網頁資料存進「狀態」裡，容易管理。不需監聽才能得知網頁當下值。<br>根據資料自動複製 HTML、設定HTML屬性</li>
+<li>將資料與網頁雙向同步<br>同步更新資料與網頁的資料</li>
+<li>加快開發、程式可讀性增加</li>
+</ol>
+<h3 id="Vue-js-初始化"><a href="#Vue-js-初始化" class="headerlink" title="Vue.js 初始化"></a>Vue.js 初始化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Veu(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    </span><br><span class="line">  &#125; <span class="comment">//資料保存狀態</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>資料替換 &#123; &#125;文字 與 HTML<br>v-html<br>指定資料時可進行額外計算，使用Js表達式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  text: <span class="string">'Hello'</span>,</span><br><span class="line">  htmlText: <span class="string">'&lt;p&gt;Hello HTML&lt;/p&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>v-bind:href 可簡寫成 :ahref<br><a v-bind:href="link"></a><br><a :href="link"></a></p>
+<p>v-if：條件不符合時不產生 HTML<br>v-show：條件不符合時以 CSS 隱藏。（display: none）<br>v-else：其餘狀況，當物件存在時才顯示。</p>
+<h3 id="v-model-雙向綁定資料"><a href="#v-model-雙向綁定資料" class="headerlink" title="v-model 雙向綁定資料"></a>v-model 雙向綁定資料</h3><p>當使用者輸入變動時，會同步反應資料。</p>
+<p>指定 v-model 資料型別<br>確保同步時，使用者變動反應的資料是數字或是布林值</p>
+<p>可應用：打勾時變更為true，撲克牌便會翻開</p>
+<p>例如：type為number或checkbox，來更動資料是否為布林值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input(type=&apos;number, v-model=&apos;綁定資料&apos;)</span><br><span class="line">input(type=&apos;checkbox&apos;, v-model=&apos;綁定資料&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="計算屬性-coumputed"><a href="#計算屬性-coumputed" class="headerlink" title="計算屬性 coumputed"></a>計算屬性 coumputed</h3><ul>
+<li>computed 會建立「虛擬屬性」</li>
+<li>不實際建立在資料data內，但會建立虛擬的data</li>
+<li>雙向計算屬性：利用到 getter、setter<br>取得值或是設定值可以觸發額外動作<ul>
+<li>getter 取得ssetter的實際值</li>
+<li>setter 設定值</li>
+</ul>
+</li>
+<li>常應用在 總價、過濾後的清單或是動態 CSS</li>
+</ul>
+<p>例如：購物車的組合價格（商品價格+運費）、組合名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h3 &#123;&#123; price &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'h3'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    fullPrice: <span class="number">3000</span>,</span><br><span class="line">    discount: <span class="number">0.85</span>,</span><br><span class="line">    shoppingFee: <span class="number">60</span></span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    price()&#123;</span><br><span class="line">      <span class="keyword">let</span> result = <span class="keyword">this</span>.fullPrice * <span class="keyword">this</span>.discount</span><br><span class="line">      <span class="keyword">return</span> result + <span class="keyword">this</span>.shoppingFee <span class="comment">// 2610$</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>利用computed建立出price的虛擬屬性，來組合價格</p>
+<h4 id="getter-與-setter"><a href="#getter-與-setter" class="headerlink" title="getter 與 setter"></a>getter 與 setter</h4><p>雙向綁定，指定getter與setter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(v-model=&apos;fullName&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  firstName: <span class="string">''</span>,</span><br><span class="line">  lastName: <span class="string">''</span></span><br><span class="line">&#125;,</span><br><span class="line">computed: &#123;</span><br><span class="line">  fullname: &#123;</span><br><span class="line">    get()&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">','</span> + <span class="keyword">this</span>.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    set(value)&#123;</span><br><span class="line">      <span class="keyword">this</span>.firstName = value.split(<span class="string">','</span>)[<span class="number">0</span>]</span><br><span class="line">      <span class="keyword">this</span>.lastName = value.split(<span class="string">','</span>)[<span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>get()會取得使用者輸入的firstName與lastName<br>set()則會開始處理 get得到的值</p>
+<h3 id="監看變化-watch"><a href="#監看變化-watch" class="headerlink" title="監看變化 watch"></a>監看變化 watch</h3><ul>
+<li>變數發生變化時偵測觸發</li>
+<li>傳入引數：監測出改變前、改變後的值</li>
+<li>常應用在 表單使用者輸入、改變資料或是登入</li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Vue" >
+    <span class="tag-code">Vue</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/ES6語法：let、const/">
+        <span class="nav-arrow">← </span>
+        
+          ES6語法：let、const
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Canvas：前端特效動畫的基礎/">
+        
+          Canvas：前端特效動畫的基礎
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Vue-js-解決了什麼問題？"><span class="toc-nav-text">Vue.js 解決了什麼問題？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#定義目標"><span class="toc-nav-text">定義目標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#為什麼要使用-Vue-js？"><span class="toc-nav-text">為什麼要使用 Vue.js？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Vue-js-初始化"><span class="toc-nav-text">Vue.js 初始化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#v-model-雙向綁定資料"><span class="toc-nav-text">v-model 雙向綁定資料</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#計算屬性-coumputed"><span class="toc-nav-text">計算屬性 coumputed</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#getter-與-setter"><span class="toc-nav-text">getter 與 setter</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#監看變化-watch"><span class="toc-nav-text">監看變化 watch</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//為什麼前端要學Vue-js？/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "為什麼前端要學Vue.js？",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//為什麼前端要學Vue-js？/';
+   this.language = "zh-TW";
+   this.page.identifier = '//為什麼前端要學Vue-js？/';
+   this.page.title = '為什麼前端要學Vue.js？';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

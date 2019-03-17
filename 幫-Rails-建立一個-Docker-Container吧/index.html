@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      幫 Rails 建立一個 Docker Container吧 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>幫 Rails 建立一個 Docker Container吧</h2>
+  <p class="post-date">2018-04-08</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="幫-Rails-建立一個-Docker-Container吧"><a href="#幫-Rails-建立一個-Docker-Container吧" class="headerlink" title="幫 Rails 建立一個 Docker Container吧"></a>幫 Rails 建立一個 Docker Container吧</h1><blockquote>
+<h2 id="為什麼你要使用Docker？"><a href="#為什麼你要使用Docker？" class="headerlink" title="為什麼你要使用Docker？"></a>為什麼你要使用Docker？</h2><p>Docker最重要的價值是：有效解決環境配置、衝突的問題<br>可以在一台機器上跑，就可以在所有的機器上跑。<br>如果有問題的話，就會是大家的問題，大家一起解決XD</p>
+</blockquote>
+<p>docker是建立一個container新的環境，有助於不會因為不同作業系統(Mac, Linux)導致無法在本端跑環境<br>你不用因為不小心升級了npm的webpack等等……..架不起來環境<br>最後電腦整個砍掉重灌之類的……….相信我你會很想死一千遍QQ。</p>
+<h2 id="Mac-教學"><a href="#Mac-教學" class="headerlink" title="Mac 教學"></a>Mac 教學</h2><p>請先安裝 Docker，在Mac環境下安裝Docker非常簡單，只要安裝UI軟體即可XD。<br>Mac 安裝 Docker = &gt;<a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">請點我下載</a></p>
+<p>安裝完後，我們先以建立一個新專案來跑Docker</p>
+<h3 id="建立新專案"><a href="#建立新專案" class="headerlink" title="建立新專案"></a>建立新專案</h3><p>首先建立一個新的資料夾，並且先手動建立四個檔案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd desktop</span><br><span class="line">mkdir docker</span><br><span class="line">cd mkdir</span><br><span class="line">touch Gemfile.lock</span><br><span class="line">touch Gemfile</span><br><span class="line">touch docker-compose.yml</span><br><span class="line">touch Dockerfile</span><br></pre></td></tr></table></figure></p>
+<h3 id="手動填上設定"><a href="#手動填上設定" class="headerlink" title="手動填上設定"></a>手動填上設定</h3><p>docker_1可以手動改成自己的專案名稱，ruby版本可以自由更改，撰寫此篇文章時是<code>Ruby 2.5.0</code>版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Dockerfile</span><br><span class="line">FROM ruby:2.5.0</span><br><span class="line">RUN apt-get update -qq &amp;&amp; apt-get install -y build-essential libpq-dev nodejs</span><br><span class="line">RUN mkdir /docker_1</span><br><span class="line">WORKDIR /docker_1</span><br><span class="line">ADD Gemfile /docker_1/Gemfile</span><br><span class="line">ADD Gemfile.lock /docker_1/Gemfile.lock</span><br><span class="line">RUN bundle install</span><br><span class="line">ADD . /docker_1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Docker-compose.yml</span><br><span class="line">version: &apos;2&apos;</span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    command: bundle exec rails s -p 3000 -b &apos;0.0.0.0&apos;</span><br><span class="line">    volumes:</span><br><span class="line">      - .:/docker_1</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3000:3000&quot;</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br></pre></td></tr></table></figure>
+<p>Gemfile最簡單，只要輸入兩行即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Gemfile</span><br><span class="line">source &apos;https://rubygems.org&apos;</span><br><span class="line">gem &apos;rails&apos;, &apos;~&gt; 5.1.6&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="docker-compose-yml-用途"><a href="#docker-compose-yml-用途" class="headerlink" title="docker-compose.yml 用途"></a>docker-compose.yml 用途</h3><p>docker-compose.yml的用途</p>
+<ol>
+<li>web container</li>
+<li>database constainer</li>
+</ol>
+<h3 id="設定完成，跑指令！"><a href="#設定完成，跑指令！" class="headerlink" title="設定完成，跑指令！"></a>設定完成，跑指令！</h3><p>設置好檔案後，開始跑指令吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web rails new --force --database=postgresql</span><br></pre></td></tr></table></figure>
+<p>這個指令輸入後，會自動建立一個容器，裝著新的rails 專案，<br>Dockerfile會將專案內的Gemfile複製到docker container上，並且自動執行bundle install。<br>還記得我們剛剛在新增Gemfile添加內容時，只安裝了Rails的Gem</p>
+<p>database的username則設定為：postgresql</p>
+<p>完整跑完指令後，會發現專案資料夾已經設置好Rails框架了，像是db, assets等等</p>
+<h3 id="設置database的username"><a href="#設置database的username" class="headerlink" title="設置database的username"></a>設置database的username</h3><p>接著來database.yml檔，因為剛剛輸入的指令設定database username是postgresql<br>因此資料庫的yml檔必須也添加上去，添加<code>username</code>、<code>password</code>、<code>host</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">default: &amp;default</span><br><span class="line">  adapter: postgresql</span><br><span class="line">  encoding: unicode</span><br><span class="line">  # For details on connection pooling, see Rails configuration guide</span><br><span class="line">  # http://guides.rubyonrails.org/configuring.html#database-pooling</span><br><span class="line">  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) &#123; 5 &#125; %&gt;</span><br><span class="line">  username: postgres</span><br><span class="line">  password:</span><br><span class="line">  host: db</span><br></pre></td></tr></table></figure>
+<h3 id="架設環境吧！"><a href="#架設環境吧！" class="headerlink" title="架設環境吧！"></a>架設環境吧！</h3><p>docker-compose up 的指令等同於 rails s，只是是遠端操作docker，那port設定是在3000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure></p>
+<p>如果設置檔案過程都順利、正常的話，輸入<code>localhost:3000</code>即會看到Rails 架設成功的畫面惹。<br><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/08232903/Screen-Shot-2018-04-08-at-10.51.52-PM.png" target="_blank" rel="noopener"><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/08232903/Screen-Shot-2018-04-08-at-10.51.52-PM.png" alt=""></a><br>恭喜你，看到這個畫面時，也代表進入Docker的大坑了（誤）</p>
+<h2 id="Docker-指令介紹"><a href="#Docker-指令介紹" class="headerlink" title="Docker 指令介紹"></a>Docker 指令介紹</h2><p>當你在Gemfile 有變動時，都要重跑bundle，那在docker上則是輸入docker-compose build<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br></pre></td></tr></table></figure></p>
+<p>跑任何Rails指令前都必須加上<code>docker-compose run web</code><br>例如：想要跑rails db:migrate 遷移資料庫指令時前面也要加上此行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web rails db:migrate</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>開啟伺服器 localhost:3000<br><code>docker-compose up</code></p>
+</li>
+<li><p>關閉伺服器<br><code>docker-compose down</code></p>
+</li>
+<li>進入Docker rails console<br><code>docker-compose rails c</code><h2 id="Docker-一次滿足你三個願望"><a href="#Docker-一次滿足你三個願望" class="headerlink" title="Docker 一次滿足你三個願望"></a>Docker 一次滿足你三個願望</h2>不管你想要安裝Yarn, Node.js還是 Webpacker, 前端Framework都沒有問題唷</li>
+</ul>
+<h3 id="想在Docker上安裝yarn、Node-js？沒問題"><a href="#想在Docker上安裝yarn、Node-js？沒問題" class="headerlink" title="想在Docker上安裝yarn、Node.js？沒問題"></a>想在Docker上安裝yarn、Node.js？沒問題</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get update &amp;&amp; apt-get install -y curl apt-transport-https wget &amp;&amp; \</span><br><span class="line">    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &amp;&amp; \</span><br><span class="line">    echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list &amp;&amp; \</span><br><span class="line">    apt-get update &amp;&amp; apt-get install -y yarn</span><br><span class="line">RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - &amp;&amp; \</span><br><span class="line">    apt-get install nodejs</span><br></pre></td></tr></table></figure>
+<h3 id="Docker-安裝-Webpacker？沒問題"><a href="#Docker-安裝-Webpacker？沒問題" class="headerlink" title="Docker 安裝 Webpacker？沒問題"></a>Docker 安裝 Webpacker？沒問題</h3><p>Docker container上加入<code>webpacker</code>？沒問題啊！<br>在Gemfile上添加<code>webpacker</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &apos;webpacker&apos;, &apos;~&gt; 3.4&apos;</span><br></pre></td></tr></table></figure>
+<p>接著重新Run一次以下指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web bundle update</span><br><span class="line">docker-compose build</span><br></pre></td></tr></table></figure>
+<h3 id="Docker上導入React-framework？沒問題！"><a href="#Docker上導入React-framework？沒問題！" class="headerlink" title="Docker上導入React framework？沒問題！"></a>Docker上導入React framework？沒問題！</h3><p>docker-compose run web rails webpack:install:react<br>你有發現到嗎？其實安裝webpacker指令在rails上也是輸入rails webpack:install<br>只是前面多加了<code>docker-compose run web</code>而已<br>不要被長長的指令嚇到了Q_Q</p>
+<h3 id="用-Alias-縮短docker指令"><a href="#用-Alias-縮短docker指令" class="headerlink" title="用 Alias 縮短docker指令"></a>用 Alias 縮短docker指令</h3><p>覺得每次都要輸入這史上超長的指令，很浪費人生、手指力氣吧<br>你想想看，我今天想在docker上新增一個container，我要這樣子輸入<br><code>docker-compose run web rails controller -g home</code><br>超級無敵霹靂有夠長的好不好！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">alias dc-web=&apos;docker-compose run web&apos;</span><br><span class="line">alias dc-migrate=&apos;docker-compose run web rails db:migrate&apos;</span><br><span class="line">alias dc-rspec=&apos;docker-compose run web rspec&apos;</span><br><span class="line">alias dc=&apos;docker-compose&apos;</span><br></pre></td></tr></table></figure>
+<p>以後在終端機上就可以簡單輸入<code>dc-web</code>這些囉<br>也可以自行設定你常用的指令。</p>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+  <a href="/tags#webpacker" >
+    <span class="tag-code">webpacker</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">
+        <span class="nav-arrow">← </span>
+        
+          前端永遠的課題：字體－呈現一致性的跨裝置
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">
+        
+          Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#幫-Rails-建立一個-Docker-Container吧"><span class="toc-nav-text">幫 Rails 建立一個 Docker Container吧</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#為什麼你要使用Docker？"><span class="toc-nav-text">為什麼你要使用Docker？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Mac-教學"><span class="toc-nav-text">Mac 教學</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立新專案"><span class="toc-nav-text">建立新專案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#手動填上設定"><span class="toc-nav-text">手動填上設定</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#docker-compose-yml-用途"><span class="toc-nav-text">docker-compose.yml 用途</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#設定完成，跑指令！"><span class="toc-nav-text">設定完成，跑指令！</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#設置database的username"><span class="toc-nav-text">設置database的username</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#架設環境吧！"><span class="toc-nav-text">架設環境吧！</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker-指令介紹"><span class="toc-nav-text">Docker 指令介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker-一次滿足你三個願望"><span class="toc-nav-text">Docker 一次滿足你三個願望</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#想在Docker上安裝yarn、Node-js？沒問題"><span class="toc-nav-text">想在Docker上安裝yarn、Node.js？沒問題</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker-安裝-Webpacker？沒問題"><span class="toc-nav-text">Docker 安裝 Webpacker？沒問題</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker上導入React-framework？沒問題！"><span class="toc-nav-text">Docker上導入React framework？沒問題！</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#用-Alias-縮短docker指令"><span class="toc-nav-text">用 Alias 縮短docker指令</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//幫-Rails-建立一個-Docker-Container吧/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "幫 Rails 建立一個 Docker Container吧",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//幫-Rails-建立一個-Docker-Container吧/';
+   this.language = "zh-TW";
+   this.page.identifier = '//幫-Rails-建立一個-Docker-Container吧/';
+   this.page.title = '幫 Rails 建立一個 Docker Container吧';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

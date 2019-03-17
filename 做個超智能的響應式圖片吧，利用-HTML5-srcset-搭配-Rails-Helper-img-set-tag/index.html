@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</h2>
+  <p class="post-date">2018-02-17</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper</p>
+<p>通常做響應式圖片有兩種作法</p>
+<ol>
+<li>使用同一張圖片，依照容器、螢幕尺寸放大縮小</li>
+<li>偵測不同的裝置，根據螢幕大小，使用不同大小的圖片</li>
+</ol>
+<h3 id="作法一"><a href="#作法一" class="headerlink" title="作法一"></a>作法一</h3><p>作法一：重頭到尾都使用同一張圖片，可以跟著螢幕修改圖片的比例大小</p>
+<blockquote>
+<p>響應式圖片 建議設定max-width: 100%<br>確保圖片不會超過畫面的大小，父層的容器設多少大小，子層的圖片就會乖乖在他背後下貼著容器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img &#123; max-width: 100%; height: auto&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>缺點：圖片量若很大，載入頁面時間會加長，對於行動裝置上網的客群，可能會因為網站載圖片跑太慢，導致用戶不想等直接離開網站。</p>
+</blockquote>
+<h3 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h3><p>做法二： 隨著裝置提供不同大小的圖檔</p>
+<blockquote>
+<p>我有一張圖片、但是幾個不同大小的版本想要替換使用<br>小螢幕裝置，就下載比較小的圖片，減少行動裝置上不必要的寬頻浪費<br>大螢幕就下載比較大的圖片、解析度也較高、看得比較清楚</p>
+</blockquote>
+<p>優點：可以根據圖片顯示的實際需要，給用戶端剛剛好的大小版本</p>
+<blockquote>
+<p>需要注意的事項：查詢<a href="https://caniuse.com/#search=srcset" target="_blank" rel="noopener">Can I Use</a> 確認主流瀏覽器支援狀況</p>
+</blockquote>
+<h4 id="偵測不同裝置隨意換上圖片"><a href="#偵測不同裝置隨意換上圖片" class="headerlink" title="偵測不同裝置隨意換上圖片"></a>偵測不同裝置隨意換上圖片</h4><p>偵測不同裝置隨意換上圖片，有以下幾種做法</p>
+<ol>
+<li>使用HTML5 <code>&lt;img&gt;</code> 的屬性 <code>srcset</code><br>缺點：需要到Can I Use 看各主流瀏覽器版本是否已支援</li>
+<li>HTML5 <code>&lt;picture&gt;</code></li>
+<li><code>使用 srcset + picture</code></li>
+<li>用 JavaScript 監聽 <code>window.resize</code>事件，修改圖片路徑</li>
+<li>使用 <code>svg</code> 向量圖</li>
+<li>使用第三方外掛，例如：<a href="https://scottjehl.github.io/picturefill/" target="_blank" rel="noopener">picturefill</a>來補足不支援picture的瀏覽器</li>
+</ol>
+<h3 id="狀況劇一"><a href="#狀況劇一" class="headerlink" title="狀況劇一"></a>狀況劇一</h3><p>狀況劇一：設計師提供給我手機版、桌機版裝置的兩種圖片，要怎麼切圖搭配srcset使用？</p>
+<h4 id="先切圖"><a href="#先切圖" class="headerlink" title="先切圖"></a>先切圖</h4><ol>
+<li>給 Mobile 小螢幕裝置的圖片<br>切成 1x 給一般手機<br>切成 2x 給 Retine 高畫質螢幕</li>
+<li>給tablet, desktop 大螢幕裝置的圖片<br>切成 1x, 2x, 3x</li>
+</ol>
+<h4 id="使用-srcset"><a href="#使用-srcset" class="headerlink" title="使用 srcset"></a>使用 srcset</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;img srcset=&quot;360.jpg 360w,</span><br><span class="line">768.jpg 768w,</span><br><span class="line">1200.jpg 1200w,</span><br><span class="line">1920.jpg 1920w&quot;</span><br><span class="line">sizes=&quot;</span><br><span class="line">(max-width: 360px) 100vw,</span><br><span class="line">(max-width: 768px) 90vw,</span><br><span class="line">(max-width: 1980px) 80vw,</span><br><span class="line">768px&quot;</span><br><span class="line">src=&quot;360.jpg&quot; alt=&quot;範例&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>srcset 非常的簡單，寫下你要放上的幾張圖片和他的寬度，瀏覽器就會自動去選擇<br>srcset 分別跟瀏覽器先生說：「嗨，我這裡有360.jpg、768.jpg、1200.jpg、1920.jpg圖片」<br>sizes 也和瀏覽器說：「不同裝置的寬度(media query)下，圖片的寬度也要幫我個別調整！」</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sizes=&quot;(max-width: 360px) 100vw&quot;</span><br></pre></td></tr></table></figure>
+<p>在320px的iphone4下瀏覽，圖片寬度自動也會被調整為 100vw。</p>
+<h3 id="Rails-img-secret-sizes-Helper"><a href="#Rails-img-secret-sizes-Helper" class="headerlink" title="Rails img secret, sizes Helper"></a>Rails img secret, sizes Helper</h3><p>由於Rails內建的Helper沒有<code>image srcset</code>，於是我們要手動新增Helper<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 新增在 application_helper.rb</span><br><span class="line">def image_set_tag(source, srcset = &#123;&#125;, options = &#123;&#125;)</span><br><span class="line">  srcset = srcset.map &#123; |src, size| &quot;#&#123;path_to_image(src)&#125; #&#123;size&#125;&quot; &#125;.join(&apos;, &apos;)</span><br><span class="line">  image_tag(source, options.merge(srcset: srcset))</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>新增完後便可以照著他的規則使用啦！剛剛切出來的五張圖片可以派上用場囉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= image_set_tag &apos;How-we-work.png&apos;, &#123; </span><br><span class="line">  &apos;How-we-work-Mobile.png&apos; =&gt; &apos;320w&apos;,</span><br><span class="line">  &apos;How-we-work-Mobile@2x.png&apos; =&gt; &apos;640w&apos;,</span><br><span class="line">  &apos;How-we-work-PC@2x.png&apos; =&gt; &apos;1024w&apos;,</span><br><span class="line">  &apos;How-we-work-PC@3x.png&apos; =&gt; &apos;1980w&apos;</span><br><span class="line">&#125;, alt: &apos;如何運作&apos;, class: &apos;img-fluid mx-auto d-block&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>瀏覽器吃掉上述程式碼後，它會通過 srcset 屬性自動選擇 Mobile 2x,  PC 2x 等圖，比如說今天用 iPhone 6s，便會自動選擇 Mobile@2x 的圖。</p>
+<blockquote>
+<p><code>default</code>, <code>image_set_tag &#39;How-we-work.png&#39;</code> 這裏即指 default</p>
+</blockquote>
+<p>若瀏覽器太舊看不懂 srcset，會讀取 src 的圖片網址來顯示。套上範例，瀏覽器不支援就會讀取<code>How-we-work.png</code>的圖檔</p>
+<blockquote>
+<p>以下的 <code>w</code> 不是真的指 <code>px</code> ，而是<code>裝置像素比</code>，為了好理解先套上px</p>
+<ul>
+<li><code>320w</code><br>手機模式瀏覽 src自動轉換成 Mobile.png<br>當偵測到瀏覽器為不大於 320px 寬時，顯示 Mobile.png 這張圖</li>
+<li><code>640w</code><br>平板模式瀏覽 src自動轉換成 <a href="mailto:Mobile@2x.png" target="_blank" rel="noopener">Mobile@2x.png</a></li>
+<li><code>1024w</code><br>平板裝置瀏覽 寬度有1024，src自動轉換成 <a href="mailto:PC@2x.png" target="_blank" rel="noopener">PC@2x.png</a></li>
+<li><code>1980w</code><br>桌機裝置瀏覽 寬度有1980，src自動轉換成 <a href="mailto:PC@3x.png" target="_blank" rel="noopener">PC@3x.png</a></li>
+</ul>
+</blockquote>
+<h3 id="w是什麼？"><a href="#w是什麼？" class="headerlink" title="w是什麼？"></a>w是什麼？</h3><p>W 是 設備像素比(DevicePixelRatio)，詳細可點擊<a href="http://screensiz.es/" target="_blank" rel="noopener">查詢各裝置的裝置像素密度</a><br>320w, 640w, 1024w, 1980w 這裡的w不是指px，而是「設備像素比」 也就是 <code>window.devicePixelRatio</code></p>
+<h3 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h3><p>如何測試實驗圖片真的有跟著寬度做更換？<br>建議測試時開啟Chrome無痕視窗，以避免瀏覽器快取後，不會自動切換圖片</p>
+<ol>
+<li>打開Chrome 開發人員工具</li>
+<li>指到 src </li>
+<li><p>會發現瀏覽器視窗隨著調整，src指定的圖片路徑會變成設定的圖檔</p>
+<blockquote>
+<p>像是我開到手機寬度時，src指定圖片路徑會變成Mobile.png，開到正常電腦大小寬度時，src的路徑則會變成<a href="mailto:PC@3x.png" target="_blank" rel="noopener">PC@3x.png</a></p>
+</blockquote>
+</li>
+<li><p>大功告成！</p>
+</li>
+</ol>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="http://www.dailycold.tw/7216/jpeg-jpg-lossy-compression-artifacts/" target="_blank" rel="noopener">為什麼低解析度的JPG會跟馬賽克一樣？</a></li>
+<li><a href="https://stackoverflow.com/questions/45360050/using-image-tag-with-srcset-attribute" target="_blank" rel="noopener">Using image_tag with srcset attribute?
+</a></li>
+<li><a href="https://segmentfault.com/a/1190000008662857" target="_blank" rel="noopener">响应式图片实战</a></li>
+<li><a href="https://www.wfublog.com/2017/08/picasa-rwd-image-srcset.html" target="_blank" rel="noopener">Picasa 圖床的獨家應用：製作 RWD 自適應圖片，讓手機自動載入小圖，加快網頁讀取速度</a></li>
+<li><a href="http://lauraluo.github.io/2015/04/15/20150415-RwdPojectStudy/" target="_blank" rel="noopener">RWD響應式網頁專案開發心得(一)</a></li>
+<li><a href="http://blog.zhusee.in/post/248199/basic-responsive-image-with-srcset-property" target="_blank" rel="noopener">用 srcset 屬性做簡單的 Responsive Image</a></li>
+<li><a href="https://www.minwt.com/webdesign-dev/js/12386.html" target="_blank" rel="noopener">《Picturefill 自適應圖片》隨著裝置提供不同大小的圖檔(JS版)</a></li>
+<li><a href="http://screensiz.es/" target="_blank" rel="noopener">查詢各裝置的裝置像素密度</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#RWD" >
+    <span class="tag-code">RWD</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Rails-5-快速設置-favicon-icon/">
+        <span class="nav-arrow">← </span>
+        
+          Rails 5 快速設置 favicon icon
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">
+        
+          Git push repo失敗： Could not resolve host: github.com
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#作法一"><span class="toc-nav-text">作法一</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#做法二"><span class="toc-nav-text">做法二</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#偵測不同裝置隨意換上圖片"><span class="toc-nav-text">偵測不同裝置隨意換上圖片</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#狀況劇一"><span class="toc-nav-text">狀況劇一</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#先切圖"><span class="toc-nav-text">先切圖</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用-srcset"><span class="toc-nav-text">使用 srcset</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Rails-img-secret-sizes-Helper"><span class="toc-nav-text">Rails img secret, sizes Helper</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#w是什麼？"><span class="toc-nav-text">w是什麼？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#測試"><span class="toc-nav-text">測試</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference-參考資料"><span class="toc-nav-text">Reference | 參考資料</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/';
+   this.language = "zh-TW";
+   this.page.identifier = '//做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/';
+   this.page.title = '做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

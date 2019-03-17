@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。</h2>
+  <p class="post-date">2018-07-23</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>我用Ruby on Rails寫了一個CRUD網路相簿的網站，主機採用Heroku提供的服務。但是有一個缺點，Heroku不提供檔案儲存的空間，每過一段時間就會洗白一次。<br>講白話一點就是：我上傳的相片過一段時間就會不見了，我得為我的相片找新的空間存放才行。這裡使用的是Amazon S3 storage服務，可以自動上傳到S3空間</p>
+<ul>
+<li><code>20180723</code> 更新，Amazon 有更改介面，故 S3 Access key指引教學也有更新內容。</li>
+</ul>
+<hr>
+<p>廢話不多說，開始教學吧</p>
+<h3 id="教學開始"><a href="#教學開始" class="headerlink" title="教學開始"></a>教學開始</h3><h4 id="安裝Gemfile"><a href="#安裝Gemfile" class="headerlink" title="安裝Gemfile"></a>安裝Gemfile</h4><p><code>gem &quot;fog-aws”</code><br><code>bundle install</code></p>
+<h4 id="在Amazon-S3新增一個新的backet"><a href="#在Amazon-S3新增一個新的backet" class="headerlink" title="在Amazon S3新增一個新的backet"></a>在Amazon S3新增一個新的backet</h4><p>我命名為photo-album-hazel，並設定在日本東京的位置。</p>
+<h4 id="新增目錄-lib-carrierwave-storage-fog-rb"><a href="#新增目錄-lib-carrierwave-storage-fog-rb" class="headerlink" title="新增目錄 lib/carrierwave/storage/fog.rb"></a>新增目錄 lib/carrierwave/storage/fog.rb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//在fog.rb貼上</span><br><span class="line">CarrierWave.configure do |config|</span><br><span class="line">  config.fog_provider = &apos;fog/aws&apos; </span><br><span class="line">  if Rails.env.production?</span><br><span class="line">    config.fog_credentials = &#123;</span><br><span class="line">      provider:              &apos;AWS&apos;,</span><br><span class="line">      aws_access_key_id:     ENV[&apos;S3_KEY&apos;],</span><br><span class="line">      aws_secret_access_key: ENV[&apos;S3_SECRET&apos;],</span><br><span class="line">      region:                &apos;ap-northeast-1&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    config.fog_directory  = ENV[&apos;S3_BUCKET&apos;]</span><br><span class="line">  else</span><br><span class="line">    config.storage :file</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>在Uploader設定儲存檔案的方式，若在 production 環境下， 將會透過 fog 上傳檔案到 AWS 的 bucket; 若是開發環境， 則會將檔案放在本地端的 public 目錄下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># photo-image-uploader.rb設定</span><br><span class="line">  if Rails.env.production?</span><br><span class="line">    storage :fog</span><br><span class="line">  else</span><br><span class="line">    storage :file</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
+<h4 id="AWS-S3-KEY-要去哪裡找？"><a href="#AWS-S3-KEY-要去哪裡找？" class="headerlink" title="AWS S3 KEY 要去哪裡找？"></a>AWS S3 KEY 要去哪裡找？</h4><p><em>20180723 更新，Amazon 有更改介面，更新要怎麼從 Amazon 找到 S3 Access key</em></p>
+<ol>
+<li>AWS 登入後</li>
+<li>點開選單，點擊 <code>Security Credentials</code><br><img src="https://i.imgur.com/efIyId3.png" alt="S3 Security Credentials"></li>
+<li>側邊選單點 Users，並建立一個 User 帳戶</li>
+<li>點擊 <code>你剛建立的User帳號</code>，標籤選 <code>Security Credentials</code></li>
+<li>Create Access Key<br><img src="https://i.imgur.com/B4DTXAi.png" alt="20180723 update. how to find Amazon S3 access key"><br>在 Create Access Key的過程便會 Show出 ID 與 KEY 囉。</li>
+</ol>
+<h4 id="Region設定方式查詢：查詢AWS區域代號"><a href="#Region設定方式查詢：查詢AWS區域代號" class="headerlink" title="Region設定方式查詢：查詢AWS區域代號"></a>Region設定方式查詢：<a href="http://docs.aws.amazon.com/general/latest/gr/rande.html" title="查詢AWS區域代號" target="_blank" rel="noopener">查詢AWS區域代號</a></h4><table>
+<thead>
+<tr>
+<th style="text-align:left">Region Name</th>
+<th style="text-align:right">代稱</th>
+<th style="text-align:center">Amazon Route 53 Hosted Zone ID*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Asia Pacific (Tokyo)</td>
+<td style="text-align:right">ap-northeast-1</td>
+<td style="text-align:center">apigateway.ap-northeast-1.amazonaws.com</td>
+</tr>
+</tbody>
+</table>
+<p>我設定的bucket在東京：所以Region是ap-northeast-1</p>
+<h4 id="用環境變數方式儲存，heroku與本機設定KEY"><a href="#用環境變數方式儲存，heroku與本機設定KEY" class="headerlink" title="用環境變數方式儲存，heroku與本機設定KEY"></a>用環境變數方式儲存，heroku與本機設定KEY</h4><p>How to setting localhost &amp; Heroku environment variable ?<br>總共有三項要設定，請分別設定在本機、Heroku上</p>
+<ol>
+<li>Bucket Name，像我在S3建立的bucket name就是photo-album-hazel</li>
+<li>KEY ID</li>
+<li>KEY SECRET</li>
+</ol>
+<p>本機 Rails 環境變數設定 AWS S3 KEY</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export S3_KEY= &quot;your access key id&quot;</span><br><span class="line">export S3_SECRET= &quot;your secret access key&quot;</span><br></pre></td></tr></table></figure>
+<p>範例程式碼如下，請不要複製，皆為虛假，請真正填上你S3的資訊。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export S3_KEY=&apos;AKIAI2XXX24DGFCDNCQ&apos;</span><br><span class="line">export S3_SECRET=&apos;nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T&apos;</span><br><span class="line">export S3_BUCKET=&apos;restaurant-review&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Heroku-遠端設定-AWS-S3-KEY"><a href="#Heroku-遠端設定-AWS-S3-KEY" class="headerlink" title="Heroku 遠端設定 AWS S3 KEY"></a>Heroku 遠端設定 AWS S3 KEY</h3><p>若沒有在heroku上設定S3 KEY，直接<code>git push heroku master</code>推到heroku上，會發現推不上去哦！<br>錯誤訊息會這樣顯示</p>
+<blockquote>
+<p>ArgumentError: Missing required arguments: aws_access_key_id, aws_secret_access_key<br>Precompiling assets failed.<br>所以還是要乖乖的先把這步驟做完，遠端連線到Heroku Server並設定好Key後，即可順利推上去。</p>
+</blockquote>
+<p><code>$ heroku config:set S3_KEY=xxx S3_SECRET=yyy S3_BUCKET=zzz</code><br>以下程式碼僅為參考用，非正確可使用的KEY。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">heroku config:set S3_KEY=AKIAI2XXX24DGFCDNCQ</span><br><span class="line">heroku config:set S3_SECRET=nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T</span><br><span class="line">heroku config:set S3_BUCKET=restaurant-review</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/23163331/setting-aws-s3-1024x356.png" alt="Setting-AWS-S3-loaclhost"></p>
+<h4 id="設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3-bucket吧"><a href="#設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3-bucket吧" class="headerlink" title="設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧"></a>設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am &apos;Setting carrierwave upload to AWS S3&apos;</span><br><span class="line">git push</span><br><span class="line">git push heroku master</span><br></pre></td></tr></table></figure>
+<p>Push到Heroku後，出現錯誤了。<br>查看heroku logs才知道：Rails找不到Carrierwave的常數fog</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/app/vendor/bundle/ruby/2.3.0/gems/carrierwave-1.2.0/lib/carrierwave/uploader/configuration.rb:78:in `eval&apos;: uninitialized constant CarrierWave::Storage::Fog (NameError)</span><br></pre></td></tr></table></figure>
+<p>嘗試解決方法</p>
+<ol>
+<li>Gem 安裝 ‘fog’<br>結果：無效</li>
+<li>在 lib/carrierwave/storage/fog.rb 多加上一行程式碼<br><code>require &#39;carrierwave/storage/fog&#39;</code><br>結果：無效</li>
+<li>把 lib/carrierwave/storage/fog.rb 刪除，並在 config/initializer下新增 carrierwave.rb<br>把fog.rb的內容複製過去<br>（當初直接新增fog.rb是完全照著官方文件做的說…）<br>結果：成功，Heroku可以成功開啟網站了（哭）</li>
+</ol>
+<p>可以順利開啟網站後，開Chrome開發人員工具檢查吧，看是否有上傳到AWS S3上</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/23163310/s3-sample.jpg" alt="Successful to upload to AWS S3 using Rails"><br>成功啦！！</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
+<li><a href="https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location" target="_blank" rel="noopener">CarriveWave Github 官方文件</a></li>
+<li><a href="http://tsaith.github.io/shi-yong-carrierwave-shang-chuan-dang-an-dao-aws-s3.html" target="_blank" rel="noopener">使用Carrierwave上傳到AWS S3</a></li>
+<li><a href="http://rubyist.marsz.tw/blog/2012-01-10/carrierwave-guides-with-amazon-s3-and-imagemagick-integration/" target="_blank" rel="noopener">使用 Carrierwave 處理檔案上傳 (整合 imagemagick 與 Amazon S3)</a></li>
+</ol>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/神奇的migration-生成器-Ruby-on-Rails-5/">
+        <span class="nav-arrow">← </span>
+        
+          神奇的migration 生成器 | Ruby on Rails 5
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/BlueHost-Wordpress-如何安裝-Git-版本控制/">
+        
+          BlueHost Wordpress 如何安裝 Git 版本控制
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#教學開始"><span class="toc-nav-text">教學開始</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#安裝Gemfile"><span class="toc-nav-text">安裝Gemfile</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#在Amazon-S3新增一個新的backet"><span class="toc-nav-text">在Amazon S3新增一個新的backet</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#新增目錄-lib-carrierwave-storage-fog-rb"><span class="toc-nav-text">新增目錄 lib/carrierwave/storage/fog.rb</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#AWS-S3-KEY-要去哪裡找？"><span class="toc-nav-text">AWS S3 KEY 要去哪裡找？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Region設定方式查詢：查詢AWS區域代號"><span class="toc-nav-text">Region設定方式查詢：查詢AWS區域代號</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#用環境變數方式儲存，heroku與本機設定KEY"><span class="toc-nav-text">用環境變數方式儲存，heroku與本機設定KEY</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Heroku-遠端設定-AWS-S3-KEY"><span class="toc-nav-text">Heroku 遠端設定 AWS S3 KEY</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3-bucket吧"><span class="toc-nav-text">設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/';
+   this.language = "zh-TW";
+   this.page.identifier = '//為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/';
+   this.page.title = '為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

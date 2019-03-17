@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      前端永遠的課題：字體－呈現一致性的跨裝置 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>前端永遠的課題：字體－呈現一致性的跨裝置</h2>
+  <p class="post-date">2018-03-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>前端最主要就是將所有裝置能一致化顯示，今天來談談「字體」的部分<br>大家都知道Windows, Linux, Mac三大作業系統，想當然也有其系統的內建字體，若只指定常見的微軟正黑體，其他作業系統沒有該字體，就會顯示該作業系統的預設字體，而不是微軟正黑體，這樣就沒有超能力隨心所欲控制字體了，這怎麼行！<br>身為一位專業的前端工程師，是有必要了解網頁字體的，Okay, Let’s go.</p>
+<blockquote>
+<p>要能隨自己心念呈現想要的字體，首先要先理解「字體擺放的順序」，順序超重要的啊</p>
+</blockquote>
+<h2 id="字體通用順序"><a href="#字體通用順序" class="headerlink" title="字體通用順序"></a>字體通用順序</h2><p>英文字型 &gt; Linux系統 &gt; Mac系統 &gt; Windows &gt; 基礎字體</p>
+<h3 id="設定-font-family-到底是中文在前面、還是英文啊？"><a href="#設定-font-family-到底是中文在前面、還是英文啊？" class="headerlink" title="設定 font-family 到底是中文在前面、還是英文啊？"></a>設定 font-family 到底是中文在前面、還是英文啊？</h3><blockquote>
+<p>英文字型在前，中文字型在後</p>
+</blockquote>
+<p>如果中文字型在前，那麼網頁會永遠讀取不到Arial的字體，正確示範應為以下設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: &quot;Arial&quot;, &quot;微軟正黑體&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用機率較少的字體放前，使用機率高的字體放後"><a href="#使用機率較少的字體放前，使用機率高的字體放後" class="headerlink" title="使用機率較少的字體放前，使用機率高的字體放後"></a>使用機率較少的字體放前，使用機率高的字體放後</h2><ul>
+<li>使用機率較少的字體放在前面（例如只有Mac系統才有的蘋果儷中黑字體）</li>
+<li>使用機率高的字體放在後面（幾乎每個作業系統都有的新細明體或標楷體）</li>
+</ul>
+<blockquote>
+<p>舉例來說，如果我想要瀏覽這個網站的使用者，使用Mac裝置看得是蘋果儷中黑，用Windows瀏覽則看到的是微軟正黑體，那該怎麼設定？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: &quot;蘋果儷中黑&quot;, &quot;微軟正黑體&quot;, sans-serif</span><br></pre></td></tr></table></figure>
+<h2 id="確保裝置都能讀取字體：中英字體名稱皆設定"><a href="#確保裝置都能讀取字體：中英字體名稱皆設定" class="headerlink" title="確保裝置都能讀取字體：中英字體名稱皆設定"></a>確保裝置都能讀取字體：中英字體名稱皆設定</h2><p>建議設定font-family時不只是要設定A的中文字體，也要設定A的英文字行名稱都要設定，這樣做是為了防止有些作業系統或裝置抓不到該中文字體名稱，兩者皆設定會比較保險。<br>舉例來說，微軟正黑體的英文名稱為：Microsoft JhengHei，那就可以像下面這樣設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: Microsoft JhengHei, &quot;微軟正黑體&quot;, sans-serif</span><br></pre></td></tr></table></figure></p>
+<h2 id="在-Rails-5-裡引用特殊英文字體"><a href="#在-Rails-5-裡引用特殊英文字體" class="headerlink" title="在 Rails 5 裡引用特殊英文字體"></a>在 Rails 5 裡引用特殊英文字體</h2><p>如果設計師給你的字型是特殊的英文字體（也就是非內建字體），需包在專案內</p>
+<blockquote>
+<p>舉例來說，今天設計師給我CenturyGothicBold字體，引用此字體步驟</p>
+</blockquote>
+<ol>
+<li>把字體包放到 assets/fonts資料架內</li>
+<li>用 Fontface Generator 產生各種支援的eot, woff, ttf 格式支援各系統<br><a href="https://www.fontsquirrel.com/tools/webfont-generator" target="_blank" rel="noopener">Font-face 產生器</a></li>
+</ol>
+<p>上傳你要客製化使用的英文字體，Generator(產生器)便會自動生成各系統使用的字體檔</p>
+<ol start="3">
+<li>在css上設定@font-face，若在rails引用路徑，可用 assets_path的helper</li>
+<li>針對個別需使用此字體的element（例如h1）或整體body設定 font-family: “CenturyGothicBold” <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">  font-family: &apos;CenturyGothicBold&apos;;</span><br><span class="line">  src: url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.eot&quot;) %&gt;&apos;);</span><br><span class="line">  src: url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.eot&quot;) %&gt;&apos;) format(&apos;embedded-opentype&apos;),</span><br><span class="line">  		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.woff&quot;) %&gt;&apos;) format(&apos;woff2&apos;),</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.woff&quot;) %&gt;&apos;) format(&apos;woff&apos;),</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.ttf&quot;) %&gt;&apos;) format(&apos;truetype&apos;)</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.svg#CenturyGothicBold&quot;) %&gt;&apos;) format(&apos;svg&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>小知識：為什麼有這麼多種格式的字型？（woff2, woff, eot, ttf）</p>
+</blockquote>
+<p>原因：有些瀏覽器只會讀取某種格式的字體檔，如果你想要把所有裝置瀏覽網頁都呈現統一的字體瀏覽的話，就得必須設這些擴充字體，讓某些不支援的瀏覽器或Android手機可以正常顯示你想要的字體</p>
+<blockquote>
+<p>小知識：你知道字體有四大天王的格式嗎？</p>
+</blockquote>
+<p>網頁上有四種字型格式：WOFF2、WOFF、EOT、TTF<br>有些瀏覽器只會讀取某種格式的字體檔，</p>
+<ul>
+<li>WOFF 2.0 支援的瀏覽器</li>
+<li>WOFF 給大部分瀏覽器</li>
+<li>EOT 給舊版 Android (4.4版以下) 的瀏覽器</li>
+<li>TTF 給舊版 IE ( IE 9 以下) 的瀏覽器</li>
+</ul>
+<p>有興趣者可以參考這篇Stack發問：<a href="https://stackoverflow.com/questions/11002820/why-should-we-include-ttf-eot-woff-svg-in-a-font-face" target="_blank" rel="noopener">Why should we include ttf, eot, woff, svg,… in a font-face
+</a></p>
+<h2 id="三大作業系統-字體中英對照"><a href="#三大作業系統-字體中英對照" class="headerlink" title="三大作業系統 | 字體中英對照"></a>三大作業系統 | 字體中英對照</h2><h3 id="Mac-OS"><a href="#Mac-OS" class="headerlink" title="Mac OS"></a>Mac OS</h3><p>華文楷體：STKaiti<br>華文細明體：STSong<br>華文仿宋：STFangsong<br>儷黑 Pro：LiHei Pro Medium<br>儷宋 Pro：LiSong Pro Light<br>標楷體：BiauKai<br>蘋果儷中黑：Apple LiGothic Medium<br>蘋果儷細宋：Apple LiSung Light</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>新細明體：PMingLiU<br>細明體：MingLiU<br>標楷體：DFKai-SB<br>黑體：SimHei<br>細明體：mingliu<br>新細明體：Nmingliu<br>仿宋：FangSong<br>楷體：KaiTi<br>仿宋_GB2312：FangSong_GB2312<br>標楷體：KaiTi_GB2312<br>微軟正黑體：Microsoft JhengHei<br>微軟雅黑體：Microsoft YaHei</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>文泉驛正黑：WenQuanYi Zen Hei<br>全字庫正楷體：TW-Kai</p>
+<h2 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h2><ul>
+<li><a href="https://www.wfublog.com/2014/02/font-family-chinese-cross-platform.html" target="_blank" rel="noopener">網頁中英文字型(font-family)跨平台設定最佳化</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">
+        <span class="nav-arrow">← </span>
+        
+          Git筆記：移花接木的Rebase，整理commit訊息的好幫手
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/幫-Rails-建立一個-Docker-Container吧/">
+        
+          幫 Rails 建立一個 Docker Container吧
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#字體通用順序"><span class="toc-nav-text">字體通用順序</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#設定-font-family-到底是中文在前面、還是英文啊？"><span class="toc-nav-text">設定 font-family 到底是中文在前面、還是英文啊？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用機率較少的字體放前，使用機率高的字體放後"><span class="toc-nav-text">使用機率較少的字體放前，使用機率高的字體放後</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#確保裝置都能讀取字體：中英字體名稱皆設定"><span class="toc-nav-text">確保裝置都能讀取字體：中英字體名稱皆設定</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#在-Rails-5-裡引用特殊英文字體"><span class="toc-nav-text">在 Rails 5 裡引用特殊英文字體</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三大作業系統-字體中英對照"><span class="toc-nav-text">三大作業系統 | 字體中英對照</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Mac-OS"><span class="toc-nav-text">Mac OS</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Windows"><span class="toc-nav-text">Windows</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Linux"><span class="toc-nav-text">Linux</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference-參考資料"><span class="toc-nav-text">Reference | 參考資料</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//前端永遠的課題：呈現一致性的跨裝置：關於Font/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "前端永遠的課題：字體－呈現一致性的跨裝置",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//前端永遠的課題：呈現一致性的跨裝置：關於Font/';
+   this.language = "zh-TW";
+   this.page.identifier = '//前端永遠的課題：呈現一致性的跨裝置：關於Font/';
+   this.page.title = '前端永遠的課題：字體－呈現一致性的跨裝置';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

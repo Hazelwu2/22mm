@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      複製 Production 真實環境資料，模擬超逼真測試 | Rails 5 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>複製 Production 真實環境資料，模擬超逼真測試 | Rails 5</h2>
+  <p class="post-date">2018-06-13</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。</p>
+<h3 id="將要測試的資料庫（例如：production）匯出成sql"><a href="#將要測試的資料庫（例如：production）匯出成sql" class="headerlink" title="將要測試的資料庫（例如：production）匯出成sql"></a>將要測試的資料庫（例如：production）匯出成sql</h3><p>將原始production資料庫:database_name，匯出成「database_name-20180612.sql」檔案</p>
+<blockquote>
+<p>（註：通常會加上日期，會較為清楚知道這是什麼時期匯出的資料）</p>
+</blockquote>
+<p>你需要知道：Server端上的database_url、Server的IP及資料庫的名稱<br>格式大約會像是這樣：</p>
+<p>你可以從Google Cloud Platform上查詢或是在Server租用的主機商查看資訊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">database_url</span><br><span class="line">範例格式：postgresql://資料庫使用者:資料庫密碼@ServerIP/database_name</span><br><span class="line">真實格式：postgresql://hazelwu:123456@11.12.200.205/production</span><br></pre></td></tr></table></figure></p>
+<p>如果不清楚database_url是怎麼生成的，可以參考這篇文章：<a href="http://edgeguides.rubyonrails.org/configuring.html#configuring-a-database" target="_blank" rel="noopener">Rails Guide Configure database</a></p>
+<p>遠端連上Server後<br>ssh <a href="mailto:hazelwu@11.12.200.205" target="_blank" rel="noopener">hazelwu@11.12.200.205</a><br>移動到專案目錄後，在Commend Line上輸入，並自行填上相關參數<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pg_dump -h 11.12.200.205 -U 資料庫使用者 資料庫名稱 &gt; production-20180612.sql</span><br><span class="line">## 範例：使用者 hazelwu, 資料庫名稱 123456</span><br><span class="line">pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</span><br></pre></td></tr></table></figure></p>
+<p><code>pg_dump dbname &gt; dumpfile</code></p>
+<ul>
+<li>原始指令：pg_dump 資料庫名稱 &gt; 匯出檔案名稱</li>
+<li>參數意義：<br>  -h：host<br>  -U：user<br>  -p：port（註：專案未有設定port，所以不需要設定此參數）<blockquote>
+<p>由於是在Server端要連線至資料庫（本文撰寫時採用GCP），所以需要特別輸入IP位址及User名稱，才能有權限讀取資料庫，並匯出sql檔案。</p>
+</blockquote>
+</li>
+</ul>
+<p>輸入完指令後，便會將 Porduction的資料庫檔案，匯出成sql檔。<br>接著要做的就是把這個新生成的檔案（production-20180612.sql），從Server拉到自己Local端</p>
+<p>不過，通常資料庫都會越來越肥大，在拉到Local端之前要記得先用gzip壓縮一下哦。</p>
+<h3 id="在Server上-gz-壓縮-越來越肥的資料庫"><a href="#在Server上-gz-壓縮-越來越肥的資料庫" class="headerlink" title="在Server上 gz 壓縮 | 越來越肥的資料庫"></a>在Server上 gz 壓縮 | 越來越肥的資料庫</h3><p>以下操作指令皆為在<code>Server</code>端輸入。</p>
+<ol>
+<li><p>將檔案壓縮成gz<br>解壓縮完便會還原成 production-20180612.sql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gzip production-20180612.sql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>gz解壓縮指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gunzip production-20180612.sql.gz</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Remote-Server-下載-sql-到-Local端"><a href="#Remote-Server-下載-sql-到-Local端" class="headerlink" title="Remote Server 下載 sql 到 Local端"></a>Remote Server 下載 sql 到 Local端</h3><p>要如何從Server端直接下載檔案到本機電腦呢？<br>有幾種方式：curl、wget或是scp都可以。</p>
+<ul>
+<li>使用wget的話，需要將檔案放在server上的開放空間，且必須要是瀏覽器可以打開的網址，例如</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ Wget url</span><br><span class="line">wget http://11.12.200.205:8000/production-20180612.sql</span><br></pre></td></tr></table></figure>
+<p>以下是採取<code>scp</code>方式<br>scp其實很好記，顧名思義：Server Copy，夠白話了吧XD</p>
+<ul>
+<li>指令格式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp user@server:/路徑/你要/下載/的檔案 ~/Desktop/你要下載/到/電腦/的哪個/位置</span><br><span class="line">scp hazelwu@11.12.200.205:/home/hazelwu/test/current/production-20180612.sql ~/Desktop/github/test_rails</span><br><span class="line">## 這樣便會將production-20180612.sql下載至desktop/github/test_rails資料夾內。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="你知道嗎？其實還能夠再簡化一點"><a href="#你知道嗎？其實還能夠再簡化一點" class="headerlink" title="你知道嗎？其實還能夠再簡化一點"></a>你知道嗎？其實還能夠再簡化一點</h4><p>指定你要下載的東西，在Commend Line上先移動到想要把檔案放的資料夾（例如/tmp），接著後面那串指令（表示本機位置）以<code>.</code>來取代就可以了，便會將檔案下載到<code>/tmp</code>內。</p>
+<blockquote>
+<p>建議可以直接放在專案內的tmp內，因為不會被commit進去、tmp主要都為放暫時性檔案使用。（通常gitinore有加入/tmp/*）</p>
+</blockquote>
+<p>打以下的指令時，可以先在Command Line移動到你想要複製的目錄，後面就不用打一長串的東西囉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">### 簡化後的版本</span><br><span class="line">[local端] cd tmp/</span><br><span class="line">scp hazelwu@11.12.200.205:/home/hazelwu/test/current/production-20180612.sql .</span><br></pre></td></tr></table></figure>
+<p>這樣即可將sql匯出來哩</p>
+<h3 id="保個保險吧：攔截會發送給使用者的動作（Email"><a href="#保個保險吧：攔截會發送給使用者的動作（Email" class="headerlink" title="保個保險吧：攔截會發送給使用者的動作（Email)"></a>保個保險吧：攔截會發送給使用者的動作（Email)</h3><p>由於這些資料都非常真實，是來自真實使用者的資料，包含信箱手機等都為真的<br>所以不能真的做出通知使用者的行為，例如 E-Mail 寄送、簡訊認證碼送出等。</p>
+<p>Rails 有提供 <code>register_interceptor</code>攔截 Email</p>
+<ol>
+<li>config/initializers/email.rb</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 新增 config/initializers/email.rb </span><br><span class="line"># 在 Rails 啟動時，如果是非 production 環境就載入EmailInterceptor：</span><br><span class="line"></span><br><span class="line">unless Rails.env.production?</span><br><span class="line">  puts &quot;阻攔Email，將收件人皆改為test測試用信箱&quot;</span><br><span class="line">  require &apos;email_interceptor&apos;</span><br><span class="line">  ActionMailer::Base.register_interceptor(EmailInterceptor)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>lib/email_interceptor.rb新增以下程式碼</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## 新增 lib/email_interceptor.rb 並且自訂條件：將收件人信箱皆改為測試用信箱</span><br><span class="line">class EmailInterceptor</span><br><span class="line">  def self.delivering_email(message)</span><br><span class="line">    message.to = [&apos;test@example&apos;]</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="將-sql-匯出到-local端-develop-environment"><a href="#將-sql-匯出到-local端-develop-environment" class="headerlink" title="將 sql 匯出到 local端 / develop environment"></a>將 sql 匯出到 local端 / develop environment</h3><p>順利抓下Server端的資料後，也設上攔截機制了，接著可以匯入資料囉。</p>
+<ul>
+<li>匯出資料庫<br>pg_dump database_name &gt; backup.sql</li>
+<li>匯入資料庫<br>psql db_name &lt; backup.sql</li>
+</ul>
+<p>還記得剛剛匯出的指令嗎？<br><code>pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</code><br>接著要匯入的話，指令要這樣打<br><code>psql 123456 &lt; production-20180612.sql</code><br>輸入完之後，可以進入到Console.log試試看資料庫有沒有匯入成功</p>
+<blockquote>
+<p>有發現為什麼突然少那麼多參數嗎？</p>
+<ul>
+<li>原因<br>  由於目前環境是Local端，不需要填入帳號密碼等參數來藉由GCP連入資料庫了，我們只要指定檔案，匯入到本機的資料庫即可。預設是沒有輸入參數，他會抓當前的IP位置</li>
+</ul>
+</blockquote>
+<ul>
+<li>重整 Postgresql 匯入/匯出資料庫指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">匯出資料庫</span><br><span class="line">psql project_development &lt; project_production-20180612.sql</span><br><span class="line">匯入資料庫</span><br><span class="line">psql project_development &lt; project_production.sql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="實際操作時，遇到的問題："><a href="#實際操作時，遇到的問題：" class="headerlink" title="實際操作時，遇到的問題："></a>實際操作時，遇到的問題：</h3><h4 id="1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"><a href="#1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？" class="headerlink" title="1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"></a>1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？</h4><blockquote>
+<p>在 Server端 用 Gem 產生資料檔 Seed，抓下來到Local端跑種子檔，<br>結果：無法與關聯資料庫對上，關聯id對不上去（如：user_id會對不上，找不到該User）</p>
+</blockquote>
+<p>資料格式類似如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User.create!([</span><br><span class="line">&#123;email: &quot;fduwsbxcbkdym4jzxn6b@gmail.com&quot;, encrypted_password: &quot;zxkdfgjeute123ds&quot;, reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一次試著做時，是用<code>Gem &#39;seed_dump&#39;</code>在Server端上做，因屢次失敗的原因，後面便不採用seed_dump的做法了。轉移production資料到local，直接用postgresql指令直接拉，會比較快。</p>
+<h4 id="2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"><a href="#2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？" class="headerlink" title="2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"></a>2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？</h4><p>將local端資料庫全部刪除，打算跑rails db:seed:users，將production轉移至local<br>但發現會對不上關聯資料庫的部分，因為重建立的user_id並不是從0開始，這該怎麼辦？</p>
+<ul>
+<li>刪除資料後，id會從0開始有下列幾個做法</li>
+</ul>
+<ol>
+<li>TRUNCATE table <code>TABLE_NAME</code>; </li>
+<li>DROP table <code>TABLE_NAME</code>;</li>
+<li>rails db:drop</li>
+</ol>
+<ul>
+<li><code>TRUNCATE</code> 與 <code>DROP</code> 兩者的差別在於<ul>
+<li>前者是把資料欄位全部刪除；</li>
+<li>後者 DROP 則是把整個 TABLE 刪除</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"><a href="#3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出" class="headerlink" title="3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"></a>3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出</h4><p>由於Server端的資料庫與專案上安裝的資料庫版本不符（一個為9.6版本、一個則是9.5版本），導致無法匯出</p>
+<ul>
+<li>一開始的嘗試：<br>先在Server上安裝相同版本的psql，但未能成功，仍還是舊版本QQ<br>搞版本總是很複雜又很麻煩，不過有一個比較快的方法是：</li>
+</ul>
+<p>在跑<code>pg_dump</code>指令時，prefix前面加上指定的版本，就能夠指定為9.6版本跑pg_dump的指令，而不是舊的版本（9.5)</p>
+<ul>
+<li>如何解決：<br>因此我們需要指定版本：<code>/usr/lib/postgresql/9.6/bin/pg_dump</code> 後面再加上原要接的參數，就可以輕鬆搞定版本問題啦！</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 原本psql匯出指令</span><br><span class="line">pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql </span><br><span class="line"># 解決版本不一致 匯出指令</span><br><span class="line">/usr/lib/postgresql/9.6/bin/pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</span><br></pre></td></tr></table></figure>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="http://osxdaily.com/2016/11/07/download-file-from-server-scp-ssh/" target="_blank" rel="noopener">How to Download a File from a Server with SSH /SCP </a></li>
+<li><a href="http://motion-express.com/blog/20141112-rails-test-db-seed" target="_blank" rel="noopener">Rails 複製資料到 development環境</a></li>
+<li><a href="https://www.postgresql.org/docs/10/static/backup-dump.html" target="_blank" rel="noopener">Postgresql Dump</a></li>
+<li>小蟹本人XD</li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#scp server" >
+    <span class="tag-code">scp server</span>
+  </a>
+
+  <a href="/tags#production data into local" >
+    <span class="tag-code">production data into local</span>
+  </a>
+
+  <a href="/tags#copy production data transfer to staging" >
+    <span class="tag-code">copy production data transfer to staging</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Rails-Server打不開嗎？你應該看看這篇/">
+        <span class="nav-arrow">← </span>
+        
+          Rails Server打不開嗎？你應該看看這篇
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Macbook Pro 2017版，如何架設兩個螢幕/">
+        
+          Macbook Pro 2017版，外接兩個螢幕 | 全攻略
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#將要測試的資料庫（例如：production）匯出成sql"><span class="toc-nav-text">將要測試的資料庫（例如：production）匯出成sql</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在Server上-gz-壓縮-越來越肥的資料庫"><span class="toc-nav-text">在Server上 gz 壓縮 | 越來越肥的資料庫</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Remote-Server-下載-sql-到-Local端"><span class="toc-nav-text">Remote Server 下載 sql 到 Local端</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#你知道嗎？其實還能夠再簡化一點"><span class="toc-nav-text">你知道嗎？其實還能夠再簡化一點</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#保個保險吧：攔截會發送給使用者的動作（Email"><span class="toc-nav-text">保個保險吧：攔截會發送給使用者的動作（Email)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#將-sql-匯出到-local端-develop-environment"><span class="toc-nav-text">將 sql 匯出到 local端 / develop environment</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#實際操作時，遇到的問題："><span class="toc-nav-text">實際操作時，遇到的問題：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"><span class="toc-nav-text">1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"><span class="toc-nav-text">2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"><span class="toc-nav-text">3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference-參考資料"><span class="toc-nav-text">Reference | 參考資料</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//複製-Production-真實環境資料，模擬超逼真測試-Rails-5/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "複製 Production 真實環境資料，模擬超逼真測試 | Rails 5",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//複製-Production-真實環境資料，模擬超逼真測試-Rails-5/';
+   this.language = "zh-TW";
+   this.page.identifier = '//複製-Production-真實環境資料，模擬超逼真測試-Rails-5/';
+   this.page.title = '複製 Production 真實環境資料，模擬超逼真測試 | Rails 5';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

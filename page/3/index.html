@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/">Rails 與 Webpacker 神奇的結合：用image-wepback-loader 來壓縮圖片</a>
+      </h2>
+      <p class="article-date">April 28, 2018</p>
+      
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#Rails with Webpacker" >
+    <span class="tag-code">Rails with Webpacker</span>
+  </a>
+
+  <a href="/tags#image compress" >
+    <span class="tag-code">image compress</span>
+  </a>
+
+  <a href="/tags#image-webpack-loader" >
+    <span class="tag-code">image-webpack-loader</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Gem Webpacker 特色
+Webpacker是一個Gem，即使不用裝webpack，也能在Rails上編譯，然後也拿掉原生使用的Srocket。Webpacker使用的是webpack 3.x.x版本，他已經預設幫你安裝了幾件事，但你需要另外設定檔
+
+
+用babel 將ES6 編譯成 ...
+        
+      </div>
+      <a class="more" href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法</a>
+      </h2>
+      <p class="article-date">April 9, 2018</p>
+      
+        
+  <a href="/tags#rails server" >
+    <span class="tag-code">rails server</span>
+  </a>
+
+  <a href="/tags#s.PGSQL.5432" >
+    <span class="tag-code">s.PGSQL.5432</span>
+  </a>
+
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#psql" >
+    <span class="tag-code">psql</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          s.PGSQL.5432是蝦咪挖溝？紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。這次遇到的狀況是要跑rails db:migrate時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入psq ...
+        
+      </div>
+      <a class="more" href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/幫-Rails-建立一個-Docker-Container吧/">幫 Rails 建立一個 Docker Container吧</a>
+      </h2>
+      <p class="article-date">April 8, 2018</p>
+      
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+  <a href="/tags#webpacker" >
+    <span class="tag-code">webpacker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          幫 Rails 建立一個 Docker Container吧
+為什麼你要使用Docker？Docker最重要的價值是：有效解決環境配置、衝突的問題可以在一台機器上跑，就可以在所有的機器上跑。如果有問題的話，就會是大家的問題，大家一起解決XD
+
+docker是建立一個container新的環境 ...
+        
+      </div>
+      <a class="more" href="/幫-Rails-建立一個-Docker-Container吧/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">前端永遠的課題：字體－呈現一致性的跨裝置</a>
+      </h2>
+      <p class="article-date">March 18, 2018</p>
+      
+      <div class="article-summary">
+        
+          前端最主要就是將所有裝置能一致化顯示，今天來談談「字體」的部分大家都知道Windows, Linux, Mac三大作業系統，想當然也有其系統的內建字體，若只指定常見的微軟正黑體，其他作業系統沒有該字體，就會顯示該作業系統的預設字體，而不是微軟正黑體，這樣就沒有超能力隨心所欲控制字體了，這怎麼 ...
+        
+      </div>
+      <a class="more" href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">Git筆記：移花接木的Rebase，整理commit訊息的好幫手</a>
+      </h2>
+      <p class="article-date">March 4, 2018</p>
+      
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Git 有個神奇的功能叫：Rebase，中文翻譯叫「變動基底」，簡單來說就是移花接木，把某一個樹枝（Branch）接到Master的主幹上等等功能，指定的節點可以重新 commit，花了一點時間做功課，把自己的理解的寫下來
+為什麼要用 Rebase ？變動基底的話不就很危險嗎Rebase 的 ...
+        
+      </div>
+      <a class="more" href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">Git push repo失敗： Could not resolve host: github.com</a>
+      </h2>
+      <p class="article-date">March 1, 2018</p>
+      
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          今天在練習JavaScript時，正要把成果push到Git repo裡，出現Could not resolve host: github.com錯誤訊息，在此紀錄如何解決
+錯誤訊息Could not resolve host: github.com
+解決辦法
+在終端機上先Ping gith ...
+        
+      </div>
+      <a class="more" href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/">做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</a>
+      </h2>
+      <p class="article-date">February 17, 2018</p>
+      
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#RWD" >
+    <span class="tag-code">RWD</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper
+通常做響應式圖片有兩種作法
+
+使用同一張圖片，依照容器、螢幕尺寸放大縮 ...
+        
+      </div>
+      <a class="more" href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Rails-5-快速設置-favicon-icon/">Rails 5 快速設置 favicon icon</a>
+      </h2>
+      <p class="article-date">February 10, 2018</p>
+      
+        
+  <a href="/tags#Rails 5" >
+    <span class="tag-code">Rails 5</span>
+  </a>
+
+  <a href="/tags#Favicon Icon" >
+    <span class="tag-code">Favicon Icon</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          現在的裝置上千幾種，Icon也針對各種裝置Andoroid、iOS各設置了不同大小尺寸的icon，如果在Rails內開發，可以參考以下的寫法。底下的Reference可以知道各個icon設置的用途適用於哪些裝置。
+快速設置 Icon 步驟
+在view/layouts下新增_favicon.h ...
+        
+      </div>
+      <a class="more" href="/Rails-5-快速設置-favicon-icon/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Git-修改又臭又長的指令，加快開發速度/">Git 修改又臭又長的指令，加快開發速度</a>
+      </h2>
+      <p class="article-date">February 9, 2018</p>
+      
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+有辦法縮短Github指令嗎？git status, git commit -m&#39;,git checkout develop/layout,git pull origin master..是不是常常覺得輸入這些指令很繁瑣又長，有甚麼辦法可以縮短這些指令呢？
+答案是有的！將Git常用 ...
+        
+      </div>
+      <a class="more" href="/Git-修改又臭又長的指令，加快開發速度/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Git-筆記：我想回到過去，到底要怎麼坐時光機？/">Git 筆記：我想回到過去，到底要怎麼坐時光機？</a>
+      </h2>
+      <p class="article-date">February 6, 2018</p>
+      
+        
+  <a href="/tags#Git" >
+    <span class="tag-code">Git</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Git 筆記：我想回到過去，到底要怎麼坐時光機？基本觀念
+目前的位置叫做HEAD
+沒被 git add進入commit的檔案untracked files，Git會選擇忽略，也不用怕被坐時光機回溯影響，reset、checkout對他們的影響力是0。
+origin/master是遠端的res ...
+        
+      </div>
+      <a class="more" href="/Git-筆記：我想回到過去，到底要怎麼坐時光機？/">閱讀更多</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/2/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a href="/page/4/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

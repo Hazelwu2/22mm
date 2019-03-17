@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JavaScript 30 Day -  Day1 DrumKits 練習 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JavaScript 30 Day -  Day1 DrumKits 練習</h2>
+  <p class="post-date">2017-12-29</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>JavaScript 30 Day -  Day1 DrumKits</p>
+<p>主題：用鍵盤按鍵，模擬打出爵士鼓的音效<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/29025908/Screen-Shot-2017-12-27-at-4.48.58-PM.png" alt=""></p>
+<ul>
+<li><a href="https://hazelwu2.github.io/JavaScript30/day1-DrumKit/index.html" target="_blank" rel="noopener">DEMO</a></li>
+<li><a href="https://github.com/Hazelwu2/JavaScript30" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><h4 id="1-利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵"><a href="#1-利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵" class="headerlink" title="1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵"></a>1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵</h4><p><code>window.addEventListerer(&#39;keydown&#39;, playSound);</code></p>
+<h4 id="2-設定-function-playSound-e"><a href="#2-設定-function-playSound-e" class="headerlink" title="2. 設定 function playSound(e)"></a>2. 設定 function playSound(e)</h4><ul>
+<li>將函數e傳入進去，利用e.keyCode取得對應的audio音檔、div data-key標籤。</li>
+<li>如果傳入的e.keyCode沒有對應的audio，便中斷function。</li>
+<li>設定audio音檔無延遲，播放時間為0。<br><code>currentTime = 0;</code></li>
+<li>播放對應的音檔。</li>
+<li>利用<code>classList.add(&#39;playing&#39;)</code>將div.key加入playing的class。<br><code>classList.add(&#39;class&#39;) 等同於 jQuery 的 addClass(&#39;class&#39;)</code>。</li>
+</ul>
+<h4 id="3-將所有div-key組合成陣列，監聽：當播放完音效後，會停止transform的特效。"><a href="#3-將所有div-key組合成陣列，監聽：當播放完音效後，會停止transform的特效。" class="headerlink" title="3. 將所有div.key組合成陣列，監聽：當播放完音效後，會停止transform的特效。"></a>3. 將所有div.key組合成陣列，監聽：當播放完音效後，會停止transform的特效。</h4><ul>
+<li>利用<code>querySelectorAll(&#39;.key&#39;)</code>組合起來存在變數keys裡面，querySelectorAll組合的div.key是一個陣列組合。    </li>
+<li>利用<code>forEach</code>的JavaScript語法，將keys陣列取出每個div.key，並設定監聽：若transitionend發生了，執行removeTransition的function。</li>
+</ul>
+<h4 id="4-設定removeTransition-的-function，當發生transform效果時則中斷。"><a href="#4-設定removeTransition-的-function，當發生transform效果時則中斷。" class="headerlink" title="4. 設定removeTransition 的 function，當發生transform效果時則中斷。"></a>4. 設定removeTransition 的 function，當發生transform效果時則中斷。</h4><ul>
+<li>將函數e傳入，倘若e.propertyName != transform時則中斷。</li>
+<li>同時也移除playing的class，利用<code>classList.remove(&#39;class&#39;)</code>，等同於 jQuery 的 <code>removeClass(&#39;class&#39;)</code>。</li>
+</ul>
+<h3 id="HTML架構"><a href="#HTML架構" class="headerlink" title="HTML架構"></a>HTML架構</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;keys&quot;&gt;</span><br><span class="line">	&lt;div data-key=&quot;65&quot; class=&quot;key&quot;&gt;</span><br><span class="line">	&lt;kbd&gt;A&lt;/kbd&gt;</span><br><span class="line">	&lt;span class=&quot;sound&quot;&gt;Clap&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio data-key=&quot;65&quot; src=&quot;sounds/hihat.wav&quot;&gt;&lt;/audio&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="JavaScript部分"><a href="#JavaScript部分" class="headerlink" title="JavaScript部分"></a>JavaScript部分</h3><h4 id="設定對應的audio音檔"><a href="#設定對應的audio音檔" class="headerlink" title="設定對應的audio音檔"></a>設定對應的audio音檔</h4><p>利用<code>document.querySelector</code>來選擇audio[data-key]，因為keyCode有九種按鈕的設置，將keyCode設為變數，由e傳入找出屬性為.keyCode</p>
+<h4 id="Audio-音檔無延遲、播放"><a href="#Audio-音檔無延遲、播放" class="headerlink" title="Audio 音檔無延遲、播放"></a>Audio 音檔無延遲、播放</h4><p>HTML5的 <code>audio</code>新標籤，IE 8 及以下版本都不支援<br><code>&lt;audio src=&quot;路徑/clap.mp3&quot;&gt;&lt;audio&gt;</code></p>
+<p>透過JavaScript控制播放音樂<br><code>audio.play()</code>可以播放音檔<br><code>audio.currentTime()</code>指定播放的秒數<br>利用設定currentTime = 0，達到無延遲效果。</p>
+<h4 id="用forEach-代替-for-迴圈"><a href="#用forEach-代替-for-迴圈" class="headerlink" title="用forEach 代替 for 迴圈"></a>用forEach 代替 for 迴圈</h4><p>第一次使用到JS的forEach，以往都是用for迴圈去跑每個元素，也意外發現forEach比起for迴圈還要整潔、快速！前提是：不打算更改陣列裡的每個元素，就可以使用forEach。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [ data1, data2, data3];</span><br><span class="line">for ( var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">	console.log(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用forEach是相同的效果，寫法也讓程式碼更加簡短了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [ data1, data2, data3];</span><br><span class="line">arr.forEach((val) =&gt; &#123;</span><br><span class="line">	console.log(arr[i]);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="Arrow-Function-箭頭函式"><a href="#Arrow-Function-箭頭函式" class="headerlink" title="Arrow Function 箭頭函式"></a>Arrow Function 箭頭函式</h4><p>他是ES6版本的函式簡寫<br><code>() =&gt; {}</code>等同於 <code>function() {}</code>，但還是有一些區別。</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">MDN web docs - Arrow Function</a></li>
+<li><a href="https://yami.io/reduce-foreach-filter-map/" target="_blank" rel="noopener">在 JavaScript 棄用 For 迴圈，擁抱 Reduce、ForEach、Filter、Map</a></li>
+<li><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/arrow_function.html" target="_blank" rel="noopener">箭頭函式</a></li>
+</ul>
+</section>
+    <div id="busuanzi_container_page_pv">
+      閱讀量 <span id="busuanzi_value_page_pv"></span> 次
+    </div>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/Rails-用-Bootstrap-快速客製化-alert-notice-flash-message快閃訊息/">
+        <span class="nav-arrow">← </span>
+        
+          Rails 用 Bootstrap 快速客製化 alert &amp; notice flash message快閃訊息
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/Rails-用-CarrierWave-大量產生假圖片-Remote-image/">
+        
+          Rails 用 CarrierWave 大量產生假圖片 ( Remote image )
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+      <div id="disqus_thread"></div>
+      <!-- 自己加入的 disqus -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#流程"><span class="toc-nav-text">流程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵"><span class="toc-nav-text">1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-設定-function-playSound-e"><span class="toc-nav-text">2. 設定 function playSound(e)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-將所有div-key組合成陣列，監聽：當播放完音效後，會停止transform的特效。"><span class="toc-nav-text">3. 將所有div.key組合成陣列，監聽：當播放完音效後，會停止transform的特效。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-設定removeTransition-的-function，當發生transform效果時則中斷。"><span class="toc-nav-text">4. 設定removeTransition 的 function，當發生transform效果時則中斷。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HTML架構"><span class="toc-nav-text">HTML架構</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript部分"><span class="toc-nav-text">JavaScript部分</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#設定對應的audio音檔"><span class="toc-nav-text">設定對應的audio音檔</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Audio-音檔無延遲、播放"><span class="toc-nav-text">Audio 音檔無延遲、播放</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#用forEach-代替-for-迴圈"><span class="toc-nav-text">用forEach 代替 for 迴圈</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Arrow-Function-箭頭函式"><span class="toc-nav-text">Arrow Function 箭頭函式</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://wualnz.com//JavaScript-30-Day-Day1-DrumKits-練習/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "hazelwu2";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "JavaScript 30 Day -  Day1 DrumKits 練習",
+        owner: "hazelwu2",
+        repo: "22mm",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script id="dsq-count-scr" src="//hazelwu.disqus.com/count.js" async></script>
+<script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  */
+ var disqus_config = function () {
+   this.page.url = 'http://wualnz.com//JavaScript-30-Day-Day1-DrumKits-練習/';
+   this.language = "zh-TW";
+   this.page.identifier = '//JavaScript-30-Day-Day1-DrumKits-練習/';
+   this.page.title = 'JavaScript 30 Day -  Day1 DrumKits 練習';
+ };
+ (function () { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+    s.src = 'https://hazelwu.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

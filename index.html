@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Hazel Wu | 22&#39;mm
+    
+  </title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109679233-1');
+  </script>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Vue-Event-Bus/">Vue Event Bus</a>
+      </h2>
+      <p class="article-date">March 17, 2019</p>
+      
+      <div class="article-summary">
+        
+          Event Bus 定位Event Bus 的定位是事件通知
+Event Bus 使用時機例如：有件事要被很多人知道，可以用Event Bus來做傳遞，傳話筒
+客製化事件像是click
+Event Bus 缺點
+記憶體殘留，
+
+如何看記憶體？Chrome Developer Memory 工 ...
+        
+      </div>
+      <a class="more" href="/Vue-Event-Bus/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Vue-元件之間的傳話筒-總整理/">Vue 元件之間的傳話筒 總整理</a>
+      </h2>
+      <p class="article-date">March 12, 2019</p>
+      
+      <div class="article-summary">
+        
+          使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！
+
+Props 父傳子
+Parent =&gt; Child Communication
+
+
+$emit 子傳父
+自定義事件，Child =&gt; Parent Co ...
+        
+      </div>
+      <a class="more" href="/Vue-元件之間的傳話筒-總整理/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/FrameWork-7-與-H5邂逅的雷坑/">FrameWork 7 與 H5 邂逅的雷坑</a>
+      </h2>
+      <p class="article-date">December 13, 2018</p>
+      
+        
+  <a href="/tags#Vue" >
+    <span class="tag-code">Vue</span>
+  </a>
+
+  <a href="/tags#FrameWrok 7" >
+    <span class="tag-code">FrameWrok 7</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          環境配置：Vue + FrameWork 7 ，外面包一層Apk，做成App供手機測試以下將紀錄在實作時遇到的雷坑及如何解決的。
+input 送出按鍵123456789101112131415161718192021&lt;!-- 驗證碼: authenticationCode Start  ...
+        
+      </div>
+      <a class="more" href="/FrameWork-7-與-H5邂逅的雷坑/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/快來架設超潮的NodeBB論壇在Heroku上/">快來架設超潮的NodeBB論壇在Heroku上</a>
+      </h2>
+      <p class="article-date">December 10, 2018</p>
+      
+        
+  <a href="/tags#node.js" >
+    <span class="tag-code">node.js</span>
+  </a>
+
+  <a href="/tags#forum" >
+    <span class="tag-code">forum</span>
+  </a>
+
+  <a href="/tags#heroku" >
+    <span class="tag-code">heroku</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          架設 NodeBB 論壇 在 Heroku 上This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.I look ...
+        
+      </div>
+      <a class="more" href="/快來架設超潮的NodeBB論壇在Heroku上/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Vue-元件化概念/">Vue 元件化概念</a>
+      </h2>
+      <p class="article-date">November 26, 2018</p>
+      
+      <div class="article-summary">
+        
+          Vue 元件化概念 筆記
+使用元件化切出複雜頁面
+使用vue-router 做耊面
+使用 vuex（資料中心）統一狀態更動
+
+元件化
+App.vue是大元件
+什麼是元件化？
+將網頁依照頁面、功能拆分
+小至一個按鈕、大到整個頁面或程式
+Single File ComponentVue 元件化概 ...
+        
+      </div>
+      <a class="more" href="/Vue-元件化概念/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/ES6-Object-Literal-Upgrades：動態命名/">JavaScript ES6 物件 Literal Upgrades：動態命名</a>
+      </h2>
+      <p class="article-date">November 25, 2018</p>
+      
+        
+  <a href="/tags#ES6" >
+    <span class="tag-code">ES6</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          ES6 Object Literal UpgradesES6 擴展：物件實體命名，透過[]的方式，可以帶入變數，讓程式碼更好維護、管理。
+運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。舉例：像是我建立一個tShirt的物件，裡面有屬性是Color：color ...
+        
+      </div>
+      <a class="more" href="/ES6-Object-Literal-Upgrades：動態命名/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/">JavaScript30/08 | Fun With HTML Canvas 筆記</a>
+      </h2>
+      <p class="article-date">October 30, 2018</p>
+      
+        
+  <a href="/tags#js30" >
+    <span class="tag-code">js30</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          JavaScript30/08 | Fun With HTML Canvas 筆記
+Demo 效果
+完成 Day8 需要用到的屬性
+Canvas基本屬性
+getContext()
+lineCap
+lineJoin
+beginPath()調整色彩、寬度
+lineWidth
+fillStyle
+ ...
+        
+      </div>
+      <a class="more" href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Call-Back-Hell：Promise誕生/">Call Back Hell：Promise誕生</a>
+      </h2>
+      <p class="article-date">October 2, 2018</p>
+      
+      <div class="article-summary">
+        
+          123456789101112131415161718192021222324// first  function getRecipt()&#123;    setTimeout( () =&gt; &#123;      const recipeID = [523, 883, 432, 9 ...
+        
+      </div>
+      <a class="more" href="/Call-Back-Hell：Promise誕生/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？</a>
+      </h2>
+      <p class="article-date">September 18, 2018</p>
+      
+        
+  <a href="/tags#CSS3" >
+    <span class="tag-code">CSS3</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          CSS3 Transform 3D最近練習 CSS3 Transform 3D，卡片正面翻轉到背面的特效很酷炫，於是寫下這篇筆記。
+這篇 CSS3 主要會應用到的屬性有
+
+tranform-style:presesrve-3d
+backface-visibility
+transform: r ...
+        
+      </div>
+      <a class="more" href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Canvas：前端特效動畫的基礎/">Canvas：前端特效動畫的基礎</a>
+      </h2>
+      <p class="article-date">September 13, 2018</p>
+      
+        
+  <a href="/tags#canvas" >
+    <span class="tag-code">canvas</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Canvas 基礎特性
+
+可以自由繪製的元件區域
+可以控制每個像素的顏色與繪製
+有很高的操控度，就像遙控器
+可以把他當成一張動態隨時可更動的圖片
+
+掌握 Canvas
+繪製圖型
+向量概念
+三角函數數學
+物件導向開發（拆成函件或物件變成小零件，來操作。方便除錯與維護）
+
+點線面構成圖形
+用點和 ...
+        
+      </div>
+      <a class="more" href="/Canvas：前端特效動畫的基礎/">閱讀更多</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> Prev</a>
+  
+  
+    <a href="/page/2/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+  <span id="busuanzi_container_site_uv">
+    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+  </span>
+</footer>
+<!-- 不蒜子記人數 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
