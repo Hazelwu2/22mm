@@ -10,7 +10,7 @@
   
   <title>
     
-      Git 修改又臭又長的指令，加快開發速度 | Hazel Wu | 22&#39;mm
+      瞭解apply、call，朝向高級前端工程師邁進 | Hazel Wu | 22&#39;mm
     
   </title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -147,8 +147,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Git 修改又臭又長的指令，加快開發速度</h2>
-  <p class="post-date">2018-02-09</p>
+  <h2>瞭解apply、call，朝向高級前端工程師邁進</h2>
+  <p class="post-date">2019-03-18</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -156,53 +156,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/02/09000352/Screen-Shot-2018-02-08-at-11.47.49-PM.png" alt=""></p>
-<h3 id="有辦法縮短Github指令嗎？"><a href="#有辦法縮短Github指令嗎？" class="headerlink" title="有辦法縮短Github指令嗎？"></a>有辦法縮短Github指令嗎？</h3><p><code>git status</code>, <code>git commit -m&#39;</code>,<code>git checkout develop/layout</code>,<code>git pull origin master</code>..是不是常常覺得輸入這些指令很繁瑣又長，有甚麼辦法可以縮短這些指令呢？</p>
-<h4 id="答案是有的！"><a href="#答案是有的！" class="headerlink" title="答案是有的！"></a>答案是有的！</h4><h3 id="將Git常用的指令，縮短成好記又好用的縮寫吧！"><a href="#將Git常用的指令，縮短成好記又好用的縮寫吧！" class="headerlink" title="將Git常用的指令，縮短成好記又好用的縮寫吧！"></a>將Git常用的指令，縮短成好記又好用的縮寫吧！</h3><p>這四個指令比較好記，也較常用到，實用度很高！！</p>
+    <section class="markdown-content"><p>call、apply 用途</p>
 <ol>
-<li>MAC 環境下打開 iTerm</li>
-<li>輸入以下指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.lg log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit --branches`</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>co = checkout</li>
-<li>ci = commit</li>
-<li>st = status</li>
-<li>br = branch</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git co develop // 等同於 git checkout develop</span><br><span class="line">git ci -m &apos;Initalize commit&apos; // 等同於 git commit -m &apos;Initalize commit&apos;</span><br><span class="line">git st // 等同於 git status</span><br><span class="line">git br -b develop // 等同於 建立develop分支並切換過去</span><br></pre></td></tr></table></figure>
-<h4 id="其他參考指令"><a href="#其他參考指令" class="headerlink" title="其他參考指令"></a>其他參考指令</h4><p><code>vim ~/.gitconfig</code> 找到 <code>alias</code> 列表後可以根據自己需求輸入，如果想要客製化更改也可以的哦</p>
-<ol>
-<li><code>alias gthis=&#39;git rev-parse --abbrev-ref HEAD&#39;</code></li>
-<li><code>alias gpushthis=&#39;git push origin gthis&#39;</code></li>
-<li><code>alias gpullthis=&#39;git pull origin gthis&#39;</code></li>
-<li><code>alias gup=&#39;git remote update&#39;</code></li>
-<li><code>alias gpl=&#39;git pull origin&#39;</code></li>
-</ol>
-<h3 id="客製化-Git-輸出顏色"><a href="#客製化-Git-輸出顏色" class="headerlink" title="客製化 Git 輸出顏色"></a>客製化 Git 輸出顏色</h3><p>為了好好愛護眼睛，來客製化 Git 輸出的顏色吧!</p>
-<p>先開啟git color ui顏色顯示指令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure></p>
-<p>開啟<code>git color.ui</code>指令後，Git 會按照你的需要，自動為大部分的輸出加上顏色。<br>當然也能客製化的更改，可以明確地規定哪些需要指令需要塗上顏色、要設定什麼顏色<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/02/09000352/Screen-Shot-2018-02-08-at-11.47.49-PM.png" alt=""></p>
-<ul>
-<li>用 Vim 編輯器直接進入 gitconfig 來編輯<br><code>vim ~/.gitconfig</code></li>
-<li>找到 [alias]列表就可以開始進行客製化啦！</li>
-<li>我使用別人提供的 Pretty git branch 加上 [alias]上</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lg = <span class="built_in">log</span> --graph --abbrev-commit --decorate --format=format:<span class="string">'%C(yellow)%h%C(reset)%C(auto)%d%C(reset) %C(normal)%s%C(reset) %C(dim white)%an%C(reset) %C(dim blue)(%ar)%C (reset)'</span> --all</span><br></pre></td></tr></table></figure>
-<p>以後只要輸入 git lg就會有一個小型的分支圖+一行的commit訊息啦，非常方便！</p>
-<h4 id="Gitgraph-js"><a href="#Gitgraph-js" class="headerlink" title="Gitgraph.js"></a><a href="http://gitgraphjs.com/" target="_blank" rel="noopener">Gitgraph.js</a></h4><p>也是一個js寫的library在瀏覽器顯示分支圖的樣式，有興趣者可以研究看看</p>
-<h4 id="bash-completion-自動補齊-Plugin"><a href="#bash-completion-自動補齊-Plugin" class="headerlink" title="bash-completion 自動補齊 Plugin"></a><a href="https://github.com/scop/bash-completion" target="_blank" rel="noopener">bash-completion 自動補齊 Plugin</a></h4><ul>
-<li>MAC 環境 Bash安裝 bash-completion </li>
-<li>工程師實在要記得太多數不清的指令了，當忘記指令的時候，多按幾下TAB便會幫你自動提示，超強大神器！</li>
-</ul>
-<p>Mac 使用 Brew 安裝 bash-completion，在 commend上輸入以下指令即可安裝。<br><code>brew install git bash-completion</code></p>
-<blockquote>
-<p>若還沒有安裝 <code>Brew</code> 請往前走左轉到 <a href="https://docs.brew.sh/Installation" target="_blank" rel="noopener">Brew官方網站安裝</a>，啊！對了只限定於 Mac 哦。</p>
-</blockquote>
-<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference 參考資料"></a>Reference 參考資料</h3><ol>
-<li><a href="http://note.drx.tw/2015/11/bash-completion-on-mac-osx.html" target="_blank" rel="noopener">Bash 自動補齊 on Mac OSX 10.11.1</a></li>
-<li><a href="https://segmentfault.com/a/1190000005945614" target="_blank" rel="noopener">前端資源系列- Git-常用命令&amp;快捷命令&amp;小工作流</a></li>
-<li><a href="https://git-scm.com/book/zh-tw/v1/Git-%E5%AE%A2%E8%A3%BD%E5%8C%96-Git-%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener">Git-客製化-Git-設定</a></li>
-<li><a href="https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs" target="_blank" rel="noopener">Pretty git branch graphs</a></li>
+<li>改變 this 指向<br> 最常見的用途是改變 function 內部的 this 指向</li>
 </ol>
 </section>
     <div id="busuanzi_container_page_pv">
@@ -210,35 +166,19 @@
     </div>
     <!-- Tags START -->
     
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Git" >
-    <span class="tag-code">Git</span>
-  </a>
-
-      </div>
-    
     <!-- Tags END -->
     <!-- NAV START -->
     
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/Git-筆記：我想回到過去，到底要怎麼坐時光機？/">
+      <a class="nav-left" href="/Vue-元件之間的傳話筒-總整理/">
         <span class="nav-arrow">← </span>
         
-          Git 筆記：我想回到過去，到底要怎麼坐時光機？
+          Vue 元件之間的傳話筒 總整理
         
       </a>
     
-    
-      <a class="nav-right" href="/Rails-5-快速設置-favicon-icon/">
-        
-          Rails 5 快速設置 favicon icon
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -262,7 +202,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#有辦法縮短Github指令嗎？"><span class="toc-nav-text">有辦法縮短Github指令嗎？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#答案是有的！"><span class="toc-nav-text">答案是有的！</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#將Git常用的指令，縮短成好記又好用的縮寫吧！"><span class="toc-nav-text">將Git常用的指令，縮短成好記又好用的縮寫吧！</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#其他參考指令"><span class="toc-nav-text">其他參考指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客製化-Git-輸出顏色"><span class="toc-nav-text">客製化 Git 輸出顏色</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Gitgraph-js"><span class="toc-nav-text">Gitgraph.js</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#bash-completion-自動補齊-Plugin"><span class="toc-nav-text">bash-completion 自動補齊 Plugin</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference-參考資料"><span class="toc-nav-text">Reference 參考資料</span></a></li></ol>
+      <ol class="nav">none</ol>
     
   </div>
 </aside>
@@ -272,7 +212,7 @@
 
 <script>
   (function () {
-    var url = 'http://wualnz.com//Git-修改又臭又長的指令，加快開發速度/';
+    var url = 'http://wualnz.com//瞭解apply、call，朝向高級前端工程師邁進/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -328,7 +268,7 @@
     var gitmentConfig = "hazelwu2";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "Git 修改又臭又長的指令，加快開發速度",
+        id: "瞭解apply、call，朝向高級前端工程師邁進",
         owner: "hazelwu2",
         repo: "22mm",
         oauth: {
@@ -362,10 +302,10 @@
   /*
   */
  var disqus_config = function () {
-   this.page.url = 'http://wualnz.com//Git-修改又臭又長的指令，加快開發速度/';
+   this.page.url = 'http://wualnz.com//瞭解apply、call，朝向高級前端工程師邁進/';
    this.language = "zh-TW";
-   this.page.identifier = '//Git-修改又臭又長的指令，加快開發速度/';
-   this.page.title = 'Git 修改又臭又長的指令，加快開發速度';
+   this.page.identifier = '//瞭解apply、call，朝向高級前端工程師邁進/';
+   this.page.title = '瞭解apply、call，朝向高級前端工程師邁進';
  };
  (function () { // DON'T EDIT BELOW THIS LINE
   var d = document, s = d.createElement('script');
