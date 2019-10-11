@@ -189,6 +189,10 @@
 <li>開啟瀏覽器，網址：<code>localhost:8081</code><br>還記得剛剛在步驟二開的Port是8081:80嗎？就是從步驟二這裡設定的</li>
 </ul>
 <p>帳號輸入：root<br>密碼輸入：hazelwu</p>
+<h3 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h3><ul>
+<li>關閉Container後，如何重開？</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a # 查詢[phpMyadmin container name]</span><br><span class="line">docker restart b40e5a6a12aa # [phpMyadmin container name]</span><br></pre></td></tr></table></figure>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="https://medium.com/@migueldoctor/run-mysql-phpmyadmin-locally-in-3-steps-using-docker-74eb735fa1fc" target="_blank" rel="noopener">Run MySQL &amp; phpMyAdmin locally in 3 steps using Docker</a></li>
 <li><a href="https://www.jianshu.com/p/21d66ca6115e" target="_blank" rel="noopener">关于对docker run –link的理解</a></li>
@@ -235,7 +239,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#環境"><span class="toc-nav-text">環境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#開始"><span class="toc-nav-text">開始</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#架設mysql-Container"><span class="toc-nav-text">架設mysql Container</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#架設phpMyAdmin-Container"><span class="toc-nav-text">架設phpMyAdmin Container</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#登入-phpMyAdmin"><span class="toc-nav-text">登入 phpMyAdmin</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#環境"><span class="toc-nav-text">環境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#開始"><span class="toc-nav-text">開始</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#架設mysql-Container"><span class="toc-nav-text">架設mysql Container</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#架設phpMyAdmin-Container"><span class="toc-nav-text">架設phpMyAdmin Container</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#登入-phpMyAdmin"><span class="toc-nav-text">登入 phpMyAdmin</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#其他指令"><span class="toc-nav-text">其他指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
     
   </div>
 </aside>
