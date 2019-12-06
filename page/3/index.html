@@ -1,488 +1,2187 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-  <meta name="keyword" content="hexo-theme, vuejs">
-  
-    <link rel="shortcut icon" href="/css/images/logo.png">
-  
-  <title>
-    
-      Hazel Wu | 22&#39;mm
-    
-  </title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'UA-109679233-1');
-  </script>
-  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/plugins/gitment.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrious.js"></script>
-<script src="/js/gitment.js"></script>
-  
-  
-    <!-- MathJax support START -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- MathJax support END -->
+
   
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hazel Wu | 22&#39;mm">
+<meta property="og:url" content="http://wualnz.com/page/3/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hazel Wu | 22&#39;mm">
+<meta name="twitter:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wualnz.com/page/3/"/>
+
+
+
+
+
+  <title>Hazel Wu | 22'mm</title>
+  
+
+
+
+
+
+
 
 
 </head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hazel Wu | 22'mm</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-  <body>
-    <header class="header fixed-header">
-  <div class="header-container">
-    <a class="home-link" href="/">
-      <div class="logo"></div>
-      <span>Hazel Wu | 22'mm</span>
-    </a>
-    <ul class="right-list">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li class="list-item">
-          
-            <a href="/" class="item-link active">Home</a>
-          
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/tags/" class="item-link">Tags</a>
-          
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/archives/" class="item-link">Archives</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/project/" class="item-link">Projects</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/about/" class="item-link">About</a>
-          
-        </li>
+
       
     </ul>
-    <div class="menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/" itemprop="url">Rails 與 Webpacker 神奇的結合：用image-wepback-loader 來壓縮圖片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T03:51:02+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Gem-Webpacker-特色"><a href="#Gem-Webpacker-特色" class="headerlink" title="Gem Webpacker 特色"></a>Gem Webpacker 特色</h2><blockquote>
+<p>Webpacker是一個Gem，即使不用裝webpack，也能在Rails上編譯，然後也拿掉原生使用的Srocket。<br>Webpacker使用的是webpack 3.x.x版本，他已經預設幫你安裝了幾件事，但你需要另外設定檔</p>
+</blockquote>
+<ul>
+<li>用babel 將ES6 編譯成 ES5</li>
+<li>在webpack.yml上即可輕鬆設定好entry（入口）、output（出口）</li>
+<li>PostCSS，加入前綴詞</li>
+<li>CDN 支援</li>
+<li>前端框架（React、Agnular、Elm、Vue）支援</li>
+<li>內建 Rails view的helper</li>
+</ul>
+<blockquote>
+<p>像用babel轉成ES5、PostCSS加前綴詞，只需要在專案上加入<code>.babelrc</code>、<code>postcss.config.js</code>做設定即可，當然package.json也需要安裝相關的套件才能跑</p>
+</blockquote>
+<p>這邊不暫述怎麼在 Rails 5 初始化webapcker的設定，只介紹怎麼載入loader</p>
+<ol>
+<li>先讓webpacker能讀取設定路徑內，所有的圖片</li>
+<li>再讓webpacker載入loader</li>
+</ol>
+<h2 id="安裝及設定"><a href="#安裝及設定" class="headerlink" title="安裝及設定"></a>安裝及設定</h2><h3 id="webpacker-yml設定entry、output"><a href="#webpacker-yml設定entry、output" class="headerlink" title="webpacker.yml設定entry、output"></a>webpacker.yml設定entry、output</h3><p>我個人設定是把所有image、js、css檔都放在app/frontend下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">default: &amp;default</span><br><span class="line">  source_path: app/frontend</span><br><span class="line">  source_entry_path: packs</span><br><span class="line">  public_output_path: packs</span><br><span class="line">  cache_path: tmp/cache/webpacker</span><br></pre></td></tr></table></figure></p>
+<h3 id="frontend-application-js-先載入所有圖片設定"><a href="#frontend-application-js-先載入所有圖片設定" class="headerlink" title="frontend/application.js 先載入所有圖片設定"></a>frontend/application.js 先載入所有圖片設定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># app/frontend/application.js</span><br><span class="line">require.context(&apos;../images/&apos;, true, /\.(gif|jpg|png|svg)$/i);</span><br><span class="line">require.context(&apos;../styles/&apos;, true, /^\.\/[^_].*\.(css|scss|sass)$/i);</span><br></pre></td></tr></table></figure>
+<p>Webpacker這個Gem，他已經預先使用<code>CSS loader</code>、<code>Sass loader</code>了<br>這項設定會使你專案內（app/frontend）的圖片、CSS等，都會被載入</p>
+<p>在安裝webpacker時，他也會預先幫你設好目錄，在config/webpack檔案分別有<code>development.js</code>、<code>environment.js</code>、<code>production.js</code>。</p>
+<h3 id="安裝image-webpack-loader"><a href="#安裝image-webpack-loader" class="headerlink" title="安裝image-webpack-loader"></a>安裝image-webpack-loader</h3><p>圖片壓縮須先安裝image-webpack-loader，我們將透過npm來安裝這個loader。<br>輸入 <code>npm install image-webpack-loader</code></p>
+<h3 id="載入image-webpack-loader"><a href="#載入image-webpack-loader" class="headerlink" title="載入image-webpack-loader"></a>載入image-webpack-loader</h3><p>確認安裝完後，我們便來開始設定：載入image-webpack-loader<br>在<code>config/webpack/environment.js</code>下設定，options可以客製化，可以找image-webpack-loader的官方文件看更詳細的設置教學。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># config/webpack/environment.js</span><br><span class="line">environment.loaders.append(&apos;image&apos;, &#123;</span><br><span class="line">  test: /\.(gif|png|jpe?g|svg)$/i,</span><br><span class="line">  loader: &apos;image-webpack-loader&apos;,</span><br><span class="line">  options: &#123;</span><br><span class="line">    mozjpeg: &#123;</span><br><span class="line">      progressive: true,</span><br><span class="line">      quality: 65</span><br><span class="line">    &#125;,</span><br><span class="line">    // optipng.enabled: false will disable optipng</span><br><span class="line">    optipng: &#123;</span><br><span class="line">      enabled: false</span><br><span class="line">    &#125;,</span><br><span class="line">    pngquant: &#123;</span><br><span class="line">      quality: &apos;65-90&apos;,</span><br><span class="line">      speed: 4</span><br><span class="line">    &#125;,</span><br><span class="line">    gifsicle: &#123;</span><br><span class="line">      interlaced: false</span><br><span class="line">    &#125;,</span><br><span class="line">    // the webp option will enable WEBP</span><br><span class="line">    webp: &#123;</span><br><span class="line">      quality: 75</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="重新編譯-Webpacker"><a href="#重新編譯-Webpacker" class="headerlink" title="重新編譯 Webpacker"></a>重新編譯 Webpacker</h3><p>以上皆完成後，在cmd輸入以下指令，做重新編譯的動作<br><code>webpack -w</code>或<code>ruby ./bin/webpack-dev-server</code><br>你就會發現，圖片被壓縮了！！（撒花）</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/rails/webpacker" target="_blank" rel="noopener">Webpacker官方文件</a></li>
+<li><a href="https://hk.saowen.com/a/1650bf12d731afabf95a8bfa2cd885ddd944aa5e4e067aa75eb0ee5c2c75fcfe" target="_blank" rel="noopener">基於 Webpack 引入公共庫的幾種方式</a></li>
+</ul>
+
+          
+        
+      
     </div>
-    <div class="menu-mask">
-      <ul class="menu-list">
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <li class="menu-item">
-            
-              <a href="/" class="menu-link mobile-active">Home</a>
-            
-          </li>
         
-          <li class="menu-item">
-            
-              <a href="/tags/" class="menu-link">Tags</a>
-            
-          </li>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/" itemprop="url">Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法</a></h1>
         
-          <li class="menu-item">
+
+        <div class="post-meta">
+          <span class="post-time">
             
-              <a href="/archives/" class="menu-link">Archives</a>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T03:59:09+08:00">
+                2018-04-09
+              </time>
             
-          </li>
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
-          <li class="menu-item">
-            
-              <a href="/project/" class="menu-link">Projects</a>
-            
-          </li>
+          
+            <h3 id="s-PGSQL-5432是蝦咪挖溝？"><a href="#s-PGSQL-5432是蝦咪挖溝？" class="headerlink" title="s.PGSQL.5432是蝦咪挖溝？"></a>s.PGSQL.5432是蝦咪挖溝？</h3><p>紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。<br>這次遇到的狀況是要跑<code>rails db:migrate</code>時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入<code>psql</code>出現ERROR訊息：<br>RUN版本：<code>postgresql 10.3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">psql: could not connect to server: No such file or directory</span><br><span class="line">    Is the server running locally and accepting</span><br><span class="line">    connections on Unix domain socket &quot;/var/pgsql_socket/.s.PGSQL.5432&quot;?</span><br></pre></td></tr></table></figure>
+<p>上述錯誤訊息是在說：現在開啟的Rails Server沒有與本機的psql資料庫連線，你要不要再確認一下？</p>
+<p>造成此原因有很多種，但最白癡的原因莫過於本端沒有打開psql服務</p>
+<blockquote>
+<p>若你也有出現此錯誤訊息，可以先測試看看是不是根本沒有打開psql服務，若仍無法排除，再嘗試重新裝載psql。<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></p>
+</blockquote>
+<h2 id="解決良藥"><a href="#解決良藥" class="headerlink" title="解決良藥"></a>解決良藥</h2><h3 id="1-本機開啟psql的服務"><a href="#1-本機開啟psql的服務" class="headerlink" title="1. 本機開啟psql的服務"></a>1. 本機開啟psql的服務</h3><p>如果psql本身被關閉的話，輸入以下指令便會告知你psql服務被打開囉。<br>Mac若重新開機的話，psql服務會自動被關閉，通常遇到無法連線local psql時輸入此指令皆可解決。<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></p>
+<h3 id="2-重新裝載psql"><a href="#2-重新裝載psql" class="headerlink" title="2. 重新裝載psql"></a>2. 重新裝載psql</h3><p>如果本機確認有打開psql服務的話，仍無法排除狀況，那就重新裝載psql吧QQ。</p>
+<ul>
+<li>先移除前一個版本Postgresql<br><code>$ brew uninstall --force postgresql</code></li>
+<li>確保有刪除乾淨，再次手動刪除<br><code>$ rm -rf /usr/local/var/postgres</code></li>
+<li>用Homebrew 安裝 Postgres<br><code>$ brew install postgres</code><br>開啟PostgreSQL的Server，在終端機輸入：<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></li>
+<li>建立資料庫<br><code>$ initdb /usr/local/var/postgres</code><br>或是直接在Rails專案建立資料庫<br><code>$ rails db:create</code></li>
+</ul>
+<h3 id="備份資料庫"><a href="#備份資料庫" class="headerlink" title="備份資料庫"></a>備份資料庫</h3><p>如果local端有舊的資料庫，也並不打算轉移的話…<br>刪除舊有資料庫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r /usr/local/var/postgres</span><br></pre></td></tr></table></figure></p>
+<p>重新建立一個新的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initdb /usr/local/var/postgres</span><br></pre></td></tr></table></figure></p>
+<p>新建新的資料庫<br><code>createdb 資料庫名稱</code></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://medium.com/@Umesh_Kafle/postgresql-and-postgis-installation-in-mac-os-87fa98a6814d" target="_blank" rel="noopener">PostgreSQL and PostGIS installation in Mac OS.</a></li>
+</ul>
+
+          
         
-          <li class="menu-item">
-            
-              <a href="/about/" class="menu-link">About</a>
-            
-          </li>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/幫-Rails-建立一個-Docker-Container吧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
         
-      </ul>
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/幫-Rails-建立一個-Docker-Container吧/" itemprop="url">幫 Rails 建立一個 Docker Container吧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-08T04:15:59+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="幫-Rails-建立一個-Docker-Container吧"><a href="#幫-Rails-建立一個-Docker-Container吧" class="headerlink" title="幫 Rails 建立一個 Docker Container吧"></a>幫 Rails 建立一個 Docker Container吧</h1><blockquote>
+<h2 id="為什麼你要使用Docker？"><a href="#為什麼你要使用Docker？" class="headerlink" title="為什麼你要使用Docker？"></a>為什麼你要使用Docker？</h2><p>Docker最重要的價值是：有效解決環境配置、衝突的問題<br>可以在一台機器上跑，就可以在所有的機器上跑。<br>如果有問題的話，就會是大家的問題，大家一起解決XD</p>
+</blockquote>
+<p>docker是建立一個container新的環境，有助於不會因為不同作業系統(Mac, Linux)導致無法在本端跑環境<br>你不用因為不小心升級了npm的webpack等等……..架不起來環境<br>最後電腦整個砍掉重灌之類的……….相信我你會很想死一千遍QQ。</p>
+<h2 id="Mac-教學"><a href="#Mac-教學" class="headerlink" title="Mac 教學"></a>Mac 教學</h2><p>請先安裝 Docker，在Mac環境下安裝Docker非常簡單，只要安裝UI軟體即可XD。<br>Mac 安裝 Docker = &gt;<a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">請點我下載</a></p>
+<p>安裝完後，我們先以建立一個新專案來跑Docker</p>
+<h3 id="建立新專案"><a href="#建立新專案" class="headerlink" title="建立新專案"></a>建立新專案</h3><p>首先建立一個新的資料夾，並且先手動建立四個檔案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd desktop</span><br><span class="line">mkdir docker</span><br><span class="line">cd mkdir</span><br><span class="line">touch Gemfile.lock</span><br><span class="line">touch Gemfile</span><br><span class="line">touch docker-compose.yml</span><br><span class="line">touch Dockerfile</span><br></pre></td></tr></table></figure></p>
+<h3 id="手動填上設定"><a href="#手動填上設定" class="headerlink" title="手動填上設定"></a>手動填上設定</h3><p>docker_1可以手動改成自己的專案名稱，ruby版本可以自由更改，撰寫此篇文章時是<code>Ruby 2.5.0</code>版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Dockerfile</span><br><span class="line">FROM ruby:2.5.0</span><br><span class="line">RUN apt-get update -qq &amp;&amp; apt-get install -y build-essential libpq-dev nodejs</span><br><span class="line">RUN mkdir /docker_1</span><br><span class="line">WORKDIR /docker_1</span><br><span class="line">ADD Gemfile /docker_1/Gemfile</span><br><span class="line">ADD Gemfile.lock /docker_1/Gemfile.lock</span><br><span class="line">RUN bundle install</span><br><span class="line">ADD . /docker_1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Docker-compose.yml</span><br><span class="line">version: &apos;2&apos;</span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    command: bundle exec rails s -p 3000 -b &apos;0.0.0.0&apos;</span><br><span class="line">    volumes:</span><br><span class="line">      - .:/docker_1</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3000:3000&quot;</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br></pre></td></tr></table></figure>
+<p>Gemfile最簡單，只要輸入兩行即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Gemfile</span><br><span class="line">source &apos;https://rubygems.org&apos;</span><br><span class="line">gem &apos;rails&apos;, &apos;~&gt; 5.1.6&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="docker-compose-yml-用途"><a href="#docker-compose-yml-用途" class="headerlink" title="docker-compose.yml 用途"></a>docker-compose.yml 用途</h3><p>docker-compose.yml的用途</p>
+<ol>
+<li>web container</li>
+<li>database constainer</li>
+</ol>
+<h3 id="設定完成，跑指令！"><a href="#設定完成，跑指令！" class="headerlink" title="設定完成，跑指令！"></a>設定完成，跑指令！</h3><p>設置好檔案後，開始跑指令吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web rails new --force --database=postgresql</span><br></pre></td></tr></table></figure>
+<p>這個指令輸入後，會自動建立一個容器，裝著新的rails 專案，<br>Dockerfile會將專案內的Gemfile複製到docker container上，並且自動執行bundle install。<br>還記得我們剛剛在新增Gemfile添加內容時，只安裝了Rails的Gem</p>
+<p>database的username則設定為：postgresql</p>
+<p>完整跑完指令後，會發現專案資料夾已經設置好Rails框架了，像是db, assets等等</p>
+<h3 id="設置database的username"><a href="#設置database的username" class="headerlink" title="設置database的username"></a>設置database的username</h3><p>接著來database.yml檔，因為剛剛輸入的指令設定database username是postgresql<br>因此資料庫的yml檔必須也添加上去，添加<code>username</code>、<code>password</code>、<code>host</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">default: &amp;default</span><br><span class="line">  adapter: postgresql</span><br><span class="line">  encoding: unicode</span><br><span class="line">  # For details on connection pooling, see Rails configuration guide</span><br><span class="line">  # http://guides.rubyonrails.org/configuring.html#database-pooling</span><br><span class="line">  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) &#123; 5 &#125; %&gt;</span><br><span class="line">  username: postgres</span><br><span class="line">  password:</span><br><span class="line">  host: db</span><br></pre></td></tr></table></figure>
+<h3 id="架設環境吧！"><a href="#架設環境吧！" class="headerlink" title="架設環境吧！"></a>架設環境吧！</h3><p>docker-compose up 的指令等同於 rails s，只是是遠端操作docker，那port設定是在3000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure></p>
+<p>如果設置檔案過程都順利、正常的話，輸入<code>localhost:3000</code>即會看到Rails 架設成功的畫面惹。<br><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/08232903/Screen-Shot-2018-04-08-at-10.51.52-PM.png" target="_blank" rel="noopener"><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/08232903/Screen-Shot-2018-04-08-at-10.51.52-PM.png" alt=""></a><br>恭喜你，看到這個畫面時，也代表進入Docker的大坑了（誤）</p>
+<h2 id="Docker-指令介紹"><a href="#Docker-指令介紹" class="headerlink" title="Docker 指令介紹"></a>Docker 指令介紹</h2><p>當你在Gemfile 有變動時，都要重跑bundle，那在docker上則是輸入docker-compose build<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br></pre></td></tr></table></figure></p>
+<p>跑任何Rails指令前都必須加上<code>docker-compose run web</code><br>例如：想要跑rails db:migrate 遷移資料庫指令時前面也要加上此行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web rails db:migrate</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>開啟伺服器 localhost:3000<br><code>docker-compose up</code></p>
+</li>
+<li><p>關閉伺服器<br><code>docker-compose down</code></p>
+</li>
+<li>進入Docker rails console<br><code>docker-compose rails c</code><h2 id="Docker-一次滿足你三個願望"><a href="#Docker-一次滿足你三個願望" class="headerlink" title="Docker 一次滿足你三個願望"></a>Docker 一次滿足你三個願望</h2>不管你想要安裝Yarn, Node.js還是 Webpacker, 前端Framework都沒有問題唷</li>
+</ul>
+<h3 id="想在Docker上安裝yarn、Node-js？沒問題"><a href="#想在Docker上安裝yarn、Node-js？沒問題" class="headerlink" title="想在Docker上安裝yarn、Node.js？沒問題"></a>想在Docker上安裝yarn、Node.js？沒問題</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get update &amp;&amp; apt-get install -y curl apt-transport-https wget &amp;&amp; \</span><br><span class="line">    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &amp;&amp; \</span><br><span class="line">    echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list &amp;&amp; \</span><br><span class="line">    apt-get update &amp;&amp; apt-get install -y yarn</span><br><span class="line">RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - &amp;&amp; \</span><br><span class="line">    apt-get install nodejs</span><br></pre></td></tr></table></figure>
+<h3 id="Docker-安裝-Webpacker？沒問題"><a href="#Docker-安裝-Webpacker？沒問題" class="headerlink" title="Docker 安裝 Webpacker？沒問題"></a>Docker 安裝 Webpacker？沒問題</h3><p>Docker container上加入<code>webpacker</code>？沒問題啊！<br>在Gemfile上添加<code>webpacker</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &apos;webpacker&apos;, &apos;~&gt; 3.4&apos;</span><br></pre></td></tr></table></figure>
+<p>接著重新Run一次以下指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run web bundle update</span><br><span class="line">docker-compose build</span><br></pre></td></tr></table></figure>
+<h3 id="Docker上導入React-framework？沒問題！"><a href="#Docker上導入React-framework？沒問題！" class="headerlink" title="Docker上導入React framework？沒問題！"></a>Docker上導入React framework？沒問題！</h3><p>docker-compose run web rails webpack:install:react<br>你有發現到嗎？其實安裝webpacker指令在rails上也是輸入rails webpack:install<br>只是前面多加了<code>docker-compose run web</code>而已<br>不要被長長的指令嚇到了Q_Q</p>
+<h3 id="用-Alias-縮短docker指令"><a href="#用-Alias-縮短docker指令" class="headerlink" title="用 Alias 縮短docker指令"></a>用 Alias 縮短docker指令</h3><p>覺得每次都要輸入這史上超長的指令，很浪費人生、手指力氣吧<br>你想想看，我今天想在docker上新增一個container，我要這樣子輸入<br><code>docker-compose run web rails controller -g home</code><br>超級無敵霹靂有夠長的好不好！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">alias dc-web=&apos;docker-compose run web&apos;</span><br><span class="line">alias dc-migrate=&apos;docker-compose run web rails db:migrate&apos;</span><br><span class="line">alias dc-rspec=&apos;docker-compose run web rspec&apos;</span><br><span class="line">alias dc=&apos;docker-compose&apos;</span><br></pre></td></tr></table></figure>
+<p>以後在終端機上就可以簡單輸入<code>dc-web</code>這些囉<br>也可以自行設定你常用的指令。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/前端永遠的課題：呈現一致性的跨裝置：關於Font/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/" itemprop="url">前端永遠的課題：字體－呈現一致性的跨裝置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-18T04:25:39+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前端最主要就是將所有裝置能一致化顯示，今天來談談「字體」的部分<br>大家都知道Windows, Linux, Mac三大作業系統，想當然也有其系統的內建字體，若只指定常見的微軟正黑體，其他作業系統沒有該字體，就會顯示該作業系統的預設字體，而不是微軟正黑體，這樣就沒有超能力隨心所欲控制字體了，這怎麼行！<br>身為一位專業的前端工程師，是有必要了解網頁字體的，Okay, Let’s go.</p>
+<blockquote>
+<p>要能隨自己心念呈現想要的字體，首先要先理解「字體擺放的順序」，順序超重要的啊</p>
+</blockquote>
+<h2 id="字體通用順序"><a href="#字體通用順序" class="headerlink" title="字體通用順序"></a>字體通用順序</h2><p>英文字型 &gt; Linux系統 &gt; Mac系統 &gt; Windows &gt; 基礎字體</p>
+<h3 id="設定-font-family-到底是中文在前面、還是英文啊？"><a href="#設定-font-family-到底是中文在前面、還是英文啊？" class="headerlink" title="設定 font-family 到底是中文在前面、還是英文啊？"></a>設定 font-family 到底是中文在前面、還是英文啊？</h3><blockquote>
+<p>英文字型在前，中文字型在後</p>
+</blockquote>
+<p>如果中文字型在前，那麼網頁會永遠讀取不到Arial的字體，正確示範應為以下設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: &quot;Arial&quot;, &quot;微軟正黑體&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用機率較少的字體放前，使用機率高的字體放後"><a href="#使用機率較少的字體放前，使用機率高的字體放後" class="headerlink" title="使用機率較少的字體放前，使用機率高的字體放後"></a>使用機率較少的字體放前，使用機率高的字體放後</h2><ul>
+<li>使用機率較少的字體放在前面（例如只有Mac系統才有的蘋果儷中黑字體）</li>
+<li>使用機率高的字體放在後面（幾乎每個作業系統都有的新細明體或標楷體）</li>
+</ul>
+<blockquote>
+<p>舉例來說，如果我想要瀏覽這個網站的使用者，使用Mac裝置看得是蘋果儷中黑，用Windows瀏覽則看到的是微軟正黑體，那該怎麼設定？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: &quot;蘋果儷中黑&quot;, &quot;微軟正黑體&quot;, sans-serif</span><br></pre></td></tr></table></figure>
+<h2 id="確保裝置都能讀取字體：中英字體名稱皆設定"><a href="#確保裝置都能讀取字體：中英字體名稱皆設定" class="headerlink" title="確保裝置都能讀取字體：中英字體名稱皆設定"></a>確保裝置都能讀取字體：中英字體名稱皆設定</h2><p>建議設定font-family時不只是要設定A的中文字體，也要設定A的英文字行名稱都要設定，這樣做是為了防止有些作業系統或裝置抓不到該中文字體名稱，兩者皆設定會比較保險。<br>舉例來說，微軟正黑體的英文名稱為：Microsoft JhengHei，那就可以像下面這樣設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family: Microsoft JhengHei, &quot;微軟正黑體&quot;, sans-serif</span><br></pre></td></tr></table></figure></p>
+<h2 id="在-Rails-5-裡引用特殊英文字體"><a href="#在-Rails-5-裡引用特殊英文字體" class="headerlink" title="在 Rails 5 裡引用特殊英文字體"></a>在 Rails 5 裡引用特殊英文字體</h2><p>如果設計師給你的字型是特殊的英文字體（也就是非內建字體），需包在專案內</p>
+<blockquote>
+<p>舉例來說，今天設計師給我CenturyGothicBold字體，引用此字體步驟</p>
+</blockquote>
+<ol>
+<li>把字體包放到 assets/fonts資料架內</li>
+<li>用 Fontface Generator 產生各種支援的eot, woff, ttf 格式支援各系統<br><a href="https://www.fontsquirrel.com/tools/webfont-generator" target="_blank" rel="noopener">Font-face 產生器</a></li>
+</ol>
+<p>上傳你要客製化使用的英文字體，Generator(產生器)便會自動生成各系統使用的字體檔</p>
+<ol start="3">
+<li>在css上設定@font-face，若在rails引用路徑，可用 assets_path的helper</li>
+<li>針對個別需使用此字體的element（例如h1）或整體body設定 font-family: “CenturyGothicBold” <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">  font-family: &apos;CenturyGothicBold&apos;;</span><br><span class="line">  src: url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.eot&quot;) %&gt;&apos;);</span><br><span class="line">  src: url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.eot&quot;) %&gt;&apos;) format(&apos;embedded-opentype&apos;),</span><br><span class="line">  		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.woff&quot;) %&gt;&apos;) format(&apos;woff2&apos;),</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.woff&quot;) %&gt;&apos;) format(&apos;woff&apos;),</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.ttf&quot;) %&gt;&apos;) format(&apos;truetype&apos;)</span><br><span class="line">		url(&apos;&lt;%= asset_path(&quot;fonts/CenturyGothicBold.svg#CenturyGothicBold&quot;) %&gt;&apos;) format(&apos;svg&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>小知識：為什麼有這麼多種格式的字型？（woff2, woff, eot, ttf）</p>
+</blockquote>
+<p>原因：有些瀏覽器只會讀取某種格式的字體檔，如果你想要把所有裝置瀏覽網頁都呈現統一的字體瀏覽的話，就得必須設這些擴充字體，讓某些不支援的瀏覽器或Android手機可以正常顯示你想要的字體</p>
+<blockquote>
+<p>小知識：你知道字體有四大天王的格式嗎？</p>
+</blockquote>
+<p>網頁上有四種字型格式：WOFF2、WOFF、EOT、TTF<br>有些瀏覽器只會讀取某種格式的字體檔，</p>
+<ul>
+<li>WOFF 2.0 支援的瀏覽器</li>
+<li>WOFF 給大部分瀏覽器</li>
+<li>EOT 給舊版 Android (4.4版以下) 的瀏覽器</li>
+<li>TTF 給舊版 IE ( IE 9 以下) 的瀏覽器</li>
+</ul>
+<p>有興趣者可以參考這篇Stack發問：<a href="https://stackoverflow.com/questions/11002820/why-should-we-include-ttf-eot-woff-svg-in-a-font-face" target="_blank" rel="noopener">Why should we include ttf, eot, woff, svg,… in a font-face
+</a></p>
+<h2 id="三大作業系統-字體中英對照"><a href="#三大作業系統-字體中英對照" class="headerlink" title="三大作業系統 | 字體中英對照"></a>三大作業系統 | 字體中英對照</h2><h3 id="Mac-OS"><a href="#Mac-OS" class="headerlink" title="Mac OS"></a>Mac OS</h3><p>華文楷體：STKaiti<br>華文細明體：STSong<br>華文仿宋：STFangsong<br>儷黑 Pro：LiHei Pro Medium<br>儷宋 Pro：LiSong Pro Light<br>標楷體：BiauKai<br>蘋果儷中黑：Apple LiGothic Medium<br>蘋果儷細宋：Apple LiSung Light</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>新細明體：PMingLiU<br>細明體：MingLiU<br>標楷體：DFKai-SB<br>黑體：SimHei<br>細明體：mingliu<br>新細明體：Nmingliu<br>仿宋：FangSong<br>楷體：KaiTi<br>仿宋_GB2312：FangSong_GB2312<br>標楷體：KaiTi_GB2312<br>微軟正黑體：Microsoft JhengHei<br>微軟雅黑體：Microsoft YaHei</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>文泉驛正黑：WenQuanYi Zen Hei<br>全字庫正楷體：TW-Kai</p>
+<h2 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h2><ul>
+<li><a href="https://www.wfublog.com/2014/02/font-family-chinese-cross-platform.html" target="_blank" rel="noopener">網頁中英文字型(font-family)跨平台設定最佳化</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/" itemprop="url">Git筆記：移花接木的Rebase，整理commit訊息的好幫手</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-04T04:42:10+08:00">
+                2018-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04182817/rEBASE.png" target="_blank" rel="noopener"><img class="size-full wp-image-334 aligncenter" src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04182817/rEBASE.png" alt="" width="560" height="397"></a><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04193721/rEBASE-1.png" target="_blank" rel="noopener"><br></a>Git 有個神奇的功能叫：Rebase，中文翻譯叫「變動基底」，簡單來說就是移花接木，把某一個樹枝（Branch）接到Master的主幹上等等功能，指定的節點可以重新 commit，花了一點時間做功課，把自己的理解的寫下來</p>
+<h1 id="為什麼要用-Rebase-？變動基底的話不就很危險嗎"><a href="#為什麼要用-Rebase-？變動基底的話不就很危險嗎" class="headerlink" title="為什麼要用 Rebase ？變動基底的話不就很危險嗎"></a>為什麼要用 Rebase ？變動基底的話不就很危險嗎</h1><p>Rebase 的好處 &gt; 壞處，接著養成好習慣，在每次做Rebase之前，開一個backup的branch，以防改爛時還可以回溯，這樣就什麼都不怕啦！</p>
+<h2 id="Rebase能做什麼？"><a href="#Rebase能做什麼？" class="headerlink" title="Rebase能做什麼？"></a>Rebase能做什麼？</h2><ul>
+<li>可以修改 commit 訊息 （Reword）</li>
+<li>可以修改 commit 內容（Edit），甚至可以拆成兩個 commit 紀錄、合併commit</li>
+<li>重新 commit ( <code>Pick</code>)</li>
+<li>更換 commit 順序（<strong>做這個要很小心，可能會把你的專案搞爛</strong>）</li>
+<li>修改 commit 順序 (<code>Edit</code>)</li>
+<li>拆解 commit (把多個commit紀錄變成一個commit)</li>
+<li>壓縮 commit，合併 commit 訊息 (<code>Squash</code>)</li>
+<li>刪除 commit (<code>Skip</code>)<br>即使列出來還是不懂Rebase的好處嗎？在此示範，我常常會有種鬼打牆的狀況…..<h3 id="亂糟糟的Commit紀錄"><a href="#亂糟糟的Commit紀錄" class="headerlink" title="亂糟糟的Commit紀錄"></a>亂糟糟的Commit紀錄</h3><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04183630/Screen-Shot-2018-03-04-at-6.34.30-PM.png" alt=""></li>
+</ul>
+<p>你看到的git log有好幾處幾乎是有重複的commit紀錄，這時就有必要性整理commit紀錄了！</p>
+<h3 id="用rebase來整理commit紀錄"><a href="#用rebase來整理commit紀錄" class="headerlink" title="用rebase來整理commit紀錄"></a>用rebase來整理commit紀錄</h3><p>由於我是在develop的branch開發的，所以整理commit message自然也要在develop上做<br>首先先git log 查看你想要塗改的commit紀錄，最好是在前面好幾個紀錄前<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04183958/Screen-Shot-2018-03-04-at-6.38.01-PM-1024x478.png" alt=""></p>
+<p>如果說要重新commit的話就是選你的要的那一行commit，預設都是pick<br><code>輸入git rebase -i 968cada</code></p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04184958/Screen-Shot-2018-03-04-at-6.48.27-PM-1024x670.png" alt=""></p>
+<p>那我把第二行的commit 調整首頁區塊 <code>pick</code> 修改成 <code>squash</code><br><code>squahs</code>代表將這個commit紀錄，合併到上一個commit裡面</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185313/Screen-Shot-2018-03-04-at-6.49.21-PM-1024x743.png" alt=""></p>
+<p>接著會跳出視窗：請你修改commit message &lt;<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185325/Screen-Shot-2018-03-04-at-6.50.13-PM-1024x668.png" alt=""></p>
+<p>我不想要留下那個commit訊息，我要直接合併，因此我將第二個commit message那一行全部刪除</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185343/Screen-Shot-2018-03-04-at-6.50.35-PM-1024x403.png" alt=""></p>
+<h3 id="如何在Vim編輯器下存檔、離開？"><a href="#如何在Vim編輯器下存檔、離開？" class="headerlink" title="如何在Vim編輯器下存檔、離開？"></a>如何在Vim編輯器下存檔、離開？</h3><blockquote>
+<p>下圖為<code>Vim</code>編輯器下，如果你還不太會用Vim編輯器，只要記得下列兩個超實用的指令就可走遍半個江湖<br>如何修改：按鍵盤的<code>i</code>即會出現游標，便可以開始修改。修改完成後按下<code>ESC</code>鍵，並輸出<code>:wq</code>即可存檔<br>不想存檔？想要直接離開，一樣先按下<code>ESC</code>並輸入<code>:q</code>即可不存檔離開</p>
+</blockquote>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/03/04185813/Screen-Shot-2018-03-04-at-6.56.36-PM-1024x251.png" alt=""></p>
+<p>接著就成功的合併commit紀錄啦！</p>
+<p>如果覺得還是醜醜的可以繼續rebase整理完再合併到master上</p>
+<p>接著就是切換到<code>master</code> =&gt; <code>git checout master</code> =&gt; 合併 <code>git merge develop</code></p>
+<p>&nbsp;</p>
+<p>如果選擇其他的像reword、edit的選項（修改commit訊息、或是一個commit拆成多個commit）<br>他會自動跳到你當時儲存的節點當成是HEAD<br>接著再<code>git add 你想要分的檔案</code> <code>git commit -m</code> 就可以拆分commit紀錄了</p>
+<p>&nbsp;</p>
+<p>整理完develop的commit紀錄後，再<code>git merge master</code>就可以囉</p>
+<p>別忘了在rebase前，記得開一個backup的branch，以防萬一啊！</p>
+<h3 id="練習試試看，推薦Learn-Git-Branching，"><a href="#練習試試看，推薦Learn-Git-Branching，" class="headerlink" title="練習試試看，推薦Learn Git Branching，"></a>練習試試看，推薦Learn Git Branching，</h3><p>我非常推薦一個非常棒的Github教學網站：<a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">Learn Git Branching</a><br>要學Git往往最困難的是要準備此情境的檔案，因為很懶（誤）…<br>但在這個<code>Learn Git Branching</code>直接幫你準備好，甚至很變態的在網站上輸入git指令就可以馬上看到結果。<br><img src="https://i.imgur.com/tK5aKJG.png" alt="Learn Git Branching"><br>這邊還可以學到reset, revert, rebase, cherry-pick<br><img src="https://i.imgur.com/i1PAyAw.png" alt="Learn Git Branching"><br>根據你想要學的單元，他會給你一個目標進而完成關卡。<br><img src="https://i.imgur.com/QFENxyW.png" alt="Learn Git Branching"><br>他的介面是這樣，動手在左邊視窗輸入指令，右邊的圖便會照著你的指令移動</p>
+<blockquote>
+<p>看再多的教學，都只是用眼睛看而已，一定要動手實作看看，才真的可以吸收進去，快點點進去吧XD</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Git-push-repo失敗：-Could-not-resolve-host-github-com/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/" itemprop="url">Git push repo失敗： Could not resolve host: github.com</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-01T05:02:26+08:00">
+                2018-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天在練習JavaScript時，正要把成果push到Git repo裡，出現<code>Could not resolve host: github.com</code>錯誤訊息，在此紀錄如何解決</p>
+<h2 id="錯誤訊息"><a href="#錯誤訊息" class="headerlink" title="錯誤訊息"></a>錯誤訊息</h2><p><code>Could not resolve host: github.com</code></p>
+<h2 id="解決辦法"><a href="#解決辦法" class="headerlink" title="解決辦法"></a>解決辦法</h2><ol>
+<li>在終端機上先Ping <code>github.com</code></li>
+<li>確認有連線到，Cmd+C結束</li>
+<li>直接竄改本地端的host文件</li>
+<li>開啟finder -&gt; GOTO -&gt; etc/hosts</li>
+<li>將hosts拉到桌面，在127.0.0.1 localhost 下面一行新增「192.30.255.113 github.com」儲存</li>
+<li>儲存後將hosts丟回etc/hosts資料夾，會要求輸入admin密碼，輸入後並取代檔案</li>
+<li>重新git push origin master，成功</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/" itemprop="url">做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-17T05:04:50+08:00">
+                2018-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper</p>
+<p>通常做響應式圖片有兩種作法</p>
+<ol>
+<li>使用同一張圖片，依照容器、螢幕尺寸放大縮小</li>
+<li>偵測不同的裝置，根據螢幕大小，使用不同大小的圖片</li>
+</ol>
+<h3 id="作法一"><a href="#作法一" class="headerlink" title="作法一"></a>作法一</h3><p>作法一：重頭到尾都使用同一張圖片，可以跟著螢幕修改圖片的比例大小</p>
+<blockquote>
+<p>響應式圖片 建議設定max-width: 100%<br>確保圖片不會超過畫面的大小，父層的容器設多少大小，子層的圖片就會乖乖在他背後下貼著容器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img &#123; max-width: 100%; height: auto&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>缺點：圖片量若很大，載入頁面時間會加長，對於行動裝置上網的客群，可能會因為網站載圖片跑太慢，導致用戶不想等直接離開網站。</p>
+</blockquote>
+<h3 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h3><p>做法二： 隨著裝置提供不同大小的圖檔</p>
+<blockquote>
+<p>我有一張圖片、但是幾個不同大小的版本想要替換使用<br>小螢幕裝置，就下載比較小的圖片，減少行動裝置上不必要的寬頻浪費<br>大螢幕就下載比較大的圖片、解析度也較高、看得比較清楚</p>
+</blockquote>
+<p>優點：可以根據圖片顯示的實際需要，給用戶端剛剛好的大小版本</p>
+<blockquote>
+<p>需要注意的事項：查詢<a href="https://caniuse.com/#search=srcset" target="_blank" rel="noopener">Can I Use</a> 確認主流瀏覽器支援狀況</p>
+</blockquote>
+<h4 id="偵測不同裝置隨意換上圖片"><a href="#偵測不同裝置隨意換上圖片" class="headerlink" title="偵測不同裝置隨意換上圖片"></a>偵測不同裝置隨意換上圖片</h4><p>偵測不同裝置隨意換上圖片，有以下幾種做法</p>
+<ol>
+<li>使用HTML5 <code>&lt;img&gt;</code> 的屬性 <code>srcset</code><br>缺點：需要到Can I Use 看各主流瀏覽器版本是否已支援</li>
+<li>HTML5 <code>&lt;picture&gt;</code></li>
+<li><code>使用 srcset + picture</code></li>
+<li>用 JavaScript 監聽 <code>window.resize</code>事件，修改圖片路徑</li>
+<li>使用 <code>svg</code> 向量圖</li>
+<li>使用第三方外掛，例如：<a href="https://scottjehl.github.io/picturefill/" target="_blank" rel="noopener">picturefill</a>來補足不支援picture的瀏覽器</li>
+</ol>
+<h3 id="狀況劇一"><a href="#狀況劇一" class="headerlink" title="狀況劇一"></a>狀況劇一</h3><p>狀況劇一：設計師提供給我手機版、桌機版裝置的兩種圖片，要怎麼切圖搭配srcset使用？</p>
+<h4 id="先切圖"><a href="#先切圖" class="headerlink" title="先切圖"></a>先切圖</h4><ol>
+<li>給 Mobile 小螢幕裝置的圖片<br>切成 1x 給一般手機<br>切成 2x 給 Retine 高畫質螢幕</li>
+<li>給tablet, desktop 大螢幕裝置的圖片<br>切成 1x, 2x, 3x</li>
+</ol>
+<h4 id="使用-srcset"><a href="#使用-srcset" class="headerlink" title="使用 srcset"></a>使用 srcset</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;img srcset=&quot;360.jpg 360w,</span><br><span class="line">768.jpg 768w,</span><br><span class="line">1200.jpg 1200w,</span><br><span class="line">1920.jpg 1920w&quot;</span><br><span class="line">sizes=&quot;</span><br><span class="line">(max-width: 360px) 100vw,</span><br><span class="line">(max-width: 768px) 90vw,</span><br><span class="line">(max-width: 1980px) 80vw,</span><br><span class="line">768px&quot;</span><br><span class="line">src=&quot;360.jpg&quot; alt=&quot;範例&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>srcset 非常的簡單，寫下你要放上的幾張圖片和他的寬度，瀏覽器就會自動去選擇<br>srcset 分別跟瀏覽器先生說：「嗨，我這裡有360.jpg、768.jpg、1200.jpg、1920.jpg圖片」<br>sizes 也和瀏覽器說：「不同裝置的寬度(media query)下，圖片的寬度也要幫我個別調整！」</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sizes=&quot;(max-width: 360px) 100vw&quot;</span><br></pre></td></tr></table></figure>
+<p>在320px的iphone4下瀏覽，圖片寬度自動也會被調整為 100vw。</p>
+<h3 id="Rails-img-secret-sizes-Helper"><a href="#Rails-img-secret-sizes-Helper" class="headerlink" title="Rails img secret, sizes Helper"></a>Rails img secret, sizes Helper</h3><p>由於Rails內建的Helper沒有<code>image srcset</code>，於是我們要手動新增Helper<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 新增在 application_helper.rb</span><br><span class="line">def image_set_tag(source, srcset = &#123;&#125;, options = &#123;&#125;)</span><br><span class="line">  srcset = srcset.map &#123; |src, size| &quot;#&#123;path_to_image(src)&#125; #&#123;size&#125;&quot; &#125;.join(&apos;, &apos;)</span><br><span class="line">  image_tag(source, options.merge(srcset: srcset))</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>新增完後便可以照著他的規則使用啦！剛剛切出來的五張圖片可以派上用場囉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= image_set_tag &apos;How-we-work.png&apos;, &#123; </span><br><span class="line">  &apos;How-we-work-Mobile.png&apos; =&gt; &apos;320w&apos;,</span><br><span class="line">  &apos;How-we-work-Mobile@2x.png&apos; =&gt; &apos;640w&apos;,</span><br><span class="line">  &apos;How-we-work-PC@2x.png&apos; =&gt; &apos;1024w&apos;,</span><br><span class="line">  &apos;How-we-work-PC@3x.png&apos; =&gt; &apos;1980w&apos;</span><br><span class="line">&#125;, alt: &apos;如何運作&apos;, class: &apos;img-fluid mx-auto d-block&apos; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>瀏覽器吃掉上述程式碼後，它會通過 srcset 屬性自動選擇 Mobile 2x,  PC 2x 等圖，比如說今天用 iPhone 6s，便會自動選擇 Mobile@2x 的圖。</p>
+<blockquote>
+<p><code>default</code>, <code>image_set_tag &#39;How-we-work.png&#39;</code> 這裏即指 default</p>
+</blockquote>
+<p>若瀏覽器太舊看不懂 srcset，會讀取 src 的圖片網址來顯示。套上範例，瀏覽器不支援就會讀取<code>How-we-work.png</code>的圖檔</p>
+<blockquote>
+<p>以下的 <code>w</code> 不是真的指 <code>px</code> ，而是<code>裝置像素比</code>，為了好理解先套上px</p>
+<ul>
+<li><code>320w</code><br>手機模式瀏覽 src自動轉換成 Mobile.png<br>當偵測到瀏覽器為不大於 320px 寬時，顯示 Mobile.png 這張圖</li>
+<li><code>640w</code><br>平板模式瀏覽 src自動轉換成 <a href="mailto:Mobile@2x.png" target="_blank" rel="noopener">Mobile@2x.png</a></li>
+<li><code>1024w</code><br>平板裝置瀏覽 寬度有1024，src自動轉換成 <a href="mailto:PC@2x.png" target="_blank" rel="noopener">PC@2x.png</a></li>
+<li><code>1980w</code><br>桌機裝置瀏覽 寬度有1980，src自動轉換成 <a href="mailto:PC@3x.png" target="_blank" rel="noopener">PC@3x.png</a></li>
+</ul>
+</blockquote>
+<h3 id="w是什麼？"><a href="#w是什麼？" class="headerlink" title="w是什麼？"></a>w是什麼？</h3><p>W 是 設備像素比(DevicePixelRatio)，詳細可點擊<a href="http://screensiz.es/" target="_blank" rel="noopener">查詢各裝置的裝置像素密度</a><br>320w, 640w, 1024w, 1980w 這裡的w不是指px，而是「設備像素比」 也就是 <code>window.devicePixelRatio</code></p>
+<h3 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h3><p>如何測試實驗圖片真的有跟著寬度做更換？<br>建議測試時開啟Chrome無痕視窗，以避免瀏覽器快取後，不會自動切換圖片</p>
+<ol>
+<li>打開Chrome 開發人員工具</li>
+<li>指到 src </li>
+<li><p>會發現瀏覽器視窗隨著調整，src指定的圖片路徑會變成設定的圖檔</p>
+<blockquote>
+<p>像是我開到手機寬度時，src指定圖片路徑會變成Mobile.png，開到正常電腦大小寬度時，src的路徑則會變成<a href="mailto:PC@3x.png" target="_blank" rel="noopener">PC@3x.png</a></p>
+</blockquote>
+</li>
+<li><p>大功告成！</p>
+</li>
+</ol>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="http://www.dailycold.tw/7216/jpeg-jpg-lossy-compression-artifacts/" target="_blank" rel="noopener">為什麼低解析度的JPG會跟馬賽克一樣？</a></li>
+<li><a href="https://stackoverflow.com/questions/45360050/using-image-tag-with-srcset-attribute" target="_blank" rel="noopener">Using image_tag with srcset attribute?
+</a></li>
+<li><a href="https://segmentfault.com/a/1190000008662857" target="_blank" rel="noopener">响应式图片实战</a></li>
+<li><a href="https://www.wfublog.com/2017/08/picasa-rwd-image-srcset.html" target="_blank" rel="noopener">Picasa 圖床的獨家應用：製作 RWD 自適應圖片，讓手機自動載入小圖，加快網頁讀取速度</a></li>
+<li><a href="http://lauraluo.github.io/2015/04/15/20150415-RwdPojectStudy/" target="_blank" rel="noopener">RWD響應式網頁專案開發心得(一)</a></li>
+<li><a href="http://blog.zhusee.in/post/248199/basic-responsive-image-with-srcset-property" target="_blank" rel="noopener">用 srcset 屬性做簡單的 Responsive Image</a></li>
+<li><a href="https://www.minwt.com/webdesign-dev/js/12386.html" target="_blank" rel="noopener">《Picturefill 自適應圖片》隨著裝置提供不同大小的圖檔(JS版)</a></li>
+<li><a href="http://screensiz.es/" target="_blank" rel="noopener">查詢各裝置的裝置像素密度</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Rails-5-快速設置-favicon-icon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Rails-5-快速設置-favicon-icon/" itemprop="url">Rails 5 快速設置 favicon icon</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-10T05:13:37+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>現在的裝置上千幾種，Icon也針對各種裝置Andoroid、iOS各設置了不同大小尺寸的icon，如果在Rails內開發，可以參考以下的寫法。底下的Reference可以知道各個icon設置的用途適用於哪些裝置。</p>
+<h2 id="快速設置-Icon-步驟"><a href="#快速設置-Icon-步驟" class="headerlink" title="快速設置 Icon 步驟"></a>快速設置 Icon 步驟</h2><ol>
+<li>在view/layouts下新增<code>_favicon.html.erb</code>的樣板</li>
+<li>並在application.html.erb render <code>_favicon.html.erb</code></li>
+<li>找icon generator 自動產生針對各裝置的icon圖<ul>
+<li><a href="https://realfavicongenerator.net/favicon/ruby_on_rails#.WcpqH9MjH-a" target="_blank" rel="noopener">Rails Generator</a></li>
+<li><a href="https://makeappicon.com/" target="_blank" rel="noopener">MakeAppleIcon</a></li>
+</ul>
+</li>
+<li>將 icon圖放置 <code>app/assets/image/icon</code> 內</li>
+</ol>
+<p><code>application.html.erb</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;%= render &apos;layouts/favicon&apos; %&gt;</span><br><span class="line">    &lt;link rel=&quot;manifest&quot; href=&quot; &lt;%= asset_path &apos;ico/manifest.json&apos; %&gt;&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;msapplication-config&quot; content=&quot;&lt;%= asset_path &apos;ico/browserconfig.xml&apos; %&gt;&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;xxxx&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;application-name&quot; content=&quot;xxxx&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#2b5797&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;theme-color&quot; content=&quot;#ffffff&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>_favicon.html.erb</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;% %w(57 60 72 76 114 120 144 152 180).each do |s| %&gt;</span><br><span class="line">    &lt;%= favicon_link_tag &quot;ico/apple-icon-#&#123;s&#125;x#&#123;s&#125;.png&quot;, rel: &apos;apple-touch-icon&apos;, type: &apos;image/png&apos;, sizes: &quot;#&#123;s&#125;x#&#123;s&#125;&quot; %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br><span class="line"></span><br><span class="line">&lt;% %w(36 48 72 96 144 192).each do |s| %&gt;</span><br><span class="line">    &lt;%= favicon_link_tag &quot;ico/android-icon-#&#123;s&#125;x#&#123;s&#125;.png&quot;, rel: &apos;android-chrome&apos;, type: &apos;image/png&apos;, sizes: &quot;#&#123;s&#125;x#&#123;s&#125;&quot; %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br><span class="line"></span><br><span class="line">&lt;% %w(70 144 150 310).each do |s| %&gt;</span><br><span class="line">    &lt;%= favicon_link_tag &quot;ico/ms-icon-#&#123;s&#125;x#&#123;s&#125;.png&quot;, rel: &apos;mstile&apos;, type: &apos;image/png&apos;, sizes: &quot;#&#123;s&#125;x#&#123;s&#125;&quot; %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br><span class="line"></span><br><span class="line">&lt;% %w(16 32 96).each do |s| %&gt;</span><br><span class="line">    &lt;%= favicon_link_tag &quot;ico/favicon-#&#123;s&#125;x#&#123;s&#125;.png&quot;, rel: &apos;x-icon&apos;, type: &apos;image/png&apos;, sizes: &quot;#&#123;s&#125;x#&#123;s&#125;&quot; %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br><span class="line"></span><br><span class="line">&lt;%= favicon_link_tag &apos;ico/favicon.ico&apos;, rel: &apos;shortcut icon&apos; %&gt;</span><br><span class="line">&lt;%= favicon_link_tag &apos;ico/favicon.ico&apos; , rel: &apos;bookmark&apos; %&gt;</span><br><span class="line">&lt;%= tag(:link, rel: &apos;manifest&apos;, href: (&apos;ico/manifest.json&apos;)) %&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Apple-Touch-Icons"><a href="#Apple-Touch-Icons" class="headerlink" title="Apple Touch Icons"></a>Apple Touch Icons</h4><ul>
+<li>120x120: iPhone Retina (iOS 7)</li>
+<li>180x180: iPhone 6 Plus (iOS 8+)</li>
+<li>152x152: iPad Retina (iOS 7)</li>
+<li>167x167: iPad Pro (iOS 8+)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;older-iPhone.png&quot;&gt; // 120px  </span><br><span class="line">&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;iPhone-6-Plus.png&quot;&gt;  </span><br><span class="line">&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;152x152&quot; href=&quot;iPad-Retina.png&quot;&gt;  </span><br><span class="line">&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;167x167&quot; href=&quot;iPad-Pro.png&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="IE11-微軟動態磚"><a href="#IE11-微軟動態磚" class="headerlink" title="IE11 微軟動態磚"></a>IE11 微軟動態磚</h4><p>取得 browserconfig.xml 檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;msapplication-config&quot; content=&quot;ieconfig.xml&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="https://msdn.microsoft.com/zh-tw/library/dn455106(v=vs.85" target="_blank" rel="noopener">建立自訂動態磚 - Microsoft</a>.aspx)</li>
+<li><a href="http://pressing.space/frontend/favicon-trivia/" target="_blank" rel="noopener">Favicon – 關於我的最愛圖示的二三事</a></li>
+<li><a href="https://sympli.io/blog/2017/02/15/heres-everything-you-need-to-know-about-favicons-in-2017/" target="_blank" rel="noopener">Here’s Everything You Need to Know About Favicons in 2017</a></li>
+<li><a href="https://realfavicongenerator.net/favicon/ruby_on_rails#.Wn0XVJP1Usn" target="_blank" rel="noopener">Favicon Generator for Ruby on Rails 自動生成</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Git-修改又臭又長的指令，加快開發速度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git-修改又臭又長的指令，加快開發速度/" itemprop="url">Git 修改又臭又長的指令，加快開發速度</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-09T05:16:04+08:00">
+                2018-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/02/09000352/Screen-Shot-2018-02-08-at-11.47.49-PM.png" alt=""></p>
+<h3 id="有辦法縮短Github指令嗎？"><a href="#有辦法縮短Github指令嗎？" class="headerlink" title="有辦法縮短Github指令嗎？"></a>有辦法縮短Github指令嗎？</h3><p><code>git status</code>, <code>git commit -m&#39;</code>,<code>git checkout develop/layout</code>,<code>git pull origin master</code>..是不是常常覺得輸入這些指令很繁瑣又長，有甚麼辦法可以縮短這些指令呢？</p>
+<h4 id="答案是有的！"><a href="#答案是有的！" class="headerlink" title="答案是有的！"></a>答案是有的！</h4><h3 id="將Git常用的指令，縮短成好記又好用的縮寫吧！"><a href="#將Git常用的指令，縮短成好記又好用的縮寫吧！" class="headerlink" title="將Git常用的指令，縮短成好記又好用的縮寫吧！"></a>將Git常用的指令，縮短成好記又好用的縮寫吧！</h3><p>這四個指令比較好記，也較常用到，實用度很高！！</p>
+<ol>
+<li>MAC 環境下打開 iTerm</li>
+<li>輸入以下指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>co = checkout</li>
+<li>ci = commit</li>
+<li>st = status</li>
+<li>br = branch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git co develop // 等同於 git checkout develop</span><br><span class="line">git ci -m &apos;Initalize commit&apos; // 等同於 git commit -m &apos;Initalize commit&apos;</span><br><span class="line">git st // 等同於 git status</span><br><span class="line">git br -b develop // 等同於 建立develop分支並切換過去</span><br></pre></td></tr></table></figure>
+<h4 id="其他參考指令"><a href="#其他參考指令" class="headerlink" title="其他參考指令"></a>其他參考指令</h4><p><code>vim ~/.gitconfig</code> 找到 <code>alias</code> 列表後可以根據自己需求輸入，如果想要客製化更改也可以的哦</p>
+<ol>
+<li><code>alias gthis=&#39;git rev-parse --abbrev-ref HEAD&#39;</code></li>
+<li><code>alias gpushthis=&#39;git push origin gthis&#39;</code></li>
+<li><code>alias gpullthis=&#39;git pull origin gthis&#39;</code></li>
+<li><code>alias gup=&#39;git remote update&#39;</code></li>
+<li><code>alias gpl=&#39;git pull origin&#39;</code></li>
+</ol>
+<h3 id="客製化-Git-輸出顏色"><a href="#客製化-Git-輸出顏色" class="headerlink" title="客製化 Git 輸出顏色"></a>客製化 Git 輸出顏色</h3><p>為了好好愛護眼睛，來客製化 Git 輸出的顏色吧!</p>
+<p>先開啟git color ui顏色顯示指令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure></p>
+<p>開啟<code>git color.ui</code>指令後，Git 會按照你的需要，自動為大部分的輸出加上顏色。<br>當然也能客製化的更改，可以明確地規定哪些需要指令需要塗上顏色、要設定什麼顏色<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/02/09000352/Screen-Shot-2018-02-08-at-11.47.49-PM.png" alt=""></p>
+<ul>
+<li>用 Vim 編輯器直接進入 gitconfig 來編輯<br><code>vim ~/.gitconfig</code></li>
+<li>找到 [alias]列表就可以開始進行客製化啦！</li>
+<li>我使用別人提供的 Pretty git branch 加上 [alias]上</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lg = <span class="built_in">log</span> --graph --abbrev-commit --decorate --format=format:<span class="string">'%C(yellow)%h%C(reset)%C(auto)%d%C(reset) %C(normal)%s%C(reset) %C(dim white)%an%C(reset) %C(dim blue)(%ar)%C (reset)'</span> --all</span><br></pre></td></tr></table></figure>
+<p>以後只要輸入 git lg就會有一個小型的分支圖+一行的commit訊息啦，非常方便！</p>
+<h4 id="Gitgraph-js"><a href="#Gitgraph-js" class="headerlink" title="Gitgraph.js"></a><a href="http://gitgraphjs.com/" target="_blank" rel="noopener">Gitgraph.js</a></h4><p>也是一個js寫的library在瀏覽器顯示分支圖的樣式，有興趣者可以研究看看</p>
+<h4 id="bash-completion-自動補齊-Plugin"><a href="#bash-completion-自動補齊-Plugin" class="headerlink" title="bash-completion 自動補齊 Plugin"></a><a href="https://github.com/scop/bash-completion" target="_blank" rel="noopener">bash-completion 自動補齊 Plugin</a></h4><ul>
+<li>MAC 環境 Bash安裝 bash-completion </li>
+<li>工程師實在要記得太多數不清的指令了，當忘記指令的時候，多按幾下TAB便會幫你自動提示，超強大神器！</li>
+</ul>
+<p>Mac 使用 Brew 安裝 bash-completion，在 commend上輸入以下指令即可安裝。<br><code>brew install git bash-completion</code></p>
+<blockquote>
+<p>若還沒有安裝 <code>Brew</code> 請往前走左轉到 <a href="https://docs.brew.sh/Installation" target="_blank" rel="noopener">Brew官方網站安裝</a>，啊！對了只限定於 Mac 哦。</p>
+</blockquote>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference 參考資料"></a>Reference 參考資料</h3><ol>
+<li><a href="http://note.drx.tw/2015/11/bash-completion-on-mac-osx.html" target="_blank" rel="noopener">Bash 自動補齊 on Mac OSX 10.11.1</a></li>
+<li><a href="https://segmentfault.com/a/1190000005945614" target="_blank" rel="noopener">前端資源系列- Git-常用命令&amp;快捷命令&amp;小工作流</a></li>
+<li><a href="https://git-scm.com/book/zh-tw/v1/Git-%E5%AE%A2%E8%A3%BD%E5%8C%96-Git-%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener">Git-客製化-Git-設定</a></li>
+<li><a href="https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs" target="_blank" rel="noopener">Pretty git branch graphs</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Git-筆記：我想回到過去，到底要怎麼坐時光機？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git-筆記：我想回到過去，到底要怎麼坐時光機？/" itemprop="url">Git 筆記：我想回到過去，到底要怎麼坐時光機？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-06T05:32:47+08:00">
+                2018-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Git-筆記：我想回到過去，到底要怎麼坐時光機？"><a href="#Git-筆記：我想回到過去，到底要怎麼坐時光機？" class="headerlink" title="Git 筆記：我想回到過去，到底要怎麼坐時光機？"></a>Git 筆記：我想回到過去，到底要怎麼坐時光機？</h1><h3 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h3><ol>
+<li>目前的位置叫做HEAD</li>
+<li>沒被 <code>git add</code>進入<code>commit</code>的檔案<code>untracked files</code>，Git會選擇忽略，也不用怕被坐時光機回溯影響，<code>reset、checkout</code>對他們的影響力是0。</li>
+<li><code>origin/master</code>是遠端的resp，<code>master</code>是本端的repo</li>
+</ol>
+<h3 id="我不想玩了不想存檔，我要回到上一次的存檔commit紀錄"><a href="#我不想玩了不想存檔，我要回到上一次的存檔commit紀錄" class="headerlink" title="我不想玩了不想存檔，我要回到上一次的存檔commit紀錄"></a>我不想玩了不想存檔，我要回到上一次的存檔commit紀錄</h3><p>懶得看<code>git log</code>查代碼，想快速回到上一次的commit紀錄</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout HEAD^</span><br><span class="line">HEAD^ 等同 HEAD^ 等同 HEAD~</span><br><span class="line">// 都代表一次的意思</span><br></pre></td></tr></table></figure>
+<h3 id="改壞掉了QQ，我想捨棄所有還沒commit的修改"><a href="#改壞掉了QQ，我想捨棄所有還沒commit的修改" class="headerlink" title="改壞掉了QQ，我想捨棄所有還沒commit的修改"></a>改壞掉了QQ，我想捨棄所有還沒commit的修改</h3><p>招喚reset!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure></p>
+<h4 id="改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？"><a href="#改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？" class="headerlink" title="改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？"></a>改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？</h4><ol>
+<li>退回任意的commit位置</li>
+<li>和checkout一樣，可以隨意亂跳</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^^</span><br><span class="line">git reset --hard 5efdc4f</span><br><span class="line">git reset --hard master~2</span><br><span class="line">執行結果都一樣，從 HEAD 跳回兩個前 commit</span><br></pre></td></tr></table></figure>
+<p>開分支寫一寫，然後和master合併</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature/fixbug</span><br><span class="line">// 開始寫寫寫寫寫</span><br><span class="line">// 準備合併！</span><br><span class="line">git checkout master</span><br><span class="line">git merge feature/fixbug</span><br></pre></td></tr></table></figure>
+<ul>
+<li>預設的遠端名字習慣都叫 <strong>origin</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin http://github/.....</span><br></pre></td></tr></table></figure>
+<ul>
+<li>推上遠端的 master / 分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br><span class="line">git push origin feature/fixbug</span><br></pre></td></tr></table></figure>
+<ul>
+<li>拉回來 遠端的 master / 分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br><span class="line">git pull origin feature/fixbug</span><br></pre></td></tr></table></figure>
+<h3 id="多人協作開發，Git不打架？解決衝突"><a href="#多人協作開發，Git不打架？解決衝突" class="headerlink" title="多人協作開發，Git不打架？解決衝突"></a>多人協作開發，Git不打架？解決衝突</h3><h4 id="先-Clone-克隆再說"><a href="#先-Clone-克隆再說" class="headerlink" title="先 Clone 克隆再說"></a>先 Clone 克隆再說</h4><ol>
+<li><code>git clone http://github...</code> </li>
+<li>某A 開發寫寫寫寫寫，某B也在寫寫寫</li>
+<li>某A <code>push</code> 上去了</li>
+<li>某B 也準備<code>push</code>上去<code>被拒絕!!!</code>發生衝突<br><code>pull = fetch &amp; merge</code><br>某B 要先 <code>git pull</code>，同步某A版本才行</li>
+</ol>
+<h4 id="狀況一"><a href="#狀況一" class="headerlink" title="狀況一"></a>狀況一</h4><p>狀況一：git pull 順利成功</p>
+<ol>
+<li>git pull</li>
+<li>git push origin master</li>
+</ol>
+<h4 id="狀況二"><a href="#狀況二" class="headerlink" title="狀況二"></a>狀況二</h4><p>狀況二：git pull 自動 merge失敗：<code>Merge conflict in xxx.html</code></p>
+<ol>
+<li>打開<code>xxx.html</code>，編輯你要留的部分</li>
+<li><code>git add xxx.html</code>，加入索引</li>
+<li><code>git commit -m &#39;merge ...&#39;</code></li>
+</ol>
+<h3 id="臨時狀況"><a href="#臨時狀況" class="headerlink" title="臨時狀況"></a>臨時狀況</h3><p>常遇到臨時狀況，需要放下手上的東西，支援其他人</p>
+<ul>
+<li>狀況一：寫到一半，臨時被叫去修BUG，要切換<code>branch</code>怎麼辦？</li>
+<li>狀況二： 想切換 <code>branch</code>、<code>坐時光機回到commit歷史紀錄</code>，但手上才寫到一半，我也不想commit</li>
+</ul>
+<ol>
+<li><code>git add .</code></li>
+<li><code>git commit -m &#39;Not finish yet ORZ &quot;&#39;</code></li>
+</ol>
+<p>可是，難道只能先<code>commit</code>嗎？可是還沒完整寫完啊，我不想<code>commit</code>，<code>git log</code> 會變很亂！</p>
+<h4 id="雜事放一旁，先救火再說！"><a href="#雜事放一旁，先救火再說！" class="headerlink" title="雜事放一旁，先救火再說！"></a>雜事放一旁，先救火再說！</h4><p><code>git stash</code>就像是把手邊還沒整理好的東西，先全部放在一個箱子裡，等有空時再去箱子拿回來繼續處理。</p>
+<ol>
+<li><code>git stash save &quot;RWDmobile&quot;</code><br>把手邊的資料全部放進RWDmobile的箱子裡</li>
+<li><code>git stash pop &quot;名字&quot;</code><br>終於忙完了，回來繼續整理，取回RWDmobile的箱子，並把箱子丟掉。</li>
+<li><code>git stash drop</code><br>把箱子和裡面的資料，都一起丟掉。</li>
+<li><code>git stash apply 名字</code><br>和pop一樣，取回箱子的資料，但不把箱子丟掉。</li>
+<li><code>git stash list</code><br>查詢我有幾個暫存的箱子</li>
+</ol>
+<h4 id="我commit了，但我想修改commit的訊息"><a href="#我commit了，但我想修改commit的訊息" class="headerlink" title="我commit了，但我想修改commit的訊息"></a>我commit了，但我想修改commit的訊息</h4><ul>
+<li>只能修改 HEAD 上的 commit(目前git 最後一個commit的位置)</li>
+<li>ammend是修改的意思。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Git-竄改-Commit-紀錄"><a href="#Git-竄改-Commit-紀錄" class="headerlink" title="Git 竄改 Commit 紀錄"></a>Git 竄改 Commit 紀錄</h3><p>想竄改紀錄？請找專家認證的「<code>Git rebase -i</code>」</p>
+<h4 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h4><ol>
+<li>我想修改 commit 的順序</li>
+<li>我想整理 branch 上的commit</li>
+<li>我想先把某個 branch 上的 commit 先 merge 回 master</li>
+<li>我想合併 commit，避免太過瑣碎的 commit<h3 id="Git-rebase-能做的事"><a href="#Git-rebase-能做的事" class="headerlink" title="Git rebase 能做的事"></a>Git rebase 能做的事</h3></li>
+</ol>
+<ul>
+<li>重新 commit ( <code>Pick</code>)</li>
+<li>更換 commit 順序</li>
+<li>修改 commit 順序 (<code>Edit</code>)</li>
+<li>拆解 commit (把多個commit紀錄變成一個commit)</li>
+<li>壓縮 commit，合併 commit 訊息 (<code>Squash</code>)</li>
+<li>刪除 commit (<code>Skip</code>)</li>
+</ul>
+<p><code>squash</code><br>把現在的 commit 和 上一個 commit 合併<br><code>fixup</code><br>也是合併 上一個 commit ，但不會保存 commit 的訊息</p>
+<h3 id="把多個-commit-紀錄合併成一個"><a href="#把多個-commit-紀錄合併成一個" class="headerlink" title="把多個 commit 紀錄合併成一個"></a>把多個 commit 紀錄合併成一個</h3><ul>
+<li>方法一</li>
+</ul>
+<ol>
+<li><code>git stash</code><br>暫存把目前修改的資料通通先封裝進 stash 箱子</li>
+<li><code>git reset 2q542f</code><br>坐時光機回到過去，回到 2q542f 版本</li>
+<li><code>git stash pop</code><br>把箱子裡的資料重新拿出來，所以現在是 2q542f 版本 +上剛剛從 stash箱子拿出來的資料</li>
+<li>重新 commit !<br><code>git add</code><br><code>git commit -m &#39;Message&#39;</code></li>
+</ol>
+<ul>
+<li>方法二</li>
+</ul>
+<ol>
+<li><code>git rebase -i de534f</code></li>
+<li>用 <code>squash</code> merge 3 commits into 1 comit</li>
+</ol>
+<h3 id="Rebase完後悔"><a href="#Rebase完後悔" class="headerlink" title="Rebase完後悔"></a>Rebase完後悔</h3><p>已經 rebase 竄改完紀錄，但一時眼花看錯，需要還原，對我就是後悔了，該怎麼辦？</p>
+<h4 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h4><p>輸入<code>git reflog</code>後會出現像<code>git log --oneline</code> 頁面<br><code>git reset --hard HEAD@{3}</code><br>根據上面的流水編號或bceefbc值，選你想要回復的位置</p>
+<h4 id="將追蹤的某個檔案回復成上一次-commit-狀態"><a href="#將追蹤的某個檔案回復成上一次-commit-狀態" class="headerlink" title="將追蹤的某個檔案回復成上一次 commit 狀態"></a>將追蹤的某個檔案回復成上一次 commit 狀態</h4><p><code>git checkout -- user.html.erb</code></p>
+<h4 id="所有已加入git-addtrack中，修改過的檔案，復原成最近一次commit-狀態"><a href="#所有已加入git-addtrack中，修改過的檔案，復原成最近一次commit-狀態" class="headerlink" title="所有已加入git addtrack中，修改過的檔案，復原成最近一次commit 狀態"></a>所有已加入<code>git add</code>track中，修改過的檔案，復原成最近一次commit 狀態</h4><p><code>git checkout .</code></p>
+<h4 id="從某個-commit-切回原本-branch"><a href="#從某個-commit-切回原本-branch" class="headerlink" title="從某個 commit 切回原本 branch"></a>從某個 commit 切回原本 branch</h4><p><code>git checkout -</code></p>
+<h4 id="將-某branch-裡的-某個-commit-的變動-merge-到另一條-branch"><a href="#將-某branch-裡的-某個-commit-的變動-merge-到另一條-branch" class="headerlink" title="將 某branch 裡的 某個 commit 的變動 merge 到另一條 branch"></a>將 某branch 裡的 某個 commit 的變動 merge 到另一條 branch</h4><p>EX: develop 想 merge feature的 #bceefbc commit進來<br><code>git cherry-pick</code></p>
+<h3 id="Git-協作流程"><a href="#Git-協作流程" class="headerlink" title="Git 協作流程"></a>Git 協作流程</h3><p>開發新功能或跟別人協作git時</p>
+<ol>
+<li>新建一個獨立的分支</li>
+<li>提交分支的 commit</li>
+<li><p>要時常跟上遠端的腳步，與遠端Responsitory 同步<br><code>commit前，pull！push前，也pull！</code></p>
+<h4 id="pull！pull！pull！pull！-壞掉了嗎？"><a href="#pull！pull！pull！pull！-壞掉了嗎？" class="headerlink" title="pull！pull！pull！pull！(壞掉了嗎？)"></a>pull！pull！pull！pull！(壞掉了嗎？)</h4><p><code>git pull --rebase</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. git pull</span><br><span class="line">2. git commit</span><br><span class="line">3. git pull</span><br><span class="line">4. git push</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合併 commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git rebase origin/master</span><br><span class="line">或是</span><br><span class="line">git pull origin master --rebase</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Merge-後的訊息好多餘，有辦法簡略嗎？"><a href="#Merge-後的訊息好多餘，有辦法簡略嗎？" class="headerlink" title="Merge 後的訊息好多餘，有辦法簡略嗎？"></a>Merge 後的訊息好多餘，有辦法簡略嗎？</h3><p>branch 要 merge origin/master，都會有個 merge commit ‘Merge branch ‘master’’ ，太多餘了！ 這種多餘節點很阿雜，能不能不看到？</p>
+<p>輸入<code>git pull --rebase</code> 就會使 merge 每次的 commit 不見</p>
+<blockquote>
+<p>輸入的前提：使用–rebase是在沒有 conflict 的情況下才使用</p>
+</blockquote>
+<p>真不湊巧，使用 –rebase 結果 conflict 了<br><code>git rebase --abort</code> 回復 pull 前的狀態<br><code>git merge origin master</code> 不過就會有多餘的merge message出現</p>
+<p><code>git pull --rebase</code><br>它等於以下兩步<br>git fetch<br>git merge origin </p>
+<h4 id="git-pull-rebase-是什麼意思？"><a href="#git-pull-rebase-是什麼意思？" class="headerlink" title="git pull --rebase 是什麼意思？"></a><code>git pull --rebase</code> 是什麼意思？</h4><ol>
+<li>把 commit 但還沒 push 上去的東西暫存丟到旁邊去</li>
+<li>現在的 commit 非常乾淨，Git表示：沒有東西要push上去</li>
+<li>從遠端 repo 把新的東西 pull 下來，跟上進度。此時你本地端是沒有任何要 push 的 commit，所以也不會有因為有東西還沒 push 所以無法 pull 的情況</li>
+<li>再把那些待 push 的 commit 更動過的檔案 回復回來</li>
+</ol>
+<p>有 commit 還沒 push -&gt; 想要 pull 同步 遠端repo<br>變成 輸入 <code>git pull --rebase</code> 指令後<br>把 還沒 push 的 commit 存起來，本地端沒東西 push  -&gt; 先 pull同步 -&gt; 接著變成同步遠端了，目前還有 commit 還沒 push</p>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="https://qiita.com/vc7/items/6e06b0306c8a64a23263" target="_blank" rel="noopener">Git Merge &amp; Fast-forward</a></li>
+<li><a href="http://blog.jex.tw/blog/2013/07/21/git/" target="_blank" rel="noopener">Git 常用指令</a></li>
+<li><a href="https://ihower.tw/blog/archives/3843" target="_blank" rel="noopener">使用 git rebase 避免無謂的 merge</a></li>
+<li><a href="https://www.slideshare.net/pokaichang72/git-42427674" target="_blank" rel="noopener">史上最簡單易懂的Git教學：Git 實務圖解</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-</header>
 
-    <main class="app-body">
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Rails-Server打不開嗎？你應該看看這篇/">Rails Server打不開嗎？你應該看看這篇</a>
-      </h2>
-      <p class="article-date">May 22, 2018</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#close rails server" >
-    <span class="tag-code">close rails server</span>
-  </a>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
 
       
-      <div class="article-summary">
-        
-          明明Ruby Server已經關閉了，但重新輸入rails server 出現錯誤訊息：Server已經打開了過去常遇到此問題，我都是直接重開機。後來仔細查詳解，發現有更快的解決方法。
-出現的錯誤訊息1A server is already running. Check /Users/haz ...
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hazel Wu</p>
+              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <a class="more" href="/Rails-Server打不開嗎？你應該看看這篇/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/遠端ssh連到Server，無法進入Staging-Rails-Console的終極解決辦法：移除bin/">遠端ssh連到Server，無法進入Staging Rails Console的終極解決辦法：移除bin</a>
-      </h2>
-      <p class="article-date">April 30, 2018</p>
-      
-        
-  <a href="/tags#rails server" >
-    <span class="tag-code">rails server</span>
-  </a>
+    </main>
 
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#ssh" >
-    <span class="tag-code">ssh</span>
-  </a>
-
-  <a href="/tags#console" >
-    <span class="tag-code">console</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          情境：當用ssh遠端連線至server時，要進入專案內的rails console.log，出現rails new [options]，找不到rails project的目錄，紀錄如何解決的筆記。
-123ssh deploy@xxx.xxx.xxx.xxxcd ~/project/curre ...
-        
-      </div>
-      <a class="more" href="/遠端ssh連到Server，無法進入Staging-Rails-Console的終極解決辦法：移除bin/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/">Rails 與 Webpacker 神奇的結合：用image-wepback-loader 來壓縮圖片</a>
-      </h2>
-      <p class="article-date">April 28, 2018</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#Rails with Webpacker" >
-    <span class="tag-code">Rails with Webpacker</span>
-  </a>
-
-  <a href="/tags#image compress" >
-    <span class="tag-code">image compress</span>
-  </a>
-
-  <a href="/tags#image-webpack-loader" >
-    <span class="tag-code">image-webpack-loader</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Gem Webpacker 特色
-Webpacker是一個Gem，即使不用裝webpack，也能在Rails上編譯，然後也拿掉原生使用的Srocket。Webpacker使用的是webpack 3.x.x版本，他已經預設幫你安裝了幾件事，但你需要另外設定檔
-
-
-用babel 將ES6 編譯成 ...
-        
-      </div>
-      <a class="more" href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法</a>
-      </h2>
-      <p class="article-date">April 9, 2018</p>
-      
-        
-  <a href="/tags#rails server" >
-    <span class="tag-code">rails server</span>
-  </a>
-
-  <a href="/tags#s.PGSQL.5432" >
-    <span class="tag-code">s.PGSQL.5432</span>
-  </a>
-
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#psql" >
-    <span class="tag-code">psql</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          s.PGSQL.5432是蝦咪挖溝？紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。這次遇到的狀況是要跑rails db:migrate時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入psq ...
-        
-      </div>
-      <a class="more" href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/幫-Rails-建立一個-Docker-Container吧/">幫 Rails 建立一個 Docker Container吧</a>
-      </h2>
-      <p class="article-date">April 8, 2018</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#Docker" >
-    <span class="tag-code">Docker</span>
-  </a>
-
-  <a href="/tags#webpacker" >
-    <span class="tag-code">webpacker</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          幫 Rails 建立一個 Docker Container吧
-為什麼你要使用Docker？Docker最重要的價值是：有效解決環境配置、衝突的問題可以在一台機器上跑，就可以在所有的機器上跑。如果有問題的話，就會是大家的問題，大家一起解決XD
-
-docker是建立一個container新的環境 ...
-        
-      </div>
-      <a class="more" href="/幫-Rails-建立一個-Docker-Container吧/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">前端永遠的課題：字體－呈現一致性的跨裝置</a>
-      </h2>
-      <p class="article-date">March 18, 2018</p>
-      
-      <div class="article-summary">
-        
-          前端最主要就是將所有裝置能一致化顯示，今天來談談「字體」的部分大家都知道Windows, Linux, Mac三大作業系統，想當然也有其系統的內建字體，若只指定常見的微軟正黑體，其他作業系統沒有該字體，就會顯示該作業系統的預設字體，而不是微軟正黑體，這樣就沒有超能力隨心所欲控制字體了，這怎麼 ...
-        
-      </div>
-      <a class="more" href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">Git筆記：移花接木的Rebase，整理commit訊息的好幫手</a>
-      </h2>
-      <p class="article-date">March 4, 2018</p>
-      
-        
-  <a href="/tags#Git" >
-    <span class="tag-code">Git</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Git 有個神奇的功能叫：Rebase，中文翻譯叫「變動基底」，簡單來說就是移花接木，把某一個樹枝（Branch）接到Master的主幹上等等功能，指定的節點可以重新 commit，花了一點時間做功課，把自己的理解的寫下來
-為什麼要用 Rebase ？變動基底的話不就很危險嗎Rebase 的 ...
-        
-      </div>
-      <a class="more" href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">Git push repo失敗： Could not resolve host: github.com</a>
-      </h2>
-      <p class="article-date">March 1, 2018</p>
-      
-        
-  <a href="/tags#Git" >
-    <span class="tag-code">Git</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          今天在練習JavaScript時，正要把成果push到Git repo裡，出現Could not resolve host: github.com錯誤訊息，在此紀錄如何解決
-錯誤訊息Could not resolve host: github.com
-解決辦法
-在終端機上先Ping gith ...
-        
-      </div>
-      <a class="more" href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/">做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</a>
-      </h2>
-      <p class="article-date">February 17, 2018</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#RWD" >
-    <span class="tag-code">RWD</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper
-通常做響應式圖片有兩種作法
-
-使用同一張圖片，依照容器、螢幕尺寸放大縮 ...
-        
-      </div>
-      <a class="more" href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Rails-5-快速設置-favicon-icon/">Rails 5 快速設置 favicon icon</a>
-      </h2>
-      <p class="article-date">February 10, 2018</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#Favicon Icon" >
-    <span class="tag-code">Favicon Icon</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          現在的裝置上千幾種，Icon也針對各種裝置Andoroid、iOS各設置了不同大小尺寸的icon，如果在Rails內開發，可以參考以下的寫法。底下的Reference可以知道各個icon設置的用途適用於哪些裝置。
-快速設置 Icon 步驟
-在view/layouts下新增_favicon.h ...
-        
-      </div>
-      <a class="more" href="/Rails-5-快速設置-favicon-icon/">閱讀更多</a>
-    </article>
-  
-
-  
-    <div class="guide-pager">
-  
-    <a href="/page/2/"><span class="page-arrow">← </span>Prev</a>
-  
-  
-    <a href="/page/4/">Next<span class="page-arrow"> →</span></a>
-  
-</div>
-
-  
-</main>
-
-
-    <div class="scroll-top">
-  <span class="arrow-icon"></span>
-</div>
-    <footer class="app-footer">
-  <p class="copyright">
-    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
-  </p>
-  <span id="busuanzi_container_site_uv">
-    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
   </span>
-</footer>
-<!-- 不蒜子記人數 -->
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script>
-  function async(u, c) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
+  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<script>
-  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-  })
-</script>
 
-<script>
-  var hasLine = 'true';
-  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
-</script>
-<!-- Baidu Tongji -->
 
-<script src="/js/script.js"></script>
-  </body>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>

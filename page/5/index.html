@@ -1,445 +1,1685 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-  <meta name="keyword" content="hexo-theme, vuejs">
-  
-    <link rel="shortcut icon" href="/css/images/logo.png">
-  
-  <title>
-    
-      Hazel Wu | 22&#39;mm
-    
-  </title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'UA-109679233-1');
-  </script>
-  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/plugins/gitment.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrious.js"></script>
-<script src="/js/gitment.js"></script>
-  
-  
-    <!-- MathJax support START -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- MathJax support END -->
+
   
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hazel Wu | 22&#39;mm">
+<meta property="og:url" content="http://wualnz.com/page/5/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hazel Wu | 22&#39;mm">
+<meta name="twitter:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wualnz.com/page/5/"/>
+
+
+
+
+
+  <title>Hazel Wu | 22'mm</title>
+  
+
+
+
+
+
+
 
 
 </head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hazel Wu | 22'mm</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-  <body>
-    <header class="header fixed-header">
-  <div class="header-container">
-    <a class="home-link" href="/">
-      <div class="logo"></div>
-      <span>Hazel Wu | 22'mm</span>
-    </a>
-    <ul class="right-list">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li class="list-item">
-          
-            <a href="/" class="item-link active">Home</a>
-          
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/tags/" class="item-link">Tags</a>
-          
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/archives/" class="item-link">Archives</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/project/" class="item-link">Projects</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/about/" class="item-link">About</a>
-          
-        </li>
+
       
     </ul>
-    <div class="menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/你一定有聽過的Bower-前端套件管理工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/你一定有聽過的Bower-前端套件管理工具/" itemprop="url">你一定有聽過的Bower 前端套件管理工具</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-06T06:21:35+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="你一定有聽過的-Bower-前端套件管理工具"><a href="#你一定有聽過的-Bower-前端套件管理工具" class="headerlink" title="你一定有聽過的 Bower 前端套件管理工具"></a>你一定有聽過的 Bower 前端套件管理工具</h1><p>用Bower自動下載jQuery, Bootstrap等Libery，再與Gulp做串接</p>
+<blockquote>
+<p>bower init後安裝的套件，會自動寫出到bower.json檔案。<br>全自動化，讓簡單且重複的事交給Gulp &amp; Bower，把寶貴的時間拿來寫CODE吧！</p>
+</blockquote>
+<p>此文章會用到下列幾個套件</p>
+<ul>
+<li><code>gulp-load-plugins</code> 以$字號來簡略載入各套件，只對gulp開頭的套件有用</li>
+<li><code>gulp-order</code> 排載入的順序</li>
+<li><code>main-bower-files</code> 和Bower結合</li>
+<li><code>gulp-concat</code> 合併檔案</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install -g bower</span><br><span class="line">cd project #進入專案資料夾</span><br><span class="line">bower init #bower初始化</span><br><span class="line">bower install &lt;package&gt;</span><br><span class="line">bower install jquery</span><br><span class="line">bower install bootstrap</span><br></pre></td></tr></table></figure>
+<p><code>bower init</code> 後會產生 bower.json檔</p>
+<p><code>bower install &lt;package&gt;</code> 會自動產生bower_components資料夾，裡面放的       是下載下來的外掛。 </p>
+<h2 id="串接前端的Gulp自動化工具，整合"><a href="#串接前端的Gulp自動化工具，整合" class="headerlink" title="串接前端的Gulp自動化工具，整合"></a>串接前端的Gulp自動化工具，整合</h2><h4 id="需要用到main-bower-files的Gulp套件"><a href="#需要用到main-bower-files的Gulp套件" class="headerlink" title="需要用到main-bower-files的Gulp套件"></a>需要用到main-bower-files的Gulp套件</h4><p>第一步，在Gulpfile.js require後，輸入npm install寫入package.json內<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var mainBowerFiles = require(&apos;main-bower-files&apos;);</span><br><span class="line">npm install --save-dev main-bower-files</span><br></pre></td></tr></table></figure></p>
+<p>Bower幫前端工程師下載套件 =&gt; 不用再花時間一個個手動抓<br>整合到Gulp，將套件輸出到我們想要的資料夾 =&gt; 打gulp後自動跑全自動化！<br><strong>這就是為什麼需要整合，把簡單且重複的事交給電腦做吧！</strong></p>
+<p>在package.json下多新增bower任務</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&apos;bower&apos;, function() &#123;</span><br><span class="line">    return gulp.src(mainBowerFiles())</span><br><span class="line">        .pipe(gulp.dest(&apos;./.tmp/vendors&apos;))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>再多新增一個任務叫<strong>vendorJs</strong>，最主要目的是輸出到public/vendors資料下之外，還需要賦予兩個任務：按照順序載入js、合併成一隻js檔。</p>
+<ul>
+<li><strong>照順序載入js：</strong>像jquery, bootstrap是需要按照順序載入js的，所以需要另外安裝套件order。</li>
+<li><p><strong>合併成一隻js檔</strong>：減少伺服器的request，讓伺服器負荷減輕，網站也能跑較快。</p>
+<p>  gulp.task(‘vendorJs’, [bower], function(){</p>
+<pre><code>return gulp.src([./.tmp/vendors/**/*.js])
+          .pipe($.order([
+            &apos;jquery.js&apos;,
+            &apos;bootstrap.js&apos;
+           ]))
+          .pipe($.concat(vendors.js))
+          .pipe(gulp.dest(&apos;./public/js&apos;))
+</code></pre><p>  })</p>
+</li>
+</ul>
+<p><code>gulp.task(&#39;vendorJs&#39;, [&#39;bower&#39;], function({..}))</code></p>
+<p> 多加入了<code>[bower]</code>的參數，代表在<code>vendorJs</code>任務跑完前，必須要等bower跑完。因為bower任務就是為了把下載回來的套件輸出的.tmp/vendors資料夾，若還沒下載回來，vendorJs就讀取不到啦！所以一定要記得加上。</p>
+<h2 id="將vendorJs加入default監控任務"><a href="#將vendorJs加入default監控任務" class="headerlink" title="將vendorJs加入default監控任務"></a>將vendorJs加入default監控任務</h2><p>default就不用額外設定bower任務了，因為vendorJs開跑前會先等bower寫完。</p>
+<pre><code>gulp.task(&apos;default&apos;, [&apos;vendorJs&apos;, &apos;browserSync&apos;, &apos;watch&apos;])
+</code></pre><p>輕鬆寫完腳本後，打上gulp便會自動產生囉！<br>可以將固定專案常用的腳本上傳到git，或是給其他開發者使用。</p>
+<pre><code>#.gitinore 忽略
+bower_components
+node_modules
+public
+</code></pre><p>開發者下載回來，只要輸入<code>npm install</code>及<code>bower install</code>即會產生一樣的效果，快速又方便。</p>
+<hr>
+<h3 id="bower-components資料夾，想要重新命名"><a href="#bower-components資料夾，想要重新命名" class="headerlink" title="bower_components資料夾，想要重新命名"></a>bower_components資料夾，想要重新命名</h3><p>若覺得<code>bower install</code>放套件資料夾「.bower_components」名字很醜，想另外取名的話其實是可以的哦！在專案資料夾根目錄下創建.bowerrc檔 <code>touch .bowerrc</code><br>創建後，在bowerrc裡加入以下程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.bowerrc</span><br><span class="line">&#123;</span><br><span class="line"> &quot;directory&quot;: &quot;vendors/&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接著執行 <code>bower install</code>便會產生vendors資料夾囉。</p>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li><a href="https://bower.io/" target="_blank" rel="noopener">Bower官方</a></li>
+</ul>
+
+          
+        
+      
     </div>
-    <div class="menu-mask">
-      <ul class="menu-list">
-        
-          <li class="menu-item">
-            
-              <a href="/" class="menu-link mobile-active">Home</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/tags/" class="menu-link">Tags</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/archives/" class="menu-link">Archives</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/project/" class="menu-link">Projects</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/about/" class="menu-link">About</a>
-            
-          </li>
-        
-      </ul>
-    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-</header>
-
-    <main class="app-body">
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/">git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。</a>
-      </h2>
-      <p class="article-date">November 11, 2017</p>
-      
-        
-  <a href="/tags#Git" >
-    <span class="tag-code">Git</span>
-  </a>
-
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          <h2 id="bundle-install-with-development-使用注意事項"><a href="#bundle-install-with-development-使用注意事項" class="headerlink" title="bundle install -with development 使用注意事項"></a>bundle install -with development 使用注意事項</h2><blockquote>
-<p>某次經驗談：準備將Rails的專案部署Deploy到遠端VPS Server，改檔案改到爛掉於是只好gir revert 還原到上上上上上次的版本，結果囧了發現Gemfile,database.yml不會跟著還原，原本資料庫設定是pg，因要更改production環境時的資料庫變成Mysql2<br>
-        
-      </div>
-      <a class="more" href="/git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Rails5使用-Facebook-分享按鈕API，第一次無法正常載入頁面，解決辦法/">Rails 5使用 Facebook 分享按鈕API，第一次無法正常載入頁面，解決辦法</a>
-      </h2>
-      <p class="article-date">November 8, 2017</p>
-      
-        
-  <a href="/tags#Rails 5" >
-    <span class="tag-code">Rails 5</span>
-  </a>
-
-  <a href="/tags#API" >
-    <span class="tag-code">API</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Rails 5 使用 Facebook 分享按鈕 API ，第一次無法正常載入頁面，解決辦法在進行一個案子時遇到的困難：引用臉書的分享按鈕 API，第一次載入頁面時不會出現，第二次載入頁面後才會出現，甚至要等候很久才能出現。   
-問題分析
-推測出有可能是turbolinks造成的問題，但j ...
-        
-      </div>
-      <a class="more" href="/Rails5使用-Facebook-分享按鈕API，第一次無法正常載入頁面，解決辦法/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/你一定有聽過的Bower-前端套件管理工具/">你一定有聽過的Bower 前端套件管理工具</a>
-      </h2>
-      <p class="article-date">November 6, 2017</p>
-      
-      <div class="article-summary">
-        
-          你一定有聽過的 Bower 前端套件管理工具用Bower自動下載jQuery, Bootstrap等Libery，再與Gulp做串接
+  </article>
 
-bower init後安裝的套件，會自動寫出到bower.json檔案。全自動化，讓簡單且重複的事交給Gulp &amp; Bower，把寶貴的時間拿來寫C ...
-        
-      </div>
-      <a class="more" href="/你一定有聽過的Bower-前端套件管理工具/">閱讀更多</a>
-    </article>
+
+    
+      
+
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/GitPage-上-getJSON讀取不到json，出現-404-ERROR/">GitPage 上$.getJSON讀取不到json，出現 404 ERROR</a>
-      </h2>
-      <p class="article-date">November 5, 2017</p>
-      
-        
-  <a href="/tags#Git" >
-    <span class="tag-code">Git</span>
-  </a>
 
-  <a href="/tags#Github Pages" >
-    <span class="tag-code">Github Pages</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          GitPage 上$.getJSON讀取不到json，出現 404 ERROR我將content.json檔放在Localhost測試正常後，才push到github，接著開啟GitPage，發現沒辦法實行AJAX功能，讀取不到我的content.json資料
-Consolo.log顯示
-F ...
-        
-      </div>
-      <a class="more" href="/GitPage-上-getJSON讀取不到json，出現-404-ERROR/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Rails-SEO-用Sitemap-generator快速設定sitemap/">Rails SEO-用Sitemap-generator快速設定sitemap</a>
-      </h2>
-      <p class="article-date">November 4, 2017</p>
-      
-      <div class="article-summary">
-        
-          Rails SEO-用Sitemap-generator快速設定sitemap如何用gem gitemap外掛，將Rails整體專案產出sitemap
-123456789101112gem 'sitemap_generator' # 在Gemfile加入此行bundle install    ...
-        
-      </div>
-      <a class="more" href="/Rails-SEO-用Sitemap-generator快速設定sitemap/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Gulp-學習紀錄、常用指令/">Gulp 學習紀錄、常用指令</a>
-      </h2>
-      <p class="article-date">November 4, 2017</p>
-      
-      <div class="article-summary">
-        
-          Gulp 學習紀錄、常用指令紀錄學習Gulp的歷程，及gulp常用的指令
-第一次安裝Gulp
-npm install -g gulp
-npm init
-在目錄下touch gulpfile.js
-npm install 外掛名稱 —save-dev
-
-之後使用Gulp
-移動到目錄後，npm  ...
-        
-      </div>
-      <a class="more" href="/Gulp-學習紀錄、常用指令/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/">教你如何快速設定綁定網域在 Byehost 虛擬主機商</a>
-      </h2>
-      <p class="article-date">August 25, 2017</p>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/GitPage-上-getJSON讀取不到json，出現-404-ERROR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/GitPage-上-getJSON讀取不到json，出現-404-ERROR/" itemprop="url">GitPage 上$.getJSON讀取不到json，出現 404 ERROR</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-05T06:17:18+08:00">
+                2017-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         
-  <a href="/tags#byethost" >
-    <span class="tag-code">byethost</span>
-  </a>
+          
+            <h1 id="GitPage-上-getJSON讀取不到json，出現-404-ERROR"><a href="#GitPage-上-getJSON讀取不到json，出現-404-ERROR" class="headerlink" title="GitPage 上$.getJSON讀取不到json，出現 404 ERROR"></a>GitPage 上$.getJSON讀取不到json，出現 404 ERROR</h1><p>我將content.json檔放在Localhost測試正常後，才push到github，接著開啟GitPage，發現沒辦法實行AJAX功能，讀取不到我的content.json資料</p>
+<h3 id="Consolo-log顯示"><a href="#Consolo-log顯示" class="headerlink" title="Consolo.log顯示"></a>Consolo.log顯示</h3><ul>
+<li><code>Failed to load resource: the server responded with a status of 404 ()</code></li>
+</ul>
+<h3 id="什麼原因造成的？"><a href="#什麼原因造成的？" class="headerlink" title="什麼原因造成的？"></a>什麼原因造成的？</h3><ul>
+<li>Github pages is loaded over https and your API request is over http, which is not allowed. You are serving the site over HTTPS but trying to load jQuery over HTTP. This is not allowed.<h3 id="除錯過程"><a href="#除錯過程" class="headerlink" title="除錯過程"></a>除錯過程</h3></li>
+</ul>
+<ol>
+<li>檢查.gitinore是不是忽略到我的json檔</li>
+<li>將路徑$.getJSON改成URL絕對路徑<ul>
+<li><code>$.getJSON(&#39;../data/content.json&#39;, function)</code><br>把裡面的<code>../data/content.json</code>改成</li>
+<li><code>https://hazelwu2.github.io/AjaxMasonryPhoto/data/content.json</code></li>
+</ul>
+</li>
+</ol>
+<p>重新更改路徑後，Gitpage就抓得到我的資料了。<br>初步判斷應該是因為HTTPS，但上傳到github是http，導致無法拿到資料。</p>
+<p>如果有問題、筆誤或寫錯，歡迎糾正我，謝謝</p>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li><a href="https://forum.freecodecamp.org/t/cant-receive-json-with-getjson-or-ajax-when-publish-on-github-pages/72438/10" target="_blank" rel="noopener">這可憐的老兄遇到的問題和我一樣</a></li>
+<li><a href="https://github.com/Rob--W/cors-anywhere" target="_blank" rel="noopener">CROS-anywhere</a></li>
+<li><a href="https://stackoverflow.com/questions/44279919/reading-json-file-from-github-pages-server-using-javascript" target="_blank" rel="noopener">Reading Json file from github pages server using javascript</a></li>
+</ul>
 
-  <a href="/tags#wordpress" >
-    <span class="tag-code">wordpress</span>
-  </a>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
 
       
-      <div class="article-summary">
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Rails-SEO-用Sitemap-generator快速設定sitemap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Rails-SEO-用Sitemap-generator快速設定sitemap/" itemprop="url">Rails SEO-用Sitemap-generator快速設定sitemap</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-04T17:19:08+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Rails-SEO-用Sitemap-generator快速設定sitemap"><a href="#Rails-SEO-用Sitemap-generator快速設定sitemap" class="headerlink" title="Rails SEO-用Sitemap-generator快速設定sitemap"></a>Rails SEO-用Sitemap-generator快速設定sitemap</h1><p>如何用gem gitemap外掛，將Rails整體專案產出sitemap</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'sitemap_generator'</span> </span><br><span class="line"><span class="comment"># 在Gemfile加入此行</span></span><br><span class="line">bundle install          </span><br><span class="line"><span class="comment"># 安裝套件</span></span><br><span class="line">rake <span class="symbol">sitemap:</span>install</span><br><span class="line">自動生成 APP/config/sitemap.rb</span><br><span class="line"><span class="comment"># 開啟sitemap.rb，已自動生成好格式</span></span><br><span class="line">SitemapGenerator::Sitemap.create <span class="keyword">do</span></span><br><span class="line"><span class="comment"># 必要設定default_host</span></span><br><span class="line">SitemapGenerator::Sitemap.default_host = <span class="string">"http://www.你的網站.com"</span></span><br><span class="line"><span class="comment"># 接下來就是自由設定你自己Style的map了!</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="設定robot-txt，爬蟲能夠爬得到Sitemap"><a href="#設定robot-txt，爬蟲能夠爬得到Sitemap" class="headerlink" title="設定robot.txt，爬蟲能夠爬得到Sitemap"></a><strong>設定robot.txt，爬蟲能夠爬得到Sitemap</strong></h3><p><strong>在public/robot.txt輸入</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sitemap: http://www.你的網站.com/sitemap.xml.gz</span><br></pre></td></tr></table></figure>
+<h3 id="在本端產生sitemap-xml，測試路徑是否正確"><a href="#在本端產生sitemap-xml，測試路徑是否正確" class="headerlink" title="在本端產生sitemap.xml，測試路徑是否正確"></a>在本端產生sitemap.xml，測試路徑是否正確</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rake sitemap:refresh:no_ping  #測試，故不提交給搜尋引擎</span><br><span class="line">localhost:3000/sitemap.xml.gz #瀏覽器</span><br><span class="line">#自動下載下來後用瀏覽器重新開啟</span><br></pre></td></tr></table></figure>
+<h3 id="測試沒問題了！Deploy-到-Heroku跑看看"><a href="#測試沒問題了！Deploy-到-Heroku跑看看" class="headerlink" title="測試沒問題了！Deploy 到 Heroku跑看看"></a>測試沒問題了！Deploy 到 Heroku跑看看</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am &apos;Added sitemap to SEO&apos;</span><br><span class="line">git push heroku master</span><br><span class="line">heroku run sitemap:refresh</span><br></pre></td></tr></table></figure>
+<p>Heroku傳回console.log訊息是有建立成功，但真的測試會發現找不到sitemap。原因出在Heroku採用臨時文件系統，需要找一個容器來裝檔案才行。以下是Heroku官網說明：關於Ephemeral filesystem。</p>
+<blockquote>
+<h4 id="Heroku-採用Ephemeral-filesystem（臨時文件系統）"><a href="#Heroku-採用Ephemeral-filesystem（臨時文件系統）" class="headerlink" title="Heroku 採用Ephemeral filesystem（臨時文件系統）"></a>Heroku 採用Ephemeral filesystem（臨時文件系統）</h4><p>當重新部署或動態管理時，導致資料會重新歸0<br>During the dyno’s lifetime its running processes can use the filesystem as a temporary scratchpad, <strong>but no files that are written are visible to processes in any other dyno and any files written will be discarded the moment the dyno is stopped or restarted.</strong> For example, <strong>this occurs any time a dyno is replaced due to application deployment and approximately once a day as part of normal dyno management.</strong></p>
+</blockquote>
+<h2 id="那就放在Amazon-S3吧！"><a href="#那就放在Amazon-S3吧！" class="headerlink" title="那就放在Amazon S3吧！"></a>那就放在Amazon S3吧！</h2><blockquote>
+<p><strong>寫入S3前，請先完成幾個步驟</strong></p>
+<p>1.註冊AWS會員，並登錄信用卡，才可以用Aws的免費額度。</p>
+<p>2.開啟AWS S3的服務，建立一個Bucket</p>
+<p>3.在本機環境設定先設好AWS相關的API帳密設定，接下來會用到，若沒設定好會出錯。</p>
+</blockquote>
+<h3 id="使用CarrierWave-上傳到-AWS-S3"><a href="#使用CarrierWave-上傳到-AWS-S3" class="headerlink" title="使用CarrierWave 上傳到 AWS S3"></a>使用CarrierWave 上傳到 AWS S3</h3><p>Rails含有豐富的Gem世界，Sitemaps支援多種外掛上傳到遠端空間，包含以下幾鐘：FileAdapter、FogAdapter、S3Adapter、AwsSdkAdapter、WaveAdapter，參考頁面：<a href="https://github.com/kjvarga/sitemap_generator#supported-adapters" target="_blank" rel="noopener">官方頁面Supported Adapters</a><br>藉由Gem CarrierWave來上傳到S3，請先安裝好CarrierWave的Gem</p>
+<p><strong>在sitemap.rb內修改</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">require &apos;carrierwave&apos;</span><br><span class="line">require &apos;sitemap_generator&apos;</span><br><span class="line"></span><br><span class="line">SitemapGenerator::Sitemap.default_host = &quot;你的網址&quot;</span><br><span class="line"></span><br><span class="line"># 你的AWS S3空間網址，創建的bucket-name</span><br><span class="line">SitemapGenerator::Sitemap.sitemaps_host = &quot;http://s3.amazonaws.com/你的bucket-name/&quot;</span><br><span class="line"># AWS S3 的bucket底下建立一個資料夾sitemaps</span><br><span class="line">SitemapGenerator::Sitemap.sitemaps_path = &apos;sitemaps/&apos;</span><br><span class="line"># 會放在heroku伺服器內的public/tmp資料架底下</span><br><span class="line">SitemapGenerator::Sitemap.public_path = &apos;tmp/&apos;</span><br><span class="line"></span><br><span class="line"># 使用WaveAdapter來上傳到AWS S3</span><br><span class="line">SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new</span><br><span class="line"></span><br><span class="line">SitemapGenerator::Sitemap.create do</span><br><span class="line">	add &apos;/about&apos;, :changefreq =&gt; &apos;monthly&apos;</span><br><span class="line">	add &apos;/news&apos;, :changefreq =&gt; &apos;monthly&apos;</span><br><span class="line">	add &apos;/article&apos;</span><br><span class="line">	Post.find_each do |post|</span><br><span class="line">	    add post_path(post.friendly_id), :lastmod =&gt; post.updated_at</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>新增home#controller，設定sitemap路徑</p>
+<pre><code>rails controller -g home
+</code></pre><p>在home_controller.rb內設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def robots                                             </span><br><span class="line"> robots = File.read(Rails.root + &quot;config/robots.#&#123;Rails.env&#125;.txt&quot;)</span><br><span class="line"> render :text =&gt; robots, :layout =&gt; false, :content_type =&gt; &quot;text/plain&quot;</span><br><span class="line">end</span><br><span class="line">def sitemap</span><br><span class="line">  redirect_to &apos;https://s3-ap-northeast-1.amazonaws.com/你的bucket-name/sitemaps/sitemap.xml.gz&apos;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>在routes設定路徑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get &apos;/sitemaps.xml.gz&apos; =&gt; &apos;home#sitemap&apos;</span><br><span class="line">get &apos;/robots.txt&apos; =&gt; &apos;home#robots&apos;</span><br></pre></td></tr></table></figure>
+<p>再重新Deploy到heroku測試看看。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am <span class="string">'Add home#controller &amp; Setting routes &amp; Sitemap use Wave Adapter'</span></span><br><span class="line">git push heroku master</span><br><span class="line">heroku run <span class="symbol">sitemap:</span>refresh</span><br></pre></td></tr></table></figure>
+<p>查看看你的AWS S3空間有沒有多出新的資料夾叫「sitemap」，有的話代表上傳成功囉！<br>接著就是去Google Console提交你的Sitemap啦！</p>
+<h4 id="更新robots-txt，上傳到heroku後未抓到更改後的版本。"><a href="#更新robots-txt，上傳到heroku後未抓到更改後的版本。" class="headerlink" title="更新robots.txt，上傳到heroku後未抓到更改後的版本。"></a><strong>更新robots.txt，上傳到heroku後未抓到更改後的版本。</strong></h4><p>在production.rb上加入後重新Deploy到heroku，就抓得到新的版本囉</p>
+<pre><code>config.static_cache_control = &quot;public, max-age=2592000&quot;
+</code></pre><h4 id="指令介紹"><a href="#指令介紹" class="headerlink" title="指令介紹"></a>指令介紹</h4><hr>
+<p><code>rake sitemap:install</code> 第一步安裝，會自動生成<strong>sitemap.rb</strong>在config目錄底下</p>
+<p><code>rake sitemap:refresh</code> 更新sitemap.xml.gz，並提交到搜尋引擎Google等</p>
+<p><code>rake sitemap:refresh:no_ping</code> 更新sitemap.xml.gz，但<strong>不提交</strong>到搜尋引擎（可在本機development環境下測試）</p>
+<p><code>sitemap:create</code>    建立空白的sitemap，未設定自動提交到搜尋引擎</p>
+<h3 id="關於連結設定"><a href="#關於連結設定" class="headerlink" title="關於連結設定"></a>關於連結設定</h3><p>網址若是localhost:3000/welcome，則add就是設 ‘/welcome’<br>若要使用welcome_path，這種helper需要加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SitemapGenerator::Interpreter.send :include, RoutingHelper</span><br></pre></td></tr></table></figure>
+<h3 id="關於參數"><a href="#關於參數" class="headerlink" title="關於參數"></a>關於參數</h3><p><code>changefreq</code>：這個頁面頻繁更新的次數，預設是一星期一次<br>    &gt;可設定的參數<br>    &gt;’always’, ‘hourly’, ‘daily’, ‘weekly’, ‘monthly’, ‘yearly’ or ‘never’</p>
+<p><code>lastmod</code>：告訴搜尋引擎，上次修改的時間和日期，預設是Time.now<br><code>host</code>：若不同網域主機需要用:host參數特別指定。預設為default_host所設定的網域<br><code>priority</code>： 排名URL優先權，範圍是0到1，預設為0.5</p>
+<h3 id="關於Post（循環文章）的Sitemap"><a href="#關於Post（循環文章）的Sitemap" class="headerlink" title="關於Post（循環文章）的Sitemap"></a>關於Post（循環文章）的Sitemap</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add &apos;/article&apos;</span><br><span class="line">Post.find_each do |post|</span><br><span class="line">  add post_path(post.friendly_id), :lastmod =&gt; post.updated_at</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h4 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h4><ol>
+<li><a href="https://github.com/kjvarga/sitemap_generator#rails" target="_blank" rel="noopener">Github Sitemap_generator#rails</a></li>
+<li><a href="https://www.scrivinor.com/article/rails-seo-%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E9%97%9C%E6%96%BC-sitemap?locale=zh-TW" target="_blank" rel="noopener">Rails SEO 第二步: 關於 sitemap</a></li>
+<li><a href="https://www.cookieshq.co.uk/posts/creating-a-sitemap-with-ruby-on-rails-and-upload-it-to-amazon-s3" target="_blank" rel="noopener">Creating a sitemap with Ruby on Rails and uploading it to Amazon S3</a></li>
+<li><a href="https://www.sitepoint.com/start-your-seo-right-with-sitemaps-on-rails/" target="_blank" rel="noopener">Start Your SEO Right with Sitemaps on Rails</a></li>
+<li><a href="https://stackoverflow.com/questions/23389609/robots-txt-file-on-rails-heroku-app-not-updating?answertab=votes#tab-top" target="_blank" rel="noopener">Robots.txt file on Rails heroku app not updating</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Gulp-學習紀錄、常用指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Gulp-學習紀錄、常用指令/" itemprop="url">Gulp 學習紀錄、常用指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-04T06:23:55+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Gulp-學習紀錄、常用指令"><a href="#Gulp-學習紀錄、常用指令" class="headerlink" title="Gulp 學習紀錄、常用指令"></a>Gulp 學習紀錄、常用指令</h1><p>紀錄學習Gulp的歷程，及gulp常用的指令</p>
+<h3 id="第一次安裝Gulp"><a href="#第一次安裝Gulp" class="headerlink" title="第一次安裝Gulp"></a>第一次安裝Gulp</h3><ol>
+<li>npm install -g gulp</li>
+<li>npm init</li>
+<li>在目錄下touch gulpfile.js</li>
+<li>npm install 外掛名稱 —save-dev</li>
+</ol>
+<h3 id="之後使用Gulp"><a href="#之後使用Gulp" class="headerlink" title="之後使用Gulp"></a>之後使用Gulp</h3><ol>
+<li>移動到目錄後，npm init，創造package.json檔</li>
+<li>貼上已設定的package.json</li>
+<li>npm install -l 自動安裝package.json列表上的外掛</li>
+<li>複製已設定好的腳本gulpfile.js</li>
+</ol>
+<h3 id="常用外掛清單"><a href="#常用外掛清單" class="headerlink" title="常用外掛清單"></a>常用外掛清單</h3><ul>
+<li><p>SASS/SCSS編譯成CSS gulp-sass</p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-minify-css" target="_blank" rel="noopener">CSS 壓縮迷你化 gulp-minify-css</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-plumber" target="_blank" rel="noopener">遇錯時不會中斷 gulp-plumber</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-postcss" target="_blank" rel="noopener">後處理器 gulp-postcss</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/autoprefixer" target="_blank" rel="noopener">根據不同瀏覽器版本，自動補上前綴詞 autoprefixer</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-load-plugins" target="_blank" rel="noopener">不用寫一大堆的變數，用$取代 gulp-load-plugins</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-babel" target="_blank" rel="noopener">JavaScript ES6 編譯 gulp-babel</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-sourcemaps" target="_blank" rel="noopener">壓縮合併程式碼後可以找出原始頭是誰 gulp-sourcemaps</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-concat" target="_blank" rel="noopener">合併程式碼 gulp-concat</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-order" target="_blank" rel="noopener">外部載入的套件需要排序 gulp-order</a><br>(對jquery,bootstrap常載入的是必備品)</p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/browser-sync" target="_blank" rel="noopener">Web Server，即時預覽檔案，安裝後即不用裝liverRoad  ：Browser Sync</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/main-bower-files" target="_blank" rel="noopener">Gulp 串接 Bower 工具 main-bower-files</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-uglify" target="_blank" rel="noopener">JavaScript 壓縮工具 gulp-uglify</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/minimist" target="_blank" rel="noopener">gulp 流程控制 minimist</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/gulp-if" target="_blank" rel="noopener">設定任務，可加入判斷式 gulp-if</a></p>
+</li>
+</ul>
+<h3 id="在學習Gulp時遇到的障礙"><a href="#在學習Gulp時遇到的障礙" class="headerlink" title="在學習Gulp時遇到的障礙"></a>在學習Gulp時遇到的障礙</h3><p>在安裝gulp時出現以下訊息</p>
+<p><code>npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue</code></p>
+<ul>
+<li><p>npm WARN已棄用<a href="mailto:minimatch@2.0.10" target="_blank" rel="noopener">minimatch@2.0.10</a>：請更新至最低3.0.2或更高版本以避免RegExp DoS問題</p>
+</li>
+<li><p>解決辦法：npm install minimatch@“3.0.2”<br>或著不用理他也沒有關係的</p>
+</li>
+</ul>
+<hr>
+<h3 id="Gulp-常用指令"><a href="#Gulp-常用指令" class="headerlink" title="Gulp 常用指令"></a>Gulp 常用指令</h3><p><code>Npm init</code></p>
+<ul>
+<li>輸入npm init，進行這個空白專案的初始化，同時也會生成一個基本的package.json，這個package.json非常重要，因為它定義了這個 Node.js 專案裏頭會需要用到的模組與套件 ( Node modules )，輸入npm init之後，基本上可以填寫一些名稱或描述，不然其實也可以直接一直 enter 按下去就會建立完成。</li>
+</ul>
+<p><code>touch gulpfile.js</code></p>
+<ul>
+<li>建立gulpfile.js，要寫的任務、套件全部都是寫在這裡面</li>
+</ul>
+<p><code>npm install</code></p>
+<ul>
+<li>會安裝專案內的 package.json 所列出的需要元件。</li>
+</ul>
+<p><code>npm install -l</code></p>
+<ul>
+<li>把package.json腳本設定好，建立新專案時輸入即可依照package.json上列出的套件，全部自動化安裝完</li>
+</ul>
+<h3 id="npm-相關指令整理"><a href="#npm-相關指令整理" class="headerlink" title="npm 相關指令整理"></a>npm 相關指令整理</h3><ul>
+<li><a href="http://dreamerslab.com/blog/tw/npm-basic-commands/" target="_blank" rel="noopener">http://dreamerslab.com/blog/tw/npm-basic-commands/</a></li>
+<li><a href="https://www.youtube.com/watch?v=1rw9MfIleEg" target="_blank" rel="noopener">跟著教學操作的youtube</a></li>
+</ul>
+<h3 id="Reference-參考網站"><a href="#Reference-參考網站" class="headerlink" title="Reference | 參考網站"></a>Reference | 參考網站</h3><ul>
+<li><a href="http://www.oxxostudio.tw/articles/201503/gulp-install-webserver.html" target="_blank" rel="noopener">http://www.oxxostudio.tw/articles/201503/gulp-install-webserver.html</a></li>
+<li><a href="https://gulpjs.com/" target="_blank" rel="noopener">https://gulpjs.com/</a></li>
+<li><a href="https://987.tw/gulpru-men-zhi-nan/" target="_blank" rel="noopener">https://987.tw/gulpru-men-zhi-nan/</a></li>
+<li><a href="http://www.gulpjs.com.cn/docs/getting-started/" target="_blank" rel="noopener">http://www.gulpjs.com.cn/docs/getting-started/</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10185565" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10185565</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/教你如何快速設定綁定網域在 Byehost 虛擬主機商/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/" itemprop="url">教你如何快速設定綁定網域在 Byehost 虛擬主機商</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-25T17:34:27+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>申請Byethost免費虛擬主機架站，綁定自己購買的網址<br>其實研究了有陣子，第一次架站新手，對DNS、子網域很不熟悉。<br>故記錄起來以防之後有天會忘記XD。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-      </div>
-      <a class="more" href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/">安裝Edius時，出現ERROR：Error launching installer解決辦法</a>
-      </h2>
-      <p class="article-date">July 8, 2017</p>
       
-        
-  <a href="/tags#Edius" >
-    <span class="tag-code">Edius</span>
-  </a>
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
 
       
-      <div class="article-summary">
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/" itemprop="url">安裝Edius時，出現ERROR：Error launching installer解決辦法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T17:55:36+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前陣子安裝Edius時發生了錯誤Error launching installer，爬文Google搜尋，並記錄下來解決方法。</p>
 <h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>安裝Error launching installer時出現錯誤訊息<code>Error launching installer</code><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-      </div>
-      <a class="more" href="/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/">閱讀更多</a>
-    </article>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/大部分開發者都是使用MAC OS系統？/">大部分開發者都是使用MAC OS系統？</a>
-      </h2>
-      <p class="article-date">July 4, 2017</p>
-      
-        
-  <a href="/tags#mac" >
-    <span class="tag-code">mac</span>
-  </a>
-
-  <a href="/tags#developer" >
-    <span class="tag-code">developer</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          大部分開發者都是使用MAC OS系統？
-相信這是大家都會疑問的問題，我到底要不要花錢下去買Macbook筆電？我個人學Website時是先從Windows起步的，約學習快一年的時間但當遇到許多奇怪的問題，對Unix不太熟，常卡在莫名其妙的問題上，浪費了好多時間。因為相信「時間 &gt; 金錢 ...
-        
-      </div>
-      <a class="more" href="/大部分開發者都是使用MAC OS系統？/">閱讀更多</a>
-    </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Navigation固定上方，往下瀏覽頁面時縮小效果/">Navigation固定上方，往下瀏覽頁面時縮小效果</a>
-      </h2>
-      <p class="article-date">June 30, 2017</p>
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/大部分開發者都是使用MAC OS系統？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/大部分開發者都是使用MAC OS系統？/" itemprop="url">大部分開發者都是使用MAC OS系統？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-04T13:33:11+08:00">
+                2017-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         
-  <a href="/tags#css" >
-    <span class="tag-code">css</span>
-  </a>
+          
+            <h1 id="大部分開發者都是使用MAC-OS系統？"><a href="#大部分開發者都是使用MAC-OS系統？" class="headerlink" title="大部分開發者都是使用MAC OS系統？"></a>大部分開發者都是使用MAC OS系統？</h1><p><img src="/images/developer.jpg" alt="Why Web developer always using Mac OS ?"></p>
+<p>相信這是大家都會疑問的問題，我到底要不要花錢下去買Macbook筆電？<br>我個人學Website時是先從Windows起步的，約學習快一年的時間<br>但當遇到許多奇怪的問題，對Unix不太熟，常卡在莫名其妙的問題上，浪費了好多時間。<br>因為相信「時間 &gt; 金錢」的價值觀，最後敗下去買 Macbook Pro 2017。</p>
+<h2 id="警告：以下為前輩較為主觀的意見。"><a href="#警告：以下為前輩較為主觀的意見。" class="headerlink" title="警告：以下為前輩較為主觀的意見。"></a>警告：以下為前輩較為主觀的意見。</h2><p>MAC的終端機方便很多！WINDOWS會鎖住CMD很多功能<br>變成要下載好多好多一大堆相容性軟體，出了問題又要花時間GOOGLE找解答<br>有時候還找不到解答=_=，光是這點會讓你節省不少時間</p>
+<h3 id="Mac-與常見伺服器-Ubuntu-同屬-unix-like"><a href="#Mac-與常見伺服器-Ubuntu-同屬-unix-like" class="headerlink" title="Mac 與常見伺服器(Ubuntu) 同屬 unix like"></a>Mac 與常見伺服器(Ubuntu) 同屬 unix like</h3><p>這會在許多指令、環境上的建制有許多相似之處<br>在部屬時會因為與伺服器端相似度高<br>所以問題也會較少些喔</p>
+<h3 id="開發工具多樣性"><a href="#開發工具多樣性" class="headerlink" title="開發工具多樣性"></a>開發工具多樣性</h3><p>Mac 版本的開發工具很豐富<br>有許多工具是只有 MacOS 才有<br>或者是先有 MacOS 版本後來才轉移到其他系統</p>
+<p>案例：Dash, Affinity 系列, Sketch, iTerm</p>
+<h3 id="Macbook-CP-值高"><a href="#Macbook-CP-值高" class="headerlink" title="Macbook CP 值高"></a>Macbook CP 值高</h3><p>價格偏高是事實，<br>硬體規格看似也低於同價格的 Windows 筆電，<br>但用兩年以上品質就會有差異</p>
+<ul>
+<li>電池耐久是實際 8hr 以上</li>
+<li>螢幕顯色力高，可以作為網頁設計的基準</li>
+<li>輕便</li>
+<li>二手販售Macbook仍還能賣個不錯的價格，可以到<a href="https://www.ptt.cc/bbs/MacShop/index.html" target="_blank" rel="noopener">Mac二手 PTT版</a> 逛看看。</li>
+</ul>
 
-  <a href="/tags#js" >
-    <span class="tag-code">js</span>
-  </a>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
 
       
-      <div class="article-summary">
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Navigation固定上方，往下瀏覽頁面時縮小效果/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Navigation固定上方，往下瀏覽頁面時縮小效果/" itemprop="url">Navigation固定上方，往下瀏覽頁面時縮小效果</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-30T17:57:58+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           <p>此篇講述什麼是Web Sticky效果，固定nav及縮小，及紀錄遇到的困難、改良後的JavaScript寫法。<br>將會使用到CSS、JavaScript。</p>
 <h3 id="什麼是Sticky？"><a href="#什麼是Sticky？" class="headerlink" title="什麼是Sticky？"></a>什麼是Sticky？</h3><p>固定Nav後會隨著捲軸拉下去而縮小<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Navigation固定上方，往下瀏覽頁面時縮小效果/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hazel Wu</p>
+              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <a class="more" href="/Navigation固定上方，往下瀏覽頁面時縮小效果/">閱讀更多</a>
-    </article>
-  
+    </main>
 
-  
-    <div class="guide-pager">
-  
-    <a href="/page/4/"><span class="page-arrow">← </span>Prev</a>
-  
-  
-    <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a>
-  
-</div>
-
-  
-</main>
-
-
-    <div class="scroll-top">
-  <span class="arrow-icon"></span>
-</div>
-    <footer class="app-footer">
-  <p class="copyright">
-    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
-  </p>
-  <span id="busuanzi_container_site_uv">
-    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
   </span>
-</footer>
-<!-- 不蒜子記人數 -->
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script>
-  function async(u, c) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
+  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<script>
-  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-  })
-</script>
 
-<script>
-  var hasLine = 'true';
-  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
-</script>
-<!-- Baidu Tongji -->
 
-<script src="/js/script.js"></script>
-  </body>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>

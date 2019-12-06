@@ -1,476 +1,2230 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-  <meta name="keyword" content="hexo-theme, vuejs">
-  
-    <link rel="shortcut icon" href="/css/images/logo.png">
-  
-  <title>
-    
-      Hazel Wu | 22&#39;mm
-    
-  </title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109679233-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'UA-109679233-1');
-  </script>
-  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/plugins/gitment.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrious.js"></script>
-<script src="/js/gitment.js"></script>
-  
-  
-    <!-- MathJax support START -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- MathJax support END -->
+
   
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hazel Wu | 22&#39;mm">
+<meta property="og:url" content="http://wualnz.com/page/2/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hazel Wu | 22&#39;mm">
+<meta name="twitter:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wualnz.com/page/2/"/>
+
+
+
+
+
+  <title>Hazel Wu | 22'mm</title>
+  
+
+
+
+
+
+
 
 
 </head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hazel Wu | 22'mm</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-  <body>
-    <header class="header fixed-header">
-  <div class="header-container">
-    <a class="home-link" href="/">
-      <div class="logo"></div>
-      <span>Hazel Wu | 22'mm</span>
-    </a>
-    <ul class="right-list">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li class="list-item">
-          
-            <a href="/" class="item-link active">Home</a>
-          
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/tags/" class="item-link">Tags</a>
-          
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
         </li>
       
-        <li class="list-item">
-          
-            <a href="/archives/" class="item-link">Archives</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/project/" class="item-link">Projects</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/about/" class="item-link">About</a>
-          
-        </li>
+
       
     </ul>
-    <div class="menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/為什麼前端要學Vue-js？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/為什麼前端要學Vue-js？/" itemprop="url">為什麼前端要學Vue.js？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T15:11:18+08:00">
+                2018-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vue-js-解決了什麼問題？"><a href="#Vue-js-解決了什麼問題？" class="headerlink" title="Vue.js 解決了什麼問題？"></a>Vue.js 解決了什麼問題？</h2><p>當考慮要不要學習新技術時，要先問自己幾個問題</p>
+<ol>
+<li>這個技術解決了什麼樣的問題？<br>羊毛出在羊身上，這個技術之所以被研發出來，必有其因。</li>
+<li>這個技術有沒有同類型的替代品？比較各自的優缺點</li>
+<li>我花時間成本去學習這個技術，對我有什麼好處？同樣的時間花去學別的技術，是不是更好？</li>
+<li>有什麼實際的問題我可以實用這項技術直接解決？</li>
+</ol>
+<h3 id="定義目標"><a href="#定義目標" class="headerlink" title="定義目標"></a>定義目標</h3><p>以上這些問題是定義目標，除了增強學習動力之外，也是防止浪費時間學一門沒什麼用的技術。<br>人的時間與精力有限，於是「選擇」變得很重要。<br>要將有限的時間、精力投其所好。</p>
+<h3 id="為什麼要使用-Vue-js？"><a href="#為什麼要使用-Vue-js？" class="headerlink" title="為什麼要使用 Vue.js？"></a>為什麼要使用 Vue.js？</h3><ol>
+<li>讓資料與 HTML 能夠完整分離</li>
+<li>將網頁資料存進「狀態」裡，容易管理。不需監聽才能得知網頁當下值。<br>根據資料自動複製 HTML、設定HTML屬性</li>
+<li>將資料與網頁雙向同步<br>同步更新資料與網頁的資料</li>
+<li>加快開發、程式可讀性增加</li>
+</ol>
+<h3 id="Vue-js-初始化"><a href="#Vue-js-初始化" class="headerlink" title="Vue.js 初始化"></a>Vue.js 初始化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Veu(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    </span><br><span class="line">  &#125; <span class="comment">//資料保存狀態</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>資料替換 &#123; &#125;文字 與 HTML<br>v-html<br>指定資料時可進行額外計算，使用Js表達式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  text: <span class="string">'Hello'</span>,</span><br><span class="line">  htmlText: <span class="string">'&lt;p&gt;Hello HTML&lt;/p&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>v-bind:href 可簡寫成 :ahref<br><a v-bind:href="link"></a><br><a :href="link"></a></p>
+<p>v-if：條件不符合時不產生 HTML<br>v-show：條件不符合時以 CSS 隱藏。（display: none）<br>v-else：其餘狀況，當物件存在時才顯示。</p>
+<h3 id="v-model-雙向綁定資料"><a href="#v-model-雙向綁定資料" class="headerlink" title="v-model 雙向綁定資料"></a>v-model 雙向綁定資料</h3><p>當使用者輸入變動時，會同步反應資料。</p>
+<p>指定 v-model 資料型別<br>確保同步時，使用者變動反應的資料是數字或是布林值</p>
+<p>可應用：打勾時變更為true，撲克牌便會翻開</p>
+<p>例如：type為number或checkbox，來更動資料是否為布林值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input(type=&apos;number, v-model=&apos;綁定資料&apos;)</span><br><span class="line">input(type=&apos;checkbox&apos;, v-model=&apos;綁定資料&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="計算屬性-coumputed"><a href="#計算屬性-coumputed" class="headerlink" title="計算屬性 coumputed"></a>計算屬性 coumputed</h3><ul>
+<li>computed 會建立「虛擬屬性」</li>
+<li>不實際建立在資料data內，但會建立虛擬的data</li>
+<li>雙向計算屬性：利用到 getter、setter<br>取得值或是設定值可以觸發額外動作<ul>
+<li>getter 取得ssetter的實際值</li>
+<li>setter 設定值</li>
+</ul>
+</li>
+<li>常應用在 總價、過濾後的清單或是動態 CSS</li>
+</ul>
+<p>例如：購物車的組合價格（商品價格+運費）、組合名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h3 &#123;&#123; price &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'h3'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    fullPrice: <span class="number">3000</span>,</span><br><span class="line">    discount: <span class="number">0.85</span>,</span><br><span class="line">    shoppingFee: <span class="number">60</span></span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    price()&#123;</span><br><span class="line">      <span class="keyword">let</span> result = <span class="keyword">this</span>.fullPrice * <span class="keyword">this</span>.discount</span><br><span class="line">      <span class="keyword">return</span> result + <span class="keyword">this</span>.shoppingFee <span class="comment">// 2610$</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>利用computed建立出price的虛擬屬性，來組合價格</p>
+<h4 id="getter-與-setter"><a href="#getter-與-setter" class="headerlink" title="getter 與 setter"></a>getter 與 setter</h4><p>雙向綁定，指定getter與setter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(v-model=&apos;fullName&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  firstName: <span class="string">''</span>,</span><br><span class="line">  lastName: <span class="string">''</span></span><br><span class="line">&#125;,</span><br><span class="line">computed: &#123;</span><br><span class="line">  fullname: &#123;</span><br><span class="line">    get()&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">','</span> + <span class="keyword">this</span>.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    set(value)&#123;</span><br><span class="line">      <span class="keyword">this</span>.firstName = value.split(<span class="string">','</span>)[<span class="number">0</span>]</span><br><span class="line">      <span class="keyword">this</span>.lastName = value.split(<span class="string">','</span>)[<span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>get()會取得使用者輸入的firstName與lastName<br>set()則會開始處理 get得到的值</p>
+<h3 id="監看變化-watch"><a href="#監看變化-watch" class="headerlink" title="監看變化 watch"></a>監看變化 watch</h3><ul>
+<li>變數發生變化時偵測觸發</li>
+<li>傳入引數：監測出改變前、改變後的值</li>
+<li>常應用在 表單使用者輸入、改變資料或是登入</li>
+</ul>
+
+          
+        
+      
     </div>
-    <div class="menu-mask">
-      <ul class="menu-list">
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/ES6語法：let、const/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <li class="menu-item">
-            
-              <a href="/" class="menu-link mobile-active">Home</a>
-            
-          </li>
         
-          <li class="menu-item">
-            
-              <a href="/tags/" class="menu-link">Tags</a>
-            
-          </li>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ES6語法：let、const/" itemprop="url">ES6語法：let、const</a></h1>
         
-          <li class="menu-item">
+
+        <div class="post-meta">
+          <span class="post-time">
             
-              <a href="/archives/" class="menu-link">Archives</a>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-04T02:06:54+08:00">
+                2018-09-04
+              </time>
             
-          </li>
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
-          <li class="menu-item">
-            
-              <a href="/project/" class="menu-link">Projects</a>
-            
-          </li>
+          
+            <h2 id="let-與-const-誕生的目的"><a href="#let-與-const-誕生的目的" class="headerlink" title="let 與 const 誕生的目的"></a>let 與 const 誕生的目的</h2><p>不會汙染全域變數，好方便後續維護、Debug</p>
+<ol>
+<li>let, const 用來宣告區塊 {} 裡的變數</li>
+<li>for迴圈宣告 <code>var</code>改為 <code>let</code></li>
+<li>const 唯讀變數，無法去做修改。</li>
+</ol>
+<p>let存在於大括號裡面，在大括號外面便會死翹翹。</p>
+<h2 id="被全域變數污染的例子"><a href="#被全域變數污染的例子" class="headerlink" title="被全域變數污染的例子"></a>被全域變數污染的例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ul.list</span><br><span class="line">  li 1</span><br><span class="line">  li 2</span><br><span class="line">  li 3</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.list li'</span>).length;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; list; i++ ) &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelectorAll(<span class="string">'.list li'</span>)[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(i + <span class="number">1</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>for迴圈宣告 <code>var i = 0</code>，導致全域變數被污染，不管點擊哪個 li ， alert 出來的訊息皆為 4。在 Console輸入 i 便會出現3<br>但當for迴圈宣告是<code>let i = 0</code>，將var改為let後，預期點擊 第一個li時 便會出現alert 1、預期點擊第二個 li 時 便會出現alert 2。</p>
+<h2 id="如何知道有沒有污染全域變數？"><a href="#如何知道有沒有污染全域變數？" class="headerlink" title="如何知道有沒有污染全域變數？"></a>如何知道有沒有污染全域變數？</h2><p>在Browser Console 輸入 window.變數名稱，一試便知有沒有被污染。<br>輸入window.變數名稱，如果有出現回應，代表此變數在全域中是存活的，也就是被污染了。</p>
+<h2 id="const-例外情況"><a href="#const-例外情況" class="headerlink" title="const 例外情況"></a>const 例外情況</h2><p>當 const 為 物件或陣列時，便可以修改。<br>當 const被宣告為物件、常數時，記得要加上<code>freeze</code>方法來凍結。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  url: <span class="string">'http://wualnz.com'</span></span><br><span class="line">&#125;</span><br><span class="line">obj.url = <span class="string">'http://helloWorld.com'</span></span><br></pre></td></tr></table></figure>
+<p>obj.url重新定義為<code>http://helloWorld.com</code>時，成功被修改了。</p>
+<p>當使用陣列、或物件時，有沒有什麼辦法不被修改？<br>有，使用 freeze（凍結）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  url: <span class="string">'http://wualnz.com'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.freeze(obj)</span><br><span class="line">obj.url = <span class="string">'http://helloWorld.com'</span></span><br></pre></td></tr></table></figure></p>
+<p>當加上<code>Object.freeze(obj)</code>後，便無法再更改obj.url了，於是後面定義的helloWorld便會報錯。</p>
+<h2 id="使用-let、const-時機"><a href="#使用-let、const-時機" class="headerlink" title="使用 let、const 時機"></a>使用 let、const 時機</h2><p>當宣告變數時，你必須先評估這個變數未來會不會常被更改？<br>不希望這個變數被其他開發者修改、亂搞時，宣告 <code>const</code>。<br>未來還是會修改，使用 <code>let</code> 來宣告。</p>
+<h3 id="let-與-const-特性"><a href="#let-與-const-特性" class="headerlink" title="let 與 const 特性"></a>let 與 const 特性</h3><ol>
+<li><code>let</code>, <code>const</code> 不會向上提升（Hoisting）<br>let 與 const 直到讀取那一行宣告，才會被讀取到。<br>宣告 var 時， Javascript 會將它提升（Hoisting），但當使用 let, const是不會被提升的。<br>let、const 不會提升(Hoisting)，但 var 會被提升。</li>
+</ol>
+<p>以下是用 var變數後會被向上提升的範例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefined </span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">3</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure></p>
+<p>用let或const宣告，會直接報出錯：a is not defined</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在同個區塊上（大括號內）不能重複命名</li>
+<li>let, const 不會變成全域變數<br>當在全域宣告 let, const的變數時，當你使用 window查找，會發現用 let, const宣告過的變數回報：undefined。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">window</span>.c <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">window</span>.b <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>即使你在全域環境下宣告let或const，使用window查找皆會出現undefined。</p>
+
+          
         
-          <li class="menu-item">
-            
-              <a href="/about/" class="menu-link">About</a>
-            
-          </li>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/BlueHost-Wordpress-如何安裝-Git-版本控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
         
-      </ul>
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/BlueHost-Wordpress-如何安裝-Git-版本控制/" itemprop="url">BlueHost Wordpress 如何安裝 Git 版本控制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-28T23:34:59+08:00">
+                2018-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="BlueHost-Wordpress-如何使用-Git-版本控制"><a href="#BlueHost-Wordpress-如何使用-Git-版本控制" class="headerlink" title="BlueHost Wordpress 如何使用 Git 版本控制"></a>BlueHost Wordpress 如何使用 Git 版本控制</h1><p>BlueHost 沒有提供Git或相關Git設定的支援，所以我們只好自立自強，以下安裝教學是在 BlueHost shared 環境下設置。 過程中有參考 BlueHost的官方文件，但是安裝失敗，文件並未寫得很完整，在這篇文章將記錄我是如何安裝 Git 的，以下操作環境為 Mac iOS 10.13.1。</p>
+<h2 id="為什麼-Wordpress-要進入版本控制？"><a href="#為什麼-Wordpress-要進入版本控制？" class="headerlink" title="為什麼 Wordpress 要進入版本控制？"></a>為什麼 Wordpress 要進入版本控制？</h2><p>經營一個專業的 WordPress 網站，有一定的讀者數量，相信有很多痛苦你都知道<br>以下悲劇範例，我親身經歷過：</p>
+<ol>
+<li>WordPress 版本升級，A 外掛可能升級後導致和 舊版本的 B 外掛發生衝突，導致網站掛掉。</li>
+<li>在 WordPress 後台面板直接修改主題編輯器，常不小心打錯字，導致網站掛掉。</li>
+<li>上次改了一些東西，但忘記改在哪裡。這次升級不小心弄掛了，也忘記怎麼改回去了Orz。</li>
+<li>在本機上架設一個一模一樣的 WordPress 網站，供測試用。但，在自己電腦修改好了，又要重新到真正網站上重新做一樣的動作，好浪費時間。</li>
+</ol>
+<p>通常在WordPress上因為某些套件無法達到你預期想要的效果，於是你興起了客製化的衝動。<br>客製化會需要更動 php程式碼（包含佈景主題）或 CSS, HTML，一不小心改掛了正式網站也就掛了。</p>
+<p>那你可以好好考慮一下學習 Git 來控管你的WordPress，不過前提是你常會更改到程式碼、CSS、HTML。</p>
+<h4 id="說了那麼久，到底什麼是-Git-啊？"><a href="#說了那麼久，到底什麼是-Git-啊？" class="headerlink" title="說了那麼久，到底什麼是 Git 啊？"></a>說了那麼久，到底什麼是 Git 啊？</h4><p><code>Git</code>，它就是一個遊戲存檔紀錄！<br>像是玩單機遊戲一樣，你可能玩了幾個小時後便會先存檔，怕下次再玩的時候忘記自己破到哪關了XD。<br>重新打開遊戲、讀取紀錄檔，又可以回到當初狀態啦！<br>你每一次更改的東西，Git都會幫你做追蹤。<br>比如說你今天建立了香蕉、蘋果，你可以分成存成一次的紀錄或兩次。</p>
+<ul>
+<li>分成一次存檔紀錄訊息：存檔香蕉、蘋果，紀錄訊息：我建立了香蕉、蘋果</li>
+<li>分成兩次的存檔紀錄：存檔香蕉，紀錄訊息：我建立了香蕉、存檔蘋果，存檔紀錄訊息：我建立了蘋果<br>然後呢，在你不小心網站爆炸或又被改爆的時候，跟 Git說：嘿！我要回去我那天建立存檔香蕉的紀錄，就會完全復原啦！網站復活YA</li>
+</ul>
+<blockquote>
+<p>總結：Git主要功用是幫助你做存檔訊息，網站不小心改爆時還能夠回到當初的存檔紀錄，後面一率掰掰XD<br>雖然 Git 學習曲線還是有相當程度的高，但若只是使用 存檔、讀取存檔紀錄、查當初改了什麼，那這學習曲線其實很低的，比起大把浪費的時間，嗯…我認為很值得投資。</p>
+</blockquote>
+<h2 id="開始之前，您必須具備的條件"><a href="#開始之前，您必須具備的條件" class="headerlink" title="開始之前，您必須具備的條件"></a>開始之前，您必須具備的條件</h2><h4 id="能夠-SSH-進入-BlueHost-Server-端"><a href="#能夠-SSH-進入-BlueHost-Server-端" class="headerlink" title="能夠 SSH 進入 BlueHost Server 端"></a>能夠 SSH 進入 BlueHost Server 端</h4><p>SSH KEY 要先進入 BlueHost 後台，先設定好本機電腦的 ssh 公鑰放在上面，id名稱盡量取名為 <code>id_rsa</code><br>成功設定好後，在終端機上輸入<code>ssh UserName@ServerIP</code>即可成功</p>
+<blockquote>
+<p>註：UserName、ServerIP 皆在 BlueHost 後台面板上可尋找得到。</p>
+</blockquote>
+<p>你必須先設定好 ssh鑰匙，才能開始下面的奇妙旅程。</p>
+<h4 id="需要具備一些-Git-知識"><a href="#需要具備一些-Git-知識" class="headerlink" title="需要具備一些 Git 知識"></a>需要具備一些 Git 知識</h4><p>這裡就不多說了，網路上有相當多的教學可以查詢。<br>根據我們的目的是存檔、讀取存檔紀錄、查當初改了什麼，大部分只會用到下列幾個指令。</p>
+<p>git init用意是，和 Git 說：這個資料夾內所有會動的東西，都交給你負責追蹤了！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></p>
+<p>Git啊，你幫我存檔 index.php，訊息寫說：「我建立了index.php，邁向里程碑YA!」<br>（紀錄訊息僅供參考，通常是寫你為什麼做這樣變動，方便回憶，千萬別真的這樣打啊…）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add index.php</span><br><span class="line">git commit -m &apos;我建立了index.php，邁向里程碑YA!&apos;</span><br></pre></td></tr></table></figure></p>
+<p>Git 啊，我這個資料夾所有變動的資料，你全部都幫我存檔吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git comit -m &apos;存檔所有檔案！&apos;</span><br></pre></td></tr></table></figure></p>
+<p>Git 啊，請你幫我回到上一次存檔紀錄吧，我網站改爆了啦&gt;”&lt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD^</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>除此之外，還有個圖形化軟體叫：<code>GitKraken</code><br>它可查看每一次你存檔更動了哪些檔案，對於金魚記憶只有7秒的人類是一大福音，當然對網站管理者來說：再也不用浪費腦容量紀錄這些啦XD<br>下圖是我其中一個請 Git幫我追蹤的專案，每一次的存檔紀錄 Git 都很認真在紀錄<br><img src="https://i.imgur.com/kJOqmjk.png" alt="GitKraken Example"></p>
+</blockquote>
+<p>接下來會教學如何在BlueHost上安裝Git。</p>
+<h2 id="連線-Server端-，-安裝-Git"><a href="#連線-Server端-，-安裝-Git" class="headerlink" title="連線 Server端 ， 安裝 Git"></a>連線 Server端 ， 安裝 Git</h2><p>連線進入 Server 後，我們必須先切換家目錄，才能輸入更改 <code>.bashrc</code>的設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh UserName@ServerIP</span><br><span class="line">$ cd</span><br><span class="line">$ pwd</span><br></pre></td></tr></table></figure></p>
+<p>用 VIM編輯器開啟 .bashrc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>接著需要更改.bashrc設定檔，將以下程式碼加入在最後一行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$HOME/.local/bin:$HOME/.local/usr/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>此行用意是指定Git要安裝在$HOME底下的<code>.local/usr/bin</code><br>既然我們指定了目錄，當然就要創建這些條件囉！<br>建立資料夾.local，並移動進去。如果你已經有 <code>.local</code>資料夾的話，直接進入路徑即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir .local</span><br><span class="line">$ cd .local</span><br></pre></td></tr></table></figure>
+<p>接著再創立一個目錄叫 <code>src</code>，並把移動目錄移動到<code>src</code>內</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir src</span><br><span class="line">$ cd src</span><br></pre></td></tr></table></figure>
+<p>如果你在 Commend Line 上輸入 <code>pwd</code>的話，目錄應該會長得像是 /home#/username/.local/src，這代表你目前操作都是正確的！</p>
+<blockquote>
+<p>home為你網站根目錄，username為你ssh連線進入時的使用者名稱，username皆在 Bluehost Panel內可以查詢得到。</p>
+</blockquote>
+<p>接下來，萬事俱備啦！到目前為止，我們先是指定了bashrc（Server端預設是使用bashrc）安裝套件等都安裝在<code>.local/usr/bin</code>下，並也真的建立了這些資料夾。</p>
+<p>重頭戲就是：安裝 Git 囉（廢話）<br>我們用<code>wget</code>來安裝<code>git</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget --no-check-certificate https://github.com/git/git/archive/master.zip</span><br></pre></td></tr></table></figure>
+<p>這行指令是在說，向這個網址下載<code>master.zip</code>檔案，下載zip檔案後，看到zip當然是要先解壓縮啊！<br>解壓縮完，並將剛利用完已經失去價值的<code>master.zip</code>移除，過河拆巧的概念，節省空間！斷捨離！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ unzip master</span><br><span class="line">$ rm master.zip</span><br></pre></td></tr></table></figure>
+<p>解壓縮後會出現資料夾，我們先移動到資料夾內，然後開始安裝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd git-master</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+<p>檔案有點龐大，要稍等一下。<br>最後，測試是否有安裝成功，在終端機上輸入 git<br>如果你有成功安裝，就應該會跑出這樣的畫面才對喲。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usage: git [--version] [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</span><br><span class="line"></span><br><span class="line">          [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]</span><br><span class="line"></span><br><span class="line">          [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</span><br><span class="line"></span><br><span class="line">          [-c name=value] [--help]</span><br><span class="line"></span><br><span class="line">          &lt;command&gt; [&lt;args&gt;]</span><br></pre></td></tr></table></figure>
+<p>最後補充一點，雖然 Server已自動安裝 bash-complete 套件了，但 Git 已經習慣打簡略的指令了，可以看看這篇<a href="https://wualnz.com/Git-%E4%BF%AE%E6%94%B9%E5%8F%88%E8%87%AD%E5%8F%88%E9%95%B7%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%8C%E5%8A%A0%E5%BF%AB%E9%96%8B%E7%99%BC%E9%80%9F%E5%BA%A6/">Git 修改又臭又長的指令，加快開發速度</a><br>連線至 Server 後輸入以下指令吧！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br></pre></td></tr></table></figure>
+<p>他便會自動在 <code>~/.gitconfig</code> 紀錄，未來輸入<code>git commit -m</code> 就可以直接化簡為 <code>git ci -m</code> 啦！<br>先別聽安麗說了，時間就是金錢，一定要節省時間，不節省時間要幹嘛啊？工程師就是要懶啊XD</p>
+<h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h3><p>建議版本控制為進入 /public_html內做版本控制，若直接在Home上進版本控制，會收納很多不必要的東西XD。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">cd /public_html</span><br><span class="line">git init</span><br><span class="line">git st</span><br><span class="line">git ci -m &apos;Initialize Commit&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="紀錄失敗歷程：官方文件好失敗"><a href="#紀錄失敗歷程：官方文件好失敗" class="headerlink" title="紀錄失敗歷程：官方文件好失敗"></a>紀錄失敗歷程：官方文件好失敗</h3><p><a href="https://my.bluehost.com/cgi/help/2383" target="_blank" rel="noopener">VPS or Dedicated Hosting - Installing Git</a><br>照著官方文件做，失敗，無法順利裝上Git，真是的….</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install git</span><br><span class="line">yum install git --disableexcludes=main --skip-broken</span><br></pre></td></tr></table></figure>
+<p>這兩行指令都失敗QQ，也找不到<a href="https://my.bluehost.com/cgi/help/2358" target="_blank" rel="noopener">官方文件-Enabling Sudo Access</a>上所指的 Access Management。</p>
+<h2 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h2><ul>
+<li><a href="http://willjackson.org/blog/installing-git-bluehost-shared-hosting" target="_blank" rel="noopener">Installing GIT on Bluehost Shared Hosting</a></li>
+<li><a href="https://wualnz.com/Git-%E4%BF%AE%E6%94%B9%E5%8F%88%E8%87%AD%E5%8F%88%E9%95%B7%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%8C%E5%8A%A0%E5%BF%AB%E9%96%8B%E7%99%BC%E9%80%9F%E5%BA%A6/">Git 修改又臭又長的指令，加快開發速度</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/" itemprop="url">為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T23:11:59+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我用Ruby on Rails寫了一個CRUD網路相簿的網站，主機採用Heroku提供的服務。但是有一個缺點，Heroku不提供檔案儲存的空間，每過一段時間就會洗白一次。<br>講白話一點就是：我上傳的相片過一段時間就會不見了，我得為我的相片找新的空間存放才行。這裡使用的是Amazon S3 storage服務，可以自動上傳到S3空間</p>
+<ul>
+<li><code>20180723</code> 更新，Amazon 有更改介面，故 S3 Access key指引教學也有更新內容。</li>
+</ul>
+<hr>
+<p>廢話不多說，開始教學吧</p>
+<h3 id="教學開始"><a href="#教學開始" class="headerlink" title="教學開始"></a>教學開始</h3><h4 id="安裝Gemfile"><a href="#安裝Gemfile" class="headerlink" title="安裝Gemfile"></a>安裝Gemfile</h4><p><code>gem &quot;fog-aws”</code><br><code>bundle install</code></p>
+<h4 id="在Amazon-S3新增一個新的backet"><a href="#在Amazon-S3新增一個新的backet" class="headerlink" title="在Amazon S3新增一個新的backet"></a>在Amazon S3新增一個新的backet</h4><p>我命名為photo-album-hazel，並設定在日本東京的位置。</p>
+<h4 id="新增目錄-lib-carrierwave-storage-fog-rb"><a href="#新增目錄-lib-carrierwave-storage-fog-rb" class="headerlink" title="新增目錄 lib/carrierwave/storage/fog.rb"></a>新增目錄 lib/carrierwave/storage/fog.rb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//在fog.rb貼上</span><br><span class="line">CarrierWave.configure do |config|</span><br><span class="line">  config.fog_provider = &apos;fog/aws&apos; </span><br><span class="line">  if Rails.env.production?</span><br><span class="line">    config.fog_credentials = &#123;</span><br><span class="line">      provider:              &apos;AWS&apos;,</span><br><span class="line">      aws_access_key_id:     ENV[&apos;S3_KEY&apos;],</span><br><span class="line">      aws_secret_access_key: ENV[&apos;S3_SECRET&apos;],</span><br><span class="line">      region:                &apos;ap-northeast-1&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    config.fog_directory  = ENV[&apos;S3_BUCKET&apos;]</span><br><span class="line">  else</span><br><span class="line">    config.storage :file</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>在Uploader設定儲存檔案的方式，若在 production 環境下， 將會透過 fog 上傳檔案到 AWS 的 bucket; 若是開發環境， 則會將檔案放在本地端的 public 目錄下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># photo-image-uploader.rb設定</span><br><span class="line">  if Rails.env.production?</span><br><span class="line">    storage :fog</span><br><span class="line">  else</span><br><span class="line">    storage :file</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
+<h4 id="AWS-S3-KEY-要去哪裡找？"><a href="#AWS-S3-KEY-要去哪裡找？" class="headerlink" title="AWS S3 KEY 要去哪裡找？"></a>AWS S3 KEY 要去哪裡找？</h4><p><em>20180723 更新，Amazon 有更改介面，更新要怎麼從 Amazon 找到 S3 Access key</em></p>
+<ol>
+<li>AWS 登入後</li>
+<li>點開選單，點擊 <code>Security Credentials</code><br><img src="https://i.imgur.com/efIyId3.png" alt="S3 Security Credentials"></li>
+<li>側邊選單點 Users，並建立一個 User 帳戶</li>
+<li>點擊 <code>你剛建立的User帳號</code>，標籤選 <code>Security Credentials</code></li>
+<li>Create Access Key<br><img src="https://i.imgur.com/B4DTXAi.png" alt="20180723 update. how to find Amazon S3 access key"><br>在 Create Access Key的過程便會 Show出 ID 與 KEY 囉。</li>
+</ol>
+<h4 id="Region設定方式查詢：查詢AWS區域代號"><a href="#Region設定方式查詢：查詢AWS區域代號" class="headerlink" title="Region設定方式查詢：查詢AWS區域代號"></a>Region設定方式查詢：<a href="http://docs.aws.amazon.com/general/latest/gr/rande.html" title="查詢AWS區域代號" target="_blank" rel="noopener">查詢AWS區域代號</a></h4><table>
+<thead>
+<tr>
+<th style="text-align:left">Region Name</th>
+<th style="text-align:right">代稱</th>
+<th style="text-align:center">Amazon Route 53 Hosted Zone ID*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Asia Pacific (Tokyo)</td>
+<td style="text-align:right">ap-northeast-1</td>
+<td style="text-align:center">apigateway.ap-northeast-1.amazonaws.com</td>
+</tr>
+</tbody>
+</table>
+<p>我設定的bucket在東京：所以Region是ap-northeast-1</p>
+<h4 id="用環境變數方式儲存，heroku與本機設定KEY"><a href="#用環境變數方式儲存，heroku與本機設定KEY" class="headerlink" title="用環境變數方式儲存，heroku與本機設定KEY"></a>用環境變數方式儲存，heroku與本機設定KEY</h4><p>How to setting localhost &amp; Heroku environment variable ?<br>總共有三項要設定，請分別設定在本機、Heroku上</p>
+<ol>
+<li>Bucket Name，像我在S3建立的bucket name就是photo-album-hazel</li>
+<li>KEY ID</li>
+<li>KEY SECRET</li>
+</ol>
+<p>本機 Rails 環境變數設定 AWS S3 KEY</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export S3_KEY= &quot;your access key id&quot;</span><br><span class="line">export S3_SECRET= &quot;your secret access key&quot;</span><br></pre></td></tr></table></figure>
+<p>範例程式碼如下，請不要複製，皆為虛假，請真正填上你S3的資訊。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export S3_KEY=&apos;AKIAI2XXX24DGFCDNCQ&apos;</span><br><span class="line">export S3_SECRET=&apos;nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T&apos;</span><br><span class="line">export S3_BUCKET=&apos;restaurant-review&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Heroku-遠端設定-AWS-S3-KEY"><a href="#Heroku-遠端設定-AWS-S3-KEY" class="headerlink" title="Heroku 遠端設定 AWS S3 KEY"></a>Heroku 遠端設定 AWS S3 KEY</h3><p>若沒有在heroku上設定S3 KEY，直接<code>git push heroku master</code>推到heroku上，會發現推不上去哦！<br>錯誤訊息會這樣顯示</p>
+<blockquote>
+<p>ArgumentError: Missing required arguments: aws_access_key_id, aws_secret_access_key<br>Precompiling assets failed.<br>所以還是要乖乖的先把這步驟做完，遠端連線到Heroku Server並設定好Key後，即可順利推上去。</p>
+</blockquote>
+<p><code>$ heroku config:set S3_KEY=xxx S3_SECRET=yyy S3_BUCKET=zzz</code><br>以下程式碼僅為參考用，非正確可使用的KEY。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">heroku config:set S3_KEY=AKIAI2XXX24DGFCDNCQ</span><br><span class="line">heroku config:set S3_SECRET=nZZ5JhyVjfKyMC5GD9gGMERLE3j3!XroZsEjLK!T</span><br><span class="line">heroku config:set S3_BUCKET=restaurant-review</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/23163331/setting-aws-s3-1024x356.png" alt="Setting-AWS-S3-loaclhost"></p>
+<h4 id="設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3-bucket吧"><a href="#設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3-bucket吧" class="headerlink" title="設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧"></a>設定好了就可以git上傳囉，在heroku上測試是否有成功上傳到S3 bucket吧</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am &apos;Setting carrierwave upload to AWS S3&apos;</span><br><span class="line">git push</span><br><span class="line">git push heroku master</span><br></pre></td></tr></table></figure>
+<p>Push到Heroku後，出現錯誤了。<br>查看heroku logs才知道：Rails找不到Carrierwave的常數fog</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/app/vendor/bundle/ruby/2.3.0/gems/carrierwave-1.2.0/lib/carrierwave/uploader/configuration.rb:78:in `eval&apos;: uninitialized constant CarrierWave::Storage::Fog (NameError)</span><br></pre></td></tr></table></figure>
+<p>嘗試解決方法</p>
+<ol>
+<li>Gem 安裝 ‘fog’<br>結果：無效</li>
+<li>在 lib/carrierwave/storage/fog.rb 多加上一行程式碼<br><code>require &#39;carrierwave/storage/fog&#39;</code><br>結果：無效</li>
+<li>把 lib/carrierwave/storage/fog.rb 刪除，並在 config/initializer下新增 carrierwave.rb<br>把fog.rb的內容複製過去<br>（當初直接新增fog.rb是完全照著官方文件做的說…）<br>結果：成功，Heroku可以成功開啟網站了（哭）</li>
+</ol>
+<p>可以順利開啟網站後，開Chrome開發人員工具檢查吧，看是否有上傳到AWS S3上</p>
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/23163310/s3-sample.jpg" alt="Successful to upload to AWS S3 using Rails"><br>成功啦！！</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
+<li><a href="https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location" target="_blank" rel="noopener">CarriveWave Github 官方文件</a></li>
+<li><a href="http://tsaith.github.io/shi-yong-carrierwave-shang-chuan-dang-an-dao-aws-s3.html" target="_blank" rel="noopener">使用Carrierwave上傳到AWS S3</a></li>
+<li><a href="http://rubyist.marsz.tw/blog/2012-01-10/carrierwave-guides-with-amazon-s3-and-imagemagick-integration/" target="_blank" rel="noopener">使用 Carrierwave 處理檔案上傳 (整合 imagemagick 與 Amazon S3)</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/神奇的migration-生成器-Ruby-on-Rails-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/神奇的migration-生成器-Ruby-on-Rails-5/" itemprop="url">神奇的migration 生成器 | Ruby on Rails 5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T14:45:18+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="神奇的migration-生成器-Ruby-on-Rails-5"><a href="#神奇的migration-生成器-Ruby-on-Rails-5" class="headerlink" title="神奇的migration 生成器 | Ruby on Rails 5"></a>神奇的migration 生成器 | Ruby on Rails 5</h2><p>參照著格式便可以自動產生Migration檔（包含格式與欄位及型態）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rails g add_xxx_to_資料表 [field:type][:index]</span><br><span class="line">rails g remove_xxx_to_資料表 [field:type][:index]</span><br></pre></td></tr></table></figure>
+<p>同時可以設定我們需要的欄位，<br>我想要新增一個fee欄位到users的Table下</p>
+<blockquote>
+<p>你可以想像成一個Excel表，這個Excel Table叫做Users，<br>因為Excel表有很多資料欄位(field)，所以都要用複數來表示，也就是Users<br>按照Rails的慣例，Table總表以複數來表示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g migration add_fee_to_users fee:integer:index</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>在後面加上:index則是代表要幫這個資料欄位<code>fee</code>加上索引<br>加上索引是為了避免產生太多的查詢，像是query+1效能問題</p>
+<h3 id="怎麼判斷這個資料欄位-field-要不要加上索引？"><a href="#怎麼判斷這個資料欄位-field-要不要加上索引？" class="headerlink" title="怎麼判斷這個資料欄位(field)要不要加上索引？"></a>怎麼判斷這個資料欄位(field)要不要加上索引？</h3><p>可以參考幾個點，但主要還是要看這個欄位<code>fee</code>是否會是需要常查詢的欄位？</p>
+<ol>
+<li>會被查詢的欄位（使用where)</li>
+<li>會被group的欄位(使用到group方法)</li>
+<li>會被排序的欄位(使用到order)</li>
+<li>外部鍵foreign key</li>
+</ol>
+<p>他便會自動產生Migration檔：時間戳記_add_fee_to_users<br>註：時間戳記會根據現實的時間自動產生，像是20180523051928這種形式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class AddeeToLoans &lt; ActiveRecord::Migration[5.1]</span><br><span class="line">  def change</span><br><span class="line">    add_column :users, :fee, :integer</span><br><span class="line">    add_index :users, :fee</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<h3 id="後悔產生migration檔，如何手動刪除？"><a href="#後悔產生migration檔，如何手動刪除？" class="headerlink" title="後悔產生migration檔，如何手動刪除？"></a>後悔產生migration檔，如何手動刪除？</h3><p>注意：這個刪除的前提是你還沒有跑migration，也就是還沒真的新增此欄位到資料庫裡<br>剛剛生成的指令是輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g migration add_fee_to_users fee:integer:index</span><br></pre></td></tr></table></figure>
+<p>那麼刪除就只要將g改為d就可以囉！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails d migration add_fee_to_users fee:integer:index</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址/" itemprop="url">如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-08T15:26:50+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址"><a href="#如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址" class="headerlink" title="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址"></a>如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址</h1><p><img src="https://i.imgur.com/NDKQqjz.png" alt="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址"><br>本篇適用於用Hexo框架架設在Github Pages上，但想要綁定自己買的網址。<br>由於Github Pages 產生的個人網址太長，對 SEO 不友善，不是這麼好被搜尋引擎收錄，</p>
+<h2 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h2><ol>
+<li>Github Repo 設定 Custom Domain</li>
+<li>在 Repo專案下新增 CNAME，完成網址綁定</li>
+<li>用 Cloudflare 提供免費的 SSL 憑證，得以正確讀取 CSS、Google視為安全網站認證</li>
+</ol>
+<h2 id="Github-設定專屬網址"><a href="#Github-設定專屬網址" class="headerlink" title="Github 設定專屬網址"></a>Github 設定專屬網址</h2><p>開啟Github的Hexo專案，選Setting-&gt;Options-&gt; Github Pages -&gt; Custom Domain，填入自己的網域（例如：<code>wualnz.com</code>），接著儲存。<br><img src="https://i.imgur.com/7ZyGcn5.png" alt="Setting Github Custom Domain figure"></p>
+<h3 id="新增-CNAME"><a href="#新增-CNAME" class="headerlink" title="新增 CNAME"></a>新增 CNAME</h3><p>在該 Hexo 專案下的 <code>source</code> 資料夾下新增檔案 <code>CNAME</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## In project</span><br><span class="line">cd /source</span><br><span class="line">touch CNAME</span><br></pre></td></tr></table></figure></p>
+<p>修改 CNAME 內容，將域名填入即可，並重新部署到Github。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wualnz.com</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/Hazelwu2/22mm/blob/master/CNAME" target="_blank" rel="noopener">點我查看 Github Repo CNAME 設定完成範例</a></p>
+<blockquote>
+<p>到底要放在 <code>/source</code> 還是 <code>最上層資料夾</code>？</p>
+</blockquote>
+<p>若使用Hexo框架的話，要將<code>CNAME</code>放置在 <code>/source</code>資料夾內，原因是：當每次<code>hexo deploy</code>時才不會被覆蓋到。<br>若不是使用Hexo的話，沒有自動部署，直接將<code>CNAME</code>檔放在Proejct內即可。</p>
+<h3 id="CNAME-導向個人網址-原理"><a href="#CNAME-導向個人網址-原理" class="headerlink" title="CNAME 導向個人網址 原理"></a>CNAME 導向個人網址 原理</h3><p>使用者在瀏覽器輸入<code>wualnz.com</code>後，DNS 便會開始解析找到 Github的 IP<br><br></p>
+<p>Github上有成千上百萬個Pages由不同使用者建立，Github不會知道網址<code>wualnz.com</code>是屬於 哪個 User 哪個 Repo，因此需要在Repo下放上 CNAME，這樣 Github才找得到，哦！就是這個hazelwu2/22mm的Repo！並回傳給瀏覽器</p>
+<h4 id="CNAME-是什麼？"><a href="#CNAME-是什麼？" class="headerlink" title="CNAME 是什麼？"></a>CNAME 是什麼？</h4><p>它是一種 DNS 紀錄類型，可以將別名（綽號）對應到實際或正規的網址。<br>當你在瀏覽器上輸入 <code>wualnz.com</code>時，瀏覽器會去找 <code>DNS</code> ，經過DNS的解析 <code>wualnz.com</code> 得到： <code>wualnz.com</code> Github IP 位址，例如找到的是<code>192.168.0.444</code>。</p>
+<blockquote>
+<p>最常見的 <code>CNAME</code> 用法<br>瀏覽器上輸入 <code>www.wualnz.com</code> Enter後會自動跳轉到（對應到）<code>wualnz.com</code><br>不論是輸入<code>wualnz.com</code>還是<code>www.wualnz.com</code> 都能正確導向至網站。</p>
+</blockquote>
+<h4 id="A-Records-是什麼？"><a href="#A-Records-是什麼？" class="headerlink" title="A Records 是什麼？"></a>A Records 是什麼？</h4><p>A Records 就是 該主機的 IP 位址。<br>像 <code>wualnz.com</code> 方便人們記憶的名稱，最後會被解析成很難記住的 IP 位址，例：<code>192.168.0.444</code></p>
+<h2 id="Hexo-設定-url-個人網域"><a href="#Hexo-設定-url-個人網域" class="headerlink" title="Hexo 設定 url 個人網域"></a>Hexo 設定 url 個人網域</h2><p>打開_config.yml<br>其中找到url與root，設定為自己網域名稱。</p>
+<p>若沒有個人網域，可以用預設的Github Pages產生的url（例如：<code>hazelwu2.github.io/22mm</code>)</p>
+<h3 id="無個人網域-設定"><a href="#無個人網域-設定" class="headerlink" title="無個人網域 設定"></a>無個人網域 設定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## _config.yml</span><br><span class="line">url: http://github帳號.github.io/repo名稱</span><br><span class="line">root: /repo名稱</span><br></pre></td></tr></table></figure>
+<p>舉例來說，我的Github帳號是<code>hazelwu2</code>，Repo名稱叫<code>22mm</code>，那麼設定就會像下列這樣<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## _config.yml</span><br><span class="line">url: https://hazelwu2.github.io/22mm/</span><br><span class="line">root: /22mm/</span><br></pre></td></tr></table></figure></p>
+<h3 id="有個人網域-設定"><a href="#有個人網域-設定" class="headerlink" title="有個人網域 設定"></a>有個人網域 設定</h3><p>有個人網域的話，開啟 _config.yml，並將url設定成自己購買的網址，記得<code>/</code>不要省略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: http://wualnz.com/</span><br><span class="line">root: /</span><br></pre></td></tr></table></figure></p>
+<p>最後，再回到github你的repo內，設定 Custom Domain</p>
+<ol>
+<li>進入github，點 Hexo 的 Repo，並進入設定</li>
+<li>GitHub Pages 下的 Custom domain</li>
+<li>修改成你購買的網域。（要與CNAME檔案設定一致）</li>
+</ol>
+<p>（例：我的網域是wualnz）<br><img src="https://i.imgur.com/kbEuK16.png" alt="Github 設定 Custom Domain Hexo"></p>
+<p>以上步驟完成後，便綁定個人網域成功。<br><br></p>
+<h2 id="Hexo-綁定自訂網址後，CSS-無法正常載入"><a href="#Hexo-綁定自訂網址後，CSS-無法正常載入" class="headerlink" title="Hexo 綁定自訂網址後，CSS 無法正常載入"></a>Hexo 綁定自訂網址後，CSS 無法正常載入</h2><p>綁定網址後開心的進入網站，發現：靠～無法載入 CSS ，打開 Console.log 檢查發現<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">404 Error Not found</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>原因來自於：<br>Github Page 不支援自定義的 SSL 憑證，也就是說：使用Github Pages 綁定自己的網址，會和 Github 起衝突</p>
+</blockquote>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><ol>
+<li>自訂網域付費購買 SSL 憑證</li>
+<li>使用免費憑證（例：Let’s Encrypt）</li>
+<li>CDN Cloud Flare服務</li>
+</ol>
+<p>比較建議使用 CDN 的 Cloud Flare，Let’s Encrypt雖是免費憑證，但需要三個月手動更換一次。<br>接下來會介紹如何在 Cloudflare 做設定</p>
+<h3 id="Cloudflare-設定"><a href="#Cloudflare-設定" class="headerlink" title="Cloudflare 設定"></a>Cloudflare 設定</h3><p>設定前，需要將你的網址商設定<code>網域名稱伺服器</code>為Cloudflare提供的網址，讓Cloudflare 代管 DNS Server<br>我買的網址商是Godaddy的，因此在Godaddy面板上設定會像是這樣<br><img src="https://i.imgur.com/ad5nlWf.png" alt="Godaddy 設定 Cloudflare 代管DNS"><br>在網址商Godaddy設定成功後，在Cloudflare樣板會看到 Status:Active，表示設定成功。<br><img src="https://i.imgur.com/p497z5I.png" alt="Cloudflare Setting DNS Server Active Successful"></p>
+<p>前往Cloudflare DNS</p>
+<ol>
+<li>新增兩個 A Records，皆指向Github IP：<code>192.30.252.153</code>、<code>192.30.252.154</code></li>
+<li>新增 CNAME，NAME 填 www，Value填上 Github帳號.github.io<br>設定完成後，應該會像下圖這樣。<br><img src="https://i.imgur.com/M2QuOzg.png" alt="Cloudflare setting github page with custom domain"></li>
+</ol>
+<h3 id="設定-SSL-憑證"><a href="#設定-SSL-憑證" class="headerlink" title="設定 SSL 憑證"></a>設定 SSL 憑證</h3><p>Cloudflare DNS 設定完成後，到Crypto標籤，我們要設定 SSL憑證</p>
+<p>SSL有Flexible、Full選項，這兩個都可以選。<br><img src="https://i.imgur.com/4IRZ3Ic.png" alt="Cloudflare Crypto setting SSL"><br>將 Always user HTTPS 打開，變成 On狀態<br><img src="https://i.imgur.com/lqmzqKD.png" alt="Cloudflare Crypto setting SSL"></p>
+<p>設定完後，恭喜你，重新Refresh網址後，網站已經能成功抓到 CSS 囉</p>
+<blockquote>
+<h4 id="Cloudflare-SSL-Flexible-、-Full-差別"><a href="#Cloudflare-SSL-Flexible-、-Full-差別" class="headerlink" title="Cloudflare SSL Flexible 、 Full 差別"></a>Cloudflare SSL Flexible 、 Full 差別</h4><p>下圖為<a href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-" target="_blank" rel="noopener">官方網站提供的說明圖樣</a><br>Flexible、Full 差別在於 Cloudflare 與 Server 間 <strong>是否為加密連線</strong>，官方推薦大家設定 Full SSL。<br>Flexible 是 對 Server 間的連線是不加密的。<br><img src="https://support.cloudflare.com/hc/en-us/article_attachments/206124658/cfssl_flexible.png" alt="Cloudflare SSL Flexible"><br>Full 是你擁有一方的SSL憑證，你可以自由選擇一方是否加密。白話一點就是：CloudFlare不管是對訪客、還是對Server端都能夠加密！而且免付費會員也可以使用這功能。<br><img src="https://support.cloudflare.com/hc/en-us/article_attachments/206167937/cfssl_full.png" alt="Cloudflare SSL Full"></p>
+</blockquote>
+<p>如果想知道更詳細內容，可以看看我寫的這篇文章：關於<a href="https://medium.com/@hazelwu/rails-%E8%97%89cloudflare-%E5%85%8D%E8%B2%BBssl%E8%AA%8D%E8%AD%89%E5%BE%8C-%E7%84%A1%E6%B3%95%E7%99%BB%E5%85%A5%E5%BE%8C%E5%8F%B0-%E8%A7%A3%E6%B1%BA%E8%BE%A6%E6%B3%95-4b87d59be765" target="_blank" rel="noopener">Rails &amp; Cloudflare use Free SSL, 無法登入後台 解決辦法</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://liyang.pro/hexo-github-cloudflare-customer-domain-ssl/" target="_blank" rel="noopener">Hexo+GitHub+Cloudflare实现自定义域名全站SSL</a></li>
+<li><a href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-" target="_blank" rel="noopener">What do the SSL options mean?</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Macbook Pro 2017版，如何架設兩個螢幕/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Macbook Pro 2017版，如何架設兩個螢幕/" itemprop="url">Macbook Pro 2017版，外接兩個螢幕 | 全攻略</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T15:04:03+08:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Macbook-Pro-2017版，外接兩個螢幕-全攻略"><a href="#Macbook-Pro-2017版，外接兩個螢幕-全攻略" class="headerlink" title="Macbook Pro 2017版，外接兩個螢幕 | 全攻略"></a>Macbook Pro 2017版，外接兩個螢幕 | 全攻略</h1><p><img src="https://i.imgur.com/TmzH6C8.jpg" alt="Macbook Pro 2017 how to connect two display tutorial"></p>
+<h4 id="為什麼要外接兩個螢幕？"><a href="#為什麼要外接兩個螢幕？" class="headerlink" title="為什麼要外接兩個螢幕？"></a>為什麼要外接兩個螢幕？</h4><p>架設三個螢幕的用途是：最左邊 Mbp 顯示程式結果、中間 20吋 主要寫 Code、右邊24吋螢幕能垂直擺放，用來查資料。<br>多螢幕用途是為了不讓注意力被分心，提高工作效率。</p>
+<blockquote>
+<p>如果你也認同這一點，也希望提高工作效率，那麼你可以考慮購買雙螢幕。</p>
+</blockquote>
+<p>下列將介紹我是如何用Macbook Pro 2017 外接兩個螢幕<br>其中在選購螢幕時也發現很多眉眉角角，也會分享我對螢幕挑選的準則。<br><br></p>
+<blockquote>
+<h2 id="還在單一螢幕-Macbook-時期"><a href="#還在單一螢幕-Macbook-時期" class="headerlink" title="還在單一螢幕 Macbook 時期"></a>還在單一螢幕 Macbook 時期</h2><p>我常在切換視窗時忘記現在要幹嘛XD，手忙腳亂的一下開VS Code、一下要切換localhost檢查結果，或又要換成Chrome來查資料<br>自從外接單螢幕後，真誠地發現越少的切換視窗，可以幫助自己更專心！</p>
+</blockquote>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>以下是我自己本身的需求，可以參考看看</p>
+<ol>
+<li>需要外接兩個螢幕</li>
+<li>深度夠的桌面，可以外接鍵盤、滑鼠，還能寫筆記</li>
+<li>2 USB、1 HDMI、2 Type-C 轉接頭</li>
+</ol>
+<p>最困擾的是 Macbook Pro 2017 出廠後只有兩個 Type-C 孔，變得是購買之前都要深思熟慮、搜集好資訊。兩個 Type-C 意味著要買好多好多轉接頭啊，扣掉充電線就只剩下一個了哪，錢包你為什麼都肥不起來&gt;”&lt;</p>
+<p><br></p>
+<blockquote>
+<h3 id="根據螢幕選購-Type-C-轉接頭"><a href="#根據螢幕選購-Type-C-轉接頭" class="headerlink" title="根據螢幕選購 Type-C 轉接頭"></a>根據螢幕選購 Type-C 轉接頭</h3><p>如果你外接的螢幕是舊螢幕（VGA接孔），非常推薦買小米五合一的轉接頭，不貴且有 2 USB + 1 Type-C(可充電) + 1 VGA + 1 網路孔，千元有找！<br>比較新型的螢幕可能有Display Port、HDMI等等，那就是看你個人需求，去購買對應的轉接頭<br>要根據你需要外接螢幕接的是什麼樣的孔，來選配轉接頭，才不會白買哦</p>
+</blockquote>
+<h2 id="Macbook-Pro-2017-外接螢幕配備"><a href="#Macbook-Pro-2017-外接螢幕配備" class="headerlink" title="Macbook Pro 2017 外接螢幕配備"></a>Macbook Pro 2017 外接螢幕配備</h2><p>以下列的是上圖工作桌的所有配備</p>
+<ol>
+<li>工作桌 長度 140 cm x 深度 65 cm | Ikea HILVER 桌面 + ADILS 桌腳 | $ 3390</li>
+<li>Macbook Pro 2017 | 13吋 </li>
+<li>E202H Display | 20 吋螢幕 | VGA | $ 0 （二手）</li>
+<li>DELL U2415 | 22 吋螢幕 | HDMI | $ 8430</li>
+<li>HDMI 1.4 版 公轉公<br><img src="https://www.jakartanotebook.com/images/products/39/8/5218/2/high-speed-hdmi-to-hdmi-cable-od7.3mm-gold-plated-4k-5m-black-42.gif" alt=""></li>
+<li>小米 USB-C 轉 VGA 五合一 轉接頭<br>（台灣小米之家沒有販賣，購買管道要從淘寶官方/露天賣家尋找）<br><img src="https://i.imgur.com/QBpgf2K.jpg" alt=""></li>
+<li>Type-C 轉 HDMI / Type-C / USB<br><img src="https://i.imgur.com/EAuMX65.jpg" alt="Type-C 轉 HDMI / Type-C / USB"></li>
+</ol>
+<h2 id="挑選電腦桌"><a href="#挑選電腦桌" class="headerlink" title="挑選電腦桌"></a>挑選電腦桌</h2><h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>如果你想要能夠外接鍵盤、滑鼠，建議桌子深度可以挑50cm以上的桌子，40cm絕對不推薦，太淺了。<br>但是如果你想要可以另外寫筆記、又外接鍵盤滑鼠，顯得不狹窄，建議挑桌子深度65cm就夠用了<br><br></p>
+<h4 id="長寬度建議"><a href="#長寬度建議" class="headerlink" title="長寬度建議"></a>長寬度建議</h4><p>外接單個螢幕，桌子至少長度要<code>120cm</code><br>外接雙螢幕的話，桌子長度 120cm 會稍微擁擠，預算夠的話可以直接上140cm!XD<br>我是購買Ikea桌子，桌子頗穩固，拿螺絲自己鎖很快，組裝也超簡單</p>
+<blockquote>
+<p>如果線上桌子沒有你想要款式的話，Ikea有提供客製化桌面：<a href="https://www.ikea.com/tw/zh/catalog/categories/departments/workspaces/tools/planner_build_your_own_desk/" target="_blank" rel="noopener">Ikea 客製化書桌</a><br>桌面長寬度、桌腳要什麼都可以自己配，超方便。乾，搞得有點像是業配文QQ</p>
+</blockquote>
+<h2 id="長時間-Coding-看螢幕，如何挑選螢幕"><a href="#長時間-Coding-看螢幕，如何挑選螢幕" class="headerlink" title="長時間 Coding 看螢幕，如何挑選螢幕"></a>長時間 Coding 看螢幕，如何挑選螢幕</h2><p>工程師長期是用眼睛、腦在工作，尤其眼睛最重要，動不動看螢幕就是8小時起跳，如果等眼睛不好時才想到要保養，真的會來不及。<br>過去太操眼睛，導致看螢幕不到兩小時就看不下去了，靠！這要怎麼工作啊..</p>
+<blockquote>
+<p>工程師的職業傷害是近視度數加深、長期眼睛疲勞，想要眼睛不易疲勞，列出幾項建議</p>
+<ol>
+<li>善用 f.lux 軟體降低藍光</li>
+<li>配電腦專用眼鏡，度數要比正常度數低 50~100 度</li>
+<li>寫程式、查資料是靜態畫面，不用特別買特高更新頻率、曲面更是不需要（只是會潮到出水而已XD）</li>
+<li>買不閃屏螢幕，降低螢幕亮度</li>
+<li>環境燈光要明亮</li>
+</ol>
+</blockquote>
+<h3 id="環境光源更重要"><a href="#環境光源更重要" class="headerlink" title="環境光源更重要"></a>環境光源更重要</h3><blockquote>
+<p>眼睛不易疲勞，環境光源亮度 &gt; 上等好螢幕</p>
+</blockquote>
+<p>如果你的需求是看螢幕較不會對眼睛造成太大負擔，你必須要知道的是：環境燈光 &gt; 好螢幕<br>當電腦桌燈光較幽暗，外光線比較亮，導致你的瞳孔放大，長期下來會讓你看沒多久螢幕就會受不了</p>
+<blockquote>
+<p>倘若你的環境燈光暗到像世界末日，找水電工換個燈光吧，對了記得要LED，省電省瓦數（笑），明亮的環境也有助於改善心情。</p>
+</blockquote>
+<p>接著，下面會著重講解怎麼挑選「不閃屏螢幕」</p>
+<h4 id="閃屏是什麼？"><a href="#閃屏是什麼？" class="headerlink" title="閃屏是什麼？"></a>閃屏是什麼？</h4><p>螢幕其實有肉眼看不見的閃爍，你相信嗎？最簡單的實驗是拿著手機對著螢幕錄影，你看看有沒有出現一條一條的線。<a href="https://youtu.be/8lEZQRv3MPk?t=23" target="_blank" rel="noopener">不閃屏 VS 閃屏對比影片</a>，點擊影片花個三十秒，你會更了解：平常閃屏螢幕是怎麼摧殘眼睛的。</p>
+<h4 id="為什麼要挑選不閃屏的螢幕？"><a href="#為什麼要挑選不閃屏的螢幕？" class="headerlink" title="為什麼要挑選不閃屏的螢幕？"></a>為什麼要挑選不閃屏的螢幕？</h4><p>如果你一天看螢幕八個小時，一秒高達250次的閃屏螢幕，看八小時的螢幕也等於被閃了5760000次！不閃屏有助於減少眼睛疲勞！<br>螢幕的錢絕對不要省，對自己的眼睛好一點，一台好的螢幕如EIZO 低階款 13,900，最少也能用5年，等於說你是一天花7.6元而已，眼睛不疲勞能讓你休息時間繼續進修，技術升等了就也加薪了，是不是賺很大，這點錢真的就別省了！</p>
+<h4 id="此不閃屏非彼「不閃屏」"><a href="#此不閃屏非彼「不閃屏」" class="headerlink" title="此不閃屏非彼「不閃屏」"></a>此不閃屏非彼「不閃屏」</h4><p>許多廠商知道消費者注重眼睛健康，要購買不閃屏螢幕，紛紛標榜說「不閃屏螢幕」</p>
+<blockquote>
+<p>標榜不閃屏，一調低亮度就破功</p>
+</blockquote>
+<p>100%亮度時確實是不閃屏，現代螢幕出產皆為LED燈管，不再是舊技術CCLF（較不亮），導致螢幕在100%亮度時，認為太亮、眼睛好酸，便會將亮度調低到50%、30%，甚至更低。<br><br><br>那你知道嗎？當亮度調到50%、30%時，這時閃屏就會出現了，還會伴隨著 PWA，導致不舒服。（也是我購買螢幕時做功課，才知道有時看螢幕看到噁心想吐、頭暈，原來都是 PWA 惹的禍），這就是此不閃屏非彼「不閃屏」的由來！</p>
+<h4 id="換句話說"><a href="#換句話說" class="headerlink" title="換句話說"></a>換句話說</h4><p>如果亮度太低，螢幕的閃爍就會加強，瞳孔不斷放大縮小，讓眼睛更疲勞<br>如果亮度太高，螢幕的藍光就會加強，黃斑部應付過量藍光，也會更疲勞</p>
+<blockquote>
+<p>結論：要買好螢幕，可以調低亮度也不會產生 PWM 的螢幕，才能有效降低眼睛負擔</p>
+</blockquote>
+<blockquote>
+<p>小知識：PWM 會傷害人體、傷眼<br>PWM (Pulse Width Modulation)，當亮度調到 20% 以下時會導致 PWM 劇烈，往往伴隨著眼睛難受、頭痛甚至噁心想吐的情況發生。亮度 20% 以下會變得更劇烈的原因：調光方式是藉由閃爍來達到變暗的效果，下列附上TFC CENTRAL對PWM的詳細介紹。<br><a href="http://www.tftcentral.co.uk/articles/pulse_width_modulation.htm" target="_blank" rel="noopener">PWM - Introduction | TFTCENTRAL</a><br>目前上等好螢幕對於「調低亮度會產生 PWM 」沒有完美的解決方案，像是知名廠牌EIZO是用混合方式解決，亮度低於20用高頻18000Hz（無論眼睛、手機螢幕錄影都捕捉不到），或是有些廠商是用 DC調光 解決。</p>
+</blockquote>
+<h3 id="挑選螢幕的準則"><a href="#挑選螢幕的準則" class="headerlink" title="挑選螢幕的準則"></a>挑選螢幕的準則</h3><p>挑選對眼睛負擔較小的螢幕，必須要有以下準則</p>
+<ol>
+<li>不會閃屏（亮度低於100%也不會閃屏）</li>
+<li>不會因為調低螢幕亮度，產生 PWA<br>下列連結是 TFT Central 目前對所有已做過測試 PWA 螢幕匯集的總表，如果<strong>不會產生 PWA，會顯示 Confir-med: Yes</strong><br>最快的辦法是從這個列表中挑出 Yes 的螢幕型號，再根據自己的預算慢慢篩掉。<br><a href="http://www.tftcentral.co.uk/articles/flicker_free_database.htm" target="_blank" rel="noopener">Flicker Free Database 所有螢幕對 PMA 測試 | TFT Central</a></li>
+</ol>
+<blockquote>
+<p>TFT Central 是什麼？<br>TFT Central是一個來自英國權威且老牌的測試螢幕網站，網站內容皆是對螢幕的詳細測試、專業性評論，包含亮度調到多少時，瓦數會有怎樣的表現、調低亮度時是否會產生過高的閃爍、PWA、色調、校色、與其他螢幕校色性能比較、旋轉角度、亮度與穩定對比度比較、面板平均性等超細項的調查。編輯者皆為專業知識豐富者，找LED螢幕資料時，是一個很值得參考的網站，缺點是：因為測試太齊全了、導致網站更新很慢，不是所有螢幕都有測試報告。</p>
+</blockquote>
+<p>總而言之就是</p>
+<ol>
+<li>先找出你鍾意的螢幕</li>
+<li>Google搜尋喜歡螢幕型號，再多加上幾組關鍵字「PWM Flicker free tests」<br><br><br>例如：考慮想買Dell U2415，Google先搜尋 <code>DELL U2415m pwm flicker free test</code> 查看報告結果，以TFT CENTRAL提供資訊為主，<a href="http://www.tftcentral.co.uk/reviews/dell_u2415.htm" target="_blank" rel="noopener">Dell U2415M測評</a>，找到<code>Backlight Dimming and Flicker</code>段落，你會看到下列圖片。<br><img src="https://i.imgur.com/asAnEcT.png" alt="U2415m filcker free"><blockquote>
+<p>圖片在說什麼？<br>最左上角的<code>Pulse Width Modulation Used</code> 就是最討厭的 PWM 了，如果右邊對應的是 No，代表不會產生 PWM<br>Cycling Frequency指的是循環頻率，當1200 Hz時候會產生非常低的震盪次數。（PWM 產生是因為亮度調暗後必須加快閃爍頻率）<br>100 % Brightness時，當螢幕亮度為 100% 不會產生 PWM、50 % Brightness也不會、0% Brightness 也不會有PWM，恭喜你！當你看到這張圖片都顯示ＮＯ時，這台螢幕你真的可以考慮帶回家了！</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="專業性測評螢幕-相關網站"><a href="#專業性測評螢幕-相關網站" class="headerlink" title="專業性測評螢幕 | 相關網站"></a>專業性測評螢幕 | 相關網站</h4><p>除了<code>TFT Central</code>之外，還有幾個外國網站也是專業性測評螢幕可以提供參考。</p>
+<ul>
+<li><a href="http://www.tftcentral.co.uk/" target="_blank" rel="noopener">TFT Central</a></li>
+<li><a href="https://www.prad.de/" target="_blank" rel="noopener">Prad</a></li>
+<li><a href="https://displaylag.com/" target="_blank" rel="noopener">Displaylad</a></li>
+</ul>
+<h3 id="Dell-U2415-如何接線-？"><a href="#Dell-U2415-如何接線-？" class="headerlink" title="Dell U2415 如何接線 ？"></a>Dell U2415 如何接線 ？</h3><p>經過測試後，決定把Dell U2415搬回家，悲劇發現：靠！我不會接到Macbook，好蠢喔（笑）<br>後來調查幾個解決方案，我是直接買HDMI接公對公 + Type-C 轉 HDMI 轉接頭才得以 Online…</p>
+<ol>
+<li>USB 對 miniDP 可以將螢幕當作USB HUB，外接設備可連接在螢幕的USB上。</li>
+<li>DP 對 miniDP，DP插螢幕，mini DP插電腦，顯示卡沒有Display插槽就無法用</li>
+<li>買一條支援 2K/4K HDMI 公對公</li>
+<li>買一條 MiniDP轉DP 即可接上螢幕，但 DP 的線需要買支援到 4K 的</li>
+</ol>
+<h3 id="關於-HDMI-線材-1-4-和-2-0-差別"><a href="#關於-HDMI-線材-1-4-和-2-0-差別" class="headerlink" title="關於 HDMI 線材 1.4 和 2.0 差別"></a>關於 HDMI 線材 1.4 和 2.0 差別</h3><p>他們的差別在於輸出畫質是否高於 1080P<br>HDMI 1.4版，最高輸出只會到 1080P 而已<br>HDMI 2.0版可以輸出 2k/4K，輸入畫質可以 &gt; 1080P</p>
+<blockquote>
+<p>如果你有使用到 4k 解析度的需求或螢幕解析度比例是 21:9，一定要特別選購 HDMI 2.0(60Hz)以上版本的傳輸線，否則會黑頻。</p>
+</blockquote>
+<h3 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h3><ul>
+<li><a href="https://isite.tw/2016/08/10/16680/4" target="_blank" rel="noopener">電腦達人養成計畫 5-3：HDMI？DVI？VGA？各式螢幕介面完全解析與選購指南</a></li>
+<li><a href="https://www.mobile01.com/topicdetail.php?f=350&amp;t=4852168" target="_blank" rel="noopener">EIZO 螢幕 跟 benq光智慧 大家會選哪一款 護眼的話</a></li>
+<li><a href="http://www.tftcentral.co.uk/reviews/dell_u2415.htm" target="_blank" rel="noopener">Dell U2415 Review | TFT Central</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/複製-Production-真實環境資料，模擬超逼真測試-Rails-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/複製-Production-真實環境資料，模擬超逼真測試-Rails-5/" itemprop="url">複製 Production 真實環境資料，模擬超逼真測試 | Rails 5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T03:23:39+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。</p>
+<h3 id="將要測試的資料庫（例如：production）匯出成sql"><a href="#將要測試的資料庫（例如：production）匯出成sql" class="headerlink" title="將要測試的資料庫（例如：production）匯出成sql"></a>將要測試的資料庫（例如：production）匯出成sql</h3><p>將原始production資料庫:database_name，匯出成「database_name-20180612.sql」檔案</p>
+<blockquote>
+<p>（註：通常會加上日期，會較為清楚知道這是什麼時期匯出的資料）</p>
+</blockquote>
+<p>你需要知道：Server端上的database_url、Server的IP及資料庫的名稱<br>格式大約會像是這樣：</p>
+<p>你可以從Google Cloud Platform上查詢或是在Server租用的主機商查看資訊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">database_url</span><br><span class="line">範例格式：postgresql://資料庫使用者:資料庫密碼@ServerIP/database_name</span><br><span class="line">真實格式：postgresql://hazelwu:123456@11.12.200.205/production</span><br></pre></td></tr></table></figure></p>
+<p>如果不清楚database_url是怎麼生成的，可以參考這篇文章：<a href="http://edgeguides.rubyonrails.org/configuring.html#configuring-a-database" target="_blank" rel="noopener">Rails Guide Configure database</a></p>
+<p>遠端連上Server後<br>ssh <a href="mailto:hazelwu@11.12.200.205" target="_blank" rel="noopener">hazelwu@11.12.200.205</a><br>移動到專案目錄後，在Commend Line上輸入，並自行填上相關參數<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pg_dump -h 11.12.200.205 -U 資料庫使用者 資料庫名稱 &gt; production-20180612.sql</span><br><span class="line">## 範例：使用者 hazelwu, 資料庫名稱 123456</span><br><span class="line">pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</span><br></pre></td></tr></table></figure></p>
+<p><code>pg_dump dbname &gt; dumpfile</code></p>
+<ul>
+<li>原始指令：pg_dump 資料庫名稱 &gt; 匯出檔案名稱</li>
+<li>參數意義：<br>  -h：host<br>  -U：user<br>  -p：port（註：專案未有設定port，所以不需要設定此參數）<blockquote>
+<p>由於是在Server端要連線至資料庫（本文撰寫時採用GCP），所以需要特別輸入IP位址及User名稱，才能有權限讀取資料庫，並匯出sql檔案。</p>
+</blockquote>
+</li>
+</ul>
+<p>輸入完指令後，便會將 Porduction的資料庫檔案，匯出成sql檔。<br>接著要做的就是把這個新生成的檔案（production-20180612.sql），從Server拉到自己Local端</p>
+<p>不過，通常資料庫都會越來越肥大，在拉到Local端之前要記得先用gzip壓縮一下哦。</p>
+<h3 id="在Server上-gz-壓縮-越來越肥的資料庫"><a href="#在Server上-gz-壓縮-越來越肥的資料庫" class="headerlink" title="在Server上 gz 壓縮 | 越來越肥的資料庫"></a>在Server上 gz 壓縮 | 越來越肥的資料庫</h3><p>以下操作指令皆為在<code>Server</code>端輸入。</p>
+<ol>
+<li><p>將檔案壓縮成gz<br>解壓縮完便會還原成 production-20180612.sql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gzip production-20180612.sql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>gz解壓縮指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gunzip production-20180612.sql.gz</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Remote-Server-下載-sql-到-Local端"><a href="#Remote-Server-下載-sql-到-Local端" class="headerlink" title="Remote Server 下載 sql 到 Local端"></a>Remote Server 下載 sql 到 Local端</h3><p>要如何從Server端直接下載檔案到本機電腦呢？<br>有幾種方式：curl、wget或是scp都可以。</p>
+<ul>
+<li>使用wget的話，需要將檔案放在server上的開放空間，且必須要是瀏覽器可以打開的網址，例如</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ Wget url</span><br><span class="line">wget http://11.12.200.205:8000/production-20180612.sql</span><br></pre></td></tr></table></figure>
+<p>以下是採取<code>scp</code>方式<br>scp其實很好記，顧名思義：Server Copy，夠白話了吧XD</p>
+<ul>
+<li>指令格式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp user@server:/路徑/你要/下載/的檔案 ~/Desktop/你要下載/到/電腦/的哪個/位置</span><br><span class="line">scp hazelwu@11.12.200.205:/home/hazelwu/test/current/production-20180612.sql ~/Desktop/github/test_rails</span><br><span class="line">## 這樣便會將production-20180612.sql下載至desktop/github/test_rails資料夾內。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="你知道嗎？其實還能夠再簡化一點"><a href="#你知道嗎？其實還能夠再簡化一點" class="headerlink" title="你知道嗎？其實還能夠再簡化一點"></a>你知道嗎？其實還能夠再簡化一點</h4><p>指定你要下載的東西，在Commend Line上先移動到想要把檔案放的資料夾（例如/tmp），接著後面那串指令（表示本機位置）以<code>.</code>來取代就可以了，便會將檔案下載到<code>/tmp</code>內。</p>
+<blockquote>
+<p>建議可以直接放在專案內的tmp內，因為不會被commit進去、tmp主要都為放暫時性檔案使用。（通常gitinore有加入/tmp/*）</p>
+</blockquote>
+<p>打以下的指令時，可以先在Command Line移動到你想要複製的目錄，後面就不用打一長串的東西囉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">### 簡化後的版本</span><br><span class="line">[local端] cd tmp/</span><br><span class="line">scp hazelwu@11.12.200.205:/home/hazelwu/test/current/production-20180612.sql .</span><br></pre></td></tr></table></figure>
+<p>這樣即可將sql匯出來哩</p>
+<h3 id="保個保險吧：攔截會發送給使用者的動作（Email"><a href="#保個保險吧：攔截會發送給使用者的動作（Email" class="headerlink" title="保個保險吧：攔截會發送給使用者的動作（Email)"></a>保個保險吧：攔截會發送給使用者的動作（Email)</h3><p>由於這些資料都非常真實，是來自真實使用者的資料，包含信箱手機等都為真的<br>所以不能真的做出通知使用者的行為，例如 E-Mail 寄送、簡訊認證碼送出等。</p>
+<p>Rails 有提供 <code>register_interceptor</code>攔截 Email</p>
+<ol>
+<li>config/initializers/email.rb</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 新增 config/initializers/email.rb </span><br><span class="line"># 在 Rails 啟動時，如果是非 production 環境就載入EmailInterceptor：</span><br><span class="line"></span><br><span class="line">unless Rails.env.production?</span><br><span class="line">  puts &quot;阻攔Email，將收件人皆改為test測試用信箱&quot;</span><br><span class="line">  require &apos;email_interceptor&apos;</span><br><span class="line">  ActionMailer::Base.register_interceptor(EmailInterceptor)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>lib/email_interceptor.rb新增以下程式碼</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## 新增 lib/email_interceptor.rb 並且自訂條件：將收件人信箱皆改為測試用信箱</span><br><span class="line">class EmailInterceptor</span><br><span class="line">  def self.delivering_email(message)</span><br><span class="line">    message.to = [&apos;test@example&apos;]</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="將-sql-匯出到-local端-develop-environment"><a href="#將-sql-匯出到-local端-develop-environment" class="headerlink" title="將 sql 匯出到 local端 / develop environment"></a>將 sql 匯出到 local端 / develop environment</h3><p>順利抓下Server端的資料後，也設上攔截機制了，接著可以匯入資料囉。</p>
+<ul>
+<li>匯出資料庫<br>pg_dump database_name &gt; backup.sql</li>
+<li>匯入資料庫<br>psql db_name &lt; backup.sql</li>
+</ul>
+<p>還記得剛剛匯出的指令嗎？<br><code>pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</code><br>接著要匯入的話，指令要這樣打<br><code>psql 123456 &lt; production-20180612.sql</code><br>輸入完之後，可以進入到Console.log試試看資料庫有沒有匯入成功</p>
+<blockquote>
+<p>有發現為什麼突然少那麼多參數嗎？</p>
+<ul>
+<li>原因<br>  由於目前環境是Local端，不需要填入帳號密碼等參數來藉由GCP連入資料庫了，我們只要指定檔案，匯入到本機的資料庫即可。預設是沒有輸入參數，他會抓當前的IP位置</li>
+</ul>
+</blockquote>
+<ul>
+<li>重整 Postgresql 匯入/匯出資料庫指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">匯出資料庫</span><br><span class="line">psql project_development &lt; project_production-20180612.sql</span><br><span class="line">匯入資料庫</span><br><span class="line">psql project_development &lt; project_production.sql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="實際操作時，遇到的問題："><a href="#實際操作時，遇到的問題：" class="headerlink" title="實際操作時，遇到的問題："></a>實際操作時，遇到的問題：</h3><h4 id="1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"><a href="#1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？" class="headerlink" title="1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"></a>1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？</h4><blockquote>
+<p>在 Server端 用 Gem 產生資料檔 Seed，抓下來到Local端跑種子檔，<br>結果：無法與關聯資料庫對上，關聯id對不上去（如：user_id會對不上，找不到該User）</p>
+</blockquote>
+<p>資料格式類似如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User.create!([</span><br><span class="line">&#123;email: &quot;fduwsbxcbkdym4jzxn6b@gmail.com&quot;, encrypted_password: &quot;zxkdfgjeute123ds&quot;, reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一次試著做時，是用<code>Gem &#39;seed_dump&#39;</code>在Server端上做，因屢次失敗的原因，後面便不採用seed_dump的做法了。轉移production資料到local，直接用postgresql指令直接拉，會比較快。</p>
+<h4 id="2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"><a href="#2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？" class="headerlink" title="2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"></a>2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？</h4><p>將local端資料庫全部刪除，打算跑rails db:seed:users，將production轉移至local<br>但發現會對不上關聯資料庫的部分，因為重建立的user_id並不是從0開始，這該怎麼辦？</p>
+<ul>
+<li>刪除資料後，id會從0開始有下列幾個做法</li>
+</ul>
+<ol>
+<li>TRUNCATE table <code>TABLE_NAME</code>; </li>
+<li>DROP table <code>TABLE_NAME</code>;</li>
+<li>rails db:drop</li>
+</ol>
+<ul>
+<li><code>TRUNCATE</code> 與 <code>DROP</code> 兩者的差別在於<ul>
+<li>前者是把資料欄位全部刪除；</li>
+<li>後者 DROP 則是把整個 TABLE 刪除</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"><a href="#3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出" class="headerlink" title="3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"></a>3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出</h4><p>由於Server端的資料庫與專案上安裝的資料庫版本不符（一個為9.6版本、一個則是9.5版本），導致無法匯出</p>
+<ul>
+<li>一開始的嘗試：<br>先在Server上安裝相同版本的psql，但未能成功，仍還是舊版本QQ<br>搞版本總是很複雜又很麻煩，不過有一個比較快的方法是：</li>
+</ul>
+<p>在跑<code>pg_dump</code>指令時，prefix前面加上指定的版本，就能夠指定為9.6版本跑pg_dump的指令，而不是舊的版本（9.5)</p>
+<ul>
+<li>如何解決：<br>因此我們需要指定版本：<code>/usr/lib/postgresql/9.6/bin/pg_dump</code> 後面再加上原要接的參數，就可以輕鬆搞定版本問題啦！</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 原本psql匯出指令</span><br><span class="line">pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql </span><br><span class="line"># 解決版本不一致 匯出指令</span><br><span class="line">/usr/lib/postgresql/9.6/bin/pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</span><br></pre></td></tr></table></figure>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="http://osxdaily.com/2016/11/07/download-file-from-server-scp-ssh/" target="_blank" rel="noopener">How to Download a File from a Server with SSH /SCP </a></li>
+<li><a href="http://motion-express.com/blog/20141112-rails-test-db-seed" target="_blank" rel="noopener">Rails 複製資料到 development環境</a></li>
+<li><a href="https://www.postgresql.org/docs/10/static/backup-dump.html" target="_blank" rel="noopener">Postgresql Dump</a></li>
+<li>小蟹本人XD</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Rails-Server打不開嗎？你應該看看這篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Rails-Server打不開嗎？你應該看看這篇/" itemprop="url">Rails Server打不開嗎？你應該看看這篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T03:34:48+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>明明Ruby Server已經關閉了，但重新輸入rails server 出現錯誤訊息：Server已經打開了<br>過去常遇到此問題，我都是直接重開機。後來仔細查詳解，發現有更快的解決方法。</p>
+<h3 id="出現的錯誤訊息"><a href="#出現的錯誤訊息" class="headerlink" title="出現的錯誤訊息"></a>出現的錯誤訊息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A server is already running. Check /Users/hazelwu/Desktop/github/project/tmp/pids/server.pid.</span><br></pre></td></tr></table></figure>
+<h3 id="除了重開機以外，你還有更好的選擇！"><a href="#除了重開機以外，你還有更好的選擇！" class="headerlink" title="除了重開機以外，你還有更好的選擇！"></a>除了重開機以外，你還有更好的選擇！</h3><h4 id="先查出使用的port有什麼應用程式執行"><a href="#先查出使用的port有什麼應用程式執行" class="headerlink" title="先查出使用的port有什麼應用程式執行"></a>先查出使用的port有什麼應用程式執行</h4><p>首先要先知道你的Rails Server上一次關閉前是使用哪個port上<br>預設輸入<code>rails s</code>皆為設定port為3000。<br>例如：<code>localhost:3000</code><br>3001可以更改為預設的3000，或是看你的server開在哪個port上</p>
+<p>在Iterm/commend上輸入下列指令，可以查出3001的port被哪些應用程式開啟。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i tcp:3001</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/05/22001433/Screen-Shot-2018-05-22-at-12.07.15-AM.png" target="_blank" rel="noopener"><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/05/22001433/Screen-Shot-2018-05-22-at-12.07.15-AM-1024x158.png" alt=""></a><br>上圖中可以明顯看到佔用電腦3001的port有<code>ruby</code>及<code>ngrok</code><br>而ruby對應的PID是809</p>
+<h4 id="殺掉Ruby對應的PID，強迫關閉"><a href="#殺掉Ruby對應的PID，強迫關閉" class="headerlink" title="殺掉Ruby對應的PID，強迫關閉"></a>殺掉Ruby對應的PID，強迫關閉</h4><p>此刻輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 809</span><br></pre></td></tr></table></figure>
+<p>就可以成功將佔用port:3001的Rails Server關閉<br>重新在command上輸入<code>rails s -p 3001</code>即可順利開啟localhost:3001囉</p>
+<h4 id="補充：在Cmd如何關閉-Rails-Server"><a href="#補充：在Cmd如何關閉-Rails-Server" class="headerlink" title="補充：在Cmd如何關閉 Rails Server"></a>補充：在Cmd如何關閉 Rails Server</h4><p>除了<code>Ctrl+C</code>可以關掉rails server外，如果不小心進入無窮迴圈，用Ctrl+C沒有作用，還有另一種方法：<code>Ctrl+Z</code></p>
+<ol>
+<li><code>Ctrl+C / Cmd + C</code></li>
+<li><code>Ctrl+Z / Cmd + Z</code></li>
+</ol>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a href="https://stackoverflow.com/questions/15088163/cant-stop-rails-server" target="_blank" rel="noopener">Can’t stop rails server</a><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/05/22001433/Screen-Shot-2018-05-22-at-12.07.15-AM.png" target="_blank" rel="noopener"><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/05/22001433/Screen-Shot-2018-05-22-at-12.07.15-AM-1024x158.png" alt=""></a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wualnz.com/遠端ssh連到Server，無法進入Staging-Rails-Console的終極解決辦法：移除bin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hazel Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hazel Wu | 22'mm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/遠端ssh連到Server，無法進入Staging-Rails-Console的終極解決辦法：移除bin/" itemprop="url">遠端ssh連到Server，無法進入Staging Rails Console的終極解決辦法：移除bin</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T03:43:52+08:00">
+                2018-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="情境："><a href="#情境：" class="headerlink" title="情境："></a>情境：</h2><p>當用ssh遠端連線至server時，要進入專案內的rails console.log，出現rails new [options]，找不到rails project的目錄，紀錄如何解決的筆記。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh deploy@xxx.xxx.xxx.xxx</span><br><span class="line">cd ~/project/current</span><br><span class="line">bundle exec rails c staging</span><br></pre></td></tr></table></figure>
+<p>遠端連線至server時，想進去看log訊息，卻出現下圖的錯誤訊息<br><a href="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/30233930/14810cce-8bee-4d40-b4de-c877c1371eff.png" target="_blank" rel="noopener"><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2018/04/30233930/14810cce-8bee-4d40-b4de-c877c1371eff.png" alt=""></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rails new APP_PATH [options]</span><br><span class="line">....以下略</span><br></pre></td></tr></table></figure>
+<h2 id="解決辦法"><a href="#解決辦法" class="headerlink" title="解決辦法"></a>解決辦法</h2><p>專案是用capistrano 1.3.1 版本部署</p>
+<ol>
+<li>在local端用力打開 config/deploy.rb</li>
+<li>找到linked_dirs，然後把bin吃掉</li>
+<li>重新推上github上</li>
+<li>重新部署一次</li>
+<li>試試看，重新遠端ssh連線，就可以進入staging console囉</li>
+</ol>
+<h3 id="原始config-deploy-rb檔案設定"><a href="#原始config-deploy-rb檔案設定" class="headerlink" title="原始config/deploy.rb檔案設定"></a>原始config/deploy.rb檔案設定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set :linked_dirs, %w&#123;bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads public/assets&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="移除bin設定"><a href="#移除bin設定" class="headerlink" title="移除bin設定"></a>移除bin設定</h3><p>要移除bin，所以會變成下列的程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set :linked_dirs, %w&#123;log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads public/assets&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接著，重新推到github repo上<br>重開staging伺服器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cap staging deploy:restart</span><br></pre></td></tr></table></figure>
+<p>大概有九成可以解決問題XD</p>
+<h2 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h2><ul>
+<li><a href="https://stackoverflow.com/questions/31629983/rails-console-command-not-working" target="_blank" rel="noopener">rails console command not working
+</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-</header>
 
-    <main class="app-body">
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？</a>
-      </h2>
-      <p class="article-date">September 18, 2018</p>
-      
-        
-  <a href="/tags#CSS3" >
-    <span class="tag-code">CSS3</span>
-  </a>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
 
       
-      <div class="article-summary">
-        
-          CSS3 Transform 3D最近練習 CSS3 Transform 3D，卡片正面翻轉到背面的特效很酷炫，於是寫下這篇筆記。
-這篇 CSS3 主要會應用到的屬性有
 
-tranform-style:presesrve-3d
-backface-visibility
-transform: r ...
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hazel Wu</p>
+              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <a class="more" href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Canvas：前端特效動畫的基礎/">Canvas：前端特效動畫的基礎</a>
-      </h2>
-      <p class="article-date">September 13, 2018</p>
-      
-        
-  <a href="/tags#canvas" >
-    <span class="tag-code">canvas</span>
-  </a>
+    </main>
 
-      
-      <div class="article-summary">
-        
-          Canvas 基礎特性
-
-可以自由繪製的元件區域
-可以控制每個像素的顏色與繪製
-有很高的操控度，就像遙控器
-可以把他當成一張動態隨時可更動的圖片
-
-掌握 Canvas
-繪製圖型
-向量概念
-三角函數數學
-物件導向開發（拆成函件或物件變成小零件，來操作。方便除錯與維護）
-
-點線面構成圖形
-用點和 ...
-        
-      </div>
-      <a class="more" href="/Canvas：前端特效動畫的基礎/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/為什麼前端要學Vue-js？/">為什麼前端要學Vue.js？</a>
-      </h2>
-      <p class="article-date">September 12, 2018</p>
-      
-        
-  <a href="/tags#Vue" >
-    <span class="tag-code">Vue</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Vue.js 解決了什麼問題？當考慮要不要學習新技術時，要先問自己幾個問題
-
-這個技術解決了什麼樣的問題？羊毛出在羊身上，這個技術之所以被研發出來，必有其因。
-這個技術有沒有同類型的替代品？比較各自的優缺點
-我花時間成本去學習這個技術，對我有什麼好處？同樣的時間花去學別的技術，是不是更好？
- ...
-        
-      </div>
-      <a class="more" href="/為什麼前端要學Vue-js？/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/ES6語法：let、const/">ES6語法：let、const</a>
-      </h2>
-      <p class="article-date">September 4, 2018</p>
-      
-        
-  <a href="/tags#ES6" >
-    <span class="tag-code">ES6</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          let 與 const 誕生的目的不會汙染全域變數，好方便後續維護、Debug
-
-let, const 用來宣告區塊 {} 裡的變數
-for迴圈宣告 var改為 let
-const 唯讀變數，無法去做修改。
-
-let存在於大括號裡面，在大括號外面便會死翹翹。
-被全域變數污染的例子1234ul ...
-        
-      </div>
-      <a class="more" href="/ES6語法：let、const/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/BlueHost-Wordpress-如何安裝-Git-版本控制/">BlueHost Wordpress 如何安裝 Git 版本控制</a>
-      </h2>
-      <p class="article-date">July 28, 2018</p>
-      
-        
-  <a href="/tags#WordPress" >
-    <span class="tag-code">WordPress</span>
-  </a>
-
-  <a href="/tags#BlueHost" >
-    <span class="tag-code">BlueHost</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          BlueHost Wordpress 如何使用 Git 版本控制BlueHost 沒有提供Git或相關Git設定的支援，所以我們只好自立自強，以下安裝教學是在 BlueHost shared 環境下設置。 過程中有參考 BlueHost的官方文件，但是安裝失敗，文件並未寫得很完整，在這篇文章 ...
-        
-      </div>
-      <a class="more" href="/BlueHost-Wordpress-如何安裝-Git-版本控制/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/">為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。</a>
-      </h2>
-      <p class="article-date">July 23, 2018</p>
-      
-      <div class="article-summary">
-        
-          我用Ruby on Rails寫了一個CRUD網路相簿的網站，主機採用Heroku提供的服務。但是有一個缺點，Heroku不提供檔案儲存的空間，每過一段時間就會洗白一次。講白話一點就是：我上傳的相片過一段時間就會不見了，我得為我的相片找新的空間存放才行。這裡使用的是Amazon S3 sto ...
-        
-      </div>
-      <a class="more" href="/為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/神奇的migration-生成器-Ruby-on-Rails-5/">神奇的migration 生成器 | Ruby on Rails 5</a>
-      </h2>
-      <p class="article-date">July 20, 2018</p>
-      
-        
-  <a href="/tags#migration" >
-    <span class="tag-code">migration</span>
-  </a>
-
-  <a href="/tags#rails" >
-    <span class="tag-code">rails</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          神奇的migration 生成器 | Ruby on Rails 5參照著格式便可以自動產生Migration檔（包含格式與欄位及型態）
-12rails g add_xxx_to_資料表 [field:type][:index]rails g remove_xxx_to_資料表 [field ...
-        
-      </div>
-      <a class="more" href="/神奇的migration-生成器-Ruby-on-Rails-5/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址/">如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證</a>
-      </h2>
-      <p class="article-date">July 8, 2018</p>
-      
-        
-  <a href="/tags#Hexo" >
-    <span class="tag-code">Hexo</span>
-  </a>
-
-  <a href="/tags#CloudFlare" >
-    <span class="tag-code">CloudFlare</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址本篇適用於用Hexo框架架設在Github Pages上，但想要綁定自己買的網址。由於Github Pages 產生的個人網址太長，對 SEO 不友善，不是這麼好被搜尋引擎收錄，
-步驟
-Github Rep ...
-        
-      </div>
-      <a class="more" href="/如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/Macbook Pro 2017版，如何架設兩個螢幕/">2019年 Macbook Pro，外接兩個螢幕 | 全攻略</a>
-      </h2>
-      <p class="article-date">July 3, 2018</p>
-      
-        
-  <a href="/tags#Macbook Pro" >
-    <span class="tag-code">Macbook Pro</span>
-  </a>
-
-  <a href="/tags#外接螢幕" >
-    <span class="tag-code">外接螢幕</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          2019年最新 Macbook Pro，外接兩個螢幕 | 全攻略
-為什麼要外接兩個螢幕？架設三個螢幕的用途是：最左邊 Mbp 顯示程式結果、中間 20吋 主要寫 Code、右邊24吋螢幕能垂直擺放，用來查資料。多螢幕用途是為了不讓注意力被分心，提高工作效率。
-
-如果你也認同這一點，也希望提高 ...
-        
-      </div>
-      <a class="more" href="/Macbook Pro 2017版，如何架設兩個螢幕/">閱讀更多</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/複製-Production-真實環境資料，模擬超逼真測試-Rails-5/">複製 Production 真實環境資料，模擬超逼真測試 | Rails 5</a>
-      </h2>
-      <p class="article-date">June 13, 2018</p>
-      
-        
-  <a href="/tags#scp server" >
-    <span class="tag-code">scp server</span>
-  </a>
-
-  <a href="/tags#production data into local" >
-    <span class="tag-code">production data into local</span>
-  </a>
-
-  <a href="/tags#copy production data transfer to staging" >
-    <span class="tag-code">copy production data transfer to staging</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。
-將要測試的資料庫（例如：production）匯出成sql將原始production資料庫: ...
-        
-      </div>
-      <a class="more" href="/複製-Production-真實環境資料，模擬超逼真測試-Rails-5/">閱讀更多</a>
-    </article>
-  
-
-  
-    <div class="guide-pager">
-  
-    <a href="/"><span class="page-arrow">← </span>Prev</a>
-  
-  
-    <a href="/page/3/">Next<span class="page-arrow"> →</span></a>
-  
-</div>
-
-  
-</main>
-
-
-    <div class="scroll-top">
-  <span class="arrow-icon"></span>
-</div>
-    <footer class="app-footer">
-  <p class="copyright">
-    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
-  </p>
-  <span id="busuanzi_container_site_uv">
-    共有 <span id="busuanzi_value_site_uv"></span> 人 訪問
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
   </span>
-</footer>
-<!-- 不蒜子記人數 -->
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script>
-  function async(u, c) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
+  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<script>
-  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-  })
-</script>
 
-<script>
-  var hasLine = 'true';
-  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
-</script>
-<!-- Baidu Tongji -->
 
-<script src="/js/script.js"></script>
-  </body>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>
