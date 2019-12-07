@@ -22,9 +22,12 @@ tags:
 
 ## 專案環境
 以下的專案環境是用CentoOS Linux 7.7.1908做安裝及設定
-前端專案Vue、後端專案Laravel
-
+前端專案Vue、後端專案Laravel，專案有設定前後端分離，也就是前端一包專案、後端一包專案，後端只產生API給前端接
+Vue專案及Jenkins都安裝在測試主機上，並沒有個開
 ## 自動部署做了哪些事？
+自動部署會先去Github將專案最新程式碼拉下來，並開始安裝套件`npm install`，接著再用webpack打包檔案`npm run build:prod`
+打包完會產生一包`dist`資料夾，dist資料夾會對應到後端專案的MVC裡的View。
+
 ```
 npm cache clean -force
 npm install
@@ -77,10 +80,9 @@ duso systemctl enable docker
 cd /var/dockerContainer
 touch Dockerfile
 ```
-編輯Dockerfile檔，我們會下載jenkinsci/blueocean的image並先安裝nodejs與npm，之所以要客製化是因為我安裝很多次Jenkins的NodeJS Plugin一直失敗，沒辦法跑`npm install`，一直報錯說找不到npm，只好徒法煉鋼，先客製化images，在images除了用現成的jenkins blueocean版本，另外也先裝好nodeJS, npm。
+編輯Dockerfile檔，我們會下載jenkinsci/blueocean的image並先安裝nodejs與npm，之所以要客製化是因為我安裝很多次Jenkins的NodeJS Plugin一直失敗，沒辦法跑`npm install`，一直報錯說找不到npm，只好徒法煉鋼，先客製化images，在images除了用現成的jenkins blueocean版本，另外也先裝好nodeJS、npm。
 
-```
-# Dockerfile
+``` Dockerfile
 # 從 DockerHub 安裝 Jenkinsci/blueocean image。
 FROM jenkinsci/blueocean
 
@@ -110,7 +112,7 @@ docker run -d
   --restart=always \
   frontend-ui-image
 ```
-這裡說明一下參數
+以下將說明參數的用途
 - --name frontend-ui：容器名稱命名為frontend-ui
 - -p 8080:8080：映射出8080 Port與容器裡的8080 Port 相應
 - -u root：以User root身份執行，否則會沒有權限
@@ -125,12 +127,31 @@ docker run -d
 進入Jenkins後，請先安裝Jenkins預設外掛
 ![Jenkins Install](../../../images/jenkins-install.png)
 ### 設定 Github Hook 觸發 Jenkins
-- 打勾 GitHub hook trigger for GITScm polling
-- GIthub 點擊專案的Setting，加入 web-hook，設定網址：http://serverIP:8080/github-webhook/，Content Type設定 application/json
+接著我們要來設定每次Git Push時會觸發專案啟動Jenkins，在設定前我們需要先新增專案
+Jenkins點擊新增作業，選取「建置 Free-Style 軟體專案」
+
+![Jenkins 建置 Free-Style 軟體專案](../../../images/jenkins-free-style.jpg)
+
+選好之後點OK進入到下一步，接著近一步細部設定，原始碼管理區塊要設定專案網址，並設定Github的帳號密碼，讓Jenkins有權限可以讀取專案。
+在建置觸發程序要打勾「GitHub hook trigger for GITScm polling」，當GitHub Repository有變動時會自動通知 Jenkins 來進行編譯
+![Jenkins 原始碼管理、建置觸發程序](../../../images/jenkins-step3.jpg)
+
+除了設定Jenkins要進行編譯之外，Github Repository這端也要設定 Webhook
+- Github 點擊專案的 Setting，加入 web-hook
+Payload URL 網址設定為你的Jenkins Server 網址，例：http://serverIP:8080/github-webhook/，Content Type 要設定 application/json
+Secret設定為空沒有關係，另外有詢問你什麼時候要觸發這個webhook，在圖片上是設定當只有push 事件發生時，才會觸發，當然你也可以客製化
+- Jest the push event：只有push事件發生才會觸發 webhook
+- Send me everything：不管發生什麼事，都會觸發 webhook
+- Let me select individual events.：選取這個可以客製化哪些event才要觸發
+
+![加入webhook設定](../../../images/webhook-add.jpg)
+設定完會像下面這張圖片一樣
+![webhook](../../../images/webhook.jpg)
 - 確保Server 8080的Port有開啟，沒有被防火牆擋住，開8080 Port才能讓流量進來，Github才能Call得到Jenkins
 
+
 ### 設定前後端分離
-後端是用Php Laravel框架，前端是用webpack打包成一包dist檔案後，用軟連結映射到後端專案的public/static、/resources/views/index.blade.php，才能順利以view方式顯示
+Web Server是採用nginx，後端是用Php Laravel框架，前端是用webpack打包成一包dist資料夾後，用軟連結映射到後端專案的public/static、/resources/views/index.blade.php，才能順利以view方式顯示，同時也可以解決前端打後端專案的API有CROS跨網域問題。
 
 project 是前端專案名稱
 backend-project 是後端專案名稱
@@ -140,6 +161,30 @@ ln -s /var/data/workspace/project/dist/static /home/vhost/backend-project/public
 ln -s /var/data/workspace/project/dist/index.html /home/vhost/backend-project/resources/views/index.blade.php
 ```
 
+nginx 設定
+```
+# /etc/nginx/conf.d/project
+server {
+    listen 80;
+    listen [::]:80;
+    root /home/vhost/backend-project/public;
+    index index.php index.html index.htm;
+
+    server_name xx.xx.xxxx.xx;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+```
+
+
 ### 在Jenkins上串Salck
 接著設定Slack，先在Jenkins安裝Slack外掛
 點選「管理Jenins」-> 「設定系統」-> Slack區塊，設定Workspace、Credential
@@ -147,16 +192,33 @@ ln -s /var/data/workspace/project/dist/index.html /home/vhost/backend-project/re
 
 ![slack](../../../images/Slack.png)
 Credential的Kind選Secret text，Secret填Slack給的Token Key，ID和Description可以自由選填
+至於Token Key可以從Slack 的Jenkins頁面拿到
+![Token](../../../images/jenken-slack-token.jpg)
+
+
 ![slack](../../../images/Jenkins-credential.png)
 設定成功後，可以試試看點按鈕「Test Connection」，如果成功的話，會在下方顯示Success，且Slack頻道上會有機器人說話
 ```
 Slack/Jenkins plugin: you're all set on http://www.test-jenkins:8080/
 ```
 ![Slack](../../../images/Jenkins-Slack-success.jpg)
-### 總結
-一開始安裝Jenkins是直接用官方印象檔
 
+## 總結
+一開始安裝Jenkins是用Docker Images: jenkins，預設外掛都不能安裝，才發現要裝 Images: jenkins/jenkins，而不是jenkins。
+用Images jenkins/jenkins啟動容器後發現第二個問題是容器內沒有node.js，裝了外掛NodeJS仍無法解決我的問題，最後還是自製Images比較快。
+不過CI/CD還是很單調的流程，還沒有到很複雜，至今也還在學習中，如果有問題或是有寫錯的地方，歡迎下面留言喔
 
-### Reference
+- [X] jenkins：images版本過舊
+- [X] jenkins/jenins：沒有nodeJS，Jenkins 外掛 NodeJS也無法使用
+- [X] jenkinsci/blueocean：沒有nodeJS，Jenkins 外掛 NodeJS也無法使用
+- [O] frontend-ui-image：自製images，jenkinsci/blueocean + 自行安裝nodeJS
+
+之所以後來選擇images是採用jenkinsci/blueocean的版本，也是看上它有很漂亮的UI、使用者體驗佳，至今還在摸索中，如果有更多的心得會再多寫一篇文章分享，謝謝看到這裡
+![Jenkins BlueOcean Snapper](../../../images/jenkins-blueocean.jpg)
+
+## Reference
+- [Centos Install Docker Document](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [持續交付的8條原則](https://samkuo.me/post/2013/11/principles-continuous-delivery/)
 - [山姆鍋對持續整合、持續部署、持續交付的定義](https://samkuo.me/post/2013/10/continuous-integration-deployment-delivery/)
+- [永久修改以容器化方式运行的Jenkins系统时间](https://www.jianshu.com/p/47d767cf893d)
+- [Introducing Blue Ocean: a new user experience for Jenkins](https://jenkins.io/blog/2016/05/26/introducing-blue-ocean/)
