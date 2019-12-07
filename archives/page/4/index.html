@@ -1,904 +1,467 @@
 <!DOCTYPE html>
-
-
-
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Hazel Wu | 22&#39;mm
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hazel Wu | 22&#39;mm">
-<meta property="og:url" content="http://wualnz.com/archives/page/4/index.html">
-<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-<meta property="og:locale" content="default">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hazel Wu | 22&#39;mm">
-<meta name="twitter:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://wualnz.com/archives/page/4/"/>
-
-
-
-
-
-  <title>Archive | Hazel Wu | 22'mm</title>
   
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-archive">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hazel Wu | 22'mm</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
             
-
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 48 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/前端工程師一定要會的：Sass-Mixin神器/" itemprop="url">
-              
-                <span itemprop="name">前端工程師一定要會的：Sass Mixin神器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-29T05:29:19+08:00"
-              content="2018-01-29" >
-          01-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/VS-Code-使用erb類型檔案時，Emmet快捷打html標籤跳不出來/" itemprop="url">
-              
-                <span itemprop="name">VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-05T05:25:17+08:00"
-              content="2018-01-05" >
-          01-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Rails-用-CarrierWave-大量產生假圖片-Remote-image/" itemprop="url">
-              
-                <span itemprop="name">Rails 用 CarrierWave 大量產生假圖片 ( Remote image )</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-30T05:46:47+08:00"
-              content="2017-12-30" >
-          12-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/JavaScript-30-Day-Day1-DrumKits-練習/" itemprop="url">
-              
-                <span itemprop="name">JavaScript 30 Day -  Day1 DrumKits 練習</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-29T06:29:24+08:00"
-              content="2017-12-29" >
-          12-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Rails-用-Bootstrap-快速客製化-alert-notice-flash-message快閃訊息/" itemprop="url">
-              
-                <span itemprop="name">Rails 用 Bootstrap 快速客製化 alert & notice flash message快閃訊息</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-29T05:49:06+08:00"
-              content="2017-12-29" >
-          12-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Iframe-modal關閉後，內嵌影片音效沒有停止/" itemprop="url">
-              
-                <span itemprop="name">Iframe modal關閉後，內嵌影片音效沒有停止</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-25T06:25:40+08:00"
-              content="2017-12-25" >
-          12-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/架Wordpress在本機，更改固定網址後掛了/" itemprop="url">
-              
-                <span itemprop="name">架Wordpress在本機，更改固定網址後掛了</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-14T06:20:00+08:00"
-              content="2017-11-14" >
-          11-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/warning-LF-will-be-replaced-by-CRLF-in-files？這什麼東西啦！/" itemprop="url">
-              
-                <span itemprop="name">warning: LF will be replaced by CRLF in files？這什麼東西啦！</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-14T06:13:59+08:00"
-              content="2017-11-14" >
-          11-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/" itemprop="url">
-              
-                <span itemprop="name">git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-11T06:15:41+08:00"
-              content="2017-11-11" >
-          11-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Rails5使用-Facebook-分享按鈕API，第一次無法正常載入頁面，解決辦法/" itemprop="url">
-              
-                <span itemprop="name">Rails 5使用 Facebook 分享按鈕API，第一次無法正常載入頁面，解決辦法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-08T06:18:55+08:00"
-              content="2017-11-08" >
-          11-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
     </div>
   </div>
-  
-  
-  
+</header>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/5/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hazel Wu</p>
-              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">48</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">51</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
-
-  
+    <div id="article-banner">
+  <h2>Archives</h2>
+  <p class="post-date">文章归档</p>
 </div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
+<main class="app-body" id="archives">
   
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2019
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/攻略：用Jenkins-從-0-到1-打造強大的前端自動化工作流/" class="archive-title">攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流</a>
+        <p class="archive-date">12-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Vue-元件之間的傳話筒-總整理/" class="archive-title">Vue 元件之間的傳話筒 總整理</a>
+        <p class="archive-date">03-12</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2018
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/FrameWork-7-與-H5邂逅的雷坑/" class="archive-title">FrameWork 7 與 H5 邂逅的雷坑</a>
+        <p class="archive-date">12-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/快來架設超潮的NodeBB論壇在Heroku上/" class="archive-title">快來架設超潮的NodeBB論壇在Heroku上</a>
+        <p class="archive-date">12-10</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Vue-元件化概念/" class="archive-title">Vue 元件化概念</a>
+        <p class="archive-date">11-26</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/ES6-Object-Literal-Upgrades：動態命名/" class="archive-title">JavaScript ES6 物件 Literal Upgrades：動態命名</a>
+        <p class="archive-date">11-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/" class="archive-title">JavaScript30/08 | Fun With HTML Canvas 筆記</a>
+        <p class="archive-date">10-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Canvas：前端特效動畫的基礎/" class="archive-title">Canvas：前端特效動畫的基礎</a>
+        <p class="archive-date">09-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/為什麼前端要學Vue-js？/" class="archive-title">為什麼前端要學Vue.js？</a>
+        <p class="archive-date">09-12</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/ES6語法：let、const/" class="archive-title">ES6語法：let、const</a>
+        <p class="archive-date">09-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/BlueHost-Wordpress-如何安裝-Git-版本控制/" class="archive-title">BlueHost Wordpress 如何安裝 Git 版本控制</a>
+        <p class="archive-date">07-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/為Heroku-上傳的圖片找新的空間：Amazon-S3，就決定是你了。/" class="archive-title">為Heroku 上傳的圖片找新的空間：Amazon S3，就決定是你了。</a>
+        <p class="archive-date">07-23</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/神奇的migration-生成器-Ruby-on-Rails-5/" class="archive-title">神奇的migration 生成器 | Ruby on Rails 5</a>
+        <p class="archive-date">07-20</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址/" class="archive-title">如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證</a>
+        <p class="archive-date">07-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Macbook Pro 2017版，如何架設兩個螢幕/" class="archive-title">Macbook Pro 2017版，外接兩個螢幕 | 全攻略</a>
+        <p class="archive-date">07-03</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/複製-Production-真實環境資料，模擬超逼真測試-Rails-5/" class="archive-title">複製 Production 真實環境資料，模擬超逼真測試 | Rails 5</a>
+        <p class="archive-date">06-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails-Server打不開嗎？你應該看看這篇/" class="archive-title">Rails Server打不開嗎？你應該看看這篇</a>
+        <p class="archive-date">05-22</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/遠端ssh連到Server，無法進入Staging-Rails-Console的終極解決辦法：移除bin/" class="archive-title">遠端ssh連到Server，無法進入Staging Rails Console的終極解決辦法：移除bin</a>
+        <p class="archive-date">04-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails-與-Webpacker-神奇的結合：用image-wepback-loader-來壓縮圖片/" class="archive-title">Rails 與 Webpacker 神奇的結合：用image-wepback-loader 來壓縮圖片</a>
+        <p class="archive-date">04-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Mac-安裝postgresql後無法連結Rails-Server，出現s-PGSQL-5432-ERROR，這天殺的訊息！/" class="archive-title">Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法</a>
+        <p class="archive-date">04-09</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/幫-Rails-建立一個-Docker-Container吧/" class="archive-title">幫 Rails 建立一個 Docker Container吧</a>
+        <p class="archive-date">04-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/前端永遠的課題：呈現一致性的跨裝置：關於Font/" class="archive-title">前端永遠的課題：字體－呈現一致性的跨裝置</a>
+        <p class="archive-date">03-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Git筆記：移花接木的Rebase，整理commit訊息的好幫手/" class="archive-title">Git筆記：移花接木的Rebase，整理commit訊息的好幫手</a>
+        <p class="archive-date">03-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Git-push-repo失敗：-Could-not-resolve-host-github-com/" class="archive-title">Git push repo失敗： Could not resolve host: github.com</a>
+        <p class="archive-date">03-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/做個超智能的響應式圖片吧，利用-HTML5-srcset-搭配-Rails-Helper-img-set-tag/" class="archive-title">做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</a>
+        <p class="archive-date">02-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails-5-快速設置-favicon-icon/" class="archive-title">Rails 5 快速設置 favicon icon</a>
+        <p class="archive-date">02-10</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Git-修改又臭又長的指令，加快開發速度/" class="archive-title">Git 修改又臭又長的指令，加快開發速度</a>
+        <p class="archive-date">02-09</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Git-筆記：我想回到過去，到底要怎麼坐時光機？/" class="archive-title">Git 筆記：我想回到過去，到底要怎麼坐時光機？</a>
+        <p class="archive-date">02-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/前端工程師一定要會的：Sass-Mixin神器/" class="archive-title">前端工程師一定要會的：Sass Mixin神器</a>
+        <p class="archive-date">01-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/VS-Code-使用erb類型檔案時，Emmet快捷打html標籤跳不出來/" class="archive-title">VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來</a>
+        <p class="archive-date">01-05</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2017
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/Rails-用-CarrierWave-大量產生假圖片-Remote-image/" class="archive-title">Rails 用 CarrierWave 大量產生假圖片 ( Remote image )</a>
+        <p class="archive-date">12-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/JavaScript-30-Day-Day1-DrumKits-練習/" class="archive-title">JavaScript 30 Day -  Day1 DrumKits 練習</a>
+        <p class="archive-date">12-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails-用-Bootstrap-快速客製化-alert-notice-flash-message快閃訊息/" class="archive-title">Rails 用 Bootstrap 快速客製化 alert &amp; notice flash message快閃訊息</a>
+        <p class="archive-date">12-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Iframe-modal關閉後，內嵌影片音效沒有停止/" class="archive-title">Iframe modal關閉後，內嵌影片音效沒有停止</a>
+        <p class="archive-date">12-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/架Wordpress在本機，更改固定網址後掛了/" class="archive-title">架Wordpress在本機，更改固定網址後掛了</a>
+        <p class="archive-date">11-14</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/warning-LF-will-be-replaced-by-CRLF-in-files？這什麼東西啦！/" class="archive-title">warning: LF will be replaced by CRLF in files？這什麼東西啦！</a>
+        <p class="archive-date">11-14</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/git-revert到commit某一版本，Gemfile不會跟著還原，–without-development的緣故。/" class="archive-title">git revert到commit某一版本，Gemfile不會跟著還原，–without development的緣故。</a>
+        <p class="archive-date">11-11</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails5使用-Facebook-分享按鈕API，第一次無法正常載入頁面，解決辦法/" class="archive-title">Rails 5使用 Facebook 分享按鈕API，第一次無法正常載入頁面，解決辦法</a>
+        <p class="archive-date">11-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/你一定有聽過的Bower-前端套件管理工具/" class="archive-title">你一定有聽過的Bower 前端套件管理工具</a>
+        <p class="archive-date">11-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/GitPage-上-getJSON讀取不到json，出現-404-ERROR/" class="archive-title">GitPage 上$.getJSON讀取不到json，出現 404 ERROR</a>
+        <p class="archive-date">11-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Rails-SEO-用Sitemap-generator快速設定sitemap/" class="archive-title">Rails SEO-用Sitemap-generator快速設定sitemap</a>
+        <p class="archive-date">11-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Gulp-學習紀錄、常用指令/" class="archive-title">Gulp 學習紀錄、常用指令</a>
+        <p class="archive-date">11-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/教你如何快速設定綁定網域在 Byehost 虛擬主機商/" class="archive-title">教你如何快速設定綁定網域在 Byehost 虛擬主機商</a>
+        <p class="archive-date">08-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/安裝Edius時，出現ERROR：Error-launching-installer解決辦法/" class="archive-title">安裝Edius時，出現ERROR：Error launching installer解決辦法</a>
+        <p class="archive-date">07-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/大部分開發者都是使用MAC OS系統？/" class="archive-title">大部分開發者都是使用MAC OS系統？</a>
+        <p class="archive-date">07-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/Navigation固定上方，往下瀏覽頁面時縮小效果/" class="archive-title">Navigation固定上方，往下瀏覽頁面時縮小效果</a>
+        <p class="archive-date">06-30</p>
+      </div>
+    
+  </div>
+</section>
+  
+</main>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  (function () {
+    var url = 'http://wualnz.com/archives/page/4/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+  })();
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
   }
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>

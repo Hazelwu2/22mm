@@ -1,308 +1,153 @@
 <!DOCTYPE html>
-
-
-
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Rails 用 CarrierWave 大量產生假圖片 ( Remote image ) | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Rails 5,CarrierWave," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="我們常需要一些假資料來撐開版型、驗證，但一筆一筆新增很麻煩，所以會用到rake自訂任務請Rails一次幫忙產生500筆資料，但上傳圖片的image欄位是藉由Gem CarrierWave產生，所以需要用它提供的helper: remote-image_url Strong Parameter 新增 CarrierWave 原生的help: remote_image_url1234#restaura">
-<meta name="keywords" content="Rails 5,CarrierWave">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Rails 用 CarrierWave 大量產生假圖片 ( Remote image )">
-<meta property="og:url" content="http://wualnz.com/Rails-用-CarrierWave-大量產生假圖片-Remote-image/index.html">
-<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="我們常需要一些假資料來撐開版型、驗證，但一筆一筆新增很麻煩，所以會用到rake自訂任務請Rails一次幫忙產生500筆資料，但上傳圖片的image欄位是藉由Gem CarrierWave產生，所以需要用它提供的helper: remote-image_url Strong Parameter 新增 CarrierWave 原生的help: remote_image_url1234#restaura">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/30231913/Screen-Shot-2017-12-30-at-11.12.01-PM-1024x558.png">
-<meta property="og:updated_time" content="2018-07-04T21:48:42.983Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rails 用 CarrierWave 大量產生假圖片 ( Remote image )">
-<meta name="twitter:description" content="我們常需要一些假資料來撐開版型、驗證，但一筆一筆新增很麻煩，所以會用到rake自訂任務請Rails一次幫忙產生500筆資料，但上傳圖片的image欄位是藉由Gem CarrierWave產生，所以需要用它提供的helper: remote-image_url Strong Parameter 新增 CarrierWave 原生的help: remote_image_url1234#restaura">
-<meta name="twitter:image" content="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/30231913/Screen-Shot-2017-12-30-at-11.12.01-PM-1024x558.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://wualnz.com/Rails-用-CarrierWave-大量產生假圖片-Remote-image/"/>
-
-
-
-
-
-  <title>Rails 用 CarrierWave 大量產生假圖片 ( Remote image ) | Hazel Wu | 22'mm</title>
   
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hazel Wu | 22'mm</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Rails-用-CarrierWave-大量產生假圖片-Remote-image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
         
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
         
-          <h1 class="post-title" itemprop="name headline">Rails 用 CarrierWave 大量產生假圖片 ( Remote image )</h1>
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
         
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-30T05:46:47+08:00">
-                2017-12-30
-              </time>
+              <a href="/archives/" class="menu-link">Archives</a>
             
-
+          </li>
+        
+          <li class="menu-item">
             
-
+              <a href="/project/" class="menu-link">Projects</a>
             
-          </span>
-
-          
-
-          
+          </li>
+        
+          <li class="menu-item">
             
-          
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
 
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>我們常需要一些假資料來撐開版型、驗證，但一筆一筆新增很麻煩，所以會用到rake自訂任務請Rails一次幫忙產生500筆資料，但上傳圖片的image欄位是藉由Gem CarrierWave產生，所以需要用它提供的helper: remote-image_url</p>
+    <div id="article-banner">
+  <h2>Rails 用 CarrierWave 大量產生假圖片 ( Remote image )</h2>
+  <p class="post-date">2017-12-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>我們常需要一些假資料來撐開版型、驗證，但一筆一筆新增很麻煩，所以會用到rake自訂任務請Rails一次幫忙產生500筆資料，但上傳圖片的image欄位是藉由Gem CarrierWave產生，所以需要用它提供的helper: remote-image_url</p>
 <p>Strong Parameter 新增 CarrierWave 原生的help: remote_image_url<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#restaurant_controller</span><br><span class="line">  def restaurant_params</span><br><span class="line">    params.require(:restaurant).permit(:name, :tel, :opening_hours, :address, :description, :image, :remote_image_url)</span><br><span class="line">  end</span><br></pre></td></tr></table></figure></p>
 <h3 id="自動建立-500-筆資料"><a href="#自動建立-500-筆資料" class="headerlink" title="自動建立 500 筆資料"></a>自動建立 500 筆資料</h3><p>新增 Rake 任務 dev.rake，自動建立 500 筆餐廳資料<br>在Restaurant下使用remote_image_url，在後面加上遠端網址即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Restaurant.destroy_all</span><br><span class="line">Restaurant.create!(name: &apos;Andromeda&apos;, remote_photo_url: &apos;https://visualhunt.com/photos/l/7/architecture-store-building.jpg&apos;)</span><br></pre></td></tr></table></figure>
@@ -314,245 +159,119 @@
 <li><a href="https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-Upload-remote-image-urls-to-your-seedfile" target="_blank" rel="noopener">How to: Upload remote image urls to your seedfile</a></li>
 <li><a href="https://www.rails365.net/articles/carrierwave-tu-pian-shang-chuan-he-tu-pian-te-shu-chu-li" target="_blank" rel="noopener">CarrierWave 图片上传和图片特殊处理</a></li>
 </ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Rails 5">
+    <span class="tag-code">Rails 5</span>
+  </a>
 
-      
-    </div>
+  <a href="/tags#CarrierWave">
+    <span class="tag-code">CarrierWave</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/JavaScript-30-Day-Day1-DrumKits-練習/">
+        <span class="nav-arrow">← </span>
+        
+          JavaScript 30 Day -  Day1 DrumKits 練習
+        
+      </a>
     
     
+      <a class="nav-right" href="/VS-Code-使用erb類型檔案時，Emmet快捷打html標籤跳不出來/">
+        
+          VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Rails-5/" rel="tag"># Rails 5</a>
-          
-            <a href="/tags/CarrierWave/" rel="tag"># CarrierWave</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/JavaScript-30-Day-Day1-DrumKits-練習/" rel="next" title="JavaScript 30 Day -  Day1 DrumKits 練習">
-                <i class="fa fa-chevron-left"></i> JavaScript 30 Day -  Day1 DrumKits 練習
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/VS-Code-使用erb類型檔案時，Emmet快捷打html標籤跳不出來/" rel="prev" title="VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來">
-                VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#自動建立-500-筆資料"><span class="toc-nav-text">自動建立 500 筆資料</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#用亂數隨機讀取圖片"><span class="toc-nav-text">用亂數隨機讀取圖片</span></a></li></ol>
+    
   </div>
-
-
-          </div>
-          
-
-
-          
-
+</aside>
   
+  <!-- Catalog END -->
+</main>
 
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Rails-用-CarrierWave-大量產生假圖片-Remote-image/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
 
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
 
-      
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hazel Wu</p>
-              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">48</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">51</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#自動建立-500-筆資料"><span class="nav-number">1.</span> <span class="nav-text">自動建立 500 筆資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用亂數隨機讀取圖片"><span class="nav-number">2.</span> <span class="nav-text">用亂數隨機讀取圖片</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
-
-  
-</div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
 </script>
 
 
@@ -561,130 +280,54 @@
 
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>

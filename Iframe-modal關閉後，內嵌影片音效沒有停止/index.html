@@ -1,309 +1,153 @@
 <!DOCTYPE html>
-
-
-
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Iframe modal關閉後，內嵌影片音效沒有停止 | Hazel Wu | 22&#39;mm
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="情境介紹 Iframe modal關閉後，內嵌影片音效沒有停止內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。   移除包含iframe節點我試著用 Jquery 解決，移除整個包含iframe的節點 123$(‘.close-modal’).on(‘click’,function()&amp;#1">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Iframe modal關閉後，內嵌影片音效沒有停止">
-<meta property="og:url" content="http://wualnz.com/Iframe-modal關閉後，內嵌影片音效沒有停止/index.html">
-<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="情境介紹 Iframe modal關閉後，內嵌影片音效沒有停止內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。   移除包含iframe節點我試著用 Jquery 解決，移除整個包含iframe的節點 123$(‘.close-modal’).on(‘click’,function()&amp;#1">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png">
-<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230858/iframe-example.gif">
-<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230829/iframe-cannot-worked2-300x176.png">
-<meta property="og:updated_time" content="2018-07-04T22:28:58.382Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Iframe modal關閉後，內嵌影片音效沒有停止">
-<meta name="twitter:description" content="情境介紹 Iframe modal關閉後，內嵌影片音效沒有停止內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。   移除包含iframe節點我試著用 Jquery 解決，移除整個包含iframe的節點 123$(‘.close-modal’).on(‘click’,function()&amp;#1">
-<meta name="twitter:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://wualnz.com/Iframe-modal關閉後，內嵌影片音效沒有停止/"/>
-
-
-
-
-
-  <title>Iframe modal關閉後，內嵌影片音效沒有停止 | Hazel Wu | 22'mm</title>
   
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hazel Wu | 22'mm</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Iframe-modal關閉後，內嵌影片音效沒有停止/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
         
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
         
-          <h1 class="post-title" itemprop="name headline">Iframe modal關閉後，內嵌影片音效沒有停止</h1>
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
         
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T06:25:40+08:00">
-                2017-12-25
-              </time>
+              <a href="/archives/" class="menu-link">Archives</a>
             
-
+          </li>
+        
+          <li class="menu-item">
             
-
+              <a href="/project/" class="menu-link">Projects</a>
             
-          </span>
-
-          
-
-          
+          </li>
+        
+          <li class="menu-item">
             
-          
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
 
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h3 id="情境介紹"><a href="#情境介紹" class="headerlink" title="情境介紹"></a>情境介紹</h3><blockquote>
+    <div id="article-banner">
+  <h2>Iframe modal關閉後，內嵌影片音效沒有停止</h2>
+  <p class="post-date">2017-12-25</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h3 id="情境介紹"><a href="#情境介紹" class="headerlink" title="情境介紹"></a>情境介紹</h3><blockquote>
 <p>Iframe modal關閉後，內嵌影片音效沒有停止<br>內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。</p>
 </blockquote>
 <p><img src="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png" alt="iframe-not-working" title="iframe-not-working"></p>
@@ -333,237 +177,106 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.modal&apos;).on(&apos;hidden.bs.modal&apos;, function()&#123;</span><br><span class="line">    var $iframe = $(this).find(&apos;iframe&apos;);</span><br><span class="line">    var videoSrc = $iframe.attr(&apos;src&apos;);</span><br><span class="line">    console.log(videoSrc);</span><br><span class="line">    $iframe.attr(&apos;src&apos;, &apos;&apos;);</span><br><span class="line">    $iframe.attr(&apos;src&apos;, videoSrc);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 <p>嘿嘿完成圖！打開縮圖可以得到一個modal燈箱，點擊兩個按鈕都可以做到關閉的效果，真開心！超有成就感。</p>
-
-      
-    </div>
+</section>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/架Wordpress在本機，更改固定網址後掛了/">
+        <span class="nav-arrow">← </span>
+        
+          架Wordpress在本機，更改固定網址後掛了
+        
+      </a>
     
     
+      <a class="nav-right" href="/Rails-用-Bootstrap-快速客製化-alert-notice-flash-message快閃訊息/">
+        
+          Rails 用 Bootstrap 快速客製化 alert &amp; notice flash message快閃訊息
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/架Wordpress在本機，更改固定網址後掛了/" rel="next" title="架Wordpress在本機，更改固定網址後掛了">
-                <i class="fa fa-chevron-left"></i> 架Wordpress在本機，更改固定網址後掛了
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Rails-用-Bootstrap-快速客製化-alert-notice-flash-message快閃訊息/" rel="prev" title="Rails 用 Bootstrap 快速客製化 alert & notice flash message快閃訊息">
-                Rails 用 Bootstrap 快速客製化 alert & notice flash message快閃訊息 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#情境介紹"><span class="toc-nav-text">情境介紹</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#移除包含iframe節點"><span class="toc-nav-text">移除包含iframe節點</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#用attr設定src的屬性，取得src網址後再重新加載一次！"><span class="toc-nav-text">用attr設定src的屬性，取得src網址後再重新加載一次！</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#20171225更新"><span class="toc-nav-text">20171225更新</span></a></li></ol></li></ol>
+    
   </div>
-
-
-          </div>
-          
-
-
-          
-
+</aside>
   
+  <!-- Catalog END -->
+</main>
 
+<script>
+  (function () {
+    var url = 'http://wualnz.com//Iframe-modal關閉後，內嵌影片音效沒有停止/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
 
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
 
-      
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hazel Wu</p>
-              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">48</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">51</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#情境介紹"><span class="nav-number">1.</span> <span class="nav-text">情境介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#移除包含iframe節點"><span class="nav-number">1.1.</span> <span class="nav-text">移除包含iframe節點</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用attr設定src的屬性，取得src網址後再重新加載一次！"><span class="nav-number">2.</span> <span class="nav-text">用attr設定src的屬性，取得src網址後再重新加載一次！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#20171225更新"><span class="nav-number">2.1.</span> <span class="nav-text">20171225更新</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
-
-  
-</div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
 </script>
 
 
@@ -572,130 +285,54 @@
 
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>

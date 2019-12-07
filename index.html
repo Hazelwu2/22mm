@@ -1,2081 +1,465 @@
 <!DOCTYPE html>
-
-
-
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Hazel Wu | 22&#39;mm
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hazel Wu | 22&#39;mm">
-<meta property="og:url" content="http://wualnz.com/index.html">
-<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-<meta property="og:locale" content="default">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hazel Wu | 22&#39;mm">
-<meta name="twitter:description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://wualnz.com/"/>
-
-
-
-
-
-  <title>Hazel Wu | 22'mm</title>
   
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hazel Wu | 22'mm</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Hazel Wu | 22'mm</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Vue-Event-Bus/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Vue-Event-Bus/" itemprop="url">Vue Event Bus</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-17T16:50:56+08:00">
-                2019-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Event-Bus-定位"><a href="#Event-Bus-定位" class="headerlink" title="Event Bus 定位"></a>Event Bus 定位</h2><p>Event Bus 的定位是事件通知</p>
-<h2 id="Event-Bus-使用時機"><a href="#Event-Bus-使用時機" class="headerlink" title="Event Bus 使用時機"></a>Event Bus 使用時機</h2><p>例如：有件事要被很多人知道，可以用Event Bus來做傳遞，傳話筒</p>
-<p>客製化事件<br>像是<code>click</code></p>
-<h2 id="Event-Bus-缺點"><a href="#Event-Bus-缺點" class="headerlink" title="Event Bus 缺點"></a>Event Bus 缺點</h2><ul>
-<li>記憶體殘留，</li>
-</ul>
-<h3 id="如何看記憶體？"><a href="#如何看記憶體？" class="headerlink" title="如何看記憶體？"></a>如何看記憶體？</h3><p>Chrome Developer Memory 工具</p>
-<ul>
-<li>刪除元件，記憶體便不會被殘留</li>
-<li>怎麼樣的情況下元件仍會佔用記憶體？</li>
-</ul>
-
-          
-        
-      
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Vue-元件之間的傳話筒-總整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="menu-mask">
+      <ul class="menu-list">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Vue-元件之間的傳話筒-總整理/" itemprop="url">Vue 元件之間的傳話筒 總整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T22:40:08+08:00">
-                2019-03-12
-              </time>
+              <a href="/" class="menu-link mobile-active">Home</a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+          </li>
         
-          
-            <p>使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！</p>
-<ol>
-<li>Props 父傳子<ul>
-<li>Parent =&gt; Child Communication</li>
-</ul>
-</li>
-<li>$emit 子傳父<ul>
-<li>自定義事件，Child =&gt; Parent Communication</li>
-</ul>
-</li>
-<li>Event Bus<ul>
-<li>類似於 Angular 2 的 services 用法</li>
-</ul>
-</li>
-</ol>
-<h3 id="Props-父傳子"><a href="#Props-父傳子" class="headerlink" title="Props 父傳子"></a>Props 父傳子</h3><p>用 Props 來傳遞資料，主元件要在外圍寫要傳什麼值進去，像是下面的範例，父元件傳了name給子元件值是Hazel。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父元件 User.vue</span></span><br><span class="line">&lt;user-detail :myName=<span class="string">"Hazel"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">user-detail</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>子元件要新增 props 屬性來接收資料，接收到的name可以直接使用在其他地方，像是下面範例，接收到從父元件傳來的name，並使用在<code>switchName()的Methods</code>裡。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子元件 UserDetail.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;p&gt; User Name: &#123;&#123; switchName() &#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: [<span class="string">'myName'</span>],</span><br><span class="line">    methods: &#123;</span><br><span class="line">        switchName()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.myName.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="限制-Props-資料類型"><a href="#限制-Props-資料類型" class="headerlink" title="限制 Props 資料類型"></a>限制 Props 資料類型</h4><p>Prop 還能夠驗證資料型態，比如說在子元件下我們可以這樣寫<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驗證 Props</span></span><br><span class="line">props: [<span class="string">'myName'</span>, <span class="string">'age'</span>, <span class="string">'book'</span>]</span><br><span class="line">props: &#123;</span><br><span class="line">    <span class="string">'myName'</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="string">'book'</span>: <span class="built_in">Object</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>當myName值傳來不是String格式便會報錯，會在 Console.log 提示開發者由於傳遞錯誤的型態。<br>我們可以用這種方式來驗證資料，以避免程式出錯。</p>
-<h3 id="Emit-子傳父"><a href="#Emit-子傳父" class="headerlink" title="Emit 子傳父"></a>Emit 子傳父</h3><p>剛剛介紹了 Prop：父元件傳遞資料給子元件，但當子元件想要傳遞資料給父元件，該如何傳遞？我們會用到 <code>emit</code> 客製化事件來做到這件事</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$emit(&apos;事件名稱&apos;, 要傳遞的值)</span><br></pre></td></tr></table></figure>
-<p>以下程式碼做的處理</p>
-<ol>
-<li>從子元件接收到myName的值</li>
-<li>子元件內 reset myName 值</li>
-<li>回傳給父元件</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UserDetail.vue 子元件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        myName: &#123;</span><br><span class="line">            type: <span class="built_in">String</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        switchName()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.myName.split(<span class="string">''</span>).revverse().join(<span class="string">''</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        resetName()&#123;</span><br><span class="line">            <span class="keyword">this</span>.myName = <span class="string">'Hazel'</span>;</span><br><span class="line">            <span class="keyword">this</span>.$emit(<span class="string">'nameWasReset'</span>, <span class="keyword">this</span>.myName);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>子元件用<code>nameWasReset</code>事件傳遞<br>要接收訊息的父元件也要設定，將子元件設定的事件名稱用<code>@</code>當前綴<br><code>@nameWasReset=&quot;name = $event&quot;</code>，並存在父元件的資料name內。</p>
-<blockquote>
-<h3 id="小教學：關於Vue的-event"><a href="#小教學：關於Vue的-event" class="headerlink" title="小教學：關於Vue的$event"></a>小教學：關於Vue的$event</h3><p>$event 為 Vue內的特殊用法，相同於 JavaScript的 event<br>$event 為子元間傳遞出來的值。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// User.vue 父元件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;user-detail :myName=<span class="string">"name"</span> @nameWasReset=<span class="string">"name =$event"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">user-detail</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            name: <span class="string">'Hazel'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="Vue-單向資料流"><a href="#Vue-單向資料流" class="headerlink" title="Vue 單向資料流"></a>Vue 單向資料流</h4><p>單向資料流定義：只能從一個方向來修改，可以由父元件傳遞資料給子元件，但子元件無法反過來直接改變父元件的資料，會引起報錯。也就是只能父元件影響子，子無法影響父。</p>
-<blockquote>
-<h4 id="總結一句話：單向資料流只能父傳子、子傳父。"><a href="#總結一句話：單向資料流只能父傳子、子傳父。" class="headerlink" title="總結一句話：單向資料流只能父傳子、子傳父。"></a>總結一句話：單向資料流只能父傳子、子傳父。</h4><p>Unidirectional Data Flow from top to bottom.</p>
-</blockquote>
-<p>如果 A 的子元件想傳遞給 B 的子元件，平行傳資料是可行的嗎？<br>在Vue內，由於單向資料流的關係，無法子傳給子，是無法平行傳資料。</p>
-<h3 id="CallBack-Function"><a href="#CallBack-Function" class="headerlink" title="CallBack Function"></a>CallBack Function</h3><p>透過Props傳遞 function 也能做到元件溝通<br>父元件利用 Props 傳遞 resetFn()，值帶入methods的resetName()方法給子元件。<br>而子元件則用Props接收。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父元件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;user-detail :myName=<span class="string">"name"</span> @nameWasReset=<span class="string">"name =$event"</span> :resetFn=<span class="string">"resetName"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">user-detail</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> UserDetail <span class="keyword">from</span> <span class="string">'./UserDetail.vue'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            name: <span class="string">'Hazel'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">        resetName()&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = <span class="string">'Hazel'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    components: &#123;</span><br><span class="line">        UserDetail: UserDetail,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>下列程式碼是子元件接受來自父元件的<code>resetFn()</code>，型態是Function。<br>當點擊按鈕時會呼叫<code>resetFn()</code>，而值則是從父元件傳遞來的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子元件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;button @click=<span class="string">"resetFn()"</span>&gt;Reset <span class="built_in">Function</span>&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        myName: &#123;</span><br><span class="line">            type: <span class="built_in">String</span></span><br><span class="line">        &#125;,</span><br><span class="line">        resetFn: <span class="built_in">Function</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="兄弟-Sibling-元件間的傳值"><a href="#兄弟-Sibling-元件間的傳值" class="headerlink" title="兄弟(Sibling)元件間的傳值"></a>兄弟(Sibling)元件間的傳值</h3><p>Communication between sibling components</p>
-<p>假設我們今天有 A 與 B 的子元件，要如何實行 A 與 B 間的傳遞？</p>
-<ul>
-<li>父元件：User</li>
-<li>A子元件：UserEdit</li>
-<li>B子元件：UserDetail</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父元件 User 傳遞值</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;user-edit :userAge=<span class="string">"age"</span> @ageWasEdited=<span class="string">"age = $event"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">user-edit</span>&gt;</span></span></span><br><span class="line">&lt;user-detail :userAge="age"&gt;&lt;user-detail&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;User Age: &#123;&#123;userAge&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            age: '25'</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>A 與 B 子元件皆接收 userAge 資料，並驗證 Number值<br>A元件用$emit：ageWasEdited傳回age值為30給父元件<br>B元件也會一併跟著更改。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A 子元件：UserEdit</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;User Age: &#123;&#123;userAge&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;button @click="editAge"&gt;Edit Age&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">    props: &#123;</span></span><br><span class="line"><span class="regexp">        userAge: Number</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">        editAge()&#123;</span></span><br><span class="line"><span class="regexp">            this.userAge = 30;</span></span><br><span class="line"><span class="regexp">            this.$emit('ageWasEdited', this.userAge);</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
-<p>以下是B元件 UserDetail ，B元件作用為 接收父元件的 UserAge 值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// B 子元件：UserDetail</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;p&gt;User Age: &#123;&#123;userAge&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        userAge: <span class="built_in">Number</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>從上面範例可以看出，當我們需要平行傳遞兄弟間的元件資料，可以用以下做法。</p>
-<ol>
-<li>父用props傳遞給 A 子元件</li>
-<li>A 子元件 子用 $emit 回傳父，改變父資料</li>
-<li>再由父傳給另一個 B 子元件</li>
-</ol>
-<h2 id="Event-Bus：溝通橋樑"><a href="#Event-Bus：溝通橋樑" class="headerlink" title="Event Bus：溝通橋樑"></a>Event Bus：溝通橋樑</h2><ul>
-<li>Event Bus 的定位是事件通知。</li>
-<li>Event Bus使用時機：有件事要被很多人知道，可以用Event Bus來做傳遞，當傳話筒的角色，也可以形容成溝通橋樑的概念。</li>
-<li>EventBus像元件一樣，擁有data, methods等屬性可以使用。</li>
-<li>Event Bus 透過 $emit 來發送資料、用 $on 來接收訊息。</li>
-</ul>
-<p>下列的範例會示範 A子元件與B子元件的溝通，但不會傳值到父元件。</p>
-<ol>
-<li>在main.js 建立一個 Vue instance 叫 eventBus</li>
-<li>要使用event bus傳遞訊息的元件上，import event bus進來</li>
-<li>在元件的methods上使用 <code>eventBus.$emit</code> 傳遞值</li>
-</ol>
-<p>步驟一：創建 eventBus 的 instance<br>注意：要把eventBus建立在new Vue上，否則會報錯。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> eventBus = <span class="keyword">new</span> Vue();</span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>步驟二：要使用傳遞資料的元件上，import eventBus<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// userEdit 元件</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; eventBus &#125; <span class="keyword">from</span> <span class="string">'../main'</span>;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>步驟三：用eventBus.$emit 傳遞值<br>eventBus 是一個 Vue instance，而 Vue instance 內建有 $emit 的methods可以用。</p>
-<blockquote>
-<p><code>eventBus.$emit(&#39;事件名稱&#39;, 值)</code></p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; eventBus &#125; <span class="keyword">from</span> <span class="string">'../main'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: [<span class="string">'userAge],</span></span><br><span class="line"><span class="string">    methods: &#123;</span></span><br><span class="line"><span class="string">        editAge()&#123;</span></span><br><span class="line"><span class="string">            this.userAge = 30;</span></span><br><span class="line"><span class="string">            // this.$emit('</span>ageWasEdited<span class="string">', this.userAge) 第二種方法：$emit傳值</span></span><br><span class="line"><span class="string">            eventBus.$emit('</span>ageWasEdited<span class="string">', this.userAge) // 第三種方法：eventBus傳值</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>B 子元件 要接收值，也需要import eventBus，而接收值要使用到$on</p>
-<blockquote>
-<p><code>eventBus.$on(&#39;事件名稱&#39;, callback function)</code><br>接收ageWasEdited事件，回傳的data用callback function，再針對data做一系列的處理。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// B子元件 UserDetail</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; eventBus &#125; <span class="keyword">from</span> <span class="string">'../main'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        userAge: <span class="built_in">Number</span></span><br><span class="line">    &#125;</span><br><span class="line">    created()&#123;</span><br><span class="line">        eventBus.$on(<span class="string">'ageWasEdited'</span>, (age) =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(age);</span><br><span class="line">            <span class="keyword">this</span>.userAge = age; <span class="comment">// 將傳來的age存進userAge內</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="EventBus-方法"><a href="#EventBus-方法" class="headerlink" title="EventBus 方法"></a>EventBus 方法</h3><p>eventBus 除了可以讓子元件平行溝通之外，也能建立methods方法，並讓元件們共用。</p>
-<ol>
-<li>建立 eventBus 的 Vue instance，建立 changeAge 的 methods</li>
-<li>在要使用的子元件上 import eventBus</li>
-</ol>
-<p>main.js上建立eventBus，並設定changeAge方法，接收參數age<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> eventBus = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    methods: &#123;</span><br><span class="line">        changeAge(age)&#123;</span><br><span class="line">            <span class="keyword">this</span>.$emit(<span class="string">'ageWasEdited'</span>, age)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>子元件 UserEdit.vue 利用 eventBus 的 changeAge 方法，傳遞userAge資料<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; eventBus &#125; <span class="keyword">from</span> <span class="string">'../main'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: [userAge],</span><br><span class="line">    methods: &#123;</span><br><span class="line">        editAge()&#123;</span><br><span class="line">            <span class="keyword">this</span>.userAge = <span class="number">30</span>;</span><br><span class="line">            eventBus.changeAge(<span class="keyword">this</span>.userAge);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同樣的 eventBus 也像元件一樣也擁有 data的屬性可儲存，這可以讓我們自由運用。</p>
-<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><ul>
-<li>props：父傳子</li>
-<li>emit：子傳父</li>
-<li>eventBus：使用上非常方便，但維護性不高，最好把握幾個原則<ol>
-<li>僅限於同層的兄弟元件通訊，父子通訊透過 Props / $emit 來進行溝通</li>
-<li>eventBus缺點是記憶體會殘留，有監聽的地方要記得去清除，像是beforeDestroy等。</li>
-<li>專案規模很大，可以考慮用 vuex來管理共同狀態。</li>
-</ol>
-</li>
-</ul>
-<p>以上重整理 Vue 元件間如何傳遞資料，若有誤歡迎留言告訴我，謝謝。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://dotblogs.com.tw/wasichris/2017/03/05/181549" target="_blank" rel="noopener">[Vue] 跟著 Vue 闖蕩前端世界 - 07 組件溝通 event bus</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/FrameWork-7-與-H5邂逅的雷坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/FrameWork-7-與-H5邂逅的雷坑/" itemprop="url">FrameWork 7 與 H5 邂逅的雷坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-13T13:35:45+08:00">
-                2018-12-13
-              </time>
+              <a href="/tags/" class="menu-link">Tags</a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+          </li>
         
-          
-            <p>環境配置：Vue + FrameWork 7 ，外面包一層Apk，做成App供手機測試<br>以下將紀錄在實作時遇到的雷坑及如何解決的。</p>
-<h2 id="input-送出按鍵"><a href="#input-送出按鍵" class="headerlink" title="input 送出按鍵"></a>input 送出按鍵</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 驗證碼: authenticationCode Start --&gt;</span><br><span class="line">&lt;f7-list-item v-<span class="keyword">else</span>&gt;</span><br><span class="line">  &lt;f7-input</span><br><span class="line">    type=<span class="string">"tel"</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"input-border"</span></span><br><span class="line">    placeholder=<span class="string">"input verification code"</span></span><br><span class="line">    :value=<span class="string">"authenticationCode"</span></span><br><span class="line">    label=<span class="string">"Phone"</span></span><br><span class="line">    @keyup.enter=<span class="string">"confirmActive"</span></span><br><span class="line">    @input=<span class="string">"authenticationCode = $event.target.value"</span></span><br><span class="line">    pattern=<span class="string">"[0-9\.]*"</span></span><br><span class="line">    error-message=<span class="string">"Verification code only be a number."</span></span><br><span class="line">    clear-button</span><br><span class="line">    validate</span><br><span class="line">    required</span><br><span class="line">    maxlength=<span class="string">"4"</span></span><br><span class="line">    minlength=<span class="string">"4"</span></span><br><span class="line">  &gt;&lt;/f7-input&gt;</span><br><span class="line">&lt;/f7-list-item&gt;</span><br><span class="line">&lt;!-- 驗證碼 End --&gt;</span><br><span class="line">&lt;/f7-list&gt;</span><br></pre></td></tr></table></figure>
-<p>遇到一個問題是：手機開啟App後，按下送出鍵會原地Refresh重整頁面，不會真的送出。<br>於是使用<a href="mailto:`@keyup.enter.native" target="_blank" rel="noopener">`@keyup.enter.native</a>=”confirmActive”`方法，發現仍行不通。</p>
-<p>經過萬能的Google搜尋、Debugger後，發現了原則：</p>
-<p><a href="mailto:`@keyup.enter" target="_blank" rel="noopener">`@keyup.enter</a>=”confirmActive”<code>=&gt; 手機按下送出後，執行confirmActive方法</code>@keyup.enter.native=”confirmActive”` =&gt; 電腦按下送出後，執行confirmActive方法</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/快來架設超潮的NodeBB論壇在Heroku上/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/快來架設超潮的NodeBB論壇在Heroku上/" itemprop="url">快來架設超潮的NodeBB論壇在Heroku上</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T23:10:09+08:00">
-                2018-12-10
-              </time>
+              <a href="/archives/" class="menu-link">Archives</a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+          </li>
         
-          
-            <h1 id="架設-NodeBB-論壇-在-Heroku-上"><a href="#架設-NodeBB-論壇-在-Heroku-上" class="headerlink" title="架設 NodeBB 論壇 在 Heroku 上"></a>架設 NodeBB 論壇 在 Heroku 上</h1><p>This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.<br>I look up official document, and step by step do it, but has some error. I’m spending much more time to fixing them.<br>So I write this topic. I hope this tutorial can help somebody.</p>
-<p>架設Nodebb論壇照著<a href="(https://docs.nodebb.org/installing/cloud/heroku/">官方文件</a>的步驟一步步做，但仍出現一些狀況無法順利架設在 Heroku上，因此寫下筆記記錄下來。</p>
-<p>下列教學總共會分成幾個步驟</p>
-<ol>
-<li>將NodeBB原始碼下載到電腦上</li>
-<li>架設環境在本機上</li>
-<li>建立專案在Heroku 上</li>
-<li>設定專案連接到 MLab （Mango）資料庫</li>
-</ol>
-<h2 id="架設環境"><a href="#架設環境" class="headerlink" title="架設環境"></a>架設環境</h2><ul>
-<li>架設環境 為Mac 10.14 OS</li>
-</ul>
-<h2 id="安裝前必備品"><a href="#安裝前必備品" class="headerlink" title="安裝前必備品"></a>安裝前必備品</h2><p>下列將列出如何安裝 NodeBB在本機環境下，且架設在heroku上，請先確保您有以下環境、知識。</p>
-<ol>
-<li>安裝 <a href="https://toolbelt.heroku.com/" target="_blank" rel="noopener">Heroku Cli</a>，可以在終端機執行像<code>heroku create</code>、<code>heroku login</code>等指令。</li>
-<li>具備基本的 Github 知識</li>
-<li>Mac 已有安裝 HomeBrew</li>
-<li>Heroku 已擁有帳號</li>
-</ol>
-<h2 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h2><h3 id="NodeBB-下載到本機"><a href="#NodeBB-下載到本機" class="headerlink" title="NodeBB 下載到本機"></a>NodeBB 下載到本機</h3><p>Download NodeBB to your localhost.<br>首先先把專案載入到電腦本機上，開啟終端機並移動到桌面，輸入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NodeBB/NodeBB.git</span><br><span class="line">cd NodeBB</span><br></pre></td></tr></table></figure></p>
-<p>便會在你的桌面上建立一個NodeBB資料夾，裡面便是原始碼。</p>
-<h3 id="安裝MongoDB"><a href="#安裝MongoDB" class="headerlink" title="安裝MongoDB"></a>安裝MongoDB</h3><p>若你已有安裝，可跳過這步驟。<br>若你系統尚未有<a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">HomeBrew</a>套件管理工具，請移駕至Homebrew官網下載並安裝。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
-<p>安裝完以後，系統並不會直接開啟，需要輸入以下指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb</span><br></pre></td></tr></table></figure></p>
-<p>輸入後，mongodb才能在系統上使用哦！</p>
-<h3 id="Heroku-建立專案"><a href="#Heroku-建立專案" class="headerlink" title="Heroku 建立專案"></a>Heroku 建立專案</h3><p>首先先確保你有安裝Heroku Cli，若沒有請先Google查詢先安裝，否則下列指令皆無法執行。</p>
-<p>我們先在終端機上輸入以下指令，登入自己的heroku帳號<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku login</span><br></pre></td></tr></table></figure></p>
-<p>接著會提示你輸入帳號及密碼，輸入完沒有打錯的話，便會成功登入。<br>接著在Heroku上直接建立專案，nodebb-forum可以自行取名，或著直接打heroku create也可以，heroku便會隨機幫你建立一個名稱。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku create twlesmatches-forum</span><br></pre></td></tr></table></figure></p>
-<p>建立好專案後，我們要去設定MLab MongoDB 與自己的heroku帳號 建立連結，可以先選擇SendBox的免費專案<br><a href="https://elements.heroku.com/addons/mongolab" target="_blank" rel="noopener">MLab建立連接</a><br>點擊上列連接，並找到按鈕「Install mLab MongoDB」進入頁面<br><img src="https://i.imgur.com/EaecwAu.png" alt="Picture install mLab Mongo DB">。<br>他會要求你登入帳號，並選擇要連接的專案。<br>像我剛剛在heroku上建立專案叫twlesmatches-forum，便在這個視窗輸入tw，便會跳出來囉，選好專案後便點擊按鈕「Provision add-on」即可加入至專案。<br><img src="https://i.imgur.com/H5BY7Rt.png" alt="Find project"><br>或是比較省事一點，直接在終端機輸入以下指令，並選擇sandbox的免費專案。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku addons:create mongolab:sandbox</span><br></pre></td></tr></table></figure></p>
-<h3 id="NodeBB-與-Mongo資料庫-連接"><a href="#NodeBB-與-Mongo資料庫-連接" class="headerlink" title="NodeBB 與 Mongo資料庫 連接"></a>NodeBB 與 Mongo資料庫 連接</h3><p>成功連接後，我們便來設定與資料庫連接<br>在終端機上輸入以下指令，請記得必須要在NodeBB的根目錄才行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nodebb setup</span><br></pre></td></tr></table></figure></p>
-<p>如果輸入setup指令後，出現ERROR訊息：<br><code>error: NodeBB could not connect to your Mongo database. Mongo returned the following error: Authentication failed.</code><br>這段Error訊息，是說專案沒辦法連接本機上的Mongo，是因為權限不夠高的關係。</p>
-<p>請在終端機上輸入以下指令，進入mongo資料庫的介面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure></p>
-<p>如果無法順利進入mongo的介面，請先檢查是否有安裝成功mongoDB或著是<code>brew service restart mongo</code>，將服務重啟。</p>
-<p>順利進入介面後，請再輸入以下指令<br>便可成功切換到nodebb的資料庫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; use nodebb</span><br><span class="line">switched to db nodebb</span><br></pre></td></tr></table></figure></p>
-<h3 id="Mongo-簡單指令"><a href="#Mongo-簡單指令" class="headerlink" title="Mongo 簡單指令"></a>Mongo 簡單指令</h3><p>mongo介面下列有幾個指令可以檢查這個nodebb資料庫的使用者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.getUsers() <span class="comment"># 查詢所有使用者</span></span><br><span class="line">show roles; <span class="comment"># 秀出所有的權限角色，像readWrite, userAdmin</span></span><br></pre></td></tr></table></figure></p>
-<p>輸入上面的指令像是db.getUsers()會發現，nodeBB資料庫內沒有任何一個使用者，所以我們要建立一個使用者，並且有足夠高的權限可以操作，角色為userAdmin。</p>
-<p>我們在終端機上輸入以下指令，在輸入前，請將<code>username</code>, <code>password</code>替換成你想要設定的名稱及密碼，這組設定將會是你本機上連接資料庫時的帳號及密碼，要記得！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;user:&apos;username&apos;, pwd:&apos;password&apos;, roles:[&#123;role:&apos;userAdmin&apos;, db:&apos;db-name&apos;&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>若想要設定其他權限，可以輸入<code>show roles;</code>，查詢資料庫內其他角色的權限，再輸入一次上述指令，將<code>role: &#39;userAdmin&#39;</code>改成其他你想要的role即可。</p>
-<p>設定好之後，並重新再跑一次setup指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nodebb setup</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://i.imgur.com/6q8KRLi.png" alt="runing setup"><br>輸入後他會跑一下子，接著會要求你設定一些選項，這邊非常重要<br>關係到你能不能架設在Heroku上連接資料庫成功，所以輸入時要提高注意力一下XD，不能全部都按Enter！！<br>（我第一次架失敗時就是全部都按Enter XD）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL used to access this NodeB(http://localhost:4567) https://twlesmatches-forum.herokuapp.com/</span><br></pre></td></tr></table></figure></p>
-<p>首先要設定的是URL，請在這裡填上你的heroku application的url，不知道的話請開新的終端機視窗輸入<code>heroku open</code>便會跳出你專案的網址，格式會像是這樣：<code>https://twlesmatches-forum.herokuapp.com/</code></p>
-<p>接著要你設定 NodeBB secret，不用理她，Enter跳過！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Please enter a NodeBB secret (ca7c68c3-edce-4a7d-80f8-7e5e757ca5ca)</span><br></pre></td></tr></table></figure></p>
-<p>接著會詢問你要使用的Database是什麼？由於NodeBB只允許Mongo或Redis這兩款資料庫可使用，我們前面辛苦安裝Mongo了，就直接Enter吧XD。（Enter代表輸入他預設的指令）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Which database to use (mongo)</span><br></pre></td></tr></table></figure></p>
-<p>接著會出現重頭戲！這個NodeBB要連接的資料庫網址是什麼？也有出現提示格式如何輸入。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2018-12-10T14:52:49.320Z [14213] - info:</span><br><span class="line">Now configuring mongo database:</span><br><span class="line">MongoDB connection URI: (leave blank <span class="keyword">if</span> you wish to specify host, port, username/password and database individually)</span><br><span class="line">Format: mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</span><br></pre></td></tr></table></figure></p>
-<p>這很簡單，開啟Heroku網站，並登入帳號後選擇你剛剛建立的application專案，進入專案後到Setting找到Config Vars，就有資料庫網址了！把他複製貼上到終端機上即可囉。（也可直接輸入heroku config，便會出現資料庫的網址）<br><img src="https://i.imgur.com/QospqAE.png" alt="示意圖"><br>輸入完後，便會自動跑完安裝啦<br><img src="https://i.imgur.com/JtTVSQF.png" alt="tutorial for nodebb and heroku"><br>跑完安裝後要注意，會有個提示訊息告知你的Admin系統管理員帳號及密碼是多少，不要忽略了哦</p>
-<p>接著剩下最後兩個步驟了，快大功告成啦！<br>請在終端機輸入以下指令，建立Procfile在Heroku上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web node app.js --no-daemon</span><br></pre></td></tr></table></figure></p>
-<p>教學文件是打loader.js，但照著打反而出錯，爬文後發現打app.js才能成功架設。<br>輸入完後，請git commit做紀錄後推上去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add -f Procfile config.json package.json build &amp;&amp; git commit -am &quot;adding Procfile and configs for Heroku&quot;</span><br><span class="line">git push heroku master</span><br></pre></td></tr></table></figure></p>
-<p>推上去heroku master要稍等一會兒時間。<br>推完後，請再輸入終端機，將dyno設定為1（free）的等級<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku ps:scale web=1</span><br></pre></td></tr></table></figure></p>
-<p>大功告成，快上去看看架設成功了沒！輸入下列指令會自動開啟專案的網站哦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heroku open</span><br></pre></td></tr></table></figure></p>
-<p>如果上述教學有任何錯誤或是需要糾正的地方，請務必留言告訴我，謝謝各位^_^</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://docs.nodebb.org/installing/cloud/heroku/" target="_blank" rel="noopener">官方文件：install nodebb in heroku</a></li>
-<li><a href="http://zhangwenli.com/blog/2016/04/19/installing-nodebb-on-mac-os/" target="_blank" rel="noopener">Install NodeBB in Heroku</a></li>
-<li><a href="https://andyyou.github.io/2016/10/31/process-types-and-profile/" target="_blank" rel="noopener">Heroku 運行類別、 Procfile、常用指令筆記</a></li>
-<li><a href="https://www.kancloud.cn/a632079/nodebb-cn/content" target="_blank" rel="noopener">NodeBB 基礎使用與開發</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Vue-元件化概念/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Vue-元件化概念/" itemprop="url">Vue 元件化概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T22:30:47+08:00">
-                2018-11-26
-              </time>
+              <a href="/project/" class="menu-link">Projects</a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+          </li>
         
-          
-            <h2 id="Vue-元件化概念-筆記"><a href="#Vue-元件化概念-筆記" class="headerlink" title="Vue 元件化概念 筆記"></a>Vue 元件化概念 筆記</h2><ol>
-<li>使用元件化切出複雜頁面</li>
-<li>使用vue-router 做耊面</li>
-<li>使用 vuex（資料中心）統一狀態更動<br><img src="./Screen Shot 2018-09-24 at 6.07.05 PM.png" alt="Alt text"></li>
-</ol>
-<h3 id="元件化"><a href="#元件化" class="headerlink" title="元件化"></a>元件化</h3><ul>
-<li>App.vue是大元件</li>
-<li>什麼是元件化？</li>
-<li>將網頁依照頁面、功能拆分</li>
-<li>小至一個按鈕、大到整個頁面或程式</li>
-<li>Single File Component<h4 id="Vue-元件化概念"><a href="#Vue-元件化概念" class="headerlink" title="Vue 元件化概念"></a>Vue 元件化概念</h4></li>
-<li>新增 / 使用元件</li>
-<li>傳遞屬性 props</li>
-<li>釋放事件 $emit</li>
-<li>元件重用控制 :key</li>
-</ul>
-<h4 id="新增-使用元件"><a href="#新增-使用元件" class="headerlink" title="新增 / 使用元件"></a>新增 / 使用元件</h4><p>每個元件都有自己的 data / computed / methods<br>data需要是回傳資料的函數（非物件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;post&apos;, &#123;</span><br><span class="line">	template:: &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;,</span><br><span class="line">	data()&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="傳遞屬性-props"><a href="#傳遞屬性-props" class="headerlink" title="傳遞屬性 props"></a>傳遞屬性 props</h4><p><a href="https://vuejs.org/v2/guide/components-props.html" target="_blank" rel="noopener">Vue Props Document</a><br>使用 v-bind:屬性 或 :屬性，傳值給元件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component v-bind:value=&apos;10&apos; :post=post&gt;&lt;component&gt;</span><br></pre></td></tr></table></figure></p>
-<p>元件收到值後，會當成內部資料使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">	props: [&apos;propname&apos;],</span><br><span class="line">	data: &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line">或是</span><br><span class="line">data: &#123;</span><br><span class="line">	props: &#123;</span><br><span class="line">		title: String</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>propD: {<br>    dafault: 100<br>}</p>
-<h4 id="釋放事件-emit"><a href="#釋放事件-emit" class="headerlink" title="釋放事件 $emit"></a>釋放事件 $emit</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;component @save=<span class="string">'...'</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">component</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">this.$emit('save', somedata)</span></span><br></pre></td></tr></table></figure>
-<p>釋出 save事件，並釋出一些 data<br>在元件的外面儲存，收到卡片@save的事件，事件save後，卡片資料放上去。</p>
-<h4 id="重用控制-key"><a href="#重用控制-key" class="headerlink" title="重用控制 :key"></a>重用控制 :key</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component @key=&apos;...&apos;&gt;&lt;component&gt;</span><br></pre></td></tr></table></figure>
-<p>根據 key 有沒有改變，控制資料是否要變更。 </p>
-<p>比如說控制卡片列表是否要重新渲染，是否要重新產生方塊<br><img src="./Screen Shot 2018-09-24 at 6.20.37 PM.png" alt="Alt text"></p>
-<p>雜學校的每個文章：卡片每個都有獨立的key，如果規則不同（標題不同），則重新產生卡片。<br>使用時機：文章建立、頁面建立時</p>
-<h2 id="初始化專案"><a href="#初始化專案" class="headerlink" title="初始化專案"></a>初始化專案</h2><ul>
-<li>pug</li>
-<li>pug-loader</li>
-<li>pug-filters</li>
-<li><p>sass</p>
-<h3 id="安裝-Pug、Sass-套件"><a href="#安裝-Pug、Sass-套件" class="headerlink" title="安裝 Pug、Sass 套件"></a>安裝 Pug、Sass 套件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install pug pug-loader pug-filters --save</span><br><span class="line">npm install sass sass-loader node-sass --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指定開發語言</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&apos;pug&apos;&gt;&lt;/template&gt;</span><br><span class="line">&lt;style lang=&apos;sass&apos;&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立專案環境，專案名稱：vuecomp，採用webpack-simple樣板</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack-simple vuecomp</span><br><span class="line">cd vuecomp</span><br><span class="line">npm install //安裝相依性的套件</span><br><span class="line">npm run dev // hot load方式開啟本機環境：localhost:8080</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>data不是 object，是函數喔</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/ES6-Object-Literal-Upgrades：動態命名/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ES6-Object-Literal-Upgrades：動態命名/" itemprop="url">JavaScript ES6 物件 Literal Upgrades：動態命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T19:12:34+08:00">
-                2018-11-25
-              </time>
+              <a href="/about/" class="menu-link">About</a>
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+          </li>
         
-          
-            <h3 id="ES6-Object-Literal-Upgrades"><a href="#ES6-Object-Literal-Upgrades" class="headerlink" title="ES6 Object Literal Upgrades"></a>ES6 Object Literal Upgrades</h3><p>ES6 擴展：物件實體命名，透過<code>[]</code>的方式，可以帶入變數，讓程式碼更好維護、管理。</p>
-<h3 id="運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。"><a href="#運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。" class="headerlink" title="運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。"></a>運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。</h3><h3 id="舉例："><a href="#舉例：" class="headerlink" title="舉例："></a>舉例：</h3><p>像是我建立一個tShirt的物件，裡面有屬性是Color：color色碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const key = &apos;pocketColor&apos;;</span><br><span class="line">const value = &apos;#d6b161&apos;;</span><br><span class="line"></span><br><span class="line">const tShirt = &#123;</span><br><span class="line">  [key]: value,</span><br><span class="line">&#125;</span><br><span class="line">console.log(tShirt);</span><br></pre></td></tr></table></figure>
-<p>console.log後的結果，[key]是什麼？<br>沒錯，就是’pocketColor’: ‘#d6b161’</p>
-<p>假設今天的目的是在一個物件裡放A顏色、A相反的顏色，並配對值<br>和A相反的顏色命名為pocketColorOppsite，並用invertColor函數來取出顏色的相反<br>我們可能會這樣寫：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tShirt = &#123;</span><br><span class="line">  [key]: value,</span><br><span class="line">  pocketColorOpposite: invertColor(value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">invertColor</span>(<span class="params">color</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'#'</span> + (<span class="string">"000000"</span> + (<span class="number">0xFFFFFF</span> ^ <span class="built_in">parseInt</span>(color.substring(<span class="number">1</span>),<span class="number">16</span>)).toString(<span class="number">16</span>)).slice(<span class="number">-6</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>套用 ES6 擴展物件屬性，我們可以帶入變數的方式<br>ES6 的寫法可以這樣下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tShirt = &#123;</span><br><span class="line">  [key]: value,</span><br><span class="line">  [<span class="string">`<span class="subst">$&#123;key&#125;</span>Opposite`</span>]: invertColor(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>透過[]方式，屬性名稱也可以使用<code>${}</code>的方式放入變數<br>也會較好維護。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://github.com/wesbos/es6-articles/blob/master/33%20-%20Object%20Literal%20Upgrades.md" target="_blank" rel="noopener">ES6 Object Literal Upgrades</a></li>
-<li><a href="http://es6.ruanyifeng.com/?search=object+literal&amp;x=0&amp;y=0#docs/string#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="noopener">ECMAScript 6 入門</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/JavaScript30-08-Fun-With-HTML-Canvas-筆記/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/" itemprop="url">JavaScript30/08 | Fun With HTML Canvas 筆記</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-30T23:42:20+08:00">
-                2018-10-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>JavaScript30/08 | Fun With HTML Canvas 筆記</p>
-<h2 id="Demo-效果"><a href="#Demo-效果" class="headerlink" title="Demo 效果"></a>Demo 效果</h2><p><img src="https://github.com/Hazelwu2/JavaScript30/blob/master/day8-fun-with-html5-canvas/demo.gif?raw=true" alt="demo"></p>
-<h2 id="完成-Day8-需要用到的屬性"><a href="#完成-Day8-需要用到的屬性" class="headerlink" title="完成 Day8 需要用到的屬性"></a>完成 Day8 需要用到的屬性</h2><ul>
-<li>Canvas<br>基本屬性<ul>
-<li>getContext()</li>
-<li>lineCap</li>
-<li>lineJoin</li>
-<li>beginPath()<br>調整色彩、寬度</li>
-<li>lineWidth</li>
-<li>fillStyle</li>
-<li>strokeStyle<br>繪製屬性</li>
-<li>beginPath()</li>
-<li>lineTo(x, y)</li>
-<li>stroke()</li>
-</ul>
-</li>
-<li>Event：用各種事件來控制 isDrawing 開關<ul>
-<li>mousedown</li>
-<li>mouseup</li>
-<li>mouseout</li>
-<li>mousemove<br><br></li>
-</ul>
-</li>
-</ul>
-<h4 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h4><ol>
-<li>將 Canvas 元素存入變數，設定 Canvas 寬與高</li>
-<li>利用 getContext(‘2d’)，來獲取值 ctx</li>
-<li>設定 ctx 的基本屬性<ul>
-<li>線條顏色（hsl）</li>
-<li>線條寬度（lineWidth)</li>
-<li>線條末端的形狀</li>
-</ul>
-</li>
-<li>繪畫效果<ul>
-<li>設定繪圖中的開關（isDrawing）</li>
-<li>監聽滑鼠事件，根據不同事件，將開關設定為 true 或 false</li>
-</ul>
-</li>
-<li>動態設定彩虹漸變（利用 hsl 的 h 值，以 h++更改顏色）</li>
-<li>動態設定：當繪畫時，線條由細到粗、由粗到細</li>
-</ol>
-<h4 id="Canvas-起手式"><a href="#Canvas-起手式" class="headerlink" title="Canvas 起手式"></a>Canvas 起手式</h4><p>以下為 Canvas 的基本用法<br>將 Canvas 元素存入變數 canvas內，並設定 Canvas 寬與高<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">'draw'</span> <span class="attr">width</span>=<span class="string">'800'</span> <span class="attr">height</span>=<span class="string">'800'</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>設定 Canvas 寬高</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'#draw'</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight;</span><br></pre></td></tr></table></figure>
-<p>接著，設定用來 ctx 吧</p>
-<ul>
-<li>lineCap：筆觸的形狀，可以設為 round、butt、square</li>
-<li>lineJoin：線條比較方式</li>
-<li>lineWidth：線條寬度</li>
-<li>strokeStyle：線條顏色</li>
-<li>fillStyle：填充顏色<br><br><br>用 ctx 繪製 Canvas</li>
-<li>beginPath()：開始畫新的路徑 </li>
-<li>stroke()：繪製線條</li>
-<li>moveTo(x,y)：以x軸、y軸為座標位置，操作起點</li>
-<li>lineTo(x,y)：同樣以x,y軸為坐標，從moveTo到lineTo會畫出一條線</li>
-</ul>
-<h4 id="設定繪圖開關"><a href="#設定繪圖開關" class="headerlink" title="設定繪圖開關"></a>設定繪圖開關</h4><p>理想結果是像小畫家一樣，當點滑鼠左鍵便開始畫線條，直到放開左鍵，所以我們要做一個叫isDrawing的開關，用來控制 繪圖中 / 結束繪圖的狀態。<br><br></p>
-<ul>
-<li>當點擊左鍵，表示正在畫畫，isDrawing =&gt; true，isDrawing開啟。</li>
-<li>當放開左鍵，表示結束畫畫，isDrawing =&gt; flase，isDrawing關閉。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isDrawing = <span class="literal">false</span>;</span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, isDrawing = ture);</span><br><span class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, draw);</span><br><span class="line">canvas.addEventListener(<span class="string">'mouseup'</span>, isDrawing = <span class="literal">false</span>);</span><br><span class="line">canvas.addEventListener(<span class="string">'mouseout'</span>, isDrawing = <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p>當點擊滑鼠左鍵開始畫圖，便是mousedown，一但點擊左鍵，將isDrawing開關變成 ture。<br>當滑鼠開始移動時，便執行draw function，裡面將會做一些 Canvas的繪製屬性動作，像是beginTo, lineTo, moveTo<br>而滑鼠放掉（mouseup）、滑鼠移出canvas的範圍時（mouseout），便將isDrawing變更為 false，代表使用者已不在繪畫中狀態。<br><br></p>
-<h3 id="線條銜接問題"><a href="#線條銜接問題" class="headerlink" title="線條銜接問題"></a>線條銜接問題</h3><p>若第一次畫完後，想再畫第二次，會發現銜接的線條是從上一次開始。但我們希望理想結果是：不要銜接上一次畫的線條<br><br><br>為了解決這樣的狀況，我們需要更新lastX, lastY，意味著最後滑鼠的x, y軸的座標位置。</p>
-<h4 id="要更新座標位置的有兩處"><a href="#要更新座標位置的有兩處" class="headerlink" title="要更新座標位置的有兩處"></a>要更新座標位置的有兩處</h4><ul>
-<li>當正在繪圖中（isDrawing = ture）時，draw function需更新座標。</li>
-<li>監聽點擊滑鼠左鍵時，要開始繪圖時，需更新最後位置狀態<br>如下列程式碼所展現，e.offsetX, e.offsetY 則為滑鼠在網頁上的座標位置，宣告變數lastX, lastY並指定給他們，即可解決線條銜接問題，每一次點擊滑鼠左鍵都是新的開始囉！</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> draw = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(lastX, lastY);</span><br><span class="line">  ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, (e) =&gt; &#123;</span><br><span class="line">  isDrawing = ture;</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="動態變動線條顏色、粗細"><a href="#動態變動線條顏色、粗細" class="headerlink" title="動態變動線條顏色、粗細"></a>動態變動線條顏色、粗細</h3><p>線條顏色我們以hsl(0, 100%, 50%)來表示，hsl(0, 100%, 50%)，這三組數字個別代表的是色相 Hue、飽和度 Saturation、亮度 Lightness，我們將會把色相替代為動態變數，以變更顏色。<br><br><br>對 hsl 想要最快速了解，可以前往<a href="http://mothereffinghsl.com/" target="_blank" rel="noopener">Mother-Effing</a>，直接展示給你看 hsl的數值及呈現顏色。</p>
-<h4 id="動態設定筆觸顏色"><a href="#動態設定筆觸顏色" class="headerlink" title="動態設定筆觸顏色"></a>動態設定筆觸顏色</h4><p>今天想要做到的理想效果是：隨著滑鼠移動畫線條時，顏色也會跟著改變，很簡單，只要將其中一個數值（0, 100%, 50%）改為變數，並將變數每次畫完時都遞增。<br><br><br>粗細也是囉，Canvas 用 lineWidth來控制線條的粗細程度，將固定數值改為動態變數取代，並將動態變數遞增即可。</p>
-<p>要注意的是 hsl值的色相（hue）值最大為 360，所以也需要另外設條件是 當 hue &gt; 360，hue = 0 歸零開始。<br><br></p>
-<h4 id="動態設定筆觸粗細"><a href="#動態設定筆觸粗細" class="headerlink" title="動態設定筆觸粗細"></a>動態設定筆觸粗細</h4><p>至於控制筆觸大小，設定判斷式：當超過某值時便將變數遞減，當小於某值時便把變數遞增即可達成囉。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hue = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> controlLineWidth = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = <span class="string">`hsl(<span class="subst">$&#123;hue&#125;</span>, 44%, 50%)`</span>;</span><br><span class="line">ctx.lineWidth = controlLineWidth;</span><br><span class="line">ctx.beginPath(); <span class="comment">// 開新的路徑</span></span><br><span class="line">ctx.moveTo(lastX, lastY);</span><br><span class="line">ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">ctx.stroke(); <span class="comment">// 畫線</span></span><br><span class="line"></span><br><span class="line">hue++; <span class="comment">// 畫線結束後，將動態變數hue遞增</span></span><br><span class="line">hue &gt; <span class="number">360</span> ? hue = <span class="number">0</span> : <span class="string">''</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制筆觸粗細大小，設定判斷式</span></span><br><span class="line"><span class="keyword">let</span> direction = ture;</span><br><span class="line"><span class="keyword">if</span> (ctx.lineWidth &gt; <span class="number">100</span> || ctx.lineWidth &lt; <span class="number">80</span> ) &#123;</span><br><span class="line">  direction = !diection;</span><br><span class="line">&#125;</span><br><span class="line">direction ? controlLineWidth++ : controlLineWidth--;</span><br></pre></td></tr></table></figure>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="http://mothereffinghsl.com/" target="_blank" rel="noopener">Mother-Effing 查詢 HSL</a></li>
-<li><a href="https://github.com/soyaine/JavaScript30/tree/master/08%20-%20Fun%20with%20HTML5%20Canvas" target="_blank" rel="noopener">08 HTML5 Canvas 实现彩虹画笔绘画板指南</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Call-Back-Hell：Promise誕生/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Call-Back-Hell：Promise誕生/" itemprop="url">Call Back Hell：Promise誕生</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-02T22:42:10+08:00">
-                2018-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// first</span><br><span class="line">  function getRecipt()&#123;</span><br><span class="line">    setTimeout( () =&gt; &#123;</span><br><span class="line">      const recipeID = [523, 883, 432, 974];</span><br><span class="line">      console.log(recipeID);</span><br><span class="line"></span><br><span class="line">      setTimeout( id =&gt; &#123;</span><br><span class="line">        const recipt = &#123;</span><br><span class="line">          title: &apos;Fresh tomato&apos;,</span><br><span class="line">          publisher: &apos;Joans&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`$&#123;id&#125;: $&#123;recipt.title&#125;`);</span><br><span class="line"></span><br><span class="line">        setTimeout(publisher =&gt; &#123;</span><br><span class="line">          const recipe = &#123;</span><br><span class="line">            title: &apos;Italian Pizza&apos;,</span><br><span class="line">            publisher: &apos;Joans&apos;</span><br><span class="line">          &#125;</span><br><span class="line">          console.log(recipe.publisher);</span><br><span class="line">        &#125;, 1500, recipt.publisher);</span><br><span class="line">      &#125;, 1000, recipeID[2]);</span><br><span class="line">    &#125;, 1500);</span><br><span class="line">  &#125;</span><br><span class="line">  getRecipt();</span><br></pre></td></tr></table></figure>
-<p>難管理<br>為了解決這樣的問題，於是誕生了「Promise」</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？/" itemprop="url">CSS3-Transform-3D：老闆，有沒有賣防螢幕暈的藥啊？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-18T20:18:13+08:00">
-                2018-09-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="CSS3-Transform-3D"><a href="#CSS3-Transform-3D" class="headerlink" title="CSS3 Transform 3D"></a>CSS3 Transform 3D</h2><p>最近練習 CSS3 Transform 3D，卡片正面翻轉到背面的特效很酷炫，於是寫下這篇筆記。</p>
-<p>這篇 CSS3 主要會應用到的屬性有</p>
-<ul>
-<li>tranform-style:presesrve-3d</li>
-<li>backface-visibility</li>
-<li>transform: rotateY(180deg)</li>
-<li>position</li>
-</ul>
-<p>HTML 架構<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.father</span><br><span class="line">  .front</span><br><span class="line">  .back</span><br></pre></td></tr></table></figure></p>
-<p>示範做一張簡單的 Business Card 翻轉<br>一開始呈現為正面效果，當點擊或Hover時會翻轉到背面。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span></span><br><span class="line">  <span class="selector-tag">width</span>: 300<span class="selector-tag">px</span>;</span><br><span class="line">  <span class="selector-tag">height</span>: 300<span class="selector-tag">px</span>;</span><br><span class="line">  <span class="selector-tag">backface-visibility</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">  <span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 1<span class="selector-tag">s</span>;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">position</span>: <span class="selector-tag">relative</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span><span class="selector-pseudo">:hover</span></span><br><span class="line">  <span class="selector-tag">transform</span>: <span class="selector-tag">rotateY</span>(180<span class="selector-tag">deg</span>)</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &gt; <span class="selector-tag">div</span></span><br><span class="line">  <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">  <span class="selector-tag">top</span>: 0;</span><br><span class="line">  <span class="selector-tag">left</span>: 0;</span><br><span class="line">  <span class="selector-tag">width</span>: 100%;</span><br><span class="line">  <span class="selector-tag">height</span>: 100%;</span><br></pre></td></tr></table></figure>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a href="https://www.youtube.com/watch?v=RtNLlANWSgs" target="_blank" rel="noopener">CSS3 In Arabic | 3D Tranform - Backface Visibility</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wualnz.com/Canvas：前端特效動畫的基礎/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hazel Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hazel Wu | 22'mm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Canvas：前端特效動畫的基礎/" itemprop="url">Canvas：前端特效動畫的基礎</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-13T11:21:09+08:00">
-                2018-09-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Canvas-基礎特性"><a href="#Canvas-基礎特性" class="headerlink" title="Canvas 基礎特性"></a>Canvas 基礎特性</h2><p><img src="http://bpic.588ku.com/element_pic/12/03/20/1656e3909271e51.jpg" alt="像素圖示範"></p>
-<ol>
-<li>可以自由繪製的元件區域</li>
-<li>可以控制每個像素的顏色與繪製</li>
-<li>有很高的操控度，就像遙控器</li>
-<li>可以把他當成一張動態隨時可更動的圖片</li>
-</ol>
-<h2 id="掌握-Canvas"><a href="#掌握-Canvas" class="headerlink" title="掌握 Canvas"></a>掌握 Canvas</h2><ol>
-<li>繪製圖型</li>
-<li>向量概念</li>
-<li>三角函數數學</li>
-<li>物件導向開發（拆成函件或物件變成小零件，來操作。方便除錯與維護）</li>
-</ol>
-<h2 id="點線面構成圖形"><a href="#點線面構成圖形" class="headerlink" title="點線面構成圖形"></a>點線面構成圖形</h2><ol>
-<li>用點和線連成面</li>
-<li>根據路徑填色或畫線</li>
-</ol>
-<h2 id="Canvas-的座標系方向"><a href="#Canvas-的座標系方向" class="headerlink" title="Canvas 的座標系方向"></a>Canvas 的座標系方向</h2><ol>
-<li>原點預設在左上角(0,0)<br>也因為原點在左上角，因此 Y軸 增加是往下跑的<br>2 . 角度方向是逆時鐘的</li>
-</ol>
-<h2 id="如何開始畫-Canvas"><a href="#如何開始畫-Canvas" class="headerlink" title="如何開始畫 Canvas"></a>如何開始畫 Canvas</h2><ol>
-<li><p>初始化 Init Canvas Element</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>)</span><br><span class="line"><span class="keyword">var</span> cvs = canvas.getContext(<span class="string">'2d'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Setting Canvas 畫布尺寸</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>開始畫圖，構成三角形</p>
-<ul>
-<li>我要開始新的路徑<br><code>cvs.beginPath()</code></li>
-<li>點移到多少<br><code>cvs.moveTo(50, 50)</code></li>
-<li>線填滿<br><code>cvs.lineTo(100, 100)</code><br><code>cvs.lineTo(250, 20)</code> </li>
-<li>關閉路徑<br><code>cvs.closePath()</code></li>
-<li>填滿顏色<br><code>cvs.fillStyle=&#39;black&#39;</code><br><code>cvs.fill()</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="Canvas-矩形繪圖函數"><a href="#Canvas-矩形繪圖函數" class="headerlink" title="Canvas 矩形繪圖函數"></a>Canvas 矩形繪圖函數</h3><ul>
-<li>填滿矩形<br><code>fillRect(x,y,w,h)</code></li>
-<li>繪製線框矩形（正方形但沒有填滿、只有邊框）<br><code>strokeRect(x,y,w,h)</code></li>
-<li>清除矩形範圍<br>清除指定矩形區域內的內容，使其變為全透明。<br><code>clearRect(x,y,w,h)</code></li>
-</ul>
-<blockquote>
-<p>(x,y,w,h)各代表什麼意思？<br>x,y 表示從原點（左上角）為出發的座標位置<br>width, height表示矩形的寬與高</p>
-</blockquote>
-<h3 id="路徑繪圖"><a href="#路徑繪圖" class="headerlink" title="路徑繪圖"></a>路徑繪圖</h3><p>路徑開始與封閉：beginPath / closePath<br>移動與畫線：moveTo / lineTo / arc<br>指定填色或線條顏色： fillStyle / lineStyle<br>把路徑填色或描出來 stroke / fill</p>
-<h3 id="轉移"><a href="#轉移" class="headerlink" title="轉移"></a>轉移</h3><ul>
-<li>Translate(x,y)</li>
-<li>Rotate(deg)<br>以當下為中心做旋轉</li>
-<li>scale(x,y)</li>
-</ul>
-<h3 id="狀態的保存與還原"><a href="#狀態的保存與還原" class="headerlink" title="狀態的保存與還原"></a>狀態的保存與還原</h3><p>將所有繪製的畫布放在 ctx.save()和ctx.restore()，能預防被污染。</p>
-<ul>
-<li>ctx.save()<br>儲存當下的座標</li>
-<li>ctx.restore()<br>還原上一個儲存的狀態</li>
-</ul>
-<p>還原的原則：先進後出(stack)，像是小畫家回上一步的狀態</p>
-<p>範例：<br>利用儲存狀態，將函數產生的座標變化限制在函數內<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawSomething</span>(<span class="params">x, y, angle</span>) </span>&#123;</span><br><span class="line">  ctx.save()</span><br><span class="line">  ctx.translate(x, y)</span><br><span class="line">  ctx.rotate(deg)</span><br><span class="line">  ctx.restore()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="矩陣"><a href="#矩陣" class="headerlink" title="矩陣"></a>矩陣</h3><p>利用 setTransform 來設定矩陣<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.setTransform(A, B, C, D, E, F)</span><br></pre></td></tr></table></figure></p>
-<p>重設狀態：<br>ctx.setTransform(1, 0, 0, 1, 0, 0)</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes" target="_blank" rel="noopener">Web APIs Canvas 介紹 | MDN</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+      </ul>
     </div>
   </div>
+</header>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/攻略：用Jenkins-從-0-到1-打造強大的前端自動化工作流/">攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流</a>
+      </h2>
+      <p class="article-date">December 6, 2019</p>
+      
+        
+  <a href="/tags#Vue">
+    <span class="tag-code">Vue</span>
+  </a>
+
+  <a href="/tags#Jenkins">
+    <span class="tag-code">Jenkins</span>
+  </a>
 
       
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hazel Wu</p>
-              <p class="site-description motion-element" itemprop="description">在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">48</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">51</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
+      <div class="article-summary">
+        
+          這篇要教導你如何用CI/CD最可靠的工具：Jenkins來打造自動化的前端環境。會有這篇文章是因為公司的專案一直以來都是手動部署的方式，每當更新程式碼要測試時，都需要找有權限的同事幫忙手動部署，一天請同事幫忙五六次都會覺得不好意思。非常希望能夠每次在git push專案時，便會自動抓最新的程 ...
         
       </div>
-    </main>
+      <a class="more" href="/攻略：用Jenkins-從-0-到1-打造強大的前端自動化工作流/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Vue-元件之間的傳話筒-總整理/">Vue 元件之間的傳話筒 總整理</a>
+      </h2>
+      <p class="article-date">March 12, 2019</p>
+      
+      <div class="article-summary">
+        
+          使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hazel Wu</span>
+Props 父傳子
+Parent =&gt; Child Communication
 
+
+$emit 子傳父
+自定義事件，Child =&gt; Parent Co ...
+        
+      </div>
+      <a class="more" href="/Vue-元件之間的傳話筒-總整理/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/FrameWork-7-與-H5邂逅的雷坑/">FrameWork 7 與 H5 邂逅的雷坑</a>
+      </h2>
+      <p class="article-date">December 13, 2018</p>
+      
+        
+  <a href="/tags#Vue">
+    <span class="tag-code">Vue</span>
+  </a>
+
+  <a href="/tags#FrameWrok 7">
+    <span class="tag-code">FrameWrok 7</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          環境配置：Vue + FrameWork 7 ，外面包一層Apk，做成App供手機測試以下將紀錄在實作時遇到的雷坑及如何解決的。
+input 送出按鍵123456789101112131415161718192021&lt;!-- 驗證碼: authenticationCode Start  ...
+        
+      </div>
+      <a class="more" href="/FrameWork-7-與-H5邂逅的雷坑/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/快來架設超潮的NodeBB論壇在Heroku上/">快來架設超潮的NodeBB論壇在Heroku上</a>
+      </h2>
+      <p class="article-date">December 10, 2018</p>
+      
+        
+  <a href="/tags#node.js">
+    <span class="tag-code">node.js</span>
+  </a>
+
+  <a href="/tags#forum">
+    <span class="tag-code">forum</span>
+  </a>
+
+  <a href="/tags#heroku">
+    <span class="tag-code">heroku</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          架設 NodeBB 論壇 在 Heroku 上This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.I look ...
+        
+      </div>
+      <a class="more" href="/快來架設超潮的NodeBB論壇在Heroku上/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Vue-元件化概念/">Vue 元件化概念</a>
+      </h2>
+      <p class="article-date">November 26, 2018</p>
+      
+      <div class="article-summary">
+        
+          Vue 元件化概念 筆記
+使用元件化切出複雜頁面
+使用vue-router 做耊面
+使用 vuex（資料中心）統一狀態更動
+
+元件化
+App.vue是大元件
+什麼是元件化？
+將網頁依照頁面、功能拆分
+小至一個按鈕、大到整個頁面或程式
+Single File ComponentVue 元件化概 ...
+        
+      </div>
+      <a class="more" href="/Vue-元件化概念/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/ES6-Object-Literal-Upgrades：動態命名/">JavaScript ES6 物件 Literal Upgrades：動態命名</a>
+      </h2>
+      <p class="article-date">November 25, 2018</p>
+      
+        
+  <a href="/tags#ES6">
+    <span class="tag-code">ES6</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          ES6 Object Literal UpgradesES6 擴展：物件實體命名，透過[]的方式，可以帶入變數，讓程式碼更好維護、管理。
+運用方式：像是對物件裡的屬性命名時，能夠用像是組字串的方式，讓命名名稱更有彈性。舉例：像是我建立一個tShirt的物件，裡面有屬性是Color：color ...
+        
+      </div>
+      <a class="more" href="/ES6-Object-Literal-Upgrades：動態命名/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/">JavaScript30/08 | Fun With HTML Canvas 筆記</a>
+      </h2>
+      <p class="article-date">October 30, 2018</p>
+      
+        
+  <a href="/tags#js30">
+    <span class="tag-code">js30</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          JavaScript30/08 | Fun With HTML Canvas 筆記
+Demo 效果
+完成 Day8 需要用到的屬性
+Canvas基本屬性
+getContext()
+lineCap
+lineJoin
+beginPath()調整色彩、寬度
+lineWidth
+fillStyle
+ ...
+        
+      </div>
+      <a class="more" href="/JavaScript30-08-Fun-With-HTML-Canvas-筆記/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/Canvas：前端特效動畫的基礎/">Canvas：前端特效動畫的基礎</a>
+      </h2>
+      <p class="article-date">September 13, 2018</p>
+      
+        
+  <a href="/tags#canvas">
+    <span class="tag-code">canvas</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Canvas 基礎特性
+
+可以自由繪製的元件區域
+可以控制每個像素的顏色與繪製
+有很高的操控度，就像遙控器
+可以把他當成一張動態隨時可更動的圖片
+
+掌握 Canvas
+繪製圖型
+向量概念
+三角函數數學
+物件導向開發（拆成函件或物件變成小零件，來操作。方便除錯與維護）
+
+點線面構成圖形
+用點和 ...
+        
+      </div>
+      <a class="more" href="/Canvas：前端特效動畫的基礎/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/為什麼前端要學Vue-js？/">為什麼前端要學Vue.js？</a>
+      </h2>
+      <p class="article-date">September 12, 2018</p>
+      
+        
+  <a href="/tags#Vue">
+    <span class="tag-code">Vue</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Vue.js 解決了什麼問題？當考慮要不要學習新技術時，要先問自己幾個問題
+
+這個技術解決了什麼樣的問題？羊毛出在羊身上，這個技術之所以被研發出來，必有其因。
+這個技術有沒有同類型的替代品？比較各自的優缺點
+我花時間成本去學習這個技術，對我有什麼好處？同樣的時間花去學別的技術，是不是更好？
+ ...
+        
+      </div>
+      <a class="more" href="/為什麼前端要學Vue-js？/">閱讀更多</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/ES6語法：let、const/">ES6語法：let、const</a>
+      </h2>
+      <p class="article-date">September 4, 2018</p>
+      
+        
+  <a href="/tags#ES6">
+    <span class="tag-code">ES6</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          let 與 const 誕生的目的不會汙染全域變數，好方便後續維護、Debug
+
+let, const 用來宣告區塊 {} 裡的變數
+for迴圈宣告 var改為 let
+const 唯讀變數，無法去做修改。
+
+let存在於大括號裡面，在大括號外面便會死翹翹。
+被全域變數污染的例子1234ul ...
+        
+      </div>
+      <a class="more" href="/ES6語法：let、const/">閱讀更多</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> Prev</a>
+  
+  
+    <a href="/page/2/">Next<span class="page-arrow"> →</span></a>
   
 </div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
   
+</main>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
   }
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>
