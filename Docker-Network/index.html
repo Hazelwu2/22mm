@@ -10,7 +10,7 @@
   
   <title>
     
-      MacOS 安裝 GVM | Hazel Wu | 22&#39;mm
+      Docker Network | Hazel Wu | 22&#39;mm
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>MacOS 安裝 GVM</h2>
+  <h2>Docker Network</h2>
   <p class="post-date">2019-12-08</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,26 +147,34 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>我用MacOS作業系統，iterm2、zsh環境，這邊做個紀錄</p>
-<h2 id="移除-Mac-官方-go-安裝檔"><a href="#移除-Mac-官方-go-安裝檔" class="headerlink" title="移除 Mac 官方 go 安裝檔"></a>移除 Mac 官方 go 安裝檔</h2><p>我們要裝GVM，要先移除官方版本的GO 安裝檔，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /usr/local/go</span><br><span class="line">rm /etc/paths.d/go</span><br></pre></td></tr></table></figure></p>
-<h2 id="安裝-GVM"><a href="#安裝-GVM" class="headerlink" title="安裝 GVM"></a>安裝 GVM</h2><p>zsh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)</span><br></pre></td></tr></table></figure></p>
-<p>bash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)</span><br></pre></td></tr></table></figure></p>
-<p>安裝完後重啟終端機，輸入gvm就會有東西了</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://andyyou.github.io/2019/04/14/gvm-cheat-sheet/" target="_blank" rel="noopener">gvm on macOS installation cheatsheet</a></li>
-</ul>
+    <section class="markdown-content"><p>Docker Network 筆記及練習</p>
+<h2 id="Docker-Network-指令"><a href="#Docker-Network-指令" class="headerlink" title="Docker Network 指令"></a>Docker Network 指令</h2><h3 id="Container-Port-與協議"><a href="#Container-Port-與協議" class="headerlink" title="Container Port 與協議"></a>Container Port 與協議</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port [container_ID]</span><br></pre></td></tr></table></figure>
+<h3 id="Docker-Container-IP"><a href="#Docker-Container-IP" class="headerlink" title="Docker Container IP"></a>Docker Container IP</h3><p>顯示Container IP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [container_ID]</span><br></pre></td></tr></table></figure>
+<h3 id="顯示所有-networks"><a href="#顯示所有-networks" class="headerlink" title="顯示所有 networks"></a>顯示所有 networks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+<h3 id="篩選-network"><a href="#篩選-network" class="headerlink" title="篩選 network"></a>篩選 network</h3><p>篩選bridge的network</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker network ls -f driver=bridge</span><br><span class="line">自訂格式 ID: Driver方式顯示</span><br><span class="line">docker network ls --format &apos;&#123;&#123;.ID&#125;&#125; : &#123;&#123;.Driver&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>打這個指令結果應該會像下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ec113447cb40 : bridge</span><br><span class="line">226c9faec426 : host</span><br><span class="line">27315156c58a : null</span><br><span class="line">1395d970d6de : bridge</span><br><span class="line">2cad3a8f93b4 : bridge</span><br></pre></td></tr></table></figure>
+<h3 id="建立-network"><a href="#建立-network" class="headerlink" title="建立 network"></a>建立 network</h3><p>建立 network 在 host 上，會建立預設的 bridge network<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create</span><br></pre></td></tr></table></figure></p>
+<h3 id="建立-bridge-network"><a href="#建立-bridge-network" class="headerlink" title="建立 bridge network"></a>建立 bridge network</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my-bridge-network</span><br></pre></td></tr></table></figure>
+<p>檢查是否建立成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+<p>你應該會看到多出一行 network 是 my-bridge-network</p>
+<p>將network和container 連在一起<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect network1 [container1]</span><br></pre></td></tr></table></figure></p>
+<p>[container1]可以輸入container的name或ID<br>連線成功後，[container1]即可和其他用my-bridge-network的容器溝通</p>
+<h3 id="建立容器並連到network"><a href="#建立容器並連到network" class="headerlink" title="建立容器並連到network"></a>建立容器並連到network</h3><p>範例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge mynetwork</span><br><span class="line">docker network ls</span><br><span class="line">docker run -d --name my_nginx --network mynetwork nginx</span><br><span class="line">docker network inspect mynetwork</span><br></pre></td></tr></table></figure></p>
+<p>檢查JSON有個container物件，有出現<code>&quot;Name&quot;: &quot;my_nginx&quot;</code>，表示加入成功<br><img src="../../../images/docker-network.jpg" alt="Docker my_ngix"></p>
+<p>開新的容器叫cool，並連到mynetwork<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name cool --network mynetwork nginx</span><br><span class="line">docker network connect mynetwork cool</span><br><span class="line">docker network inspect mynetwork</span><br><span class="line">docker container inspect cool</span><br></pre></td></tr></table></figure></p>
+<h3 id="中斷連線"><a href="#中斷連線" class="headerlink" title="中斷連線"></a>中斷連線</h3><p>cool Container與 mynetwork中斷連線<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network disconnect mynetwork cool</span><br></pre></td></tr></table></figure></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Go">
-    <span class="tag-code">Go</span>
-  </a>
-
-  <a href="/tags#GVM">
-    <span class="tag-code">GVM</span>
+  <a href="/tags#Docker">
+    <span class="tag-code">Docker</span>
   </a>
 
       </div>
@@ -177,20 +185,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/攻略：用Jenkins-從-0-到1-打造強大的前端自動化工作流/">
+      <a class="nav-left" href="/MacOS-安裝-GVM/">
         <span class="nav-arrow">← </span>
         
-          攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流
+          MacOS 安裝 GVM
         
       </a>
     
-    
-      <a class="nav-right" href="/Docker-Network/">
-        
-          Docker Network
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -212,7 +213,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#移除-Mac-官方-go-安裝檔"><span class="toc-nav-text">移除 Mac 官方 go 安裝檔</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安裝-GVM"><span class="toc-nav-text">安裝 GVM</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker-Network-指令"><span class="toc-nav-text">Docker Network 指令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Container-Port-與協議"><span class="toc-nav-text">Container Port 與協議</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker-Container-IP"><span class="toc-nav-text">Docker Container IP</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#顯示所有-networks"><span class="toc-nav-text">顯示所有 networks</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#篩選-network"><span class="toc-nav-text">篩選 network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立-network"><span class="toc-nav-text">建立 network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立-bridge-network"><span class="toc-nav-text">建立 bridge network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立容器並連到network"><span class="toc-nav-text">建立容器並連到network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#中斷連線"><span class="toc-nav-text">中斷連線</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -222,7 +223,7 @@
 
 <script>
   (function () {
-    var url = 'http://wualnz.com//MacOS-安裝-GVM/';
+    var url = 'http://wualnz.com//Docker-Network/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
