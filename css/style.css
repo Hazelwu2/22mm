@@ -321,9 +321,6 @@ h2.article-head {
   opacity: 1;
   transform: translate(0, 0);
 }
-.post-article {
-  width: 70%;
-}
 .header {
   background: none;
   border: none;
