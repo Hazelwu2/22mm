@@ -10,7 +10,7 @@
   
   <title>
     
-      MacOS 安裝 GVM | Hazel Wu | 22&#39;mm
+      Vue 自動化導入 SASS Mixin | Hazel Wu | 22&#39;mm
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>MacOS 安裝 GVM</h2>
-  <p class="post-date">2019-12-08</p>
+  <h2>Vue 自動化導入 SASS Mixin</h2>
+  <p class="post-date">2020-01-15</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,29 +147,18 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>我用MacOS作業系統，iterm2、zsh環境，這邊做個紀錄</p>
-<h2 id="移除-Mac-官方-go-安裝檔"><a href="#移除-Mac-官方-go-安裝檔" class="headerlink" title="移除 Mac 官方 go 安裝檔"></a>移除 Mac 官方 go 安裝檔</h2><p>我們要裝GVM，要先移除官方版本的GO 安裝檔，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /usr/local/go</span><br><span class="line">rm /etc/paths.d/go</span><br></pre></td></tr></table></figure></p>
-<h2 id="安裝-GVM"><a href="#安裝-GVM" class="headerlink" title="安裝 GVM"></a>安裝 GVM</h2><p>zsh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)</span><br></pre></td></tr></table></figure></p>
-<p>bash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)</span><br></pre></td></tr></table></figure></p>
-<p>安裝完後重啟終端機，輸入gvm就會有東西了</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://andyyou.github.io/2019/04/14/gvm-cheat-sheet/" target="_blank" rel="noopener">gvm on macOS installation cheatsheet</a></li>
+    <section class="markdown-content"><p>專案需要導入全域的 Mixin，以下會介紹要怎麼設定。專案使用的是Vue CLI 3建立的，因此需要自行建立一個<code>vue.config.js</code>檔來修改Webpack設定</p>
+<p>在<a href="https://cli.vuejs.org/zh/guide/css.html#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="noopener">官方Vue文件的自动化导入</a>說明，我們可以用style-resourses-loader來加載mixin、color等需要全域使用的CSS檔。</p>
+<p>安裝 style-resources-loader<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install style-resources-loader</span><br></pre></td></tr></table></figure></p>
+<p>接著在專案目錄最外層新增<code>vue.config.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> oneOfsMap = config.module.rule(<span class="string">'scss'</span>).oneOfs.store</span><br><span class="line">    oneOfsMap.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      item</span><br><span class="line">        .use(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">        .loader(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">        .options(&#123;</span><br><span class="line">          <span class="comment">// 單隻檔案引入</span></span><br><span class="line">          resources: [path.resolve(__dirname, <span class="string">'./src/style/mixin.scss'</span>)],</span><br><span class="line"></span><br><span class="line">          <span class="comment">// 多檔案引入</span></span><br><span class="line">          <span class="comment">// resources: ['./path/to/vars.scss', './path/to/mixins.scss']</span></span><br><span class="line">        &#125;)</span><br><span class="line">        .end()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>設定完後，重新啟動<code>npm run serve</code>，即可不用個別在component引入mixin.scss，也可以使用@include了</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://cli.vuejs.org/zh/guide/css.html#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="noopener">Vue - 自动化导入</a></li>
+<li><a href="https://github.com/yenshih/style-resources-loader" target="_blank" rel="noopener">Github Style-resources-loader</a></li>
+<li><a href="https://github.com/shakacode/sass-resources-loader/issues/38" target="_blank" rel="noopener">Module build failed: Error: Something wrong with provided resources. Make sure ‘options.resources’ is String or Array of Strings. </a></li>
 </ul>
 </section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Go">
-    <span class="tag-code">Go</span>
-  </a>
-
-  <a href="/tags#GVM">
-    <span class="tag-code">GVM</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -177,20 +166,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/攻略：用Jenkins-從-0-到1-打造強大的前端自動化工作流/">
+      <a class="nav-left" href="/Docker-Network/">
         <span class="nav-arrow">← </span>
-        
-          攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/Docker-Network/">
         
           Docker Network
         
-        <span class="nav-arrow"> →</span>
       </a>
+    
     
   </div>
 
@@ -212,7 +194,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#移除-Mac-官方-go-安裝檔"><span class="toc-nav-text">移除 Mac 官方 go 安裝檔</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安裝-GVM"><span class="toc-nav-text">安裝 GVM</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
     
   </div>
 </aside>
@@ -222,7 +204,7 @@
 
 <script>
   (function () {
-    var url = 'http://wualnz.com//MacOS-安裝-GVM/';
+    var url = 'http://wualnz.com//Vue-自動化導入-SASS-Mixin/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
