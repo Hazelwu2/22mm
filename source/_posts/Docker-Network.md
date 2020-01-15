@@ -17,6 +17,7 @@ docker port [container_ID]
 
 ### Docker Container IP
 顯示Container IP
+
 ```
 docker inspect [container_ID]
 ```
@@ -24,18 +25,18 @@ docker inspect [container_ID]
 ### 顯示所有 networks
 ```
 docker network ls
-``` 
-
+```
 ### 篩選 network
 篩選bridge的network
+
 ```
 docker network ls -f driver=bridge
-```
 自訂格式 ID: Driver方式顯示
-```
-docker network ls --format "{{.ID}} : {{.Driver}}"
+docker network ls --format '{{.ID}} : {{.Driver}}'
+
 ```
 打這個指令結果應該會像下面這樣
+
 ```
 ec113447cb40 : bridge
 226c9faec426 : host
@@ -46,12 +47,12 @@ ec113447cb40 : bridge
 
 
 ### 建立 network
-建立 network 在 host 上，會建立預設的 network bridge
+建立 network 在 host 上，會建立預設的 bridge network
 ```
 docker network create
 ```
 
-建立 bridge network
+### 建立 bridge network
 ```
 docker network create -d bridge my-bridge-network
 ```
@@ -60,6 +61,7 @@ docker network create -d bridge my-bridge-network
 ```
 docker network ls
 ```
+
 你應該會看到多出一行 network 是 my-bridge-network
 
 將network和container 連在一起
