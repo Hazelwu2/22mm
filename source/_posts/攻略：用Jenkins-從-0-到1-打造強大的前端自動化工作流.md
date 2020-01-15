@@ -9,6 +9,20 @@ tags:
 
 持續整合、持續交付（Continuous Integration & Continous Delivery）簡稱CI/CD，盡量減少手動人力，將一些日常工作交給自動化工具，例如：環境建置、單元測試、日誌紀錄、產品部署。
 
+如果沒有 `CI/CD`，前端要更新程式碼的工作流程會是這樣
+
+1. 本地端寫程式
+2. 提交程式碼，Push到Git Reporistory
+2. 提交程式碼，Push到Git Reporistory
+3. 終端機輸入npm run test:unit，看單元測試結果
+4. 存檔程式碼，Git Commit後並Push到Github Reporistory
+5. 連線到測試伺服器，移動到專案，git pull下來、執行npm run build
+
+
+有了CI/CD後，整個流程就會變成像下面這樣
+1. 本地端寫程式
+2. 
+
 ## 專案用了哪些工具
 - Git 版本控制
 - GitHub 程式碼託管、審查
@@ -222,3 +236,4 @@ Slack/Jenkins plugin: you're all set on http://www.test-jenkins:8080/
 - [山姆鍋對持續整合、持續部署、持續交付的定義](https://samkuo.me/post/2013/10/continuous-integration-deployment-delivery/)
 - [永久修改以容器化方式运行的Jenkins系统时间](https://www.jianshu.com/p/47d767cf893d)
 - [Introducing Blue Ocean: a new user experience for Jenkins](https://jenkins.io/blog/2016/05/26/introducing-blue-ocean/)
+- [前端开发如何让持续集成 / 持续部署 (CI/CD) 跑起来](https://juejin.im/entry/5a8f919af265da4e8e787606)
