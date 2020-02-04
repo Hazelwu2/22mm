@@ -4,7 +4,6 @@ date: 2020-02-04 11:15:18
 tags:
 ---
 # Vue 動態切換元件
-@(09. Vue)[動態切換元件,元件, component]
 根據API取得的資料，動態切換元件。公司需要做模板切換，使用者可以在後台選擇layout1、layout2、layout3，分別會載入不同的layout
 
 我們將API取得的資料放在`sessionStorage.siteInfo`裡，
@@ -47,7 +46,22 @@ export default {
 </script>
 ```
 
+## 動態載入
+import 使用變數來動態載入模組
+```
+var { hot_layout } = this.$store.dispatch('index.siteInfo');
+var { vendor_layout } = JSON.parse(sessionStorage.getItem('siteInfo'));
+var HotGame = () => import(`@/views/12.index/hot_layout/${hot_layout}.vue`)
+var VendorGame = () => import(`@/views/12.index/vendor_layout/${vendor_layout}.vue`)
 
+var c = 'components';
+export default {
+  components: {
+    Slider: () => import(`@/views/12.index/${c}/Slider.vue`),
+  },
+}
+```
+但是這個方法取得API總會遲一步，所以暫緩沒有使用此方法，在這邊做個紀錄。
 
 ### Reference
 - [官方文件：異步組件](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)
