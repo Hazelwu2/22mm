@@ -168,6 +168,26 @@
 <li>用 phpmyadmin/phpmyadmin image來啟動此容器</li>
 </ul>
 <p>完成後在網址上輸入localhost:9100就會看到phpMyAdmin登入介面了</p>
+<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><ol>
+<li>laravel無法連接資料庫<br>由於安裝mysql, phpMyAdmin是為了建Laravel，在laravel專案中無法與資料庫連接，<br>錯誤訊息：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The server requested authentication method unknown to the client</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>爬了文才知道是因為MySQL 8使用新的密碼驗證方式：caching_sha2_password，有兩種解決辦法</p>
+<ol>
+<li>升級php、載入模組</li>
+<li>修改使用者的密碼驗證方式</li>
+</ol>
+<p>我是用第二種方式，修改使用者密碼驗證方式來解決<br>進入mysql container<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br><span class="line">mysql -u root -p</span><br><span class="line">ALTER USER root IDENTIFIED WITH mysql_native_password BY &apos;PASSWORD&apos;</span><br></pre></td></tr></table></figure></p>
+<p>完成後錯誤訊息就不再跳出，而root密碼也被改為PASSWORD，在.env要記得改成PASSWORD</p>
+<ol start="2">
+<li>換了個錯誤訊息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQLSTATE[HY000] [1045] Access denied for user &apos;root&apos;@&apos;172.17.0.1&apos; (using password: YES) (SQL: select * from information_schema.tables where table_schema = works and table_name = migrations and table_type = &apos;BASE TABLE&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://www.cnblogs.com/cndavidwang/p/9357684.html" target="_blank" rel="noopener">SHA2密码验证引起的PHP错误：SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+</a></li>
+<li><a href="http://sodagreen.tw/wp/workblog/?p=398" target="_blank" rel="noopener">Docker 安裝 MySQL、phpMyAdmin</a></li>
+</ul>
 </section>
     <!-- Tags START -->
     
@@ -214,7 +234,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MySQL"><span class="toc-nav-text">MySQL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#phpMyAdmin"><span class="toc-nav-text">phpMyAdmin</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MySQL"><span class="toc-nav-text">MySQL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#phpMyAdmin"><span class="toc-nav-text">phpMyAdmin</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#遇到的問題"><span class="toc-nav-text">遇到的問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
     
   </div>
 </aside>
