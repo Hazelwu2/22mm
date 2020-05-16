@@ -149,6 +149,20 @@
   <article class="post-article">
     <section class="markdown-content"><p>這篇要教導你如何用CI/CD最可靠的工具：Jenkins來打造自動化的前端環境。會有這篇文章是因為公司的專案一直以來都是手動部署的方式，每當更新程式碼要測試時，都需要找有權限的同事幫忙手動部署，一天請同事幫忙五六次都會覺得不好意思。非常希望能夠每次在git push專案時，便會自動抓最新的程式碼並部署在測試伺服器上。</p>
 <p>持續整合、持續交付（Continuous Integration &amp; Continous Delivery）簡稱CI/CD，盡量減少手動人力，將一些日常工作交給自動化工具，例如：環境建置、單元測試、日誌紀錄、產品部署。</p>
+<p>如果沒有 <code>CI/CD</code>，前端要更新程式碼的工作流程會是這樣</p>
+<ol>
+<li>本地端寫程式</li>
+<li>提交程式碼，Push到Git Reporistory</li>
+<li>提交程式碼，Push到Git Reporistory</li>
+<li>終端機輸入npm run test:unit，看單元測試結果</li>
+<li>存檔程式碼，Git Commit後並Push到Github Reporistory</li>
+<li>連線到測試伺服器，移動到專案，git pull下來、執行npm run build</li>
+</ol>
+<p>有了CI/CD後，整個流程就會變成像下面這樣</p>
+<ol>
+<li>本地端寫程式</li>
+<li></li>
+</ol>
 <h2 id="專案用了哪些工具"><a href="#專案用了哪些工具" class="headerlink" title="專案用了哪些工具"></a>專案用了哪些工具</h2><ul>
 <li>Git 版本控制</li>
 <li>GitHub 程式碼託管、審查</li>
@@ -227,6 +241,7 @@
 <li><a href="https://samkuo.me/post/2013/10/continuous-integration-deployment-delivery/" target="_blank" rel="noopener">山姆鍋對持續整合、持續部署、持續交付的定義</a></li>
 <li><a href="https://www.jianshu.com/p/47d767cf893d" target="_blank" rel="noopener">永久修改以容器化方式运行的Jenkins系统时间</a></li>
 <li><a href="https://jenkins.io/blog/2016/05/26/introducing-blue-ocean/" target="_blank" rel="noopener">Introducing Blue Ocean: a new user experience for Jenkins</a></li>
+<li><a href="https://juejin.im/entry/5a8f919af265da4e8e787606" target="_blank" rel="noopener">前端开发如何让持续集成 / 持续部署 (CI/CD) 跑起来</a></li>
 </ul>
 </section>
     <!-- Tags START -->
