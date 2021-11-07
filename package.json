@@ -19,6 +19,7 @@
     "hexo-renderer-less": "^1.0.0",
     "hexo-renderer-marked": "^0.3.0",
     "hexo-renderer-pug": "^2.0.0",
+    "hexo-renderer-sass": "^0.4.0",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^0.2.0",
     "hexo-theme-melody": "^1.9.0"

@@ -1,7 +1,6 @@
 ---
 title: 如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證 
 date: 2018-07-08 15:26:50
-cover: https://i.imgur.com/NDKQqjz.png
 tags:
 - Hexo
 - CloudFlare
