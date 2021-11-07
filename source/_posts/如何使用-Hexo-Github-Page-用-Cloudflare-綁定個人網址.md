@@ -4,6 +4,8 @@ date: 2018-07-08 15:26:50
 tags:
 - Hexo
 - CloudFlare
+category:
+- Hexo
 ---
 # 如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址
 ![如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址](https://i.imgur.com/NDKQqjz.png)

@@ -2,6 +2,7 @@
 title: Vue 動態切換元件
 date: 2020-02-04 11:15:18
 tags:
+- vue
 ---
 # Vue 動態切換元件
 根據API取得的資料，動態切換元件。公司需要做模板切換，使用者可以在後台選擇layout1、layout2、layout3，分別會載入不同的layout
