@@ -352,6 +352,7 @@ export default {
 
 ## Watch
 引入 watch，在 setup 設定 watch function
+### 基本用法
 ``` js
 const { watch } = Vue
 export default {
@@ -363,7 +364,7 @@ export default {
 }
 
 ```
-
+### 深層監聽
 深層監聽物件屬性，加上 `deep: true`
 ``` js
 watch(() => watchObject.value.skill, (newVal, oldVal) => {
@@ -426,4 +427,41 @@ export default {
     }
   }
 }
+```
+
+## WatchEffect
+WatchEffect 是 Vue3 獨有的，和 Watch 有些不同
+
+WatchEffect
+1. 使用上較隨性，不需要指定需要監聽的變數。但 Watch 需要指定監聽哪個變數
+2. WatchEffect 可以被停止，但 Watch 不能
+3. WatchEffect 無法取得前一個值，但 Watch 可以取得被修改前的值
+
+### 基本用法
+``` js
+import { watchEffect } from Vue
+
+export default {
+  setup() {
+    const num = ref(0)
+    const name = ref('Hazel')
+
+    watchEffect(() => {
+      console.log(num)
+      console.log(name)
+    })
+  }
+}
+```
+
+### WatchEffect 停止
+宣告變數 stopWatchEffect 並執行 watchEffect function
+只要執行 `stopWatchEffect` 監聽便會停止
+``` js
+const stopWatchEffect = watchEffect(() => {
+  num.value++
+  console.log(num)
+
+  if (num.value === 5) stopWatchEffect()
+})
 ```
