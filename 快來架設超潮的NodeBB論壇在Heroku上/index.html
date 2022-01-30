@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="架設 NodeBB 論壇 在 Heroku 上This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.I look up official document, and step by step do it, but has">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快來架設超潮的NodeBB論壇在Heroku上">
+<meta property="og:url" content="http://wualnz.com/%E5%BF%AB%E4%BE%86%E6%9E%B6%E8%A8%AD%E8%B6%85%E6%BD%AE%E7%9A%84NodeBB%E8%AB%96%E5%A3%87%E5%9C%A8Heroku%E4%B8%8A/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="架設 NodeBB 論壇 在 Heroku 上This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.I look up official document, and step by step do it, but has">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/EaecwAu.png">
+<meta property="og:image" content="https://i.imgur.com/H5BY7Rt.png">
+<meta property="og:image" content="https://i.imgur.com/6q8KRLi.png">
+<meta property="og:image" content="https://i.imgur.com/QospqAE.png">
+<meta property="og:image" content="https://i.imgur.com/JtTVSQF.png">
+<meta property="article:published_time" content="2018-12-10T15:10:09.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.460Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="node.js">
+<meta property="article:tag" content="forum">
+<meta property="article:tag" content="heroku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imgur.com/EaecwAu.png">
+  
+  <title>快來架設超潮的NodeBB論壇在Heroku上 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="快來架設超潮的NodeBB論壇在Heroku上">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-10 23:10" pubdate>
+        2018年12月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">快來架設超潮的NodeBB論壇在Heroku上</h1>
+            
+            <div class="markdown-body">
+              <h1 id="架設-NodeBB-論壇-在-Heroku-上"><a href="#架設-NodeBB-論壇-在-Heroku-上" class="headerlink" title="架設 NodeBB 論壇 在 Heroku 上"></a>架設 NodeBB 論壇 在 Heroku 上</h1><p>This tutorial is introduce how to install NodeBB forum with MongoDB on MacOS and how to create in Heroku application.<br>I look up official document, and step by step do it, but has some error. I’m spending much more time to fixing them.<br>So I write this topic. I hope this tutorial can help somebody.</p>
+<p>架設Nodebb論壇照著<a href="(https://docs.nodebb.org/installing/cloud/heroku/">官方文件</a>的步驟一步步做，但仍出現一些狀況無法順利架設在 Heroku上，因此寫下筆記記錄下來。</p>
+<p>下列教學總共會分成幾個步驟</p>
+<ol>
+<li>將NodeBB原始碼下載到電腦上</li>
+<li>架設環境在本機上</li>
+<li>建立專案在Heroku 上</li>
+<li>設定專案連接到 MLab （Mango）資料庫</li>
+</ol>
+<h2 id="架設環境"><a href="#架設環境" class="headerlink" title="架設環境"></a>架設環境</h2><ul>
+<li>架設環境 為Mac 10.14 OS</li>
+</ul>
+<h2 id="安裝前必備品"><a href="#安裝前必備品" class="headerlink" title="安裝前必備品"></a>安裝前必備品</h2><p>下列將列出如何安裝 NodeBB在本機環境下，且架設在heroku上，請先確保您有以下環境、知識。</p>
+<ol>
+<li>安裝 <a target="_blank" rel="noopener" href="https://toolbelt.heroku.com/">Heroku Cli</a>，可以在終端機執行像<code>heroku create</code>、<code>heroku login</code>等指令。</li>
+<li>具備基本的 Github 知識</li>
+<li>Mac 已有安裝 HomeBrew</li>
+<li>Heroku 已擁有帳號</li>
+</ol>
+<h2 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h2><h3 id="NodeBB-下載到本機"><a href="#NodeBB-下載到本機" class="headerlink" title="NodeBB 下載到本機"></a>NodeBB 下載到本機</h3><p>Download NodeBB to your localhost.<br>首先先把專案載入到電腦本機上，開啟終端機並移動到桌面，輸入<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/NodeBB/</span>NodeBB.git<br>cd NodeBB<br></code></pre></td></tr></table></figure><br>便會在你的桌面上建立一個NodeBB資料夾，裡面便是原始碼。</p>
+<h3 id="安裝MongoDB"><a href="#安裝MongoDB" class="headerlink" title="安裝MongoDB"></a>安裝MongoDB</h3><p>若你已有安裝，可跳過這步驟。<br>若你系統尚未有<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-tw">HomeBrew</a>套件管理工具，請移駕至Homebrew官網下載並安裝。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>mongodb<br></code></pre></td></tr></table></figure>
+<p>安裝完以後，系統並不會直接開啟，需要輸入以下指令<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">brew services <span class="hljs-literal">start</span> mongodb<br></code></pre></td></tr></table></figure><br>輸入後，mongodb才能在系統上使用哦！</p>
+<h3 id="Heroku-建立專案"><a href="#Heroku-建立專案" class="headerlink" title="Heroku 建立專案"></a>Heroku 建立專案</h3><p>首先先確保你有安裝Heroku Cli，若沒有請先Google查詢先安裝，否則下列指令皆無法執行。</p>
+<p>我們先在終端機上輸入以下指令，登入自己的heroku帳號<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">heroku login</span><br></code></pre></td></tr></table></figure><br>接著會提示你輸入帳號及密碼，輸入完沒有打錯的話，便會成功登入。<br>接著在Heroku上直接建立專案，nodebb-forum可以自行取名，或著直接打heroku create也可以，heroku便會隨機幫你建立一個名稱。<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">heroku create twlesmatches-forum</span><br></code></pre></td></tr></table></figure><br>建立好專案後，我們要去設定MLab MongoDB 與自己的heroku帳號 建立連結，可以先選擇SendBox的免費專案<br><a target="_blank" rel="noopener" href="https://elements.heroku.com/addons/mongolab">MLab建立連接</a><br>點擊上列連接，並找到按鈕「Install mLab MongoDB」進入頁面<br><img src="https://i.imgur.com/EaecwAu.png" srcset="/img/loading.gif" lazyload alt="Picture install mLab Mongo DB">。<br>他會要求你登入帳號，並選擇要連接的專案。<br>像我剛剛在heroku上建立專案叫twlesmatches-forum，便在這個視窗輸入tw，便會跳出來囉，選好專案後便點擊按鈕「Provision add-on」即可加入至專案。<br><img src="https://i.imgur.com/H5BY7Rt.png" srcset="/img/loading.gif" lazyload alt="Find project"><br>或是比較省事一點，直接在終端機輸入以下指令，並選擇sandbox的免費專案。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">heroku addon<span class="hljs-variable">s:create</span> mongola<span class="hljs-variable">b:sandbox</span><br></code></pre></td></tr></table></figure></p>
+<h3 id="NodeBB-與-Mongo資料庫-連接"><a href="#NodeBB-與-Mongo資料庫-連接" class="headerlink" title="NodeBB 與 Mongo資料庫 連接"></a>NodeBB 與 Mongo資料庫 連接</h3><p>成功連接後，我們便來設定與資料庫連接<br>在終端機上輸入以下指令，請記得必須要在NodeBB的根目錄才行<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">./nodebb setup<br></code></pre></td></tr></table></figure><br>如果輸入setup指令後，出現ERROR訊息：<br><code>error: NodeBB could not connect to your Mongo database. Mongo returned the following error: Authentication failed.</code><br>這段Error訊息，是說專案沒辦法連接本機上的Mongo，是因為權限不夠高的關係。</p>
+<p>請在終端機上輸入以下指令，進入mongo資料庫的介面<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">mongo</span><br></code></pre></td></tr></table></figure><br>如果無法順利進入mongo的介面，請先檢查是否有安裝成功mongoDB或著是<code>brew service restart mongo</code>，將服務重啟。</p>
+<p>順利進入介面後，請再輸入以下指令<br>便可成功切換到nodebb的資料庫<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fsharp">&gt; <span class="hljs-keyword">use</span> nodebb<br>switched <span class="hljs-keyword">to</span> db nodebb<br></code></pre></td></tr></table></figure></p>
+<h3 id="Mongo-簡單指令"><a href="#Mongo-簡單指令" class="headerlink" title="Mongo 簡單指令"></a>Mongo 簡單指令</h3><p>mongo介面下列有幾個指令可以檢查這個nodebb資料庫的使用者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">db.getUsers() <span class="hljs-comment"># 查詢所有使用者</span><br>show roles; <span class="hljs-comment"># 秀出所有的權限角色，像readWrite, userAdmin</span><br></code></pre></td></tr></table></figure></p>
+<p>輸入上面的指令像是db.getUsers()會發現，nodeBB資料庫內沒有任何一個使用者，所以我們要建立一個使用者，並且有足夠高的權限可以操作，角色為userAdmin。</p>
+<p>我們在終端機上輸入以下指令，在輸入前，請將<code>username</code>, <code>password</code>替換成你想要設定的名稱及密碼，這組設定將會是你本機上連接資料庫時的帳號及密碼，要記得！<br><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">db.create<span class="hljs-constructor">User(&#123;<span class="hljs-params">user</span>:&#x27;<span class="hljs-params">username</span>&#x27;, <span class="hljs-params">pwd</span>:&#x27;<span class="hljs-params">password</span>&#x27;, <span class="hljs-params">roles</span>:[&#123;<span class="hljs-params">role</span>:&#x27;<span class="hljs-params">userAdmin</span>&#x27;, <span class="hljs-params">db</span>:&#x27;<span class="hljs-params">db</span>-<span class="hljs-params">name</span>&#x27;&#125;]&#125;)</span><br></code></pre></td></tr></table></figure><br>若想要設定其他權限，可以輸入<code>show roles;</code>，查詢資料庫內其他角色的權限，再輸入一次上述指令，將<code>role: &#39;userAdmin&#39;</code>改成其他你想要的role即可。</p>
+<p>設定好之後，並重新再跑一次setup指令<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">./nodebb setup<br></code></pre></td></tr></table></figure><br><img src="https://i.imgur.com/6q8KRLi.png" srcset="/img/loading.gif" lazyload alt="runing setup"><br>輸入後他會跑一下子，接著會要求你設定一些選項，這邊非常重要<br>關係到你能不能架設在Heroku上連接資料庫成功，所以輸入時要提高注意力一下XD，不能全部都按Enter！！<br>（我第一次架失敗時就是全部都按Enter XD）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">URL used to access this NodeB(http://localhost:4567) https://twlesmatches-forum.herokuapp.com/<br></code></pre></td></tr></table></figure><br>首先要設定的是URL，請在這裡填上你的heroku application的url，不知道的話請開新的終端機視窗輸入<code>heroku open</code>便會跳出你專案的網址，格式會像是這樣：<code>https://twlesmatches-forum.herokuapp.com/</code></p>
+<p>接著要你設定 NodeBB secret，不用理她，Enter跳過！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Please enter a NodeBB secret (ca7c68c3-edce-4a7d-80f8-7e5e757ca5ca)<br></code></pre></td></tr></table></figure></p>
+<p>接著會詢問你要使用的Database是什麼？由於NodeBB只允許Mongo或Redis這兩款資料庫可使用，我們前面辛苦安裝Mongo了，就直接Enter吧XD。（Enter代表輸入他預設的指令）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Which database to use (mongo)<br></code></pre></td></tr></table></figure><br>接著會出現重頭戲！這個NodeBB要連接的資料庫網址是什麼？也有出現提示格式如何輸入。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">2018-12-10T14:52:49.320Z [14213] - info:<br>Now configuring mongo database:<br>MongoDB connection URI: (leave blank <span class="hljs-keyword">if</span> you wish to specify host, port, username/password and database individually)<br>Format: mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]<br></code></pre></td></tr></table></figure><br>這很簡單，開啟Heroku網站，並登入帳號後選擇你剛剛建立的application專案，進入專案後到Setting找到Config Vars，就有資料庫網址了！把他複製貼上到終端機上即可囉。（也可直接輸入heroku config，便會出現資料庫的網址）<br><img src="https://i.imgur.com/QospqAE.png" srcset="/img/loading.gif" lazyload alt="示意圖"><br>輸入完後，便會自動跑完安裝啦<br><img src="https://i.imgur.com/JtTVSQF.png" srcset="/img/loading.gif" lazyload alt="tutorial for nodebb and heroku"><br>跑完安裝後要注意，會有個提示訊息告知你的Admin系統管理員帳號及密碼是多少，不要忽略了哦</p>
+<p>接著剩下最後兩個步驟了，快大功告成啦！<br>請在終端機輸入以下指令，建立Procfile在Heroku上<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">web <span class="hljs-keyword">node</span> <span class="hljs-title">app</span>.js --no-daemon<br></code></pre></td></tr></table></figure><br>教學文件是打loader.js，但照著打反而出錯，爬文後發現打app.js才能成功架設。<br>輸入完後，請git commit做紀錄後推上去。<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">add </span>-f Procfile <span class="hljs-built_in">config</span>.<span class="hljs-keyword">json </span>package.<span class="hljs-keyword">json </span><span class="hljs-keyword">build </span>&amp;&amp; git commit -am <span class="hljs-string">&quot;adding Procfile and configs for Heroku&quot;</span><br>git push heroku master<br></code></pre></td></tr></table></figure><br>推上去heroku master要稍等一會兒時間。<br>推完後，請再輸入終端機，將dyno設定為1（free）的等級<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">heroku ps:scale <span class="hljs-attribute">web</span>=1<br></code></pre></td></tr></table></figure></p>
+<p>大功告成，快上去看看架設成功了沒！輸入下列指令會自動開啟專案的網站哦<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">heroku open<br></code></pre></td></tr></table></figure></p>
+<p>如果上述教學有任何錯誤或是需要糾正的地方，請務必留言告訴我，謝謝各位^_^</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.nodebb.org/installing/cloud/heroku/">官方文件：install nodebb in heroku</a></li>
+<li><a target="_blank" rel="noopener" href="http://zhangwenli.com/blog/2016/04/19/installing-nodebb-on-mac-os/">Install NodeBB in Heroku</a></li>
+<li><a target="_blank" rel="noopener" href="https://andyyou.github.io/2016/10/31/process-types-and-profile/">Heroku 運行類別、 Procfile、常用指令筆記</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/a632079/nodebb-cn/content">NodeBB 基礎使用與開發</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/node-js/">node.js</a>
+                    
+                      <a class="hover-with-bg" href="/tags/forum/">forum</a>
+                    
+                      <a class="hover-with-bg" href="/tags/heroku/">heroku</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/FrameWork-7-%E8%88%87-H5%E9%82%82%E9%80%85%E7%9A%84%E9%9B%B7%E5%9D%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FrameWork 7 與 H5 邂逅的雷坑</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Vue-%E5%85%83%E4%BB%B6%E5%8C%96%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">Vue 元件化概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E5%BF%AB%E4%BE%86%E6%9E%B6%E8%A8%AD%E8%B6%85%E6%BD%AE%E7%9A%84NodeBB%E8%AB%96%E5%A3%87%E5%9C%A8Heroku%E4%B8%8A/';
+          this.page.identifier = '/%E5%BF%AB%E4%BE%86%E6%9E%B6%E8%A8%AD%E8%B6%85%E6%BD%AE%E7%9A%84NodeBB%E8%AB%96%E5%A3%87%E5%9C%A8Heroku%E4%B8%8A/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

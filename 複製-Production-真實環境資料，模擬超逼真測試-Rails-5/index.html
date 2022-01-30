@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。 將要測試的資料庫（例如：production）匯出成sql將原始production資料庫:database_name，匯出成「database_name-20180612.sql」檔案  （註：通常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="複製 Production 真實環境資料，模擬超逼真測試 | Rails 5">
+<meta property="og:url" content="http://wualnz.com/%E8%A4%87%E8%A3%BD-Production-%E7%9C%9F%E5%AF%A6%E7%92%B0%E5%A2%83%E8%B3%87%E6%96%99%EF%BC%8C%E6%A8%A1%E6%93%AC%E8%B6%85%E9%80%BC%E7%9C%9F%E6%B8%AC%E8%A9%A6-Rails-5/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。 將要測試的資料庫（例如：production）匯出成sql將原始production資料庫:database_name，匯出成「database_name-20180612.sql」檔案  （註：通常">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-06-12T19:23:39.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.461Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="scp server">
+<meta property="article:tag" content="production data into local">
+<meta property="article:tag" content="copy production data transfer to staging">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>複製 Production 真實環境資料，模擬超逼真測試 | Rails 5 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="複製 Production 真實環境資料，模擬超逼真測試 | Rails 5">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-06-13 03:23" pubdate>
+        2018年6月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">複製 Production 真實環境資料，模擬超逼真測試 | Rails 5</h1>
+            
+            <div class="markdown-body">
+              <p>為了擬真測試，我們往往需要更真實的數據，採取的作法是：將 Production 真實性的資料庫複製一份至 local 端測試，本文採取直接用Postgresql操作，並紀錄當下遇到的問題及解決辦法。</p>
+<h3 id="將要測試的資料庫（例如：production）匯出成sql"><a href="#將要測試的資料庫（例如：production）匯出成sql" class="headerlink" title="將要測試的資料庫（例如：production）匯出成sql"></a>將要測試的資料庫（例如：production）匯出成sql</h3><p>將原始production資料庫:database_name，匯出成「database_name-20180612.sql」檔案</p>
+<blockquote>
+<p>（註：通常會加上日期，會較為清楚知道這是什麼時期匯出的資料）</p>
+</blockquote>
+<p>你需要知道：Server端上的database_url、Server的IP及資料庫的名稱<br>格式大約會像是這樣：</p>
+<p>你可以從Google Cloud Platform上查詢或是在Server租用的主機商查看資訊<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">database_url<br>範例格式：postgresql:<span class="hljs-regexp">//</span>資料庫使用者:資料庫密碼@ServerIP/database_name<br>真實格式：postgresql:<span class="hljs-regexp">//</span>hazelwu:<span class="hljs-number">123456</span>@<span class="hljs-number">11.12</span>.<span class="hljs-number">200.205</span>/production<br></code></pre></td></tr></table></figure><br>如果不清楚database_url是怎麼生成的，可以參考這篇文章：<a target="_blank" rel="noopener" href="http://edgeguides.rubyonrails.org/configuring.html#configuring-a-database">Rails Guide Configure database</a></p>
+<p>遠端連上Server後<br>ssh <a href="mailto:hazelwu@11.12.200.205">hazelwu@11.12.200.205</a><br>移動到專案目錄後，在Commend Line上輸入，並自行填上相關參數<br><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">pg_dump -h <span class="hljs-number">11.12</span><span class="hljs-number">.200</span><span class="hljs-number">.205</span> -U 資料庫使用者 資料庫名稱 &gt; production<span class="hljs-number">-20180612.</span><span class="hljs-keyword">sql</span><br>## 範例：使用者 hazelwu, 資料庫名稱 <span class="hljs-number">123456</span><br>pg_dump -h <span class="hljs-number">11.12</span><span class="hljs-number">.200</span><span class="hljs-number">.205</span> -U hazelwu <span class="hljs-number">123456</span> &gt; production<span class="hljs-number">-20180612.</span><span class="hljs-keyword">sql</span><br></code></pre></td></tr></table></figure></p>
+<p><code>pg_dump dbname &gt; dumpfile</code></p>
+<ul>
+<li>原始指令：pg_dump 資料庫名稱 &gt; 匯出檔案名稱</li>
+<li>參數意義：<br>  -h：host<br>  -U：user<br>  -p：port（註：專案未有設定port，所以不需要設定此參數）<blockquote>
+<p>由於是在Server端要連線至資料庫（本文撰寫時採用GCP），所以需要特別輸入IP位址及User名稱，才能有權限讀取資料庫，並匯出sql檔案。</p>
+</blockquote>
+</li>
+</ul>
+<p>輸入完指令後，便會將 Porduction的資料庫檔案，匯出成sql檔。<br>接著要做的就是把這個新生成的檔案（production-20180612.sql），從Server拉到自己Local端</p>
+<p>不過，通常資料庫都會越來越肥大，在拉到Local端之前要記得先用gzip壓縮一下哦。</p>
+<h3 id="在Server上-gz-壓縮-越來越肥的資料庫"><a href="#在Server上-gz-壓縮-越來越肥的資料庫" class="headerlink" title="在Server上 gz 壓縮 | 越來越肥的資料庫"></a>在Server上 gz 壓縮 | 越來越肥的資料庫</h3><p>以下操作指令皆為在<code>Server</code>端輸入。</p>
+<ol>
+<li>將檔案壓縮成gz<br>解壓縮完便會還原成 production-20180612.sql<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">$ gzip production-<span class="hljs-number">20180612</span>.sql<br></code></pre></td></tr></table></figure></li>
+<li>gz解壓縮指令<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">$ gunzip production-<span class="hljs-number">20180612</span>.sql.gz<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Remote-Server-下載-sql-到-Local端"><a href="#Remote-Server-下載-sql-到-Local端" class="headerlink" title="Remote Server 下載 sql 到 Local端"></a>Remote Server 下載 sql 到 Local端</h3><p>要如何從Server端直接下載檔案到本機電腦呢？<br>有幾種方式：curl、wget或是scp都可以。</p>
+<ul>
+<li>使用wget的話，需要將檔案放在server上的開放空間，且必須要是瀏覽器可以打開的網址，例如</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> <span class="hljs-built_in">Wget</span> url<br><span class="hljs-built_in">wget</span> http://<span class="hljs-number">11.12</span>.<span class="hljs-number">200.205</span>:<span class="hljs-number">8000</span>/production<span class="hljs-literal">-20180612</span>.sql<br></code></pre></td></tr></table></figure>
+<p>以下是採取<code>scp</code>方式<br>scp其實很好記，顧名思義：Server Copy，夠白話了吧XD</p>
+<ul>
+<li>指令格式<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">scp user@server:<span class="hljs-regexp">/路徑/</span>你要<span class="hljs-regexp">/下載/</span>的檔案 ~<span class="hljs-regexp">/Desktop/</span>你要下載<span class="hljs-regexp">/到/</span>電腦<span class="hljs-regexp">/的哪個/</span>位置<br>scp hazelwu@<span class="hljs-number">11.12</span>.<span class="hljs-number">200.205</span>:<span class="hljs-regexp">/home/</span>hazelwu<span class="hljs-regexp">/test/</span>current<span class="hljs-regexp">/production-20180612.sql ~/</span>Desktop<span class="hljs-regexp">/github/</span>test_rails<br>## 這樣便會將production-<span class="hljs-number">20180612</span>.sql下載至desktop<span class="hljs-regexp">/github/</span>test_rails資料夾內。<br></code></pre></td></tr></table></figure>
+<h4 id="你知道嗎？其實還能夠再簡化一點"><a href="#你知道嗎？其實還能夠再簡化一點" class="headerlink" title="你知道嗎？其實還能夠再簡化一點"></a>你知道嗎？其實還能夠再簡化一點</h4>指定你要下載的東西，在Commend Line上先移動到想要把檔案放的資料夾（例如/tmp），接著後面那串指令（表示本機位置）以<code>.</code>來取代就可以了，便會將檔案下載到<code>/tmp</code>內。<blockquote>
+<p>建議可以直接放在專案內的tmp內，因為不會被commit進去、tmp主要都為放暫時性檔案使用。（通常gitinore有加入/tmp/*）</p>
+</blockquote>
+</li>
+</ul>
+<p>打以下的指令時，可以先在Command Line移動到你想要複製的目錄，後面就不用打一長串的東西囉</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-comment">### 簡化後的版本</span><br>[local端] cd tmp/<br>scp hazelwu<span class="hljs-variable">@11</span>.<span class="hljs-number">12.200</span>.<span class="hljs-number">205</span><span class="hljs-symbol">:/home/hazelwu/test/current/production-</span><span class="hljs-number">20180612</span>.sql .<br></code></pre></td></tr></table></figure>
+<p>這樣即可將sql匯出來哩</p>
+<h3 id="保個保險吧：攔截會發送給使用者的動作（Email"><a href="#保個保險吧：攔截會發送給使用者的動作（Email" class="headerlink" title="保個保險吧：攔截會發送給使用者的動作（Email)"></a>保個保險吧：攔截會發送給使用者的動作（Email)</h3><p>由於這些資料都非常真實，是來自真實使用者的資料，包含信箱手機等都為真的<br>所以不能真的做出通知使用者的行為，例如 E-Mail 寄送、簡訊認證碼送出等。</p>
+<p>Rails 有提供 <code>register_interceptor</code>攔截 Email</p>
+<ol>
+<li>config/initializers/email.rb</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-comment"># 新增 config/initializers/email.rb </span><br><span class="hljs-comment"># 在 Rails 啟動時，如果是非 production 環境就載入EmailInterceptor：</span><br><br><span class="hljs-keyword">unless</span> Rails.env.production?<br>  puts <span class="hljs-string">&quot;阻攔Email，將收件人皆改為test測試用信箱&quot;</span><br>  <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;email_interceptor&#x27;</span><br>  ActionMailer::Base.register_interceptor(EmailInterceptor)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>lib/email_interceptor.rb新增以下程式碼</li>
+</ol>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs delphi">## 新增 lib/email_interceptor.rb 並且自訂條件：將收件人信箱皆改為測試用信箱<br><span class="hljs-keyword">class</span> EmailInterceptor<br>  def self.delivering_email(<span class="hljs-keyword">message</span>)<br>    <span class="hljs-keyword">message</span>.<span class="hljs-keyword">to</span> = [<span class="hljs-string">&#x27;test@example&#x27;</span>]<br>  <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h3 id="將-sql-匯出到-local端-develop-environment"><a href="#將-sql-匯出到-local端-develop-environment" class="headerlink" title="將 sql 匯出到 local端 / develop environment"></a>將 sql 匯出到 local端 / develop environment</h3><p>順利抓下Server端的資料後，也設上攔截機制了，接著可以匯入資料囉。</p>
+<ul>
+<li>匯出資料庫<br>pg_dump database_name &gt; backup.sql</li>
+<li>匯入資料庫<br>psql db_name &lt; backup.sql</li>
+</ul>
+<p>還記得剛剛匯出的指令嗎？<br><code>pg_dump -h 11.12.200.205 -U hazelwu 123456 &gt; production-20180612.sql</code><br>接著要匯入的話，指令要這樣打<br><code>psql 123456 &lt; production-20180612.sql</code><br>輸入完之後，可以進入到Console.log試試看資料庫有沒有匯入成功</p>
+<blockquote>
+<p>有發現為什麼突然少那麼多參數嗎？</p>
+<ul>
+<li>原因<br>  由於目前環境是Local端，不需要填入帳號密碼等參數來藉由GCP連入資料庫了，我們只要指定檔案，匯入到本機的資料庫即可。預設是沒有輸入參數，他會抓當前的IP位置</li>
+</ul>
+</blockquote>
+<ul>
+<li>重整 Postgresql 匯入/匯出資料庫指令<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">匯出資料庫<br>psql project_development &lt; project_production<span class="hljs-number">-20180612.</span><span class="hljs-keyword">sql</span><br>匯入資料庫<br>psql project_development &lt; project_production.<span class="hljs-keyword">sql</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="實際操作時，遇到的問題："><a href="#實際操作時，遇到的問題：" class="headerlink" title="實際操作時，遇到的問題："></a>實際操作時，遇到的問題：</h3><h4 id="1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"><a href="#1-從Server端抓下來的User-data，欄位上並沒有實際的密碼，導致會失敗，User-Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？" class="headerlink" title="1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？"></a>1. 從Server端抓下來的User data，欄位上並沒有實際的密碼，導致會失敗，User Model做驗證：導致密碼效驗不能為空白，有什麼辦法可以自動化加上自設的密碼？</h4><blockquote>
+<p>在 Server端 用 Gem 產生資料檔 Seed，抓下來到Local端跑種子檔，<br>結果：無法與關聯資料庫對上，關聯id對不上去（如：user_id會對不上，找不到該User）</p>
+</blockquote>
+<p>資料格式類似如下<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">User.<span class="hljs-built_in">create</span>!([<br>&#123;email: <span class="hljs-string">&quot;fduwsbxcbkdym4jzxn6b@gmail.com&quot;</span>, encrypted_password: <span class="hljs-string">&quot;zxkdfgjeute123ds&quot;</span>, reset_password_token: <span class="hljs-literal">nil</span>, reset_password_sent_at: <span class="hljs-literal">nil</span>, remember_created_at: <span class="hljs-literal">nil</span>&#125;<br></code></pre></td></tr></table></figure><br>第一次試著做時，是用<code>Gem &#39;seed_dump&#39;</code>在Server端上做，因屢次失敗的原因，後面便不採用seed_dump的做法了。轉移production資料到local，直接用postgresql指令直接拉，會比較快。</p>
+<h4 id="2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"><a href="#2-在Rails-5-上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？" class="headerlink" title="2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？"></a>2. 在Rails 5 上重新刪除資料，並再建立一次，有辦法讓id重新從0開始跑嗎？</h4><p>將local端資料庫全部刪除，打算跑rails db:seed:users，將production轉移至local<br>但發現會對不上關聯資料庫的部分，因為重建立的user_id並不是從0開始，這該怎麼辦？</p>
+<ul>
+<li>刪除資料後，id會從0開始有下列幾個做法</li>
+</ul>
+<ol>
+<li>TRUNCATE table <code>TABLE_NAME</code>; </li>
+<li>DROP table <code>TABLE_NAME</code>;</li>
+<li>rails db:drop</li>
+</ol>
+<ul>
+<li><code>TRUNCATE</code> 與 <code>DROP</code> 兩者的差別在於<ul>
+<li>前者是把資料欄位全部刪除；</li>
+<li>後者 DROP 則是把整個 TABLE 刪除</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"><a href="#3-Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出" class="headerlink" title="3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出"></a>3. Server上操作postgresql時，準備匯出sql檔，發現Server的資料庫與專案上的資料庫版本不一致，導致無法順利匯出</h4><p>由於Server端的資料庫與專案上安裝的資料庫版本不符（一個為9.6版本、一個則是9.5版本），導致無法匯出</p>
+<ul>
+<li>一開始的嘗試：<br>先在Server上安裝相同版本的psql，但未能成功，仍還是舊版本QQ<br>搞版本總是很複雜又很麻煩，不過有一個比較快的方法是：</li>
+</ul>
+<p>在跑<code>pg_dump</code>指令時，prefix前面加上指定的版本，就能夠指定為9.6版本跑pg_dump的指令，而不是舊的版本（9.5)</p>
+<ul>
+<li>如何解決：<br>因此我們需要指定版本：<code>/usr/lib/postgresql/9.6/bin/pg_dump</code> 後面再加上原要接的參數，就可以輕鬆搞定版本問題啦！</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># 原本psql匯出指令<br>pg_dump -h <span class="hljs-number">11.12</span><span class="hljs-number">.200</span><span class="hljs-number">.205</span> -U hazelwu <span class="hljs-number">123456</span> &gt; production<span class="hljs-number">-20180612.</span><span class="hljs-keyword">sql</span> <br># 解決版本不一致 匯出指令<br>/usr/lib/postgresql/<span class="hljs-number">9.6</span>/bin/pg_dump -h <span class="hljs-number">11.12</span><span class="hljs-number">.200</span><span class="hljs-number">.205</span> -U hazelwu <span class="hljs-number">123456</span> &gt; production<span class="hljs-number">-20180612.</span><span class="hljs-keyword">sql</span> <br></code></pre></td></tr></table></figure>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://osxdaily.com/2016/11/07/download-file-from-server-scp-ssh/">How to Download a File from a Server with SSH /SCP </a></li>
+<li><a target="_blank" rel="noopener" href="http://motion-express.com/blog/20141112-rails-test-db-seed">Rails 複製資料到 development環境</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.postgresql.org/docs/10/static/backup-dump.html">Postgresql Dump</a></li>
+<li>小蟹本人XD</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/scp-server/">scp server</a>
+                    
+                      <a class="hover-with-bg" href="/tags/production-data-into-local/">production data into local</a>
+                    
+                      <a class="hover-with-bg" href="/tags/copy-production-data-transfer-to-staging/">copy production data transfer to staging</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Macbook%20Pro%202017%E7%89%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%9E%B6%E8%A8%AD%E5%85%A9%E5%80%8B%E8%9E%A2%E5%B9%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Macbook Pro 2017版，外接兩個螢幕 | 全攻略</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Rails-Server%E6%89%93%E4%B8%8D%E9%96%8B%E5%97%8E%EF%BC%9F%E4%BD%A0%E6%87%89%E8%A9%B2%E7%9C%8B%E7%9C%8B%E9%80%99%E7%AF%87/">
+                        <span class="hidden-mobile">Rails Server打不開嗎？你應該看看這篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E8%A4%87%E8%A3%BD-Production-%E7%9C%9F%E5%AF%A6%E7%92%B0%E5%A2%83%E8%B3%87%E6%96%99%EF%BC%8C%E6%A8%A1%E6%93%AC%E8%B6%85%E9%80%BC%E7%9C%9F%E6%B8%AC%E8%A9%A6-Rails-5/';
+          this.page.identifier = '/%E8%A4%87%E8%A3%BD-Production-%E7%9C%9F%E5%AF%A6%E7%92%B0%E5%A2%83%E8%B3%87%E6%96%99%EF%BC%8C%E6%A8%A1%E6%93%AC%E8%B6%85%E9%80%BC%E7%9C%9F%E6%B8%AC%E8%A9%A6-Rails-5/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

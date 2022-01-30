@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="Rails SEO-用Sitemap-generator快速設定sitemap如何用gem gitemap外掛，將Rails整體專案產出sitemap 123456789101112gem &amp;#x27;sitemap_generator&amp;#x27; # 在Gemfile加入此行bundle install          # 安裝套件rake sitemap:install自動生成 APP&#x2F;co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails SEO-用Sitemap-generator快速設定sitemap">
+<meta property="og:url" content="http://wualnz.com/Rails-SEO-%E7%94%A8Sitemap-generator%E5%BF%AB%E9%80%9F%E8%A8%AD%E5%AE%9Asitemap/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="Rails SEO-用Sitemap-generator快速設定sitemap如何用gem gitemap外掛，將Rails整體專案產出sitemap 123456789101112gem &amp;#x27;sitemap_generator&amp;#x27; # 在Gemfile加入此行bundle install          # 安裝套件rake sitemap:install自動生成 APP&#x2F;co">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2017-11-04T09:19:08.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.456Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Rails SEO-用Sitemap-generator快速設定sitemap - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Rails SEO-用Sitemap-generator快速設定sitemap">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-11-04 17:19" pubdate>
+        2017年11月4日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Rails SEO-用Sitemap-generator快速設定sitemap</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Rails-SEO-用Sitemap-generator快速設定sitemap"><a href="#Rails-SEO-用Sitemap-generator快速設定sitemap" class="headerlink" title="Rails SEO-用Sitemap-generator快速設定sitemap"></a>Rails SEO-用Sitemap-generator快速設定sitemap</h1><p>如何用gem gitemap外掛，將Rails整體專案產出sitemap</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ruby">gem <span class="hljs-string">&#x27;sitemap_generator&#x27;</span> <br><span class="hljs-comment"># 在Gemfile加入此行</span><br>bundle install          <br><span class="hljs-comment"># 安裝套件</span><br>rake <span class="hljs-symbol">sitemap:</span>install<br>自動生成 APP/config/sitemap.rb<br><span class="hljs-comment"># 開啟sitemap.rb，已自動生成好格式</span><br>SitemapGenerator::Sitemap.create <span class="hljs-keyword">do</span><br><span class="hljs-comment"># 必要設定default_host</span><br>SitemapGenerator::Sitemap.default_host = <span class="hljs-string">&quot;http://www.你的網站.com&quot;</span><br><span class="hljs-comment"># 接下來就是自由設定你自己Style的map了!</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h3 id="設定robot-txt，爬蟲能夠爬得到Sitemap"><a href="#設定robot-txt，爬蟲能夠爬得到Sitemap" class="headerlink" title="設定robot.txt，爬蟲能夠爬得到Sitemap"></a><strong>設定robot.txt，爬蟲能夠爬得到Sitemap</strong></h3><p><strong>在public/robot.txt輸入</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Sitemap: http:<span class="hljs-regexp">//</span>www.你的網站.com/sitemap.xml.gz<br></code></pre></td></tr></table></figure>
+<h3 id="在本端產生sitemap-xml，測試路徑是否正確"><a href="#在本端產生sitemap-xml，測試路徑是否正確" class="headerlink" title="在本端產生sitemap.xml，測試路徑是否正確"></a>在本端產生sitemap.xml，測試路徑是否正確</h3><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">rake sitemap:refresh:no_ping  <span class="hljs-meta">#測試，故不提交給搜尋引擎</span><br><span class="hljs-symbol">localhost:</span><span class="hljs-number">3000</span>/sitemap.xml.gz <span class="hljs-meta">#瀏覽器</span><br><span class="hljs-meta">#自動下載下來後用瀏覽器重新開啟</span><br></code></pre></td></tr></table></figure>
+<h3 id="測試沒問題了！Deploy-到-Heroku跑看看"><a href="#測試沒問題了！Deploy-到-Heroku跑看看" class="headerlink" title="測試沒問題了！Deploy 到 Heroku跑看看"></a>測試沒問題了！Deploy 到 Heroku跑看看</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git <span class="hljs-builtin-name">add</span> .<br>git commit -am <span class="hljs-string">&#x27;Added sitemap to SEO&#x27;</span><br>git push heroku master<br>heroku <span class="hljs-builtin-name">run</span> sitemap:refresh<br></code></pre></td></tr></table></figure>
+<p>Heroku傳回console.log訊息是有建立成功，但真的測試會發現找不到sitemap。原因出在Heroku採用臨時文件系統，需要找一個容器來裝檔案才行。以下是Heroku官網說明：關於Ephemeral filesystem。</p>
+<blockquote>
+<h4 id="Heroku-採用Ephemeral-filesystem（臨時文件系統）"><a href="#Heroku-採用Ephemeral-filesystem（臨時文件系統）" class="headerlink" title="Heroku 採用Ephemeral filesystem（臨時文件系統）"></a>Heroku 採用Ephemeral filesystem（臨時文件系統）</h4><p>當重新部署或動態管理時，導致資料會重新歸0<br>During the dyno’s lifetime its running processes can use the filesystem as a temporary scratchpad, <strong>but no files that are written are visible to processes in any other dyno and any files written will be discarded the moment the dyno is stopped or restarted.</strong> For example, <strong>this occurs any time a dyno is replaced due to application deployment and approximately once a day as part of normal dyno management.</strong></p>
+</blockquote>
+<h2 id="那就放在Amazon-S3吧！"><a href="#那就放在Amazon-S3吧！" class="headerlink" title="那就放在Amazon S3吧！"></a>那就放在Amazon S3吧！</h2><blockquote>
+<p><strong>寫入S3前，請先完成幾個步驟</strong></p>
+<p>1.註冊AWS會員，並登錄信用卡，才可以用Aws的免費額度。</p>
+<p>2.開啟AWS S3的服務，建立一個Bucket</p>
+<p>3.在本機環境設定先設好AWS相關的API帳密設定，接下來會用到，若沒設定好會出錯。</p>
+</blockquote>
+<h3 id="使用CarrierWave-上傳到-AWS-S3"><a href="#使用CarrierWave-上傳到-AWS-S3" class="headerlink" title="使用CarrierWave 上傳到 AWS S3"></a>使用CarrierWave 上傳到 AWS S3</h3><p>Rails含有豐富的Gem世界，Sitemaps支援多種外掛上傳到遠端空間，包含以下幾鐘：FileAdapter、FogAdapter、S3Adapter、AwsSdkAdapter、WaveAdapter，參考頁面：<a target="_blank" rel="noopener" href="https://github.com/kjvarga/sitemap_generator#supported-adapters">官方頁面Supported Adapters</a><br>藉由Gem CarrierWave來上傳到S3，請先安裝好CarrierWave的Gem</p>
+<p><strong>在sitemap.rb內修改</strong></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;carrierwave&#x27;</span><br><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;sitemap_generator&#x27;</span><br><br>SitemapGenerator::Sitemap.default_host = <span class="hljs-string">&quot;你的網址&quot;</span><br><br><span class="hljs-comment"># 你的AWS S3空間網址，創建的bucket-name</span><br>SitemapGenerator::Sitemap.sitemaps_host = <span class="hljs-string">&quot;http://s3.amazonaws.com/你的bucket-name/&quot;</span><br><span class="hljs-comment"># AWS S3 的bucket底下建立一個資料夾sitemaps</span><br>SitemapGenerator::Sitemap.sitemaps_path = <span class="hljs-string">&#x27;sitemaps/&#x27;</span><br><span class="hljs-comment"># 會放在heroku伺服器內的public/tmp資料架底下</span><br>SitemapGenerator::Sitemap.public_path = <span class="hljs-string">&#x27;tmp/&#x27;</span><br><br><span class="hljs-comment"># 使用WaveAdapter來上傳到AWS S3</span><br>SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new<br><br>SitemapGenerator::Sitemap.create <span class="hljs-keyword">do</span><br>	add <span class="hljs-string">&#x27;/about&#x27;</span>, <span class="hljs-symbol">:changefreq</span> =&gt; <span class="hljs-string">&#x27;monthly&#x27;</span><br>	add <span class="hljs-string">&#x27;/news&#x27;</span>, <span class="hljs-symbol">:changefreq</span> =&gt; <span class="hljs-string">&#x27;monthly&#x27;</span><br>	add <span class="hljs-string">&#x27;/article&#x27;</span><br>	Post.find_each <span class="hljs-keyword">do</span> |post|<br>	    add post_path(post.friendly_id), <span class="hljs-symbol">:lastmod</span> =&gt; post.updated_at<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>新增home#controller，設定sitemap路徑</p>
+<pre><code>rails controller -g home
+</code></pre><p>在home_controller.rb內設定</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">robots</span></span>                                             <br> robots = File.read(Rails.root + <span class="hljs-string">&quot;config/robots.<span class="hljs-subst">#&#123;Rails.env&#125;</span>.txt&quot;</span>)<br> render <span class="hljs-symbol">:text</span> =&gt; robots, <span class="hljs-symbol">:layout</span> =&gt; <span class="hljs-keyword">false</span>, <span class="hljs-symbol">:content_type</span> =&gt; <span class="hljs-string">&quot;text/plain&quot;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sitemap</span></span><br>  redirect_to <span class="hljs-string">&#x27;https://s3-ap-northeast-1.amazonaws.com/你的bucket-name/sitemaps/sitemap.xml.gz&#x27;</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>在routes設定路徑</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">get</span> <span class="hljs-string">&#x27;/sitemaps.xml.gz&#x27;</span> =&gt; <span class="hljs-string">&#x27;home#sitemap&#x27;</span><br><span class="hljs-keyword">get</span> <span class="hljs-string">&#x27;/robots.txt&#x27;</span> =&gt; <span class="hljs-string">&#x27;home#robots&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>再重新Deploy到heroku測試看看。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby">git add .<br>git commit -am <span class="hljs-string">&#x27;Add home#controller &amp; Setting routes &amp; Sitemap use Wave Adapter&#x27;</span><br>git push heroku master<br>heroku run <span class="hljs-symbol">sitemap:</span>refresh<br></code></pre></td></tr></table></figure>
+<p>查看看你的AWS S3空間有沒有多出新的資料夾叫「sitemap」，有的話代表上傳成功囉！<br>接著就是去Google Console提交你的Sitemap啦！</p>
+<h4 id="更新robots-txt，上傳到heroku後未抓到更改後的版本。"><a href="#更新robots-txt，上傳到heroku後未抓到更改後的版本。" class="headerlink" title="更新robots.txt，上傳到heroku後未抓到更改後的版本。"></a><strong>更新robots.txt，上傳到heroku後未抓到更改後的版本。</strong></h4><p>在production.rb上加入後重新Deploy到heroku，就抓得到新的版本囉</p>
+<pre><code>config.static_cache_control = &quot;public, max-age=2592000&quot;
+</code></pre><h4 id="指令介紹"><a href="#指令介紹" class="headerlink" title="指令介紹"></a>指令介紹</h4><hr>
+<p><code>rake sitemap:install</code> 第一步安裝，會自動生成<strong>sitemap.rb</strong>在config目錄底下</p>
+<p><code>rake sitemap:refresh</code> 更新sitemap.xml.gz，並提交到搜尋引擎Google等</p>
+<p><code>rake sitemap:refresh:no_ping</code> 更新sitemap.xml.gz，但<strong>不提交</strong>到搜尋引擎（可在本機development環境下測試）</p>
+<p><code>sitemap:create</code>    建立空白的sitemap，未設定自動提交到搜尋引擎</p>
+<h3 id="關於連結設定"><a href="#關於連結設定" class="headerlink" title="關於連結設定"></a>關於連結設定</h3><p>網址若是localhost:3000/welcome，則add就是設 ‘/welcome’<br>若要使用welcome_path，這種helper需要加上</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">SitemapGenerator::<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Interpreter</span>.</span></span>send :<span class="hljs-keyword">include</span>, RoutingHelper<br></code></pre></td></tr></table></figure>
+<h3 id="關於參數"><a href="#關於參數" class="headerlink" title="關於參數"></a>關於參數</h3><p><code>changefreq</code>：這個頁面頻繁更新的次數，預設是一星期一次<br>    &gt;可設定的參數<br>    &gt;’always’, ‘hourly’, ‘daily’, ‘weekly’, ‘monthly’, ‘yearly’ or ‘never’</p>
+<p><code>lastmod</code>：告訴搜尋引擎，上次修改的時間和日期，預設是Time.now<br><code>host</code>：若不同網域主機需要用:host參數特別指定。預設為default_host所設定的網域<br><code>priority</code>： 排名URL優先權，範圍是0到1，預設為0.5</p>
+<h3 id="關於Post（循環文章）的Sitemap"><a href="#關於Post（循環文章）的Sitemap" class="headerlink" title="關於Post（循環文章）的Sitemap"></a>關於Post（循環文章）的Sitemap</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">add</span> <span class="hljs-string">&#x27;/article&#x27;</span><br>Post.find_each <span class="hljs-built_in">do</span> |<span class="hljs-built_in">post</span>|<br>  <span class="hljs-built_in">add</span> post_path(<span class="hljs-built_in">post</span>.friendly_id), :lastmod =&gt; <span class="hljs-built_in">post</span>.updated_at<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h4 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/kjvarga/sitemap_generator#rails">Github Sitemap_generator#rails</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.scrivinor.com/article/rails-seo-%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E9%97%9C%E6%96%BC-sitemap?locale=zh-TW">Rails SEO 第二步: 關於 sitemap</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cookieshq.co.uk/posts/creating-a-sitemap-with-ruby-on-rails-and-upload-it-to-amazon-s3">Creating a sitemap with Ruby on Rails and uploading it to Amazon S3</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sitepoint.com/start-your-seo-right-with-sitemaps-on-rails/">Start Your SEO Right with Sitemaps on Rails</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23389609/robots-txt-file-on-rails-heroku-app-not-updating?answertab=votes#tab-top">Robots.txt file on Rails heroku app not updating</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/GitPage-%E4%B8%8A-getJSON%E8%AE%80%E5%8F%96%E4%B8%8D%E5%88%B0json%EF%BC%8C%E5%87%BA%E7%8F%BE-404-ERROR/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GitPage 上$.getJSON讀取不到json，出現 404 ERROR</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Gulp-%E5%AD%B8%E7%BF%92%E7%B4%80%E9%8C%84%E3%80%81%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+                        <span class="hidden-mobile">Gulp 學習紀錄、常用指令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Rails-SEO-%E7%94%A8Sitemap-generator%E5%BF%AB%E9%80%9F%E8%A8%AD%E5%AE%9Asitemap/';
+          this.page.identifier = '/Rails-SEO-%E7%94%A8Sitemap-generator%E5%BF%AB%E9%80%9F%E8%A8%AD%E5%AE%9Asitemap/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

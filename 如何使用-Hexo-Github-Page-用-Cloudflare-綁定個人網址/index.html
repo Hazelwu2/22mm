@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址本篇適用於用Hexo框架架設在Github Pages上，但想要綁定自己買的網址。由於Github Pages 產生的個人網址太長，對 SEO 不友善，不是這麼好被搜尋引擎收錄， 步驟 Github Repo 設定 Custom Domain 在 Repo專案下新增 CNAME，完成網址綁定 用 Cloudfla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證">
+<meta property="og:url" content="http://wualnz.com/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Hexo-Github-Page-%E7%94%A8-Cloudflare-%E7%B6%81%E5%AE%9A%E5%80%8B%E4%BA%BA%E7%B6%B2%E5%9D%80/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址本篇適用於用Hexo框架架設在Github Pages上，但想要綁定自己買的網址。由於Github Pages 產生的個人網址太長，對 SEO 不友善，不是這麼好被搜尋引擎收錄， 步驟 Github Repo 設定 Custom Domain 在 Repo專案下新增 CNAME，完成網址綁定 用 Cloudfla">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/NDKQqjz.png">
+<meta property="og:image" content="https://i.imgur.com/7ZyGcn5.png">
+<meta property="og:image" content="https://i.imgur.com/kbEuK16.png">
+<meta property="og:image" content="https://i.imgur.com/ad5nlWf.png">
+<meta property="og:image" content="https://i.imgur.com/p497z5I.png">
+<meta property="og:image" content="https://i.imgur.com/M2QuOzg.png">
+<meta property="og:image" content="https://i.imgur.com/4IRZ3Ic.png">
+<meta property="og:image" content="https://i.imgur.com/lqmzqKD.png">
+<meta property="og:image" content="https://support.cloudflare.com/hc/en-us/article_attachments/206124658/cfssl_flexible.png">
+<meta property="og:image" content="https://support.cloudflare.com/hc/en-us/article_attachments/206167937/cfssl_full.png">
+<meta property="article:published_time" content="2018-07-08T07:26:50.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.460Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="CloudFlare">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imgur.com/NDKQqjz.png">
+  
+  <title>如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-07-08 15:26" pubdate>
+        2018年7月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何使用 Hexo + Github Page 自訂網域名稱 + Cloudflare SSL 免費憑證</h1>
+            
+            <div class="markdown-body">
+              <h1 id="如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址"><a href="#如何使用-Hexo-Github-Page-用-Cloudflare-綁定個人網址" class="headerlink" title="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址"></a>如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址</h1><p><img src="https://i.imgur.com/NDKQqjz.png" srcset="/img/loading.gif" lazyload alt="如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址"><br>本篇適用於用Hexo框架架設在Github Pages上，但想要綁定自己買的網址。<br>由於Github Pages 產生的個人網址太長，對 SEO 不友善，不是這麼好被搜尋引擎收錄，</p>
+<h2 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h2><ol>
+<li>Github Repo 設定 Custom Domain</li>
+<li>在 Repo專案下新增 CNAME，完成網址綁定</li>
+<li>用 Cloudflare 提供免費的 SSL 憑證，得以正確讀取 CSS、Google視為安全網站認證</li>
+</ol>
+<h2 id="Github-設定專屬網址"><a href="#Github-設定專屬網址" class="headerlink" title="Github 設定專屬網址"></a>Github 設定專屬網址</h2><p>開啟Github的Hexo專案，選Setting-&gt;Options-&gt; Github Pages -&gt; Custom Domain，填入自己的網域（例如：<code>wualnz.com</code>），接著儲存。<br><img src="https://i.imgur.com/7ZyGcn5.png" srcset="/img/loading.gif" lazyload alt="Setting Github Custom Domain figure"></p>
+<h3 id="新增-CNAME"><a href="#新增-CNAME" class="headerlink" title="新增 CNAME"></a>新增 CNAME</h3><p>在該 Hexo 專案下的 <code>source</code> 資料夾下新增檔案 <code>CNAME</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## In project</span><br><span class="hljs-built_in">cd</span> /<span class="hljs-built_in">source</span><br>touch CNAME<br></code></pre></td></tr></table></figure><br>修改 CNAME 內容，將域名填入即可，並重新部署到Github。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">wualnz.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure><br><a target="_blank" rel="noopener" href="https://github.com/Hazelwu2/22mm/blob/master/CNAME">點我查看 Github Repo CNAME 設定完成範例</a></p>
+<blockquote>
+<p>到底要放在 <code>/source</code> 還是 <code>最上層資料夾</code>？</p>
+</blockquote>
+<p>若使用Hexo框架的話，要將<code>CNAME</code>放置在 <code>/source</code>資料夾內，原因是：當每次<code>hexo deploy</code>時才不會被覆蓋到。<br>若不是使用Hexo的話，沒有自動部署，直接將<code>CNAME</code>檔放在Proejct內即可。</p>
+<h3 id="CNAME-導向個人網址-原理"><a href="#CNAME-導向個人網址-原理" class="headerlink" title="CNAME 導向個人網址 原理"></a>CNAME 導向個人網址 原理</h3><p>使用者在瀏覽器輸入<code>wualnz.com</code>後，DNS 便會開始解析找到 Github的 IP<br><br></p>
+<p>Github上有成千上百萬個Pages由不同使用者建立，Github不會知道網址<code>wualnz.com</code>是屬於 哪個 User 哪個 Repo，因此需要在Repo下放上 CNAME，這樣 Github才找得到，哦！就是這個hazelwu2/22mm的Repo！並回傳給瀏覽器</p>
+<h4 id="CNAME-是什麼？"><a href="#CNAME-是什麼？" class="headerlink" title="CNAME 是什麼？"></a>CNAME 是什麼？</h4><p>它是一種 DNS 紀錄類型，可以將別名（綽號）對應到實際或正規的網址。<br>當你在瀏覽器上輸入 <code>wualnz.com</code>時，瀏覽器會去找 <code>DNS</code> ，經過DNS的解析 <code>wualnz.com</code> 得到： <code>wualnz.com</code> Github IP 位址，例如找到的是<code>192.168.0.444</code>。</p>
+<blockquote>
+<p>最常見的 <code>CNAME</code> 用法<br>瀏覽器上輸入 <code>www.wualnz.com</code> Enter後會自動跳轉到（對應到）<code>wualnz.com</code><br>不論是輸入<code>wualnz.com</code>還是<code>www.wualnz.com</code> 都能正確導向至網站。</p>
+</blockquote>
+<h4 id="A-Records-是什麼？"><a href="#A-Records-是什麼？" class="headerlink" title="A Records 是什麼？"></a>A Records 是什麼？</h4><p>A Records 就是 該主機的 IP 位址。<br>像 <code>wualnz.com</code> 方便人們記憶的名稱，最後會被解析成很難記住的 IP 位址，例：<code>192.168.0.444</code></p>
+<h2 id="Hexo-設定-url-個人網域"><a href="#Hexo-設定-url-個人網域" class="headerlink" title="Hexo 設定 url 個人網域"></a>Hexo 設定 url 個人網域</h2><p>打開_config.yml<br>其中找到url與root，設定為自己網域名稱。</p>
+<p>若沒有個人網域，可以用預設的Github Pages產生的url（例如：<code>hazelwu2.github.io/22mm</code>)</p>
+<h3 id="無個人網域-設定"><a href="#無個人網域-設定" class="headerlink" title="無個人網域 設定"></a>無個人網域 設定</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-meta">## _config.yml</span><br><span class="hljs-symbol">url:</span> http:<span class="hljs-comment">//github帳號.github.io/repo名稱</span><br><span class="hljs-symbol">root:</span> /repo名稱<br></code></pre></td></tr></table></figure>
+<p>舉例來說，我的Github帳號是<code>hazelwu2</code>，Repo名稱叫<code>22mm</code>，那麼設定就會像下列這樣<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## _config.yml</span><br>url: https:<span class="hljs-regexp">//</span>hazelwu2.github.io<span class="hljs-regexp">/22mm/</span><br>root: <span class="hljs-regexp">/22mm/</span><br></code></pre></td></tr></table></figure></p>
+<h3 id="有個人網域-設定"><a href="#有個人網域-設定" class="headerlink" title="有個人網域 設定"></a>有個人網域 設定</h3><p>有個人網域的話，開啟 _config.yml，並將url設定成自己購買的網址，記得<code>/</code>不要省略<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">url:</span> http:<span class="hljs-comment">//wualnz.com/</span><br><span class="hljs-symbol">root:</span> /<br></code></pre></td></tr></table></figure><br>最後，再回到github你的repo內，設定 Custom Domain</p>
+<ol>
+<li>進入github，點 Hexo 的 Repo，並進入設定</li>
+<li>GitHub Pages 下的 Custom domain</li>
+<li>修改成你購買的網域。（要與CNAME檔案設定一致）</li>
+</ol>
+<p>（例：我的網域是wualnz）<br><img src="https://i.imgur.com/kbEuK16.png" srcset="/img/loading.gif" lazyload alt="Github 設定 Custom Domain Hexo"></p>
+<p>以上步驟完成後，便綁定個人網域成功。<br><br></p>
+<h2 id="Hexo-綁定自訂網址後，CSS-無法正常載入"><a href="#Hexo-綁定自訂網址後，CSS-無法正常載入" class="headerlink" title="Hexo 綁定自訂網址後，CSS 無法正常載入"></a>Hexo 綁定自訂網址後，CSS 無法正常載入</h2><p>綁定網址後開心的進入網站，發現：靠～無法載入 CSS ，打開 Console.log 檢查發現<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">404 </span><span class="hljs-keyword">Error</span> <span class="hljs-keyword">Not</span> found<br></code></pre></td></tr></table></figure></p>
+<blockquote>
+<p>原因來自於：<br>Github Page 不支援自定義的 SSL 憑證，也就是說：使用Github Pages 綁定自己的網址，會和 Github 起衝突</p>
+</blockquote>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><ol>
+<li>自訂網域付費購買 SSL 憑證</li>
+<li>使用免費憑證（例：Let’s Encrypt）</li>
+<li>CDN Cloud Flare服務</li>
+</ol>
+<p>比較建議使用 CDN 的 Cloud Flare，Let’s Encrypt雖是免費憑證，但需要三個月手動更換一次。<br>接下來會介紹如何在 Cloudflare 做設定</p>
+<h3 id="Cloudflare-設定"><a href="#Cloudflare-設定" class="headerlink" title="Cloudflare 設定"></a>Cloudflare 設定</h3><p>設定前，需要將你的網址商設定<code>網域名稱伺服器</code>為Cloudflare提供的網址，讓Cloudflare 代管 DNS Server<br>我買的網址商是Godaddy的，因此在Godaddy面板上設定會像是這樣<br><img src="https://i.imgur.com/ad5nlWf.png" srcset="/img/loading.gif" lazyload alt="Godaddy 設定 Cloudflare 代管DNS"><br>在網址商Godaddy設定成功後，在Cloudflare樣板會看到 Status:Active，表示設定成功。<br><img src="https://i.imgur.com/p497z5I.png" srcset="/img/loading.gif" lazyload alt="Cloudflare Setting DNS Server Active Successful"></p>
+<p>前往Cloudflare DNS</p>
+<ol>
+<li>新增兩個 A Records，皆指向Github IP：<code>192.30.252.153</code>、<code>192.30.252.154</code></li>
+<li>新增 CNAME，NAME 填 www，Value填上 Github帳號.github.io<br>設定完成後，應該會像下圖這樣。<br><img src="https://i.imgur.com/M2QuOzg.png" srcset="/img/loading.gif" lazyload alt="Cloudflare setting github page with custom domain"></li>
+</ol>
+<h3 id="設定-SSL-憑證"><a href="#設定-SSL-憑證" class="headerlink" title="設定 SSL 憑證"></a>設定 SSL 憑證</h3><p>Cloudflare DNS 設定完成後，到Crypto標籤，我們要設定 SSL憑證</p>
+<p>SSL有Flexible、Full選項，這兩個都可以選。<br><img src="https://i.imgur.com/4IRZ3Ic.png" srcset="/img/loading.gif" lazyload alt="Cloudflare Crypto setting SSL"><br>將 Always user HTTPS 打開，變成 On狀態<br><img src="https://i.imgur.com/lqmzqKD.png" srcset="/img/loading.gif" lazyload alt="Cloudflare Crypto setting SSL"></p>
+<p>設定完後，恭喜你，重新Refresh網址後，網站已經能成功抓到 CSS 囉</p>
+<blockquote>
+<h4 id="Cloudflare-SSL-Flexible-、-Full-差別"><a href="#Cloudflare-SSL-Flexible-、-Full-差別" class="headerlink" title="Cloudflare SSL Flexible 、 Full 差別"></a>Cloudflare SSL Flexible 、 Full 差別</h4><p>下圖為<a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-">官方網站提供的說明圖樣</a><br>Flexible、Full 差別在於 Cloudflare 與 Server 間 <strong>是否為加密連線</strong>，官方推薦大家設定 Full SSL。<br>Flexible 是 對 Server 間的連線是不加密的。<br><img src="https://support.cloudflare.com/hc/en-us/article_attachments/206124658/cfssl_flexible.png" srcset="/img/loading.gif" lazyload alt="Cloudflare SSL Flexible"><br>Full 是你擁有一方的SSL憑證，你可以自由選擇一方是否加密。白話一點就是：CloudFlare不管是對訪客、還是對Server端都能夠加密！而且免付費會員也可以使用這功能。<br><img src="https://support.cloudflare.com/hc/en-us/article_attachments/206167937/cfssl_full.png" srcset="/img/loading.gif" lazyload alt="Cloudflare SSL Full"></p>
+</blockquote>
+<p>如果想知道更詳細內容，可以看看我寫的這篇文章：關於<a target="_blank" rel="noopener" href="https://medium.com/@hazelwu/rails-%E8%97%89cloudflare-%E5%85%8D%E8%B2%BBssl%E8%AA%8D%E8%AD%89%E5%BE%8C-%E7%84%A1%E6%B3%95%E7%99%BB%E5%85%A5%E5%BE%8C%E5%8F%B0-%E8%A7%A3%E6%B1%BA%E8%BE%A6%E6%B3%95-4b87d59be765">Rails &amp; Cloudflare use Free SSL, 無法登入後台 解決辦法</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://liyang.pro/hexo-github-cloudflare-customer-domain-ssl/">Hexo+GitHub+Cloudflare实现自定义域名全站SSL</a></li>
+<li><a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-">What do the SSL options mean?</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CloudFlare/">CloudFlare</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E7%A5%9E%E5%A5%87%E7%9A%84migration-%E7%94%9F%E6%88%90%E5%99%A8-Ruby-on-Rails-5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">神奇的migration 生成器 | Ruby on Rails 5</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Macbook%20Pro%202017%E7%89%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%9E%B6%E8%A8%AD%E5%85%A9%E5%80%8B%E8%9E%A2%E5%B9%95/">
+                        <span class="hidden-mobile">Macbook Pro 2017版，外接兩個螢幕 | 全攻略</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Hexo-Github-Page-%E7%94%A8-Cloudflare-%E7%B6%81%E5%AE%9A%E5%80%8B%E4%BA%BA%E7%B6%B2%E5%9D%80/';
+          this.page.identifier = '/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Hexo-Github-Page-%E7%94%A8-Cloudflare-%E7%B6%81%E5%AE%9A%E5%80%8B%E4%BA%BA%E7%B6%B2%E5%9D%80/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

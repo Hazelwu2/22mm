@@ -1,0 +1,638 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="這篇要教導你如何用CI&#x2F;CD最可靠的工具：Jenkins來打造自動化的前端環境。會有這篇文章是因為公司的專案一直以來都是手動部署的方式，每當更新程式碼要測試時，都需要找有權限的同事幫忙手動部署，一天請同事幫忙五六次都會覺得不好意思。非常希望能夠每次在git push專案時，便會自動抓最新的程式碼並部署在測試伺服器上。 持續整合、持續交付（Continuous Integration &amp; C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流">
+<meta property="og:url" content="http://wualnz.com/%E6%94%BB%E7%95%A5%EF%BC%9A%E7%94%A8Jenkins-%E5%BE%9E-0-%E5%88%B01-%E6%89%93%E9%80%A0%E5%BC%B7%E5%A4%A7%E7%9A%84%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="這篇要教導你如何用CI&#x2F;CD最可靠的工具：Jenkins來打造自動化的前端環境。會有這篇文章是因為公司的專案一直以來都是手動部署的方式，每當更新程式碼要測試時，都需要找有權限的同事幫忙手動部署，一天請同事幫忙五六次都會覺得不好意思。非常希望能夠每次在git push專案時，便會自動抓最新的程式碼並部署在測試伺服器上。 持續整合、持續交付（Continuous Integration &amp; C">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://wualnz.com/images/jenkins-success.png">
+<meta property="og:image" content="http://wualnz.com/images/jenkins-install.png">
+<meta property="og:image" content="http://wualnz.com/images/jenkins-free-style.jpg">
+<meta property="og:image" content="http://wualnz.com/images/jenkins-step3.jpg">
+<meta property="og:image" content="http://wualnz.com/images/webhook-add.jpg">
+<meta property="og:image" content="http://wualnz.com/images/webhook.jpg">
+<meta property="og:image" content="http://wualnz.com/images/Slack.png">
+<meta property="og:image" content="http://wualnz.com/images/jenken-slack-token.jpg">
+<meta property="og:image" content="http://wualnz.com/images/Jenkins-credential.png">
+<meta property="og:image" content="http://wualnz.com/images/Jenkins-Slack-success.jpg">
+<meta property="og:image" content="http://wualnz.com/images/jenkins-blueocean.jpg">
+<meta property="article:published_time" content="2019-12-06T01:49:08.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.460Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Jenkins">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://wualnz.com/images/jenkins-success.png">
+  
+  <title>攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-06 09:49" pubdate>
+        2019年12月6日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流</h1>
+            
+            <div class="markdown-body">
+              <p>這篇要教導你如何用CI/CD最可靠的工具：Jenkins來打造自動化的前端環境。會有這篇文章是因為公司的專案一直以來都是手動部署的方式，每當更新程式碼要測試時，都需要找有權限的同事幫忙手動部署，一天請同事幫忙五六次都會覺得不好意思。非常希望能夠每次在git push專案時，便會自動抓最新的程式碼並部署在測試伺服器上。</p>
+<p>持續整合、持續交付（Continuous Integration &amp; Continous Delivery）簡稱CI/CD，盡量減少手動人力，將一些日常工作交給自動化工具，例如：環境建置、單元測試、日誌紀錄、產品部署。</p>
+<p>如果沒有 <code>CI/CD</code>，前端要更新程式碼的工作流程會是這樣</p>
+<ol>
+<li>本地端寫程式</li>
+<li>提交程式碼，Push到Git Reporistory</li>
+<li>提交程式碼，Push到Git Reporistory</li>
+<li>終端機輸入npm run test:unit，看單元測試結果</li>
+<li>存檔程式碼，Git Commit後並Push到Github Reporistory</li>
+<li>連線到測試伺服器，移動到專案，git pull下來、執行npm run build</li>
+</ol>
+<p>有了CI/CD後，整個流程就會變成像下面這樣</p>
+<ol>
+<li>本地端寫程式</li>
+<li></li>
+</ol>
+<h2 id="專案用了哪些工具"><a href="#專案用了哪些工具" class="headerlink" title="專案用了哪些工具"></a>專案用了哪些工具</h2><ul>
+<li>Git 版本控制</li>
+<li>GitHub 程式碼託管、審查</li>
+<li>Jenkins 自動化建置、測試、部署</li>
+<li>Docker 可攜式、輕量級的執行環境</li>
+<li>Slack 團隊溝通、日誌、通知</li>
+</ul>
+<h2 id="看完這篇你能得到什麼？"><a href="#看完這篇你能得到什麼？" class="headerlink" title="看完這篇你能得到什麼？"></a>看完這篇你能得到什麼？</h2><ul>
+<li>實際操作，瞭解CI/CD的好處</li>
+<li>瞭解如何設定 Jenkins 在前端 Vue 的專案上</li>
+</ul>
+<h2 id="專案環境"><a href="#專案環境" class="headerlink" title="專案環境"></a>專案環境</h2><p>以下的專案環境是用CentoOS Linux 7.7.1908做安裝及設定<br>前端專案Vue、後端專案Laravel，專案有設定前後端分離，也就是前端一包專案、後端一包專案，後端只產生API給前端接<br>Vue專案及Jenkins都安裝在測試主機上，並沒有個開</p>
+<h2 id="自動部署做了哪些事？"><a href="#自動部署做了哪些事？" class="headerlink" title="自動部署做了哪些事？"></a>自動部署做了哪些事？</h2><p>自動部署會先去Github將專案最新程式碼拉下來，並開始安裝套件<code>npm install</code>，接著再用webpack打包檔案<code>npm run build:prod</code><br>打包完會產生一包<code>dist</code>資料夾，dist資料夾會對應到後端專案的MVC裡的View。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> cache clean -force<br><span class="hljs-built_in">npm</span> install<br><span class="hljs-built_in">npm</span> run build:prod<br></code></pre></td></tr></table></figure>
+<h2 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h2><p>我會分成下面幾個步驟</p>
+<ol start="0">
+<li>Centos 安裝 Docker </li>
+<li>用 Docker來安裝 Jenkins</li>
+<li>設定Github hook時觸發 Jenkins</li>
+<li>設定前後端分離</li>
+<li>Jenkins和Slack串接，當Jenkins部署時，Slack會發出通知</li>
+</ol>
+<h3 id="Centos-安裝-Docker"><a href="#Centos-安裝-Docker" class="headerlink" title="Centos 安裝 Docker"></a>Centos 安裝 Docker</h3><p>先在Centos卸載舊版本，以避免後續的錯誤<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">sudo yum remove docker <span class="hljs-string">\</span><br>  docker-client <span class="hljs-string">\</span><br>  docker-client-latest <span class="hljs-string">\</span><br>  docker-common <span class="hljs-string">\</span><br>  docker-latest <span class="hljs-string">\</span><br>  docker-latest-logrotate <span class="hljs-string">\</span><br>  docker-logrotate <span class="hljs-string">\</span><br>  docker-engine<br></code></pre></td></tr></table></figure><br>接著再來安裝 Docker<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo yum <span class="hljs-keyword">update</span><br>sudo yum install -<span class="hljs-keyword">y</span> yum-utils \<br>  device-mapper-persistent-data \<br>  lvm2<br>sudo yum-config-manager \<br>  --<span class="hljs-built_in">add</span>-repo \<br>http<span class="hljs-variable">s:</span>//download.docker.<span class="hljs-keyword">com</span>/linux/centos/docker-<span class="hljs-keyword">ce</span>.repo<br>sudo yum install docker-<span class="hljs-keyword">ce</span><br></code></pre></td></tr></table></figure><br>啟動 Docker<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">sudo systemctl <span class="hljs-literal">start</span> docker<br></code></pre></td></tr></table></figure><br>設定每次開機都會自動啟動 Docker<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">duso systemctl <span class="hljs-builtin-name">enable</span> docker<br></code></pre></td></tr></table></figure></p>
+<h3 id="建立客製化DockerFile"><a href="#建立客製化DockerFile" class="headerlink" title="建立客製化DockerFile"></a>建立客製化DockerFile</h3><p>新增一個Dockerfile檔在伺服器的/var/dockerContainer資料夾<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/var/</span>dockerContainer<br>touch Dockerfile<br></code></pre></td></tr></table></figure><br>編輯Dockerfile檔，我們會下載jenkinsci/blueocean的image並先安裝nodejs與npm，之所以要客製化是因為我安裝很多次Jenkins的NodeJS Plugin一直失敗，沒辦法跑<code>npm install</code>，一直報錯說找不到npm，只好徒法煉鋼，先客製化images，在images除了用現成的jenkins blueocean版本，另外也先裝好nodeJS、npm。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Dockerfile"><span class="hljs-comment"># 從 DockerHub 安裝 Jenkinsci/blueocean image。</span><br><span class="hljs-keyword">FROM</span> jenkinsci/blueocean<br><br><span class="hljs-comment"># 指定 User 是 root，有最大權限。</span><br><span class="hljs-keyword">USER</span> root<br><br><span class="hljs-comment"># 設定 Container 的預設目錄位置。</span><br><span class="hljs-keyword">WORKDIR</span><span class="bash"> /var/jenkins_home/workspace/project</span><br><br><span class="hljs-comment"># 安裝 NodeJS、Npm。</span><br><span class="hljs-keyword">RUN</span><span class="bash"> apk add --no-cache --update nodejs npm</span><br></code></pre></td></tr></table></figure>
+<p>編輯好Dockerfile並存檔，我們先來build image<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker build -t frontend-ui-image .<br></code></pre></td></tr></table></figure><br>成功跑完後你可以輸入<code>docker images</code>會看到frontend-ui的images檔，接著利用它為基底，啟動container<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d<br>  --name frontend-ui <span class="hljs-string">\</span><br>  -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> <span class="hljs-string">\</span><br>  -u root <span class="hljs-string">\</span><br>  -e JAVA_OPTS=-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Taipei <span class="hljs-string">\</span><br>  -v /<span class="hljs-keyword">var</span>/data:/<span class="hljs-keyword">var</span>/jenkins_home <span class="hljs-string">\</span><br>  -v /<span class="hljs-keyword">var</span>/run/docker.sock:/<span class="hljs-keyword">var</span>/run/docker.sock <span class="hljs-string">\</span><br>  -v <span class="hljs-string">&quot;$HOME&quot;</span>:/home <span class="hljs-string">\</span><br>  --restart=always <span class="hljs-string">\</span><br>  frontend-ui-image<br></code></pre></td></tr></table></figure><br>以下將說明參數的用途</p>
+<ul>
+<li>–name frontend-ui：容器名稱命名為frontend-ui</li>
+<li>-p 8080:8080：映射出8080 Port與容器裡的8080 Port 相應</li>
+<li>-u root：以User root身份執行，否則會沒有權限</li>
+<li>-e JAVA_OPTS=-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Taipei，設定環境變數時區，沒有設定此選項，會導致Jenkins的時間不是UTM+8</li>
+<li>-v /var/data:/var/jenkins_home：容器的儲存空間/var/jenkins_home 此目錄會映射到容器外的/var/data資料夾</li>
+<li>–restart=always：當容器遇到例外的情況被STOP掉，例如是重新開機，Docker 會試著重新啟動此容器</li>
+<li>frontend-ui-image：用Images frontend-ui-image啟動容器</li>
+</ul>
+<p>順利啟動容器後，打開伺服器網址：xxx.xxx.xxx.xxx:8080，便會看到Jenkin成功畫面<br><img src="../../../images/jenkins-success.png" srcset="/img/loading.gif" lazyload alt="Jenkins"></p>
+<p>進入Jenkins後，請先安裝Jenkins預設外掛<br><img src="../../../images/jenkins-install.png" srcset="/img/loading.gif" lazyload alt="Jenkins Install"></p>
+<h3 id="設定-Github-Hook-觸發-Jenkins"><a href="#設定-Github-Hook-觸發-Jenkins" class="headerlink" title="設定 Github Hook 觸發 Jenkins"></a>設定 Github Hook 觸發 Jenkins</h3><p>接著我們要來設定每次Git Push時會觸發專案啟動Jenkins，在設定前我們需要先新增專案<br>Jenkins點擊新增作業，選取「建置 Free-Style 軟體專案」</p>
+<p><img src="../../../images/jenkins-free-style.jpg" srcset="/img/loading.gif" lazyload alt="Jenkins 建置 Free-Style 軟體專案"></p>
+<p>選好之後點OK進入到下一步，接著近一步細部設定，原始碼管理區塊要設定專案網址，並設定Github的帳號密碼，讓Jenkins有權限可以讀取專案。<br>在建置觸發程序要打勾「GitHub hook trigger for GITScm polling」，當GitHub Repository有變動時會自動通知 Jenkins 來進行編譯<br><img src="../../../images/jenkins-step3.jpg" srcset="/img/loading.gif" lazyload alt="Jenkins 原始碼管理、建置觸發程序"></p>
+<p>除了設定Jenkins要進行編譯之外，Github Repository這端也要設定 Webhook</p>
+<ul>
+<li>Github 點擊專案的 Setting，加入 web-hook<br>Payload URL 網址設定為你的Jenkins Server 網址，例：<a target="_blank" rel="noopener" href="http://serverIP:8080/github-webhook/，Content">http://serverIP:8080/github-webhook/，Content</a> Type 要設定 application/json<br>Secret設定為空沒有關係，另外有詢問你什麼時候要觸發這個webhook，在圖片上是設定當只有push 事件發生時，才會觸發，當然你也可以客製化</li>
+<li>Jest the push event：只有push事件發生才會觸發 webhook</li>
+<li>Send me everything：不管發生什麼事，都會觸發 webhook</li>
+<li>Let me select individual events.：選取這個可以客製化哪些event才要觸發</li>
+</ul>
+<p><img src="../../../images/webhook-add.jpg" srcset="/img/loading.gif" lazyload alt="加入webhook設定"><br>設定完會像下面這張圖片一樣<br><img src="../../../images/webhook.jpg" srcset="/img/loading.gif" lazyload alt="webhook"></p>
+<ul>
+<li>確保Server 8080的Port有開啟，沒有被防火牆擋住，開8080 Port才能讓流量進來，Github才能Call得到Jenkins</li>
+</ul>
+<h3 id="設定前後端分離"><a href="#設定前後端分離" class="headerlink" title="設定前後端分離"></a>設定前後端分離</h3><p>Web Server是採用nginx，後端是用Php Laravel框架，前端是用webpack打包成一包dist資料夾後，用軟連結映射到後端專案的public/static、/resources/views/index.blade.php，才能順利以view方式顯示，同時也可以解決前端打後端專案的API有CROS跨網域問題。</p>
+<p>project 是前端專案名稱<br>backend-project 是後端專案名稱<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle"># 直接在server上做設定<br>ln -s <span class="hljs-regexp">/var/</span>data<span class="hljs-regexp">/workspace/</span><span class="hljs-keyword">project</span><span class="hljs-regexp">/dist/</span><span class="hljs-keyword">static</span> <span class="hljs-regexp">/home/</span>vhost<span class="hljs-regexp">/backend-project/</span><span class="hljs-keyword">public</span>/<span class="hljs-keyword">static</span><br>ln -s <span class="hljs-regexp">/var/</span>data<span class="hljs-regexp">/workspace/</span><span class="hljs-keyword">project</span><span class="hljs-regexp">/dist/i</span>ndex.html <span class="hljs-regexp">/home/</span>vhost<span class="hljs-regexp">/backend-project/</span>resources<span class="hljs-regexp">/views/i</span>ndex.blade.php<br></code></pre></td></tr></table></figure></p>
+<p>nginx 設定<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># /etc/nginx/conf.d/project</span><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">root</span> /home/vhost/backend-project/public;<br>    <span class="hljs-attribute">index</span> index.php index.html index.htm;<br><br>    <span class="hljs-attribute">server_name</span> xx.xx.xxxx.xx;<br><br>    <span class="hljs-attribute">location</span> / &#123;<br>        <span class="hljs-attribute">try_files</span> $uri $uri/ /index.php?$query_string;<br>    &#125;<br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ \.php$</span> &#123;<br>        <span class="hljs-attribute">fastcgi_pass</span>   <span class="hljs-number">127.0.0.1:9000</span>;<br>        <span class="hljs-attribute">fastcgi_index</span>  index.php;<br>        <span class="hljs-attribute">fastcgi_param</span>  SCRIPT_FILENAME  $document_root$fastcgi_script_name;<br>        <span class="hljs-attribute">include</span>        fastcgi_params;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<h3 id="在Jenkins上串Salck"><a href="#在Jenkins上串Salck" class="headerlink" title="在Jenkins上串Salck"></a>在Jenkins上串Salck</h3><p>接著設定Slack，先在Jenkins安裝Slack外掛<br>點選「管理Jenins」-&gt; 「設定系統」-&gt; Slack區塊，設定Workspace、Credential<br>這邊是屬於全域設定的部分，皆會套用到所有Jenkins的專案</p>
+<p><img src="../../../images/Slack.png" srcset="/img/loading.gif" lazyload alt="slack"><br>Credential的Kind選Secret text，Secret填Slack給的Token Key，ID和Description可以自由選填<br>至於Token Key可以從Slack 的Jenkins頁面拿到<br><img src="../../../images/jenken-slack-token.jpg" srcset="/img/loading.gif" lazyload alt="Token"></p>
+<p><img src="../../../images/Jenkins-credential.png" srcset="/img/loading.gif" lazyload alt="slack"><br>設定成功後，可以試試看點按鈕「Test Connection」，如果成功的話，會在下方顯示Success，且Slack頻道上會有機器人說話<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">Slack/Jenkins <span class="hljs-keyword">plugin</span>: you&#x27;re all <span class="hljs-keyword">set</span> <span class="hljs-keyword">on</span> http:<span class="hljs-comment">//www.test-jenkins:8080/</span><br></code></pre></td></tr></table></figure><br><img src="../../../images/Jenkins-Slack-success.jpg" srcset="/img/loading.gif" lazyload alt="Slack"></p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>一開始安裝Jenkins是用Docker Images: jenkins，預設外掛都不能安裝，才發現要裝 Images: jenkins/jenkins，而不是jenkins。<br>用Images jenkins/jenkins啟動容器後發現第二個問題是容器內沒有node.js，裝了外掛NodeJS仍無法解決我的問題，最後還是自製Images比較快。<br>不過CI/CD還是很單調的流程，還沒有到很複雜，至今也還在學習中，如果有問題或是有寫錯的地方，歡迎下面留言喔</p>
+<ul>
+<li>[X] jenkins：images版本過舊</li>
+<li>[X] jenkins/jenins：沒有nodeJS，Jenkins 外掛 NodeJS也無法使用</li>
+<li>[X] jenkinsci/blueocean：沒有nodeJS，Jenkins 外掛 NodeJS也無法使用</li>
+<li>[O] frontend-ui-image：自製images，jenkinsci/blueocean + 自行安裝nodeJS</li>
+</ul>
+<p>之所以後來選擇images是採用jenkinsci/blueocean的版本，也是看上它有很漂亮的UI、使用者體驗佳，至今還在摸索中，如果有更多的心得會再多寫一篇文章分享，謝謝看到這裡<br><img src="../../../images/jenkins-blueocean.jpg" srcset="/img/loading.gif" lazyload alt="Jenkins BlueOcean Snapper"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/install/linux/docker-ce/centos/">Centos Install Docker Document</a></li>
+<li><a target="_blank" rel="noopener" href="https://samkuo.me/post/2013/11/principles-continuous-delivery/">持續交付的8條原則</a></li>
+<li><a target="_blank" rel="noopener" href="https://samkuo.me/post/2013/10/continuous-integration-deployment-delivery/">山姆鍋對持續整合、持續部署、持續交付的定義</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/47d767cf893d">永久修改以容器化方式运行的Jenkins系统时间</a></li>
+<li><a target="_blank" rel="noopener" href="https://jenkins.io/blog/2016/05/26/introducing-blue-ocean/">Introducing Blue Ocean: a new user experience for Jenkins</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/entry/5a8f919af265da4e8e787606">前端开发如何让持续集成 / 持续部署 (CI/CD) 跑起来</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%87%AA%E5%8B%95%E9%83%A8%E7%BD%B2/">自動部署</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Jenkins/">Jenkins</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/MacOS-%E5%AE%89%E8%A3%9D-GVM/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MacOS 安裝 GVM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Vue-%E5%85%83%E4%BB%B6%E4%B9%8B%E9%96%93%E7%9A%84%E5%82%B3%E8%A9%B1%E7%AD%92-%E7%B8%BD%E6%95%B4%E7%90%86/">
+                        <span class="hidden-mobile">Vue 元件之間的傳話筒 總整理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E6%94%BB%E7%95%A5%EF%BC%9A%E7%94%A8Jenkins-%E5%BE%9E-0-%E5%88%B01-%E6%89%93%E9%80%A0%E5%BC%B7%E5%A4%A7%E7%9A%84%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/';
+          this.page.identifier = '/%E6%94%BB%E7%95%A5%EF%BC%9A%E7%94%A8Jenkins-%E5%BE%9E-0-%E5%88%B01-%E6%89%93%E9%80%A0%E5%BC%B7%E5%A4%A7%E7%9A%84%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

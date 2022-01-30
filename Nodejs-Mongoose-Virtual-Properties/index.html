@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="[Nodejs] Mongoose Virtual Properties什麼是 Virtual Properties它是 Mongoose 提供的功能之一，Model 可以在 Schema 定義虛擬屬性(Virtual Properties)，它並不會被存入資料庫，但是我們可以使用和讀取，這樣做為了可以節省空間 優缺點 優點：節省資料庫空間 缺點：由於Virtual 沒有儲存在資料庫中，因此無法查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Nodejs] Mongoose Virtual Properties">
+<meta property="og:url" content="http://wualnz.com/Nodejs-Mongoose-Virtual-Properties/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="[Nodejs] Mongoose Virtual Properties什麼是 Virtual Properties它是 Mongoose 提供的功能之一，Model 可以在 Schema 定義虛擬屬性(Virtual Properties)，它並不會被存入資料庫，但是我們可以使用和讀取，這樣做為了可以節省空間 優缺點 優點：節省資料庫空間 缺點：由於Virtual 沒有儲存在資料庫中，因此無法查">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://wualnz.com/images/20210628-virtual-properties.png">
+<meta property="article:published_time" content="2021-06-27T16:44:06.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.455Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://wualnz.com/images/20210628-virtual-properties.png">
+  
+  <title>[Nodejs] Mongoose Virtual Properties - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[Nodejs] Mongoose Virtual Properties">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-28 00:44" pubdate>
+        2021年6月28日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[Nodejs] Mongoose Virtual Properties</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Nodejs-Mongoose-Virtual-Properties"><a href="#Nodejs-Mongoose-Virtual-Properties" class="headerlink" title="[Nodejs] Mongoose Virtual Properties"></a>[Nodejs] Mongoose Virtual Properties</h1><h2 id="什麼是-Virtual-Properties"><a href="#什麼是-Virtual-Properties" class="headerlink" title="什麼是 Virtual Properties"></a>什麼是 Virtual Properties</h2><p>它是 Mongoose 提供的功能之一，Model 可以在 Schema 定義虛擬屬性(Virtual Properties)，它並不會被存入資料庫，但是我們可以使用和讀取，這樣做為了可以節省空間</p>
+<h3 id="優缺點"><a href="#優缺點" class="headerlink" title="優缺點"></a>優缺點</h3><ul>
+<li>優點：節省資料庫空間</li>
+<li>缺點：由於Virtual 沒有儲存在資料庫中，因此無法查詢</li>
+</ul>
+<p>它的概念其實就是 Vue 裡的 computed 屬性</p>
+<p>例如：lastName, firstName，最常看到的範例是 Vue2 computed 設定 lastName, firstName, fullName</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>定義了 tourSchema，在 tourSchema 最後定義完後加上設定 <code>toJSON: &#123; virtuals: true &#125;, toObject: &#123; virtuals: true &#125;</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// 這是最後要加上的設定</span><br><span class="hljs-attr">toJSON</span>: &#123; <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> &#125;<br><span class="hljs-comment">// 舉例</span><br><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br><br><span class="hljs-keyword">const</span> testSchema = <span class="hljs-keyword">new</span> mongoose.Schema(<br>	&#123; ...自定義Schema &#125;, <br>	&#123;<br>		<span class="hljs-attr">toJSON</span>: &#123; <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> &#125;,<br>	  <span class="hljs-attr">toObject</span>: &#123; <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> &#125;,<br>	&#125;<br>)<br></code></pre></td></tr></table></figure>
+<h3 id="設定虛擬屬性"><a href="#設定虛擬屬性" class="headerlink" title="設定虛擬屬性"></a>設定虛擬屬性</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsx">schema.virtual(<span class="hljs-string">&#x27;定義虛擬屬性名稱&#x27;</span>).get(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>	<span class="hljs-comment">// 這個值要 return 什麼</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;This is Virtual Properities&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>在以下程式碼，設定了 durationWeeks，根據 duration / 7 而得來，後面要接的是 callback function</p>
+<p>注意：不可用箭頭Function來寫，傳回的值會是 null</p>
+<p>❌：get.(() ⇒ { this.duration / 7 })<br>🆗：get.(function() { return this.duration / 7 })</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsx">tourSchema.virtual(<span class="hljs-string">&#x27;durationWeeks&#x27;</span>).get(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.duration / <span class="hljs-number">7</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="/images/20210628-virtual-properties.png" srcset="/img/loading.gif" lazyload alt="Postman Final Result"></p>
+<h2 id="完整程式碼"><a href="#完整程式碼" class="headerlink" title="完整程式碼"></a>完整程式碼</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br><br><span class="hljs-keyword">const</span> tourSchema = <span class="hljs-keyword">new</span> mongoose.Schema(&#123;<br>  <span class="hljs-attr">name</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a name&#x27;</span>],<br>    <span class="hljs-attr">unique</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,<br>  &#125;,<br>  <span class="hljs-attr">duration</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must hava a duration&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">maxGroupSize</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a group size&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">difficulty</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a difficulty&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">price</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a price&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">ratingsAverage</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-number">4.5</span>,<br>  &#125;,<br>  <span class="hljs-attr">ratingsQuantity</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-number">0</span>,<br>  &#125;,<br>  <span class="hljs-attr">priceDiscount</span>: <span class="hljs-built_in">Number</span>,<br>  <span class="hljs-attr">summary</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a description&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">description</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,<br>  &#125;,<br>  <span class="hljs-attr">imageCover</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;A tour must have a cover image&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-attr">images</span>: [<span class="hljs-built_in">String</span>],<br>  <span class="hljs-attr">createdAt</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Date</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-built_in">Date</span>.now(),<br>    <span class="hljs-attr">select</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// API 永遠不顯示在 Client 端</span><br>  &#125;,<br>  <span class="hljs-attr">startDates</span>: [<span class="hljs-built_in">Date</span>],<br>&#125;, &#123;<br>  <span class="hljs-attr">toJSON</span>: &#123; <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> &#125;,<br>  <span class="hljs-attr">toObject</span>: &#123; <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> &#125;,<br>&#125;)<br><br><span class="hljs-comment">// eslint-disable-next-line func-names</span><br>tourSchema.virtual(<span class="hljs-string">&#x27;durationWeeks&#x27;</span>).get(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.duration / <span class="hljs-number">7</span><br>&#125;)<br><br><span class="hljs-keyword">const</span> Tour = mongoose.model(<span class="hljs-string">&#x27;Tour&#x27;</span>, tourSchema)<br><br><span class="hljs-built_in">module</span>.exports = Tour<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Nodejs-%E7%94%A8-Middleware-Global-%E5%85%A8%E5%9F%9F%E8%99%95%E7%90%86%E9%8C%AF%E8%AA%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[Nodejs] 用 Middleware Global 全域處理錯誤</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Vue-%E8%88%87-Slot-%E7%B5%90%E5%90%88/">
+                        <span class="hidden-mobile">Vue 與 Slot 結合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Nodejs-Mongoose-Virtual-Properties/';
+          this.page.identifier = '/Nodejs-Mongoose-Virtual-Properties/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

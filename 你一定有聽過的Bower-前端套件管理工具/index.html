@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="你一定有聽過的 Bower 前端套件管理工具用Bower自動下載jQuery, Bootstrap等Libery，再與Gulp做串接  bower init後安裝的套件，會自動寫出到bower.json檔案。全自動化，讓簡單且重複的事交給Gulp &amp; Bower，把寶貴的時間拿來寫CODE吧！  此文章會用到下列幾個套件  gulp-load-plugins 以$字號來簡略載入各套件，只對">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你一定有聽過的Bower 前端套件管理工具">
+<meta property="og:url" content="http://wualnz.com/%E4%BD%A0%E4%B8%80%E5%AE%9A%E6%9C%89%E8%81%BD%E9%81%8E%E7%9A%84Bower-%E5%89%8D%E7%AB%AF%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="你一定有聽過的 Bower 前端套件管理工具用Bower自動下載jQuery, Bootstrap等Libery，再與Gulp做串接  bower init後安裝的套件，會自動寫出到bower.json檔案。全自動化，讓簡單且重複的事交給Gulp &amp; Bower，把寶貴的時間拿來寫CODE吧！  此文章會用到下列幾個套件  gulp-load-plugins 以$字號來簡略載入各套件，只對">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2017-11-05T22:21:35.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.459Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>你一定有聽過的Bower 前端套件管理工具 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="你一定有聽過的Bower 前端套件管理工具">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-11-06 06:21" pubdate>
+        2017年11月6日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">你一定有聽過的Bower 前端套件管理工具</h1>
+            
+            <div class="markdown-body">
+              <h1 id="你一定有聽過的-Bower-前端套件管理工具"><a href="#你一定有聽過的-Bower-前端套件管理工具" class="headerlink" title="你一定有聽過的 Bower 前端套件管理工具"></a>你一定有聽過的 Bower 前端套件管理工具</h1><p>用Bower自動下載jQuery, Bootstrap等Libery，再與Gulp做串接</p>
+<blockquote>
+<p>bower init後安裝的套件，會自動寫出到bower.json檔案。<br>全自動化，讓簡單且重複的事交給Gulp &amp; Bower，把寶貴的時間拿來寫CODE吧！</p>
+</blockquote>
+<p>此文章會用到下列幾個套件</p>
+<ul>
+<li><code>gulp-load-plugins</code> 以$字號來簡略載入各套件，只對gulp開頭的套件有用</li>
+<li><code>gulp-order</code> 排載入的順序</li>
+<li><code>main-bower-files</code> 和Bower結合</li>
+<li><code>gulp-concat</code> 合併檔案</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">npm <span class="hljs-keyword">install </span>-g <span class="hljs-keyword">bower</span><br><span class="hljs-keyword"></span>cd project <span class="hljs-comment">#進入專案資料夾</span><br><span class="hljs-keyword">bower </span>init <span class="hljs-comment">#bower初始化</span><br><span class="hljs-keyword">bower </span><span class="hljs-keyword">install </span>&lt;package&gt;<br><span class="hljs-keyword">bower </span><span class="hljs-keyword">install </span><span class="hljs-keyword">jquery</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">bower </span><span class="hljs-keyword">install </span><span class="hljs-keyword">bootstrap</span><br></code></pre></td></tr></table></figure>
+<p><code>bower init</code> 後會產生 bower.json檔</p>
+<p><code>bower install &lt;package&gt;</code> 會自動產生bower_components資料夾，裡面放的       是下載下來的外掛。 </p>
+<h2 id="串接前端的Gulp自動化工具，整合"><a href="#串接前端的Gulp自動化工具，整合" class="headerlink" title="串接前端的Gulp自動化工具，整合"></a>串接前端的Gulp自動化工具，整合</h2><h4 id="需要用到main-bower-files的Gulp套件"><a href="#需要用到main-bower-files的Gulp套件" class="headerlink" title="需要用到main-bower-files的Gulp套件"></a>需要用到main-bower-files的Gulp套件</h4><p>第一步，在Gulpfile.js require後，輸入npm install寫入package.json內<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">var mainBowerFiles</span> = require(<span class="hljs-string">&#x27;main-bower-files&#x27;</span>);<br><span class="hljs-attribute">npm install --save-dev main-bower-files</span><br></code></pre></td></tr></table></figure><br>Bower幫前端工程師下載套件 =&gt; 不用再花時間一個個手動抓<br>整合到Gulp，將套件輸出到我們想要的資料夾 =&gt; 打gulp後自動跑全自動化！<br><strong>這就是為什麼需要整合，把簡單且重複的事交給電腦做吧！</strong></p>
+<p>在package.json下多新增bower任務</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">gulp.task(<span class="hljs-string">&#x27;bower&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> gulp.src(mainBowerFiles())<br>        .pipe(gulp.dest(<span class="hljs-string">&#x27;./.tmp/vendors&#x27;</span>))<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>再多新增一個任務叫<strong>vendorJs</strong>，最主要目的是輸出到public/vendors資料下之外，還需要賦予兩個任務：按照順序載入js、合併成一隻js檔。</p>
+<ul>
+<li><strong>照順序載入js：</strong>像jquery, bootstrap是需要按照順序載入js的，所以需要另外安裝套件order。</li>
+<li><p><strong>合併成一隻js檔</strong>：減少伺服器的request，讓伺服器負荷減輕，網站也能跑較快。</p>
+<p>  gulp.task(‘vendorJs’, [bower], function(){</p>
+<pre><code>return gulp.src([./.tmp/vendors/**/*.js])
+          .pipe($.order([
+            &apos;jquery.js&apos;,
+            &apos;bootstrap.js&apos;
+           ]))
+          .pipe($.concat(vendors.js))
+          .pipe(gulp.dest(&apos;./public/js&apos;))
+</code></pre><p>  })</p>
+</li>
+</ul>
+<p><code>gulp.task(&#39;vendorJs&#39;, [&#39;bower&#39;], function(&#123;..&#125;))</code></p>
+<p> 多加入了<code>[bower]</code>的參數，代表在<code>vendorJs</code>任務跑完前，必須要等bower跑完。因為bower任務就是為了把下載回來的套件輸出的.tmp/vendors資料夾，若還沒下載回來，vendorJs就讀取不到啦！所以一定要記得加上。</p>
+<h2 id="將vendorJs加入default監控任務"><a href="#將vendorJs加入default監控任務" class="headerlink" title="將vendorJs加入default監控任務"></a>將vendorJs加入default監控任務</h2><p>default就不用額外設定bower任務了，因為vendorJs開跑前會先等bower寫完。</p>
+<pre><code>gulp.task(&apos;default&apos;, [&apos;vendorJs&apos;, &apos;browserSync&apos;, &apos;watch&apos;])
+</code></pre><p>輕鬆寫完腳本後，打上gulp便會自動產生囉！<br>可以將固定專案常用的腳本上傳到git，或是給其他開發者使用。</p>
+<pre><code>#.gitinore 忽略
+bower_components
+node_modules
+public
+</code></pre><p>開發者下載回來，只要輸入<code>npm install</code>及<code>bower install</code>即會產生一樣的效果，快速又方便。</p>
+<hr>
+<h3 id="bower-components資料夾，想要重新命名"><a href="#bower-components資料夾，想要重新命名" class="headerlink" title="bower_components資料夾，想要重新命名"></a>bower_components資料夾，想要重新命名</h3><p>若覺得<code>bower install</code>放套件資料夾「.bower_components」名字很醜，想另外取名的話其實是可以的哦！在專案資料夾根目錄下創建.bowerrc檔 <code>touch .bowerrc</code><br>創建後，在bowerrc裡加入以下程式碼<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts">.<span class="hljs-class">bowerrc</span><br><span class="hljs-class"></span>&#123;<br> <span class="hljs-string">&quot;directory&quot;</span>: <span class="hljs-string">&quot;vendors/&quot;</span><br> &#125;<br></code></pre></td></tr></table></figure><br>接著執行 <code>bower install</code>便會產生vendors資料夾囉。</p>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://bower.io/">Bower官方</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Rails5%E4%BD%BF%E7%94%A8-Facebook-%E5%88%86%E4%BA%AB%E6%8C%89%E9%88%95API%EF%BC%8C%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%84%A1%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BC%89%E5%85%A5%E9%A0%81%E9%9D%A2%EF%BC%8C%E8%A7%A3%E6%B1%BA%E8%BE%A6%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rails 5使用 Facebook 分享按鈕API，第一次無法正常載入頁面，解決辦法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/GitPage-%E4%B8%8A-getJSON%E8%AE%80%E5%8F%96%E4%B8%8D%E5%88%B0json%EF%BC%8C%E5%87%BA%E7%8F%BE-404-ERROR/">
+                        <span class="hidden-mobile">GitPage 上$.getJSON讀取不到json，出現 404 ERROR</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E4%BD%A0%E4%B8%80%E5%AE%9A%E6%9C%89%E8%81%BD%E9%81%8E%E7%9A%84Bower-%E5%89%8D%E7%AB%AF%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/';
+          this.page.identifier = '/%E4%BD%A0%E4%B8%80%E5%AE%9A%E6%9C%89%E8%81%BD%E9%81%8E%E7%9A%84Bower-%E5%89%8D%E7%AB%AF%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

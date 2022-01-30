@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="今天要做的需求是，使用者不管點擊上一頁或下一頁，或是點擊頁面上任何連結，再次返回到那一頁，會保留原本瀏覽的位置。也就是說一開始進入 A 頁滑到頁面最尾端，跳轉到 B 頁，再回到 A 頁，我們希望 A頁進入後是在最尾端的位置。 官方文件提供 scrollBehavior 函式來自動記載捲軸滾動的位置，但僅限於點擊瀏覽器按上一頁、下一頁才會有作用。點擊 router-link 並不會有任何作用，con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Vue] Vxe-Table 保存滾動捲軸的位置">
+<meta property="og:url" content="http://wualnz.com/Vue-Vxe-Table%20%E4%BF%9D%E5%AD%98%E6%BB%BE%E5%8B%95%E6%8D%B2%E8%BB%B8%E7%9A%84%E4%BD%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="今天要做的需求是，使用者不管點擊上一頁或下一頁，或是點擊頁面上任何連結，再次返回到那一頁，會保留原本瀏覽的位置。也就是說一開始進入 A 頁滑到頁面最尾端，跳轉到 B 頁，再回到 A 頁，我們希望 A頁進入後是在最尾端的位置。 官方文件提供 scrollBehavior 函式來自動記載捲軸滾動的位置，但僅限於點擊瀏覽器按上一頁、下一頁才會有作用。點擊 router-link 並不會有任何作用，con">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-10-12T02:16:16.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.457Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vxe-table">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>[Vue] Vxe-Table 保存滾動捲軸的位置 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[Vue] Vxe-Table 保存滾動捲軸的位置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-12 10:16" pubdate>
+        2021年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[Vue] Vxe-Table 保存滾動捲軸的位置</h1>
+            
+            <div class="markdown-body">
+              <p>今天要做的需求是，使用者不管點擊上一頁或下一頁，或是點擊頁面上任何連結，再次返回到那一頁，會保留原本瀏覽的位置。也就是說一開始進入 A 頁滑到頁面最尾端，跳轉到 B 頁，再回到 A 頁，我們希望 A頁進入後是在最尾端的位置。</p>
+<p>官方文件提供 scrollBehavior 函式來自動記載捲軸滾動的位置，但僅限於點擊瀏覽器按上一頁、下一頁才會有作用。點擊 router-link 並不會有任何作用，console 出來 scrollBehavior 會發現是 null 值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js">scrollBehavior (to, <span class="hljs-keyword">from</span>, savedPosition) &#123;<br>  <span class="hljs-keyword">if</span> (savedPosition) &#123;<br>    <span class="hljs-comment">// 若點擊 router-link，savedPosition 會是 null 值</span><br>    <span class="hljs-comment">// 並不會有任何作用</span><br>    <span class="hljs-keyword">return</span> savedPosition <br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure><br>為了彌補 scrollBehavior 少做的功能，我們必須再多做點事。</p>
+<h2 id="外部"><a href="#外部" class="headerlink" title="外部"></a>外部</h2><p>將 router 掛載的物件加入 meta.scrollTop 以方便去紀錄每個分頁的 Y軸位置，並在 router.beforeEach 離開頁面前寫入，進入頁面後 (router.afterEach) 滾動到指定位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span><br><br><span class="hljs-comment">// 設定 scrollBehavior</span><br><span class="hljs-keyword">new</span> Router(&#123;<br>  <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;history&#x27;</span>, <span class="hljs-comment">// require service support</span><br>  <span class="hljs-function"><span class="hljs-title">scrollBehavior</span>(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, savedPosition</span>)</span> &#123;<br>    <span class="hljs-keyword">const</span> scrollPos = &#123;<br>      <span class="hljs-attr">top</span>: to.meta.scrollTop,<br>      <span class="hljs-attr">left</span>: <span class="hljs-number">0</span><br>    &#125;<br><br>    <span class="hljs-keyword">return</span> savedPosition || scrollPos<br>  &#125;,<br>  <span class="hljs-attr">routes</span>: constantRoutes<br>&#125;)<br><br>router.beforeEach(<span class="hljs-keyword">async</span>(to, <span class="hljs-keyword">from</span>, next) =&gt; &#123;<br>  <span class="hljs-comment">// 離開頁面後，紀錄捲軸高度 (Y) 位置</span><br>  <span class="hljs-keyword">from</span>.meta.scrollTop = <span class="hljs-built_in">window</span>.scrollY<br>  next()<br>&#125;)<br><br>router.afterEach(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 頁面移動到上次瀏覽的位置</span><br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">window</span>.scrollTo(<span class="hljs-number">0</span>, to.meta.scrollTop)<br>  &#125;, <span class="hljs-number">100</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>也可以改寫，將 left, top 位置一併紀錄<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>  <span class="hljs-attr">component</span>: Layout,<br>  <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;/dashboard&#x27;</span>,<br>  <span class="hljs-attr">children</span>: [<br>    &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Dashboard&#x27;</span>,<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;dashboard&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;@/views/other/dashboard/index&#x27;</span>),<br>      <span class="hljs-attr">children</span>: [],<br>      <span class="hljs-attr">meta</span>: &#123;<br>        <span class="hljs-attr">title</span>: &#123;<br>          <span class="hljs-attr">en</span>: <span class="hljs-string">&#x27;dashboard&#x27;</span>,<br>          <span class="hljs-attr">zh</span>: <span class="hljs-string">&#x27;儀表板&#x27;</span><br>        &#125;,<br>        <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;dashboard&#x27;</span>,<br>        <span class="hljs-attr">affix</span>: <span class="hljs-literal">true</span>,<br>        scrollPos = &#123;<br>          <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">left</span>: <span class="hljs-number">0</span><br>        &#125;<br>      &#125;<br>    &#125;<br>  ]<br>&#125;,<br>router.beforeEach(<span class="hljs-keyword">async</span>(to, <span class="hljs-keyword">from</span>, next) =&gt; &#123;<br>  <span class="hljs-comment">// 離開頁面後，紀錄捲軸高度 (Y) 位置</span><br>  <span class="hljs-keyword">from</span>.meta.scrollPos.top = <span class="hljs-built_in">window</span>.scrollY<br>  <span class="hljs-keyword">from</span>.meta.scrollPos.left = <span class="hljs-built_in">window</span>.scrollX<br>  next()<br>&#125;)<br><br>router.afterEach(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 頁面移動到上次瀏覽的位置</span><br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">window</span>.scrollTo(to.meta.scrollPos.left, to.meta.scrollPos.top)<br>  &#125;, <span class="hljs-number">100</span>)<br>&#125;)<br></code></pre></td></tr></table></figure></p>
+<h2 id="元件內部"><a href="#元件內部" class="headerlink" title="元件內部"></a>元件內部</h2><p>使用 vxe-table 套件，只要設定 max-height後，即可紀錄保存位置</p>
+<ul>
+<li>scrollTo 移動到指定位置</li>
+<li>getScroll 取得表格的滾動狀態，必須設定 max-height 虛擬滾動表格才會紀錄，物件有  { virtualX, virtualY, scrollTop, scrollLeft }</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><br>&lt;button @change=<span class="hljs-string">&quot;scrollTo&quot;</span>&gt;移動到指定<span class="hljs-number">1500</span>位置&lt;/button&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">vxe-table</span> </span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;xTable&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">show-overflow</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">highlight-hover-row</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">max-height</span>=<span class="hljs-string">&quot;800&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;tableData&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;<span class="hljs-name">vxe-table-column</span> <span class="hljs-attr">field</span>=<span class="hljs-string">&quot;test&quot;</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span> /&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">vxe-table-column</span>&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.$refs.xTable)<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.$refs.xTable.$el)<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.$refs.xTable.$el.offsetTop)<br>&#125;,<br><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-function"><span class="hljs-title">getScroll</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.$refs.xTable.getScroll())<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">      &#123; virtualX, virtualY, scrollTop, scrollLeft &#125;</span><br><span class="hljs-comment">    */</span><br>  &#125;,<br><br>  <span class="hljs-comment">// 指定移動到 Y 軸 1500px 位置</span><br>  <span class="hljs-function"><span class="hljs-title">scrollTo</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.$refs.xTable.scrollTo(<span class="hljs-number">0</span>, <span class="hljs-number">1500</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6975851743573868551">使用keep-alive保存滚动条的位置</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@aryan02420/vue-router-restore-scroll-position-with-router-link-and-transition-61396af48ba2">Vue Router: Restore Scroll Position with <router-link> and <transition></a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vxe-table/">vxe-table</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Vue-i18n-%E7%A5%9E%E5%99%A8-i18n-ally/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[Vue] i18n 神器 i18n-ally</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Nodejs-%E7%94%A8-Middleware-Global-%E5%85%A8%E5%9F%9F%E8%99%95%E7%90%86%E9%8C%AF%E8%AA%A4/">
+                        <span class="hidden-mobile">[Nodejs] 用 Middleware Global 全域處理錯誤</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Vue-Vxe-Table%20%E4%BF%9D%E5%AD%98%E6%BB%BE%E5%8B%95%E6%8D%B2%E8%BB%B8%E7%9A%84%E4%BD%8D%E7%BD%AE/';
+          this.page.identifier = '/Vue-Vxe-Table%20%E4%BF%9D%E5%AD%98%E6%BB%BE%E5%8B%95%E6%8D%B2%E8%BB%B8%E7%9A%84%E4%BD%8D%E7%BD%AE/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

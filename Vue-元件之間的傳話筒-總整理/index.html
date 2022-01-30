@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！  Props 父傳子 Parent &#x3D;&gt; Child Communication   $emit 子傳父 自定義事件，Child &#x3D;&gt; Parent Communication   Event Bus 類似於 Angular 2 的 services 用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 元件之間的傳話筒 總整理">
+<meta property="og:url" content="http://wualnz.com/Vue-%E5%85%83%E4%BB%B6%E4%B9%8B%E9%96%93%E7%9A%84%E5%82%B3%E8%A9%B1%E7%AD%92-%E7%B8%BD%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！  Props 父傳子 Parent &#x3D;&gt; Child Communication   $emit 子傳父 自定義事件，Child &#x3D;&gt; Parent Communication   Event Bus 類似於 Angular 2 的 services 用法">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-03-12T14:40:08.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.457Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Vue 元件之間的傳話筒 總整理 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue 元件之間的傳話筒 總整理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-03-12 22:40" pubdate>
+        2019年3月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue 元件之間的傳話筒 總整理</h1>
+            
+            <div class="markdown-body">
+              <p>使用 Vue 建構網站，會越來越多元件，元件之間的溝通非常重要，常常需要傳遞資訊，讓彼此知道，讓資訊流通是一件非常重要的事！</p>
+<ol>
+<li>Props 父傳子<ul>
+<li>Parent =&gt; Child Communication</li>
+</ul>
+</li>
+<li>$emit 子傳父<ul>
+<li>自定義事件，Child =&gt; Parent Communication</li>
+</ul>
+</li>
+<li>Event Bus<ul>
+<li>類似於 Angular 2 的 services 用法</li>
+</ul>
+</li>
+</ol>
+<h3 id="Props-父傳子"><a href="#Props-父傳子" class="headerlink" title="Props 父傳子"></a>Props 父傳子</h3><p>用 Props 來傳遞資料，主元件要在外圍寫要傳什麼值進去，像是下面的範例，父元件傳了name給子元件值是Hazel。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 父元件 User.vue</span><br>&lt;user-detail :myName=<span class="hljs-string">&quot;Hazel&quot;</span>&gt;&lt;/user-detail&gt;<br></code></pre></td></tr></table></figure>
+<p>子元件要新增 props 屬性來接收資料，接收到的name可以直接使用在其他地方，像是下面範例，接收到從父元件傳來的name，並使用在<code>switchName()的Methods</code>裡。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 子元件 UserDetail.vue</span><br>&lt;template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span> User Name: &#123;&#123; switchName() &#125;&#125; <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;myName&#x27;</span>],<br>    <span class="hljs-attr">methods</span>: &#123;<br>        <span class="hljs-function"><span class="hljs-title">switchName</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.myName.split(<span class="hljs-string">&#x27;&#x27;</span>).reverse().join(<span class="hljs-string">&#x27;&#x27;</span>)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<h4 id="限制-Props-資料類型"><a href="#限制-Props-資料類型" class="headerlink" title="限制 Props 資料類型"></a>限制 Props 資料類型</h4><p>Prop 還能夠驗證資料型態，比如說在子元件下我們可以這樣寫<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 驗證 Props</span><br><span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;myName&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;book&#x27;</span>]<br><span class="hljs-attr">props</span>: &#123;<br>    <span class="hljs-string">&#x27;myName&#x27;</span>: <span class="hljs-built_in">String</span>,<br>    <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-built_in">Number</span>,<br>    <span class="hljs-string">&#x27;book&#x27;</span>: <span class="hljs-built_in">Object</span><br>&#125;<br></code></pre></td></tr></table></figure><br>當myName值傳來不是String格式便會報錯，會在 Console.log 提示開發者由於傳遞錯誤的型態。<br>我們可以用這種方式來驗證資料，以避免程式出錯。</p>
+<h3 id="Emit-子傳父"><a href="#Emit-子傳父" class="headerlink" title="Emit 子傳父"></a>Emit 子傳父</h3><p>剛剛介紹了 Prop：父元件傳遞資料給子元件，但當子元件想要傳遞資料給父元件，該如何傳遞？我們會用到 <code>emit</code> 客製化事件來做到這件事</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-symbol">$emit</span>(<span class="hljs-string">&#x27;事件名稱&#x27;</span>, 要傳遞的值)<br></code></pre></td></tr></table></figure>
+<p>以下程式碼做的處理</p>
+<ol>
+<li>從子元件接收到myName的值</li>
+<li>子元件內 reset myName 值</li>
+<li>回傳給父元件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// UserDetail.vue 子元件</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">myName</span>: &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span><br>        &#125;<br>    &#125;,<br>    <span class="hljs-attr">methods</span>: &#123;<br>        <span class="hljs-function"><span class="hljs-title">switchName</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.myName.split(<span class="hljs-string">&#x27;&#x27;</span>).revverse().join(<span class="hljs-string">&#x27;&#x27;</span>);<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">resetName</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-built_in">this</span>.myName = <span class="hljs-string">&#x27;Hazel&#x27;</span>;<br>            <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;nameWasReset&#x27;</span>, <span class="hljs-built_in">this</span>.myName);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>子元件用<code>nameWasReset</code>事件傳遞<br>要接收訊息的父元件也要設定，將子元件設定的事件名稱用<code>@</code>當前綴<br><code>@nameWasReset=&quot;name = $event&quot;</code>，並存在父元件的資料name內。</p>
+<blockquote>
+<h3 id="小教學：關於Vue的-event"><a href="#小教學：關於Vue的-event" class="headerlink" title="小教學：關於Vue的$event"></a>小教學：關於Vue的$event</h3><p>$event 為 Vue內的特殊用法，相同於 JavaScript的 event<br>$event 為子元間傳遞出來的值。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// User.vue 父元件</span><br>&lt;template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> <span class="hljs-attr">:myName</span>=<span class="hljs-string">&quot;name&quot;</span> @<span class="hljs-attr">nameWasReset</span>=<span class="hljs-string">&quot;name =$event&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-keyword">return</span> &#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Hazel&#x27;</span></span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<h4 id="Vue-單向資料流"><a href="#Vue-單向資料流" class="headerlink" title="Vue 單向資料流"></a>Vue 單向資料流</h4><p>單向資料流定義：只能從一個方向來修改，可以由父元件傳遞資料給子元件，但子元件無法反過來直接改變父元件的資料，會引起報錯。也就是只能父元件影響子，子無法影響父。</p>
+<blockquote>
+<h4 id="總結一句話：單向資料流只能父傳子、子傳父。"><a href="#總結一句話：單向資料流只能父傳子、子傳父。" class="headerlink" title="總結一句話：單向資料流只能父傳子、子傳父。"></a>總結一句話：單向資料流只能父傳子、子傳父。</h4><p>Unidirectional Data Flow from top to bottom.</p>
+</blockquote>
+<p>如果 A 的子元件想傳遞給 B 的子元件，平行傳資料是可行的嗎？<br>在Vue內，由於單向資料流的關係，無法子傳給子，是無法平行傳資料。</p>
+<h3 id="CallBack-Function"><a href="#CallBack-Function" class="headerlink" title="CallBack Function"></a>CallBack Function</h3><p>透過Props傳遞 function 也能做到元件溝通<br>父元件利用 Props 傳遞 resetFn()，值帶入methods的resetName()方法給子元件。<br>而子元件則用Props接收。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 父元件</span><br>&lt;template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> <span class="hljs-attr">:myName</span>=<span class="hljs-string">&quot;name&quot;</span> @<span class="hljs-attr">nameWasReset</span>=<span class="hljs-string">&quot;name =$event&quot;</span> <span class="hljs-attr">:resetFn</span>=<span class="hljs-string">&quot;resetName&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> UserDetail <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./UserDetail.vue&#x27;</span>;</span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-keyword">return</span> &#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Hazel&#x27;</span></span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;,</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-function"><span class="hljs-title">resetName</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&#x27;Hazel&#x27;</span>;</span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;,</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">components</span>: &#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">UserDetail</span>: UserDetail,</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<p>下列程式碼是子元件接受來自父元件的<code>resetFn()</code>，型態是Function。<br>當點擊按鈕時會呼叫<code>resetFn()</code>，而值則是從父元件傳遞來的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 子元件</span><br>&lt;template&gt;<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;resetFn()&quot;</span>&gt;</span>Reset Function<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">props</span>: &#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">myName</span>: &#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span></span></span><br><span class="javascript"><span class="xml">        &#125;,</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">resetFn</span>: <span class="hljs-built_in">Function</span>,</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure></p>
+<h3 id="兄弟-Sibling-元件間的傳值"><a href="#兄弟-Sibling-元件間的傳值" class="headerlink" title="兄弟(Sibling)元件間的傳值"></a>兄弟(Sibling)元件間的傳值</h3><p>Communication between sibling components</p>
+<p>假設我們今天有 A 與 B 的子元件，要如何實行 A 與 B 間的傳遞？</p>
+<ul>
+<li>父元件：User</li>
+<li>A子元件：UserEdit</li>
+<li>B子元件：UserDetail</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 父元件 User 傳遞值</span><br>&lt;template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">user-edit</span> <span class="hljs-attr">:userAge</span>=<span class="hljs-string">&quot;age&quot;</span> @<span class="hljs-attr">ageWasEdited</span>=<span class="hljs-string">&quot;age = $event&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-edit</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> <span class="hljs-attr">:userAge</span>=<span class="hljs-string">&quot;age&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span>&gt;</span></span><br><span class="xml"></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>User Age: &#123;&#123;userAge&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><span class="xml"></span><br><span class="xml"></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-keyword">return</span> &#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-attr">age</span>: <span class="hljs-string">&#x27;25&#x27;</span></span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<p>A 與 B 子元件皆接收 userAge 資料，並驗證 Number值<br>A元件用$emit：ageWasEdited傳回age值為30給父元件<br>B元件也會一併跟著更改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// A 子元件：UserEdit</span><br>&lt;template&gt;<br><br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>User Age: &#123;&#123;userAge&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;editAge&quot;</span>&gt;</span>Edit Age<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">props</span>: &#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">userAge</span>: <span class="hljs-built_in">Number</span></span></span><br><span class="javascript"><span class="xml">    &#125;,</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">methods</span>: &#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-function"><span class="hljs-title">editAge</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-built_in">this</span>.userAge = <span class="hljs-number">30</span>;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;ageWasEdited&#x27;</span>, <span class="hljs-built_in">this</span>.userAge);</span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<p>以下是B元件 UserDetail ，B元件作用為 接收父元件的 UserAge 值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// B 子元件：UserDetail</span><br>&lt;template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>User Age: &#123;&#123;userAge&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>&lt;/template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">props</span>: &#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">userAge</span>: <span class="hljs-built_in">Number</span></span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure><br>從上面範例可以看出，當我們需要平行傳遞兄弟間的元件資料，可以用以下做法。</p>
+<ol>
+<li>父用props傳遞給 A 子元件</li>
+<li>A 子元件 子用 $emit 回傳父，改變父資料</li>
+<li>再由父傳給另一個 B 子元件</li>
+</ol>
+<h2 id="Event-Bus：溝通橋樑"><a href="#Event-Bus：溝通橋樑" class="headerlink" title="Event Bus：溝通橋樑"></a>Event Bus：溝通橋樑</h2><ul>
+<li>Event Bus 的定位是事件通知。</li>
+<li>Event Bus使用時機：有件事要被很多人知道，可以用Event Bus來做傳遞，當傳話筒的角色，也可以形容成溝通橋樑的概念。</li>
+<li>EventBus像元件一樣，擁有data, methods等屬性可以使用。</li>
+<li>Event Bus 透過 $emit 來發送資料、用 $on 來接收訊息。</li>
+</ul>
+<p>下列的範例會示範 A子元件與B子元件的溝通，但不會傳值到父元件。</p>
+<ol>
+<li>在main.js 建立一個 Vue instance 叫 eventBus</li>
+<li>要使用event bus傳遞訊息的元件上，import event bus進來</li>
+<li>在元件的methods上使用 <code>eventBus.$emit</code> 傳遞值</li>
+</ol>
+<p>步驟一：創建 eventBus 的 instance<br>注意：要把eventBus建立在new Vue上，否則會報錯。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// main.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> eventBus = <span class="hljs-keyword">new</span> Vue();<br><span class="hljs-keyword">new</span> Vue(&#123;<br>    <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>    <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> h(App)<br>&#125;)<br></code></pre></td></tr></table></figure><br>步驟二：要使用傳遞資料的元件上，import eventBus<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// userEdit 元件</span><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> &#123; eventBus &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../main&#x27;</span>;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure></p>
+<p>步驟三：用eventBus.$emit 傳遞值<br>eventBus 是一個 Vue instance，而 Vue instance 內建有 $emit 的methods可以用。</p>
+<blockquote>
+<p><code>eventBus.$emit(&#39;事件名稱&#39;, 值)</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script&gt;<br><span class="hljs-keyword">import</span> &#123; eventBus &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../main&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;userAge],</span><br><span class="hljs-string">    methods: &#123;</span><br><span class="hljs-string">        editAge()&#123;</span><br><span class="hljs-string">            this.userAge = 30;</span><br><span class="hljs-string">            // this.$emit(&#x27;</span>ageWasEdited<span class="hljs-string">&#x27;, this.userAge) 第二種方法：$emit傳值</span><br><span class="hljs-string">            eventBus.$emit(&#x27;</span>ageWasEdited<span class="hljs-string">&#x27;, this.userAge) // 第三種方法：eventBus傳值</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&lt;/script&gt;</span><br></code></pre></td></tr></table></figure>
+<p>B 子元件 要接收值，也需要import eventBus，而接收值要使用到$on</p>
+<blockquote>
+<p><code>eventBus.$on(&#39;事件名稱&#39;, callback function)</code><br>接收ageWasEdited事件，回傳的data用callback function，再針對data做一系列的處理。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// B子元件 UserDetail</span><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> &#123; eventBus &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../main&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">userAge</span>: <span class="hljs-built_in">Number</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">created</span>(<span class="hljs-params"></span>)</span>&#123;<br>        eventBus.$on(<span class="hljs-string">&#x27;ageWasEdited&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">age</span>) =&gt;</span> &#123;<br>            <span class="hljs-built_in">console</span>.log(age);<br>            <span class="hljs-built_in">this</span>.userAge = age; <span class="hljs-comment">// 將傳來的age存進userAge內</span><br>        &#125;);<br>    &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="EventBus-方法"><a href="#EventBus-方法" class="headerlink" title="EventBus 方法"></a>EventBus 方法</h3><p>eventBus 除了可以讓子元件平行溝通之外，也能建立methods方法，並讓元件們共用。</p>
+<ol>
+<li>建立 eventBus 的 Vue instance，建立 changeAge 的 methods</li>
+<li>在要使用的子元件上 import eventBus</li>
+</ol>
+<p>main.js上建立eventBus，並設定changeAge方法，接收參數age<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// main.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> eventBus = <span class="hljs-keyword">new</span> Vue(&#123;<br>    <span class="hljs-attr">methods</span>: &#123;<br>        <span class="hljs-function"><span class="hljs-title">changeAge</span>(<span class="hljs-params">age</span>)</span>&#123;<br>            <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;ageWasEdited&#x27;</span>, age)<br>        &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure><br>子元件 UserEdit.vue 利用 eventBus 的 changeAge 方法，傳遞userAge資料<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; eventBus &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../main&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">props</span>: [userAge],<br>    <span class="hljs-attr">methods</span>: &#123;<br>        <span class="hljs-function"><span class="hljs-title">editAge</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-built_in">this</span>.userAge = <span class="hljs-number">30</span>;<br>            eventBus.changeAge(<span class="hljs-built_in">this</span>.userAge);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><br>同樣的 eventBus 也像元件一樣也擁有 data的屬性可儲存，這可以讓我們自由運用。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><ul>
+<li>props：父傳子</li>
+<li>emit：子傳父</li>
+<li>eventBus：使用上非常方便，但維護性不高，最好把握幾個原則<ol>
+<li>僅限於同層的兄弟元件通訊，父子通訊透過 Props / $emit 來進行溝通</li>
+<li>eventBus缺點是記憶體會殘留，有監聽的地方要記得去清除，像是beforeDestroy等。</li>
+<li>專案規模很大，可以考慮用 vuex來管理共同狀態。</li>
+</ol>
+</li>
+</ul>
+<p>以上重整理 Vue 元件間如何傳遞資料，若有誤歡迎留言告訴我，謝謝。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/wasichris/2017/03/05/181549">[Vue] 跟著 Vue 闖蕩前端世界 - 07 組件溝通 event bus</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%94%BB%E7%95%A5%EF%BC%9A%E7%94%A8Jenkins-%E5%BE%9E-0-%E5%88%B01-%E6%89%93%E9%80%A0%E5%BC%B7%E5%A4%A7%E7%9A%84%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">攻略：用Jenkins 從 0 到 1 打造強大的前端自動化工作流</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/FrameWork-7-%E8%88%87-H5%E9%82%82%E9%80%85%E7%9A%84%E9%9B%B7%E5%9D%91/">
+                        <span class="hidden-mobile">FrameWork 7 與 H5 邂逅的雷坑</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Vue-%E5%85%83%E4%BB%B6%E4%B9%8B%E9%96%93%E7%9A%84%E5%82%B3%E8%A9%B1%E7%AD%92-%E7%B8%BD%E6%95%B4%E7%90%86/';
+          this.page.identifier = '/Vue-%E5%85%83%E4%BB%B6%E4%B9%8B%E9%96%93%E7%9A%84%E5%82%B3%E8%A9%B1%E7%AD%92-%E7%B8%BD%E6%95%B4%E7%90%86/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

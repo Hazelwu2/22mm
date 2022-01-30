@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper 通常做響應式圖片有兩種作法  使用同一張圖片，依照容器、螢幕尺寸放大縮小 偵測不同的裝置，根據螢幕大小，使用不同大小的圖片  作法一作法一：重頭到尾都使用同一張圖片，可以跟著螢幕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag">
+<meta property="og:url" content="http://wualnz.com/%E5%81%9A%E5%80%8B%E8%B6%85%E6%99%BA%E8%83%BD%E7%9A%84%E9%9F%BF%E6%87%89%E5%BC%8F%E5%9C%96%E7%89%87%E5%90%A7%EF%BC%8C%E5%88%A9%E7%94%A8-HTML5-srcset-%E6%90%AD%E9%85%8D-Rails-Helper-img-set-tag/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper 通常做響應式圖片有兩種作法  使用同一張圖片，依照容器、螢幕尺寸放大縮小 偵測不同的裝置，根據螢幕大小，使用不同大小的圖片  作法一作法一：重頭到尾都使用同一張圖片，可以跟著螢幕">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-02-16T21:04:50.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.459Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="Rails 5">
+<meta property="article:tag" content="RWD">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-02-17 05:04" pubdate>
+        2018年2月17日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">做個超 AI 的響應式圖片吧，利用 HTML5 srcset 搭配 Rails Helper img_set_tag</h1>
+            
+            <div class="markdown-body">
+              <p>做 Responsive Web Design 時難免少不了對圖片的處理，圖片能彈性隨著螢幕裝置大小調整，有多種做法可以參考。今天來探討使用 HTML5 新增的屬性 srcset 來搭配使用 Rails 的 Helper</p>
+<p>通常做響應式圖片有兩種作法</p>
+<ol>
+<li>使用同一張圖片，依照容器、螢幕尺寸放大縮小</li>
+<li>偵測不同的裝置，根據螢幕大小，使用不同大小的圖片</li>
+</ol>
+<h3 id="作法一"><a href="#作法一" class="headerlink" title="作法一"></a>作法一</h3><p>作法一：重頭到尾都使用同一張圖片，可以跟著螢幕修改圖片的比例大小</p>
+<blockquote>
+<p>響應式圖片 建議設定max-width: 100%<br>確保圖片不會超過畫面的大小，父層的容器設多少大小，子層的圖片就會乖乖在他背後下貼著容器。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">img</span> &#123; <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>; <span class="hljs-attribute">height</span>: auto&#125;<br></code></pre></td></tr></table></figure><br>缺點：圖片量若很大，載入頁面時間會加長，對於行動裝置上網的客群，可能會因為網站載圖片跑太慢，導致用戶不想等直接離開網站。</p>
+</blockquote>
+<h3 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h3><p>做法二： 隨著裝置提供不同大小的圖檔</p>
+<blockquote>
+<p>我有一張圖片、但是幾個不同大小的版本想要替換使用<br>小螢幕裝置，就下載比較小的圖片，減少行動裝置上不必要的寬頻浪費<br>大螢幕就下載比較大的圖片、解析度也較高、看得比較清楚</p>
+</blockquote>
+<p>優點：可以根據圖片顯示的實際需要，給用戶端剛剛好的大小版本</p>
+<blockquote>
+<p>需要注意的事項：查詢<a target="_blank" rel="noopener" href="https://caniuse.com/#search=srcset">Can I Use</a> 確認主流瀏覽器支援狀況</p>
+</blockquote>
+<h4 id="偵測不同裝置隨意換上圖片"><a href="#偵測不同裝置隨意換上圖片" class="headerlink" title="偵測不同裝置隨意換上圖片"></a>偵測不同裝置隨意換上圖片</h4><p>偵測不同裝置隨意換上圖片，有以下幾種做法</p>
+<ol>
+<li>使用HTML5 <code>&lt;img&gt;</code> 的屬性 <code>srcset</code><br>缺點：需要到Can I Use 看各主流瀏覽器版本是否已支援</li>
+<li>HTML5 <code>&lt;picture&gt;</code></li>
+<li><code>使用 srcset + picture</code></li>
+<li>用 JavaScript 監聽 <code>window.resize</code>事件，修改圖片路徑</li>
+<li>使用 <code>svg</code> 向量圖</li>
+<li>使用第三方外掛，例如：<a target="_blank" rel="noopener" href="https://scottjehl.github.io/picturefill/">picturefill</a>來補足不支援picture的瀏覽器</li>
+</ol>
+<h3 id="狀況劇一"><a href="#狀況劇一" class="headerlink" title="狀況劇一"></a>狀況劇一</h3><p>狀況劇一：設計師提供給我手機版、桌機版裝置的兩種圖片，要怎麼切圖搭配srcset使用？</p>
+<h4 id="先切圖"><a href="#先切圖" class="headerlink" title="先切圖"></a>先切圖</h4><ol>
+<li>給 Mobile 小螢幕裝置的圖片<br>切成 1x 給一般手機<br>切成 2x 給 Retine 高畫質螢幕</li>
+<li>給tablet, desktop 大螢幕裝置的圖片<br>切成 1x, 2x, 3x</li>
+</ol>
+<h4 id="使用-srcset"><a href="#使用-srcset" class="headerlink" title="使用 srcset"></a>使用 srcset</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;img <span class="hljs-attribute">srcset</span>=<span class="hljs-string">&quot;360.jpg 360w,</span><br><span class="hljs-string">768.jpg 768w,</span><br><span class="hljs-string">1200.jpg 1200w,</span><br><span class="hljs-string">1920.jpg 1920w&quot;</span><br><span class="hljs-attribute">sizes</span>=<span class="hljs-string">&quot;</span><br><span class="hljs-string">(max-width: 360px) 100vw,</span><br><span class="hljs-string">(max-width: 768px) 90vw,</span><br><span class="hljs-string">(max-width: 1980px) 80vw,</span><br><span class="hljs-string">768px&quot;</span><br><span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;360.jpg&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">&quot;範例&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>srcset 非常的簡單，寫下你要放上的幾張圖片和他的寬度，瀏覽器就會自動去選擇<br>srcset 分別跟瀏覽器先生說：「嗨，我這裡有360.jpg、768.jpg、1200.jpg、1920.jpg圖片」<br>sizes 也和瀏覽器說：「不同裝置的寬度(media query)下，圖片的寬度也要幫我個別調整！」</p>
+</blockquote>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">sizes</span>=<span class="hljs-string">&quot;(max-width: 360px) 100vw&quot;</span><br></code></pre></td></tr></table></figure>
+<p>在320px的iphone4下瀏覽，圖片寬度自動也會被調整為 100vw。</p>
+<h3 id="Rails-img-secret-sizes-Helper"><a href="#Rails-img-secret-sizes-Helper" class="headerlink" title="Rails img secret, sizes Helper"></a>Rails img secret, sizes Helper</h3><p>由於Rails內建的Helper沒有<code>image srcset</code>，於是我們要手動新增Helper<br><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 新增在 application_helper.rb</span><br>def image<span class="hljs-constructor">_set_tag(<span class="hljs-params">source</span>, <span class="hljs-params">srcset</span> = &#123;&#125;, <span class="hljs-params">options</span> = &#123;&#125;)</span><br>  srcset = srcset.map &#123; <span class="hljs-pattern-match">|src, size| &quot;#&#123;path<span class="hljs-constructor">_to_image(<span class="hljs-params">src</span>)</span>&#125; #&#123;size&#125;&quot; &#125;.join(&#x27;, &#x27;)</span><br><span class="hljs-pattern-match">  image<span class="hljs-constructor">_tag(<span class="hljs-params">source</span>, <span class="hljs-params">options</span>.<span class="hljs-params">merge</span>(<span class="hljs-params">srcset</span>: <span class="hljs-params">srcset</span>)</span>)</span><br><span class="hljs-pattern-match"><span class="hljs-keyword">end</span>  </span><br></code></pre></td></tr></table></figure></p>
+<p>新增完後便可以照著他的規則使用啦！剛剛切出來的五張圖片可以派上用場囉<br><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sml">&lt;%= image_set_tag <span class="hljs-symbol">&#x27;How</span>-we-work.png&#x27;, &#123; <br>  <span class="hljs-symbol">&#x27;How</span>-we-work-<span class="hljs-type">Mobile</span>.png&#x27; =&gt; <span class="hljs-string">&#x27;320w&#x27;</span>,<br>  <span class="hljs-symbol">&#x27;How</span>-we-work-<span class="hljs-type">Mobile</span>@<span class="hljs-number">2</span>x.png&#x27; =&gt; <span class="hljs-string">&#x27;640w&#x27;</span>,<br>  <span class="hljs-symbol">&#x27;How</span>-we-work-<span class="hljs-type">PC</span>@<span class="hljs-number">2</span>x.png&#x27; =&gt; <span class="hljs-string">&#x27;1024w&#x27;</span>,<br>  <span class="hljs-symbol">&#x27;How</span>-we-work-<span class="hljs-type">PC</span>@<span class="hljs-number">3</span>x.png&#x27; =&gt; <span class="hljs-string">&#x27;1980w&#x27;</span><br>&#125;, alt: <span class="hljs-string">&#x27;如何運作&#x27;</span>, class: <span class="hljs-symbol">&#x27;img</span>-fluid mx-auto d-block&#x27; %&gt;<br></code></pre></td></tr></table></figure><br>瀏覽器吃掉上述程式碼後，它會通過 srcset 屬性自動選擇 Mobile 2x,  PC 2x 等圖，比如說今天用 iPhone 6s，便會自動選擇 Mobile@2x 的圖。</p>
+<blockquote>
+<p><code>default</code>, <code>image_set_tag &#39;How-we-work.png&#39;</code> 這裏即指 default</p>
+</blockquote>
+<p>若瀏覽器太舊看不懂 srcset，會讀取 src 的圖片網址來顯示。套上範例，瀏覽器不支援就會讀取<code>How-we-work.png</code>的圖檔</p>
+<blockquote>
+<p>以下的 <code>w</code> 不是真的指 <code>px</code> ，而是<code>裝置像素比</code>，為了好理解先套上px</p>
+<ul>
+<li><code>320w</code><br>手機模式瀏覽 src自動轉換成 Mobile.png<br>當偵測到瀏覽器為不大於 320px 寬時，顯示 Mobile.png 這張圖</li>
+<li><code>640w</code><br>平板模式瀏覽 src自動轉換成 <a href="mailto:Mobile@2x.png">Mobile@2x.png</a></li>
+<li><code>1024w</code><br>平板裝置瀏覽 寬度有1024，src自動轉換成 <a href="mailto:PC@2x.png">PC@2x.png</a></li>
+<li><code>1980w</code><br>桌機裝置瀏覽 寬度有1980，src自動轉換成 <a href="mailto:PC@3x.png">PC@3x.png</a></li>
+</ul>
+</blockquote>
+<h3 id="w是什麼？"><a href="#w是什麼？" class="headerlink" title="w是什麼？"></a>w是什麼？</h3><p>W 是 設備像素比(DevicePixelRatio)，詳細可點擊<a target="_blank" rel="noopener" href="http://screensiz.es/">查詢各裝置的裝置像素密度</a><br>320w, 640w, 1024w, 1980w 這裡的w不是指px，而是「設備像素比」 也就是 <code>window.devicePixelRatio</code></p>
+<h3 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h3><p>如何測試實驗圖片真的有跟著寬度做更換？<br>建議測試時開啟Chrome無痕視窗，以避免瀏覽器快取後，不會自動切換圖片</p>
+<ol>
+<li>打開Chrome 開發人員工具</li>
+<li>指到 src </li>
+<li><p>會發現瀏覽器視窗隨著調整，src指定的圖片路徑會變成設定的圖檔</p>
+<blockquote>
+<p>像是我開到手機寬度時，src指定圖片路徑會變成Mobile.png，開到正常電腦大小寬度時，src的路徑則會變成<a href="mailto:PC@3x.png">PC@3x.png</a></p>
+</blockquote>
+</li>
+<li><p>大功告成！</p>
+</li>
+</ol>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://www.dailycold.tw/7216/jpeg-jpg-lossy-compression-artifacts/">為什麼低解析度的JPG會跟馬賽克一樣？</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45360050/using-image-tag-with-srcset-attribute">Using image_tag with srcset attribute?
+</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008662857">响应式图片实战</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.wfublog.com/2017/08/picasa-rwd-image-srcset.html">Picasa 圖床的獨家應用：製作 RWD 自適應圖片，讓手機自動載入小圖，加快網頁讀取速度</a></li>
+<li><a target="_blank" rel="noopener" href="http://lauraluo.github.io/2015/04/15/20150415-RwdPojectStudy/">RWD響應式網頁專案開發心得(一)</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.zhusee.in/post/248199/basic-responsive-image-with-srcset-property">用 srcset 屬性做簡單的 Responsive Image</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.minwt.com/webdesign-dev/js/12386.html">《Picturefill 自適應圖片》隨著裝置提供不同大小的圖檔(JS版)</a></li>
+<li><a target="_blank" rel="noopener" href="http://screensiz.es/">查詢各裝置的裝置像素密度</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Rails-5/">Rails 5</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RWD/">RWD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Git-push-repo%E5%A4%B1%E6%95%97%EF%BC%9A-Could-not-resolve-host-github-com/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git push repo失敗： Could not resolve host: github.com</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Rails-5-%E5%BF%AB%E9%80%9F%E8%A8%AD%E7%BD%AE-favicon-icon/">
+                        <span class="hidden-mobile">Rails 5 快速設置 favicon icon</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E5%81%9A%E5%80%8B%E8%B6%85%E6%99%BA%E8%83%BD%E7%9A%84%E9%9F%BF%E6%87%89%E5%BC%8F%E5%9C%96%E7%89%87%E5%90%A7%EF%BC%8C%E5%88%A9%E7%94%A8-HTML5-srcset-%E6%90%AD%E9%85%8D-Rails-Helper-img-set-tag/';
+          this.page.identifier = '/%E5%81%9A%E5%80%8B%E8%B6%85%E6%99%BA%E8%83%BD%E7%9A%84%E9%9F%BF%E6%87%89%E5%BC%8F%E5%9C%96%E7%89%87%E5%90%A7%EF%BC%8C%E5%88%A9%E7%94%A8-HTML5-srcset-%E6%90%AD%E9%85%8D-Rails-Helper-img-set-tag/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

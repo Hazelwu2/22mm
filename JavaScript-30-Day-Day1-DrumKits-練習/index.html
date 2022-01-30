@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="JavaScript 30 Day -  Day1 DrumKits 主題：用鍵盤按鍵，模擬打出爵士鼓的音效  DEMO Github  流程1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵window.addEventListerer(&#39;keydown&#39;, playSound); 2. 設定 function playSound(e) 將函數e傳入進去，利用e.keyCod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 30 Day -  Day1 DrumKits 練習">
+<meta property="og:url" content="http://wualnz.com/JavaScript-30-Day-Day1-DrumKits-%E7%B7%B4%E7%BF%92/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="JavaScript 30 Day -  Day1 DrumKits 主題：用鍵盤按鍵，模擬打出爵士鼓的音效  DEMO Github  流程1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵window.addEventListerer(&#39;keydown&#39;, playSound); 2. 設定 function playSound(e) 將函數e傳入進去，利用e.keyCod">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/29025908/Screen-Shot-2017-12-27-at-4.48.58-PM.png">
+<meta property="article:published_time" content="2017-12-28T22:29:24.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.454Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/29025908/Screen-Shot-2017-12-27-at-4.48.58-PM.png">
+  
+  <title>JavaScript 30 Day -  Day1 DrumKits 練習 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript 30 Day -  Day1 DrumKits 練習">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-12-29 06:29" pubdate>
+        2017年12月29日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript 30 Day -  Day1 DrumKits 練習</h1>
+            
+            <div class="markdown-body">
+              <p>JavaScript 30 Day -  Day1 DrumKits</p>
+<p>主題：用鍵盤按鍵，模擬打出爵士鼓的音效<br><img src="https://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/12/29025908/Screen-Shot-2017-12-27-at-4.48.58-PM.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hazelwu2.github.io/JavaScript30/day1-DrumKit/index.html">DEMO</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Hazelwu2/JavaScript30">Github</a></li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><h4 id="1-利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵"><a href="#1-利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵" class="headerlink" title="1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵"></a>1. 利用鍵盤監聽USER鍵盤，知道使用者按了哪個按鍵</h4><p><code>window.addEventListerer(&#39;keydown&#39;, playSound);</code></p>
+<h4 id="2-設定-function-playSound-e"><a href="#2-設定-function-playSound-e" class="headerlink" title="2. 設定 function playSound(e)"></a>2. 設定 function playSound(e)</h4><ul>
+<li>將函數e傳入進去，利用e.keyCode取得對應的audio音檔、div data-key標籤。</li>
+<li>如果傳入的e.keyCode沒有對應的audio，便中斷function。</li>
+<li>設定audio音檔無延遲，播放時間為0。<br><code>currentTime = 0;</code></li>
+<li>播放對應的音檔。</li>
+<li>利用<code>classList.add(&#39;playing&#39;)</code>將div.key加入playing的class。<br><code>classList.add(&#39;class&#39;) 等同於 jQuery 的 addClass(&#39;class&#39;)</code>。</li>
+</ul>
+<h4 id="3-將所有div-key組合成陣列，監聽：當播放完音效後，會停止transform的特效。"><a href="#3-將所有div-key組合成陣列，監聽：當播放完音效後，會停止transform的特效。" class="headerlink" title="3. 將所有div.key組合成陣列，監聽：當播放完音效後，會停止transform的特效。"></a>3. 將所有div.key組合成陣列，監聽：當播放完音效後，會停止transform的特效。</h4><ul>
+<li>利用<code>querySelectorAll(&#39;.key&#39;)</code>組合起來存在變數keys裡面，querySelectorAll組合的div.key是一個陣列組合。    </li>
+<li>利用<code>forEach</code>的JavaScript語法，將keys陣列取出每個div.key，並設定監聽：若transitionend發生了，執行removeTransition的function。</li>
+</ul>
+<h4 id="4-設定removeTransition-的-function，當發生transform效果時則中斷。"><a href="#4-設定removeTransition-的-function，當發生transform效果時則中斷。" class="headerlink" title="4. 設定removeTransition 的 function，當發生transform效果時則中斷。"></a>4. 設定removeTransition 的 function，當發生transform效果時則中斷。</h4><ul>
+<li>將函數e傳入，倘若e.propertyName != transform時則中斷。</li>
+<li>同時也移除playing的class，利用<code>classList.remove(&#39;class&#39;)</code>，等同於 jQuery 的 <code>removeClass(&#39;class&#39;)</code>。</li>
+</ul>
+<h3 id="HTML架構"><a href="#HTML架構" class="headerlink" title="HTML架構"></a>HTML架構</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;keys&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-key</span>=<span class="hljs-string">&quot;65&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;key&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">kbd</span>&gt;</span>A<span class="hljs-tag">&lt;/<span class="hljs-name">kbd</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sound&quot;</span>&gt;</span>Clap<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;audio <span class="hljs-attribute">data-key</span>=<span class="hljs-string">&quot;65&quot;</span> <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;sounds/hihat.wav&quot;</span>&gt;&lt;/audio&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="JavaScript部分"><a href="#JavaScript部分" class="headerlink" title="JavaScript部分"></a>JavaScript部分</h3><h4 id="設定對應的audio音檔"><a href="#設定對應的audio音檔" class="headerlink" title="設定對應的audio音檔"></a>設定對應的audio音檔</h4><p>利用<code>document.querySelector</code>來選擇audio[data-key]，因為keyCode有九種按鈕的設置，將keyCode設為變數，由e傳入找出屬性為.keyCode</p>
+<h4 id="Audio-音檔無延遲、播放"><a href="#Audio-音檔無延遲、播放" class="headerlink" title="Audio 音檔無延遲、播放"></a>Audio 音檔無延遲、播放</h4><p>HTML5的 <code>audio</code>新標籤，IE 8 及以下版本都不支援<br><code>&lt;audio src=&quot;路徑/clap.mp3&quot;&gt;&lt;audio&gt;</code></p>
+<p>透過JavaScript控制播放音樂<br><code>audio.play()</code>可以播放音檔<br><code>audio.currentTime()</code>指定播放的秒數<br>利用設定currentTime = 0，達到無延遲效果。</p>
+<h4 id="用forEach-代替-for-迴圈"><a href="#用forEach-代替-for-迴圈" class="headerlink" title="用forEach 代替 for 迴圈"></a>用forEach 代替 for 迴圈</h4><p>第一次使用到JS的forEach，以往都是用for迴圈去跑每個元素，也意外發現forEach比起for迴圈還要整潔、快速！前提是：不打算更改陣列裡的每個元素，就可以使用forEach。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">var</span> arr = [ data1, data2, data3];<br><span class="hljs-keyword">for</span> ( <span class="hljs-built_in">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-built_in">length</span>; i++)&#123;<br>	console.<span class="hljs-built_in">log</span>(arr[i]);<br>&#125;<br></code></pre></td></tr></table></figure><br>使用forEach是相同的效果，寫法也讓程式碼更加簡短了<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">var arr = [ data1, data2, data3];<br>arr.forEach(<span class="hljs-function"><span class="hljs-params">(val)</span> =&gt;</span> &#123;<br>	<span class="hljs-built_in">console</span>.log(arr[i]);<br>&#125;)<br></code></pre></td></tr></table></figure></p>
+<h4 id="Arrow-Function-箭頭函式"><a href="#Arrow-Function-箭頭函式" class="headerlink" title="Arrow Function 箭頭函式"></a>Arrow Function 箭頭函式</h4><p>他是ES6版本的函式簡寫<br><code>() =&gt; &#123;&#125;</code>等同於 <code>function() &#123;&#125;</code>，但還是有一些區別。</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN web docs - Arrow Function</a></li>
+<li><a target="_blank" rel="noopener" href="https://yami.io/reduce-foreach-filter-map/">在 JavaScript 棄用 For 迴圈，擁抱 Reduce、ForEach、Filter、Map</a></li>
+<li><a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/arrow_function.html">箭頭函式</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Rails-%E7%94%A8-CarrierWave-%E5%A4%A7%E9%87%8F%E7%94%A2%E7%94%9F%E5%81%87%E5%9C%96%E7%89%87-Remote-image/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rails 用 CarrierWave 大量產生假圖片 ( Remote image )</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Rails-%E7%94%A8-Bootstrap-%E5%BF%AB%E9%80%9F%E5%AE%A2%E8%A3%BD%E5%8C%96-alert-notice-flash-message%E5%BF%AB%E9%96%83%E8%A8%8A%E6%81%AF/">
+                        <span class="hidden-mobile">Rails 用 Bootstrap 快速客製化 alert & notice flash message快閃訊息</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/JavaScript-30-Day-Day1-DrumKits-%E7%B7%B4%E7%BF%92/';
+          this.page.identifier = '/JavaScript-30-Day-Day1-DrumKits-%E7%B7%B4%E7%BF%92/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

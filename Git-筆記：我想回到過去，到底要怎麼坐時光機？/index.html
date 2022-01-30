@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="Git 筆記：我想回到過去，到底要怎麼坐時光機？基本觀念 目前的位置叫做HEAD 沒被 git add進入commit的檔案untracked files，Git會選擇忽略，也不用怕被坐時光機回溯影響，reset、checkout對他們的影響力是0。 origin&#x2F;master是遠端的resp，master是本端的repo  我不想玩了不想存檔，我要回到上一次的存檔commit紀錄懶得看git l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 筆記：我想回到過去，到底要怎麼坐時光機？">
+<meta property="og:url" content="http://wualnz.com/Git-%E7%AD%86%E8%A8%98%EF%BC%9A%E6%88%91%E6%83%B3%E5%9B%9E%E5%88%B0%E9%81%8E%E5%8E%BB%EF%BC%8C%E5%88%B0%E5%BA%95%E8%A6%81%E6%80%8E%E9%BA%BC%E5%9D%90%E6%99%82%E5%85%89%E6%A9%9F%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="Git 筆記：我想回到過去，到底要怎麼坐時光機？基本觀念 目前的位置叫做HEAD 沒被 git add進入commit的檔案untracked files，Git會選擇忽略，也不用怕被坐時光機回溯影響，reset、checkout對他們的影響力是0。 origin&#x2F;master是遠端的resp，master是本端的repo  我不想玩了不想存檔，我要回到上一次的存檔commit紀錄懶得看git l">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-02-05T21:32:47.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.453Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Git 筆記：我想回到過去，到底要怎麼坐時光機？ - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git 筆記：我想回到過去，到底要怎麼坐時光機？">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-02-06 05:32" pubdate>
+        2018年2月6日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git 筆記：我想回到過去，到底要怎麼坐時光機？</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Git-筆記：我想回到過去，到底要怎麼坐時光機？"><a href="#Git-筆記：我想回到過去，到底要怎麼坐時光機？" class="headerlink" title="Git 筆記：我想回到過去，到底要怎麼坐時光機？"></a>Git 筆記：我想回到過去，到底要怎麼坐時光機？</h1><h3 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h3><ol>
+<li>目前的位置叫做HEAD</li>
+<li>沒被 <code>git add</code>進入<code>commit</code>的檔案<code>untracked files</code>，Git會選擇忽略，也不用怕被坐時光機回溯影響，<code>reset、checkout</code>對他們的影響力是0。</li>
+<li><code>origin/master</code>是遠端的resp，<code>master</code>是本端的repo</li>
+</ol>
+<h3 id="我不想玩了不想存檔，我要回到上一次的存檔commit紀錄"><a href="#我不想玩了不想存檔，我要回到上一次的存檔commit紀錄" class="headerlink" title="我不想玩了不想存檔，我要回到上一次的存檔commit紀錄"></a>我不想玩了不想存檔，我要回到上一次的存檔commit紀錄</h3><p>懶得看<code>git log</code>查代碼，想快速回到上一次的commit紀錄</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">git checkout HEAD^<br>HEAD^ 等同 HEAD^ 等同 HEAD~<br><span class="hljs-regexp">//</span> 都代表一次的意思<br></code></pre></td></tr></table></figure>
+<h3 id="改壞掉了QQ，我想捨棄所有還沒commit的修改"><a href="#改壞掉了QQ，我想捨棄所有還沒commit的修改" class="headerlink" title="改壞掉了QQ，我想捨棄所有還沒commit的修改"></a>改壞掉了QQ，我想捨棄所有還沒commit的修改</h3><p>招喚reset!<br><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard</span><br></code></pre></td></tr></table></figure></p>
+<h4 id="改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？"><a href="#改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？" class="headerlink" title="改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？"></a>改壞很久才後知後覺，commit存檔之後後悔了，有後悔藥嗎？</h4><ol>
+<li>退回任意的commit位置</li>
+<li>和checkout一樣，可以隨意亂跳</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard HEAD^^</span><br>git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard 5efdc4f</span><br>git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard master~2</span><br>執行結果都一樣，從 HEAD 跳回兩個前 <span class="hljs-keyword">commit</span><br></code></pre></td></tr></table></figure>
+<p>開分支寫一寫，然後和master合併</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">git checkout -b feature/fixbug<br><span class="hljs-regexp">//</span> 開始寫寫寫寫寫<br><span class="hljs-regexp">//</span> 準備合併！<br>git checkout master<br>git merge feature/fixbug<br></code></pre></td></tr></table></figure>
+<ul>
+<li>預設的遠端名字習慣都叫 <strong>origin</strong></li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">git</span> remote <span class="hljs-keyword">add</span> origin http:<span class="hljs-comment">//github/.....</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>推上遠端的 master / 分支</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master<br>git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> <span class="hljs-built_in">feature</span>/fixbug<br></code></pre></td></tr></table></figure>
+<ul>
+<li>拉回來 遠端的 master / 分支</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git pull origin <span class="hljs-keyword">master</span><br><span class="hljs-title">git</span> pull origin feature/fixbug<br></code></pre></td></tr></table></figure>
+<h3 id="多人協作開發，Git不打架？解決衝突"><a href="#多人協作開發，Git不打架？解決衝突" class="headerlink" title="多人協作開發，Git不打架？解決衝突"></a>多人協作開發，Git不打架？解決衝突</h3><h4 id="先-Clone-克隆再說"><a href="#先-Clone-克隆再說" class="headerlink" title="先 Clone 克隆再說"></a>先 Clone 克隆再說</h4><ol>
+<li><code>git clone http://github...</code> </li>
+<li>某A 開發寫寫寫寫寫，某B也在寫寫寫</li>
+<li>某A <code>push</code> 上去了</li>
+<li>某B 也準備<code>push</code>上去<code>被拒絕!!!</code>發生衝突<br><code>pull = fetch &amp; merge</code><br>某B 要先 <code>git pull</code>，同步某A版本才行</li>
+</ol>
+<h4 id="狀況一"><a href="#狀況一" class="headerlink" title="狀況一"></a>狀況一</h4><p>狀況一：git pull 順利成功</p>
+<ol>
+<li>git pull</li>
+<li>git push origin master</li>
+</ol>
+<h4 id="狀況二"><a href="#狀況二" class="headerlink" title="狀況二"></a>狀況二</h4><p>狀況二：git pull 自動 merge失敗：<code>Merge conflict in xxx.html</code></p>
+<ol>
+<li>打開<code>xxx.html</code>，編輯你要留的部分</li>
+<li><code>git add xxx.html</code>，加入索引</li>
+<li><code>git commit -m &#39;merge ...&#39;</code></li>
+</ol>
+<h3 id="臨時狀況"><a href="#臨時狀況" class="headerlink" title="臨時狀況"></a>臨時狀況</h3><p>常遇到臨時狀況，需要放下手上的東西，支援其他人</p>
+<ul>
+<li>狀況一：寫到一半，臨時被叫去修BUG，要切換<code>branch</code>怎麼辦？</li>
+<li>狀況二： 想切換 <code>branch</code>、<code>坐時光機回到commit歷史紀錄</code>，但手上才寫到一半，我也不想commit</li>
+</ul>
+<ol>
+<li><code>git add .</code></li>
+<li><code>git commit -m &#39;Not finish yet ORZ &quot;&#39;</code></li>
+</ol>
+<p>可是，難道只能先<code>commit</code>嗎？可是還沒完整寫完啊，我不想<code>commit</code>，<code>git log</code> 會變很亂！</p>
+<h4 id="雜事放一旁，先救火再說！"><a href="#雜事放一旁，先救火再說！" class="headerlink" title="雜事放一旁，先救火再說！"></a>雜事放一旁，先救火再說！</h4><p><code>git stash</code>就像是把手邊還沒整理好的東西，先全部放在一個箱子裡，等有空時再去箱子拿回來繼續處理。</p>
+<ol>
+<li><code>git stash save &quot;RWDmobile&quot;</code><br>把手邊的資料全部放進RWDmobile的箱子裡</li>
+<li><code>git stash pop &quot;名字&quot;</code><br>終於忙完了，回來繼續整理，取回RWDmobile的箱子，並把箱子丟掉。</li>
+<li><code>git stash drop</code><br>把箱子和裡面的資料，都一起丟掉。</li>
+<li><code>git stash apply 名字</code><br>和pop一樣，取回箱子的資料，但不把箱子丟掉。</li>
+<li><code>git stash list</code><br>查詢我有幾個暫存的箱子</li>
+</ol>
+<h4 id="我commit了，但我想修改commit的訊息"><a href="#我commit了，但我想修改commit的訊息" class="headerlink" title="我commit了，但我想修改commit的訊息"></a>我commit了，但我想修改commit的訊息</h4><ul>
+<li>只能修改 HEAD 上的 commit(目前git 最後一個commit的位置)</li>
+<li>ammend是修改的意思。<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">git <span class="hljs-keyword">commit</span> <span class="hljs-comment">--amend</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Git-竄改-Commit-紀錄"><a href="#Git-竄改-Commit-紀錄" class="headerlink" title="Git 竄改 Commit 紀錄"></a>Git 竄改 Commit 紀錄</h3><p>想竄改紀錄？請找專家認證的「<code>Git rebase -i</code>」</p>
+<h4 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h4><ol>
+<li>我想修改 commit 的順序</li>
+<li>我想整理 branch 上的commit</li>
+<li>我想先把某個 branch 上的 commit 先 merge 回 master</li>
+<li>我想合併 commit，避免太過瑣碎的 commit<h3 id="Git-rebase-能做的事"><a href="#Git-rebase-能做的事" class="headerlink" title="Git rebase 能做的事"></a>Git rebase 能做的事</h3></li>
+</ol>
+<ul>
+<li>重新 commit ( <code>Pick</code>)</li>
+<li>更換 commit 順序</li>
+<li>修改 commit 順序 (<code>Edit</code>)</li>
+<li>拆解 commit (把多個commit紀錄變成一個commit)</li>
+<li>壓縮 commit，合併 commit 訊息 (<code>Squash</code>)</li>
+<li>刪除 commit (<code>Skip</code>)</li>
+</ul>
+<p><code>squash</code><br>把現在的 commit 和 上一個 commit 合併<br><code>fixup</code><br>也是合併 上一個 commit ，但不會保存 commit 的訊息</p>
+<h3 id="把多個-commit-紀錄合併成一個"><a href="#把多個-commit-紀錄合併成一個" class="headerlink" title="把多個 commit 紀錄合併成一個"></a>把多個 commit 紀錄合併成一個</h3><ul>
+<li>方法一</li>
+</ul>
+<ol>
+<li><code>git stash</code><br>暫存把目前修改的資料通通先封裝進 stash 箱子</li>
+<li><code>git reset 2q542f</code><br>坐時光機回到過去，回到 2q542f 版本</li>
+<li><code>git stash pop</code><br>把箱子裡的資料重新拿出來，所以現在是 2q542f 版本 +上剛剛從 stash箱子拿出來的資料</li>
+<li>重新 commit !<br><code>git add</code><br><code>git commit -m &#39;Message&#39;</code></li>
+</ol>
+<ul>
+<li>方法二</li>
+</ul>
+<ol>
+<li><code>git rebase -i de534f</code></li>
+<li>用 <code>squash</code> merge 3 commits into 1 comit</li>
+</ol>
+<h3 id="Rebase完後悔"><a href="#Rebase完後悔" class="headerlink" title="Rebase完後悔"></a>Rebase完後悔</h3><p>已經 rebase 竄改完紀錄，但一時眼花看錯，需要還原，對我就是後悔了，該怎麼辦？</p>
+<h4 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h4><p>輸入<code>git reflog</code>後會出現像<code>git log --oneline</code> 頁面<br><code>git reset --hard HEAD@&#123;3&#125;</code><br>根據上面的流水編號或bceefbc值，選你想要回復的位置</p>
+<h4 id="將追蹤的某個檔案回復成上一次-commit-狀態"><a href="#將追蹤的某個檔案回復成上一次-commit-狀態" class="headerlink" title="將追蹤的某個檔案回復成上一次 commit 狀態"></a>將追蹤的某個檔案回復成上一次 commit 狀態</h4><p><code>git checkout -- user.html.erb</code></p>
+<h4 id="所有已加入git-addtrack中，修改過的檔案，復原成最近一次commit-狀態"><a href="#所有已加入git-addtrack中，修改過的檔案，復原成最近一次commit-狀態" class="headerlink" title="所有已加入git addtrack中，修改過的檔案，復原成最近一次commit 狀態"></a>所有已加入<code>git add</code>track中，修改過的檔案，復原成最近一次commit 狀態</h4><p><code>git checkout .</code></p>
+<h4 id="從某個-commit-切回原本-branch"><a href="#從某個-commit-切回原本-branch" class="headerlink" title="從某個 commit 切回原本 branch"></a>從某個 commit 切回原本 branch</h4><p><code>git checkout -</code></p>
+<h4 id="將-某branch-裡的-某個-commit-的變動-merge-到另一條-branch"><a href="#將-某branch-裡的-某個-commit-的變動-merge-到另一條-branch" class="headerlink" title="將 某branch 裡的 某個 commit 的變動 merge 到另一條 branch"></a>將 某branch 裡的 某個 commit 的變動 merge 到另一條 branch</h4><p>EX: develop 想 merge feature的 #bceefbc commit進來<br><code>git cherry-pick</code></p>
+<h3 id="Git-協作流程"><a href="#Git-協作流程" class="headerlink" title="Git 協作流程"></a>Git 協作流程</h3><p>開發新功能或跟別人協作git時</p>
+<ol>
+<li>新建一個獨立的分支</li>
+<li>提交分支的 commit</li>
+<li>要時常跟上遠端的腳步，與遠端Responsitory 同步<br><code>commit前，pull！push前，也pull！</code><h4 id="pull！pull！pull！pull！-壞掉了嗎？"><a href="#pull！pull！pull！pull！-壞掉了嗎？" class="headerlink" title="pull！pull！pull！pull！(壞掉了嗎？)"></a>pull！pull！pull！pull！(壞掉了嗎？)</h4><code>git pull --rebase</code><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> git pull<br><span class="hljs-bullet">2.</span> git commit<br><span class="hljs-bullet">3.</span> git pull<br><span class="hljs-bullet">4.</span> git push<br></code></pre></td></tr></table></figure></li>
+<li>合併 commit<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git fetch origin<br>git rebase origin/<span class="hljs-keyword">master</span><br><span class="hljs-title">或是</span><br><span class="hljs-title">git</span> pull origin <span class="hljs-keyword">master</span> <span class="hljs-title">--rebase</span><br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Merge-後的訊息好多餘，有辦法簡略嗎？"><a href="#Merge-後的訊息好多餘，有辦法簡略嗎？" class="headerlink" title="Merge 後的訊息好多餘，有辦法簡略嗎？"></a>Merge 後的訊息好多餘，有辦法簡略嗎？</h3><p>branch 要 merge origin/master，都會有個 merge commit ‘Merge branch ‘master’’ ，太多餘了！ 這種多餘節點很阿雜，能不能不看到？</p>
+<p>輸入<code>git pull --rebase</code> 就會使 merge 每次的 commit 不見</p>
+<blockquote>
+<p>輸入的前提：使用–rebase是在沒有 conflict 的情況下才使用</p>
+</blockquote>
+<p>真不湊巧，使用 –rebase 結果 conflict 了<br><code>git rebase --abort</code> 回復 pull 前的狀態<br><code>git merge origin master</code> 不過就會有多餘的merge message出現</p>
+<p><code>git pull --rebase</code><br>它等於以下兩步<br>git fetch<br>git merge origin </p>
+<h4 id="git-pull-rebase-是什麼意思？"><a href="#git-pull-rebase-是什麼意思？" class="headerlink" title="git pull --rebase 是什麼意思？"></a><code>git pull --rebase</code> 是什麼意思？</h4><ol>
+<li>把 commit 但還沒 push 上去的東西暫存丟到旁邊去</li>
+<li>現在的 commit 非常乾淨，Git表示：沒有東西要push上去</li>
+<li>從遠端 repo 把新的東西 pull 下來，跟上進度。此時你本地端是沒有任何要 push 的 commit，所以也不會有因為有東西還沒 push 所以無法 pull 的情況</li>
+<li>再把那些待 push 的 commit 更動過的檔案 回復回來</li>
+</ol>
+<p>有 commit 還沒 push -&gt; 想要 pull 同步 遠端repo<br>變成 輸入 <code>git pull --rebase</code> 指令後<br>把 還沒 push 的 commit 存起來，本地端沒東西 push  -&gt; 先 pull同步 -&gt; 接著變成同步遠端了，目前還有 commit 還沒 push</p>
+<h3 id="Reference-參考資料"><a href="#Reference-參考資料" class="headerlink" title="Reference | 參考資料"></a>Reference | 參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://qiita.com/vc7/items/6e06b0306c8a64a23263">Git Merge &amp; Fast-forward</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.jex.tw/blog/2013/07/21/git/">Git 常用指令</a></li>
+<li><a target="_blank" rel="noopener" href="https://ihower.tw/blog/archives/3843">使用 git rebase 避免無謂的 merge</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/pokaichang72/git-42427674">史上最簡單易懂的Git教學：Git 實務圖解</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Git-%E4%BF%AE%E6%94%B9%E5%8F%88%E8%87%AD%E5%8F%88%E9%95%B7%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%8C%E5%8A%A0%E5%BF%AB%E9%96%8B%E7%99%BC%E9%80%9F%E5%BA%A6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git 修改又臭又長的指令，加快開發速度</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%83%E7%9A%84%EF%BC%9ASass-Mixin%E7%A5%9E%E5%99%A8/">
+                        <span class="hidden-mobile">前端工程師一定要會的：Sass Mixin神器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Git-%E7%AD%86%E8%A8%98%EF%BC%9A%E6%88%91%E6%83%B3%E5%9B%9E%E5%88%B0%E9%81%8E%E5%8E%BB%EF%BC%8C%E5%88%B0%E5%BA%95%E8%A6%81%E6%80%8E%E9%BA%BC%E5%9D%90%E6%99%82%E5%85%89%E6%A9%9F%EF%BC%9F/';
+          this.page.identifier = '/Git-%E7%AD%86%E8%A8%98%EF%BC%9A%E6%88%91%E6%83%B3%E5%9B%9E%E5%88%B0%E9%81%8E%E5%8E%BB%EF%BC%8C%E5%88%B0%E5%BA%95%E8%A6%81%E6%80%8E%E9%BA%BC%E5%9D%90%E6%99%82%E5%85%89%E6%A9%9F%EF%BC%9F/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

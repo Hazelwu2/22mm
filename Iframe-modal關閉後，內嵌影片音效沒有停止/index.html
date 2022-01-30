@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="情境介紹 Iframe modal關閉後，內嵌影片音效沒有停止內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。   移除包含iframe節點我試著用 Jquery 解決，移除整個包含iframe的節點 123$(‘.close-modal’).on(‘click’,function()&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iframe modal關閉後，內嵌影片音效沒有停止">
+<meta property="og:url" content="http://wualnz.com/Iframe-modal%E9%97%9C%E9%96%89%E5%BE%8C%EF%BC%8C%E5%85%A7%E5%B5%8C%E5%BD%B1%E7%89%87%E9%9F%B3%E6%95%88%E6%B2%92%E6%9C%89%E5%81%9C%E6%AD%A2/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="情境介紹 Iframe modal關閉後，內嵌影片音效沒有停止內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。   移除包含iframe節點我試著用 Jquery 解決，移除整個包含iframe的節點 123$(‘.close-modal’).on(‘click’,function()&amp;#1">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png">
+<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230858/iframe-example.gif">
+<meta property="og:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230829/iframe-cannot-worked2-300x176.png">
+<meta property="article:published_time" content="2017-12-24T22:25:40.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.453Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png">
+  
+  <title>Iframe modal關閉後，內嵌影片音效沒有停止 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Iframe modal關閉後，內嵌影片音效沒有停止">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-12-25 06:25" pubdate>
+        2017年12月25日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Iframe modal關閉後，內嵌影片音效沒有停止</h1>
+            
+            <div class="markdown-body">
+              <h3 id="情境介紹"><a href="#情境介紹" class="headerlink" title="情境介紹"></a>情境介紹</h3><blockquote>
+<p>Iframe modal關閉後，內嵌影片音效沒有停止<br>內套 Bootstrap 的 modal JS特效，燈箱內容放 iframe 內崁 Youtube，但發現關閉按鈕後，影片聲音仍繼續，畫面關閉了還是有聲音。</p>
+</blockquote>
+<p><img src="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230518/e693b7e58f962.png" srcset="/img/loading.gif" lazyload alt="iframe-not-working" title="iframe-not-working"></p>
+<h4 id="移除包含iframe節點"><a href="#移除包含iframe節點" class="headerlink" title="移除包含iframe節點"></a>移除包含iframe節點</h4><p>我試著用 Jquery 解決，移除整個包含iframe的節點</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(‘.<span class="hljs-params">close</span>-<span class="hljs-params">modal</span>’)</span>.on(‘click’,<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>&#123;<br>    <span class="hljs-constructor">$(‘.<span class="hljs-params">modal</span>-<span class="hljs-params">body</span>’)</span>.remove<span class="hljs-literal">()</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>哈哈，是停止了沒錯，但好笑的是，如果user想重新開啟這個modal box就會穿幫，阿幹？阿影片勒怎麼不見了？這影片是用一次就消失喔？？？</li>
+</ul>
+<p>示意圖如下</p>
+<p><img src="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230858/iframe-example.gif" srcset="/img/loading.gif" lazyload alt="iframe-example" title="iframe-example"></p>
+<p>detach()：可以移除元素，但完整保留事件</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(‘.<span class="hljs-params">close</span>-<span class="hljs-params">modal</span>’)</span>.on(‘click’,<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>&#123;<br>    <span class="hljs-constructor">$(‘<span class="hljs-params">iframe</span>)</span>.detach<span class="hljs-literal">()</span>;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>但一樣重新開啟頁面須要另寫jQ重新加回去。</li>
+<li>有個更更更更更簡短的寫法，原理是抓到DOM元素後，將src重新再放入網址！就自動停了</li>
+<li>這樣即使關掉頁面重開，也可以很完整呈現，也不用移除後還要再重新加入iframe</li>
+</ul>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(‘.<span class="hljs-params">close</span>-<span class="hljs-params">modal</span>’)</span>.on(‘click’,<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>&#123;<br>  <span class="hljs-constructor">$(‘<span class="hljs-params">iframe</span>’)</span>.attr(‘src’,<br>         <span class="hljs-constructor">$(‘<span class="hljs-params">iframe</span>’)</span>.attr(‘src’));<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>夠簡短吧，囧！學到一課了</p>
+<h3 id="用attr設定src的屬性，取得src網址後再重新加載一次！"><a href="#用attr設定src的屬性，取得src網址後再重新加載一次！" class="headerlink" title="用attr設定src的屬性，取得src網址後再重新加載一次！"></a>用attr設定src的屬性，取得src網址後再重新加載一次！</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(‘.<span class="hljs-params">close</span>-<span class="hljs-params">modal</span>,<span class="hljs-params">button</span>’)</span>.on(‘click’,<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>&#123;<br>   <span class="hljs-constructor">$(‘<span class="hljs-params">iframe</span>’,)</span>.attr(‘src’,     <br>     <span class="hljs-constructor">$(‘<span class="hljs-params">iframe</span>’)</span>.attr(‘src’));<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>同時選取兩組元素做click動作，只需要一個引號，中間用逗號隔開即可</p>
+<p><img src="http://s3-ap-northeast-1.amazonaws.com/hazel-wordpress/wp-content/uploads/2017/11/11230829/iframe-cannot-worked2-300x176.png" srcset="/img/loading.gif" lazyload alt="ifream-mode-remoe-successful-pic"></p>
+<h4 id="20171225更新"><a href="#20171225更新" class="headerlink" title="20171225更新"></a>20171225更新</h4><p>需要指定iframe取得的src連結，否則都會是拿到第一個modal的網址。<br>所以需要補宣告一個變數指定為當前開啟的iframe。</p>
+<ol>
+<li>狀態改成為當bootstrap的modal是隱藏狀態時（意味著：被使用者關閉了），將目前的iframe的網址拿掉，變空白。接著再將原有的影片網址重新塞回iframe的src屬性裡。</li>
+<li>如何取得iframe的src網址？使用attr(‘src’)</li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade">$(<span class="hljs-string">&#x27;.modal&#x27;</span>).on(<span class="hljs-string">&#x27;hidden.bs.modal&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">var</span> <span class="hljs-symbol">$iframe</span> = $(this).find(<span class="hljs-string">&#x27;iframe&#x27;</span>);<br>    <span class="hljs-keyword">var</span> videoSrc = <span class="hljs-symbol">$iframe</span>.attr(<span class="hljs-string">&#x27;src&#x27;</span>);<br>    console.log(videoSrc);<br>    <span class="hljs-symbol">$iframe</span>.attr(<span class="hljs-string">&#x27;src&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>);<br>    <span class="hljs-symbol">$iframe</span>.attr(<span class="hljs-string">&#x27;src&#x27;</span>, videoSrc);<br>  &#125;);<br></code></pre></td></tr></table></figure>
+<p>嘿嘿完成圖！打開縮圖可以得到一個modal燈箱，點擊兩個按鈕都可以做到關閉的效果，真開心！超有成就感。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Rails-%E7%94%A8-Bootstrap-%E5%BF%AB%E9%80%9F%E5%AE%A2%E8%A3%BD%E5%8C%96-alert-notice-flash-message%E5%BF%AB%E9%96%83%E8%A8%8A%E6%81%AF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rails 用 Bootstrap 快速客製化 alert & notice flash message快閃訊息</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%9E%B6Wordpress%E5%9C%A8%E6%9C%AC%E6%A9%9F%EF%BC%8C%E6%9B%B4%E6%94%B9%E5%9B%BA%E5%AE%9A%E7%B6%B2%E5%9D%80%E5%BE%8C%E6%8E%9B%E4%BA%86/">
+                        <span class="hidden-mobile">架Wordpress在本機，更改固定網址後掛了</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Iframe-modal%E9%97%9C%E9%96%89%E5%BE%8C%EF%BC%8C%E5%85%A7%E5%B5%8C%E5%BD%B1%E7%89%87%E9%9F%B3%E6%95%88%E6%B2%92%E6%9C%89%E5%81%9C%E6%AD%A2/';
+          this.page.identifier = '/Iframe-modal%E9%97%9C%E9%96%89%E5%BE%8C%EF%BC%8C%E5%85%A7%E5%B5%8C%E5%BD%B1%E7%89%87%E9%9F%B3%E6%95%88%E6%B2%92%E6%9C%89%E5%81%9C%E6%AD%A2/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

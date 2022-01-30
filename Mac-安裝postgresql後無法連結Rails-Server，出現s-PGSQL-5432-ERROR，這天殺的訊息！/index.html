@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="s.PGSQL.5432是蝦咪挖溝？紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。這次遇到的狀況是要跑rails db:migrate時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入psql出現ERROR訊息：RUN版本：postgresql 10.3 123psql: could not co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法">
+<meta property="og:url" content="http://wualnz.com/Mac-%E5%AE%89%E8%A3%9Dpostgresql%E5%BE%8C%E7%84%A1%E6%B3%95%E9%80%A3%E7%B5%90Rails-Server%EF%BC%8C%E5%87%BA%E7%8F%BEs-PGSQL-5432-ERROR%EF%BC%8C%E9%80%99%E5%A4%A9%E6%AE%BA%E7%9A%84%E8%A8%8A%E6%81%AF%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="s.PGSQL.5432是蝦咪挖溝？紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。這次遇到的狀況是要跑rails db:migrate時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入psql出現ERROR訊息：RUN版本：postgresql 10.3 123psql: could not co">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-04-08T19:59:09.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.454Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="rails server">
+<meta property="article:tag" content="s.PGSQL.5432">
+<meta property="article:tag" content="Rails 5">
+<meta property="article:tag" content="psql">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-04-09 03:59" pubdate>
+        2018年4月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Rails Server 無法連結 Postgresql，出現s.PGSQL.5432 ERROR，解決辦法</h1>
+            
+            <div class="markdown-body">
+              <h3 id="s-PGSQL-5432是蝦咪挖溝？"><a href="#s-PGSQL-5432是蝦咪挖溝？" class="headerlink" title="s.PGSQL.5432是蝦咪挖溝？"></a>s.PGSQL.5432是蝦咪挖溝？</h3><p>紀錄在 Mac 跑Rails Server時使用PG資料庫，出現s.PGSQL.5432 ERROR，我是如何解決的。<br>這次遇到的狀況是要跑<code>rails db:migrate</code>時出現錯誤訊息，追根究底時發現有可能原因是出自於psql資料庫，於是在終端機輸入<code>psql</code>出現ERROR訊息：<br>RUN版本：<code>postgresql 10.3</code></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">psql: could <span class="hljs-keyword">not</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">server</span>: <span class="hljs-keyword">No</span> such file <span class="hljs-keyword">or</span> directory<br>    <span class="hljs-keyword">Is</span> the <span class="hljs-keyword">server</span> running locally <span class="hljs-keyword">and</span> accepting<br>    connections <span class="hljs-keyword">on</span> Unix <span class="hljs-keyword">domain</span> socket &quot;/var/pgsql_socket/.s.PGSQL.5432&quot;?<br></code></pre></td></tr></table></figure>
+<p>上述錯誤訊息是在說：現在開啟的Rails Server沒有與本機的psql資料庫連線，你要不要再確認一下？</p>
+<p>造成此原因有很多種，但最白癡的原因莫過於本端沒有打開psql服務</p>
+<blockquote>
+<p>若你也有出現此錯誤訊息，可以先測試看看是不是根本沒有打開psql服務，若仍無法排除，再嘗試重新裝載psql。<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></p>
+</blockquote>
+<h2 id="解決良藥"><a href="#解決良藥" class="headerlink" title="解決良藥"></a>解決良藥</h2><h3 id="1-本機開啟psql的服務"><a href="#1-本機開啟psql的服務" class="headerlink" title="1. 本機開啟psql的服務"></a>1. 本機開啟psql的服務</h3><p>如果psql本身被關閉的話，輸入以下指令便會告知你psql服務被打開囉。<br>Mac若重新開機的話，psql服務會自動被關閉，通常遇到無法連線local psql時輸入此指令皆可解決。<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></p>
+<h3 id="2-重新裝載psql"><a href="#2-重新裝載psql" class="headerlink" title="2. 重新裝載psql"></a>2. 重新裝載psql</h3><p>如果本機確認有打開psql服務的話，仍無法排除狀況，那就重新裝載psql吧QQ。</p>
+<ul>
+<li>先移除前一個版本Postgresql<br><code>$ brew uninstall --force postgresql</code></li>
+<li>確保有刪除乾淨，再次手動刪除<br><code>$ rm -rf /usr/local/var/postgres</code></li>
+<li>用Homebrew 安裝 Postgres<br><code>$ brew install postgres</code><br>開啟PostgreSQL的Server，在終端機輸入：<br><code>$ pg_ctl -D /usr/local/var/postgres start</code></li>
+<li>建立資料庫<br><code>$ initdb /usr/local/var/postgres</code><br>或是直接在Rails專案建立資料庫<br><code>$ rails db:create</code></li>
+</ul>
+<h3 id="備份資料庫"><a href="#備份資料庫" class="headerlink" title="備份資料庫"></a>備份資料庫</h3><p>如果local端有舊的資料庫，也並不打算轉移的話…<br>刪除舊有資料庫<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">rm -r <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/var/</span>postgres<br></code></pre></td></tr></table></figure></p>
+<p>重新建立一個新的<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">initdb <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/var/</span>postgres<br></code></pre></td></tr></table></figure><br>新建新的資料庫<br><code>createdb 資料庫名稱</code></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@Umesh_Kafle/postgresql-and-postgis-installation-in-mac-os-87fa98a6814d">PostgreSQL and PostGIS installation in Mac OS.</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/rails-server/">rails server</a>
+                    
+                      <a class="hover-with-bg" href="/tags/s-PGSQL-5432/">s.PGSQL.5432</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Rails-5/">Rails 5</a>
+                    
+                      <a class="hover-with-bg" href="/tags/psql/">psql</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Rails-%E8%88%87-Webpacker-%E7%A5%9E%E5%A5%87%E7%9A%84%E7%B5%90%E5%90%88%EF%BC%9A%E7%94%A8image-wepback-loader-%E4%BE%86%E5%A3%93%E7%B8%AE%E5%9C%96%E7%89%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rails 與 Webpacker 神奇的結合：用image-wepback-loader 來壓縮圖片</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%B9%AB-Rails-%E5%BB%BA%E7%AB%8B%E4%B8%80%E5%80%8B-Docker-Container%E5%90%A7/">
+                        <span class="hidden-mobile">幫 Rails 建立一個 Docker Container吧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Mac-%E5%AE%89%E8%A3%9Dpostgresql%E5%BE%8C%E7%84%A1%E6%B3%95%E9%80%A3%E7%B5%90Rails-Server%EF%BC%8C%E5%87%BA%E7%8F%BEs-PGSQL-5432-ERROR%EF%BC%8C%E9%80%99%E5%A4%A9%E6%AE%BA%E7%9A%84%E8%A8%8A%E6%81%AF%EF%BC%81/';
+          this.page.identifier = '/Mac-%E5%AE%89%E8%A3%9Dpostgresql%E5%BE%8C%E7%84%A1%E6%B3%95%E9%80%A3%E7%B5%90Rails-Server%EF%BC%8C%E5%87%BA%E7%8F%BEs-PGSQL-5432-ERROR%EF%BC%8C%E9%80%99%E5%A4%A9%E6%AE%BA%E7%9A%84%E8%A8%8A%E6%81%AF%EF%BC%81/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="Express 框架利用 Cookie 來送出 JWT，進行安全驗證。我們會利用 express 提供的 res.cookie 來進行實作 設定環境變數打開 config.env 檔，這個檔案主要存放所有的環境變數，設定JWT_COOKIE_EXPIRES_IN，我們預設 Cookie 90天後過期 123JWT_SECRET&#x3D;sVNJpMqNcYwJ.lahq2343x4$234123^Ll!&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs 使用 JWT 送 Cookie">
+<meta property="og:url" content="http://wualnz.com/Nodejs-%E4%BD%BF%E7%94%A8-JWT-%E9%80%81-Cookie/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="Express 框架利用 Cookie 來送出 JWT，進行安全驗證。我們會利用 express 提供的 res.cookie 來進行實作 設定環境變數打開 config.env 檔，這個檔案主要存放所有的環境變數，設定JWT_COOKIE_EXPIRES_IN，我們預設 Cookie 90天後過期 123JWT_SECRET&#x3D;sVNJpMqNcYwJ.lahq2343x4$234123^Ll!&amp;">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://wualnz.com/images/20211108/使用%20JWT%20送%20Cookie.png">
+<meta property="article:published_time" content="2021-11-07T16:57:20.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.455Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://wualnz.com/images/20211108/使用%20JWT%20送%20Cookie.png">
+  
+  <title>Nodejs 使用 JWT 送 Cookie - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Nodejs 使用 JWT 送 Cookie">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-08 00:57" pubdate>
+        2021年11月8日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Nodejs 使用 JWT 送 Cookie</h1>
+            
+            <div class="markdown-body">
+              <p>Express 框架利用 Cookie 來送出 JWT，進行安全驗證。我們會利用 express 提供的 res.cookie 來進行實作</p>
+<h2 id="設定環境變數"><a href="#設定環境變數" class="headerlink" title="設定環境變數"></a>設定環境變數</h2><p>打開 config.env 檔，這個檔案主要存放所有的環境變數，設定JWT_COOKIE_EXPIRES_IN，我們預設 Cookie 90天後過期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs env">JWT_SECRET=sVNJpMqNcYwJ.lahq2343x4$234123^Ll!&amp;H&gt;+B&#123;*]QS/i+zCw+y1&gt;QRlMMf8Viiz2345+d<br>JWT_EXPIRES_IN=90d<br>JWT_COOKIE_EXPIRES_IN=90<br></code></pre></td></tr></table></figure>
+<h2 id="設定-cookie"><a href="#設定-cookie" class="headerlink" title="設定 cookie"></a>設定 cookie</h2><h3 id="參數說明"><a href="#參數說明" class="headerlink" title="參數說明"></a>參數說明</h3><p>res.cookie 的參數說明</p>
+<ul>
+<li>expire<br>expires 表示 cookie 什麼時後過期，我們希望90天後過期，取得環境變數 process.env.JWT_COOKIE_EXPIRES_IN 之後，乘上 24 (轉換天數)，乘上 60(轉換成小時)，再乘上 60(轉換成分)，最後再乘 1000(轉換成毫秒)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">expires: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<br>  <span class="hljs-built_in">Date</span>.now() + process.env.JWT_COOKIE_EXPIRES_IN * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span><br>)<br></code></pre></td></tr></table></figure></li>
+<li><p>secure<br>secure 在官方文件上解釋：<code>Marks the cookie to be used with HTTPS only.</code>，有設 定 secure 表示只含有 HTTPS 才會送出。當你的客戶端是 HTTP，沒有含有 SSL憑證時，cookie 便不會送出。<br>但在開發環境時通常不會設定 HTTPS，可以特別加上判斷，如果環境是production，才加上 <code>secure: true</code></p>
+</li>
+<li><p>httpOnly<br>httpOnly 官方文件解釋：<code>Flags the cookie to be accessible only by the web server.</code>，若設定 httpOnly: true，表示 cookie 標記只能由 Web Server 來訪問</p>
+</li>
+</ul>
+<p>官方範例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">res.cookie(<span class="hljs-string">&#x27;rememberme&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, &#123; <br>  <span class="hljs-attr">expires</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-built_in">Date</span>.now() + <span class="hljs-number">900000</span>), <br>  <span class="hljs-attr">httpOnly</span>: <span class="hljs-literal">true</span> <br>&#125;)<br></code></pre></td></tr></table></figure></p>
+<h3 id="完整程式碼"><a href="#完整程式碼" class="headerlink" title="完整程式碼"></a>完整程式碼</h3><p>Express 提供 res.cookie 方法<br><code>res.cookie(name, value [, options])</code><br>我們設定傳給客戶端 jwt 的 cookie，值是 jwt 產生</p>
+<ul>
+<li>返回的 cookie 名稱: jwt</li>
+<li>cookie jwt 值則是 jsonwebtoken 產生的 Token 值，帶入變數 token</li>
+<li>cookieOptions: 我們設定 expires, httpOnly 這兩個選項，並特別設定如果是 production 環境時才將 secure 設定為 true</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> cookieOptions = &#123;<br>  <span class="hljs-attr">expires</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<br>    <span class="hljs-built_in">Date</span>.now() + process.env.JWT_COOKIE_EXPIRES_IN * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>,<br>  ),<br>  <span class="hljs-attr">httpOnly</span>: <span class="hljs-literal">true</span>,<br>&#125;<br><br>res.cookie(<span class="hljs-string">&#x27;jwt&#x27;</span>, token, cookieOptions)<br></code></pre></td></tr></table></figure>
+<p>因此 API 除了返回 json 也會返回名叫 jwt 的 cookie ，並於 90 天後過期</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;jsonwebtoken&#x27;</span>)<br><span class="hljs-keyword">const</span> signToken = <span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> jwt.sign(&#123;id&#125;, process.env.JWT_SECRET, &#123;<br>  <span class="hljs-attr">expiresIn</span>: process.env.JWT_EXPIRES_IN<br>&#125;)<br><br><span class="hljs-keyword">const</span> createSendToken = <span class="hljs-function">(<span class="hljs-params">user, statusCode, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> token = signToken(user._id)<br>  <span class="hljs-keyword">const</span> cookieOptions = &#123;<br>    <span class="hljs-attr">expires</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<br>      <span class="hljs-built_in">Date</span>.now() + process.env.JWT_COOKIE_EXPIRES_IN * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>,<br>    ),<br>    <span class="hljs-attr">httpOnly</span>: <span class="hljs-literal">true</span>,<br>  &#125;<br><br>  res.cookie(<span class="hljs-string">&#x27;jwt&#x27;</span>, token, cookieOptions)<br><br>  <span class="hljs-comment">// Remove password from output</span><br>  user.password = <span class="hljs-literal">undefined</span><br><br>  res.status(statusCode).json(&#123;<br>    <span class="hljs-attr">status</span>: <span class="hljs-number">1</span>,<br>    token,<br>    <span class="hljs-attr">data</span>: &#123;<br>      user,<br>    &#125;,<br>  &#125;)<br>&#125;<br><br><span class="hljs-built_in">exports</span>.signup = catchAsync(<span class="hljs-keyword">async</span> (req, res, next) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> &#123;<br>    name, email, password, passwordConfirm, passwordChangedAt,<br>  &#125; = req.body<br><br>  <span class="hljs-keyword">const</span> newUser = <span class="hljs-keyword">await</span> User.create(&#123;<br>    name,<br>    email,<br>    password,<br>    passwordConfirm,<br>    passwordChangedAt,<br>  &#125;)<br><br>  createSendToken(newUser, <span class="hljs-number">201</span>, res)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><p>在 Postman 打註冊或登入 API，如果上述都有設定成功，預期成功的結果會返回 Cookie，如下圖所示<br><img src="../../../images/20211108/使用 JWT 送 Cookie.png" srcset="/img/loading.gif" lazyload alt="Postman成功返回Cookie"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://expressjs.com/zh-tw/api.html">Express官方文件：res.cookie</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065340?start=15#overview">[Udemy]Nodejs Express Bootcamp: Sending JWT via Cookie</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/nodejs/">nodejs</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Vscode-eslint-%E8%88%87-prettier-%E8%A1%9D%E7%AA%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vscode eslint 與 prettier 衝突</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E8%A7%A3%E6%B1%BA-Cannot-read-property-range-of-null-%E9%8C%AF%E8%AA%A4-1/">
+                        <span class="hidden-mobile">解決 Cannot read property range of null 錯誤</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/Nodejs-%E4%BD%BF%E7%94%A8-JWT-%E9%80%81-Cookie/';
+          this.page.identifier = '/Nodejs-%E4%BD%BF%E7%94%A8-JWT-%E9%80%81-Cookie/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

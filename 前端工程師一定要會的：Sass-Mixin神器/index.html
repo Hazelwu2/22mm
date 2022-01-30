@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="Sass Mixin 神器，學會 Mixin 可以讓你在開發上的速度加快許多，快來看看如何使用吧 Sass Mixin 主要功能Sass Mixin 主要功能：省去重複撰寫相同 CSS 的時間  降低Pseudo(偽)元素撰寫時的重複性 重用群組的 CSS，像是prefix，用@include加入群組 透過@include使用參數  示範SASS運用情境一 當你在開發時設計.introduce C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端工程師一定要會的：Sass Mixin神器">
+<meta property="og:url" content="http://wualnz.com/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%83%E7%9A%84%EF%BC%9ASass-Mixin%E7%A5%9E%E5%99%A8/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="Sass Mixin 神器，學會 Mixin 可以讓你在開發上的速度加快許多，快來看看如何使用吧 Sass Mixin 主要功能Sass Mixin 主要功能：省去重複撰寫相同 CSS 的時間  降低Pseudo(偽)元素撰寫時的重複性 重用群組的 CSS，像是prefix，用@include加入群組 透過@include使用參數  示範SASS運用情境一 當你在開發時設計.introduce C">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-01-28T21:29:19.000Z">
+<meta property="article:modified_time" content="2021-12-22T03:26:58.459Z">
+<meta property="article:author" content="Hazel Wu">
+<meta property="article:tag" content="Front-end">
+<meta property="article:tag" content="Sass">
+<meta property="article:tag" content="Mixin">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>前端工程師一定要會的：Sass Mixin神器 - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端工程師一定要會的：Sass Mixin神器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-01-29 05:29" pubdate>
+        2018年1月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端工程師一定要會的：Sass Mixin神器</h1>
+            
+            <div class="markdown-body">
+              <p>Sass Mixin 神器，學會 Mixin 可以讓你在開發上的速度加快許多，快來看看如何使用吧</p>
+<h4 id="Sass-Mixin-主要功能"><a href="#Sass-Mixin-主要功能" class="headerlink" title="Sass Mixin 主要功能"></a>Sass Mixin 主要功能</h4><p>Sass Mixin 主要功能：省去重複撰寫相同 CSS 的時間</p>
+<ul>
+<li>降低Pseudo(偽)元素撰寫時的重複性</li>
+<li>重用群組的 CSS，像是prefix，用<code>@include</code>加入群組</li>
+<li>透過<code>@include</code>使用參數</li>
+</ul>
+<h3 id="示範SASS運用"><a href="#示範SASS運用" class="headerlink" title="示範SASS運用"></a>示範SASS運用</h3><h4 id="情境一"><a href="#情境一" class="headerlink" title="情境一"></a>情境一</h4><blockquote>
+<p>當你在開發時設計.introduce Class時，結果設計師跟你說：這個背景顏色好醜，我們需要改顏色、整體網站都要更改一下，天啊真是晴天霹靂！這樣改要整個大修耶，別怕別怕！還有Mixin來幫你大幅節省時間！</p>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$font-size: <span class="hljs-number">14</span>px<br>@<span class="hljs-keyword">mixin</span> bg<br>	background: #<span class="hljs-number">000</span><br>	font-size: $font-size<br>.header<br>	+bg<br></code></pre></td></tr></table></figure>
+<p>SASS轉譯成CSS後，原始碼會變這樣</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.header</span> &#123;<br>	<span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;<br>	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>是不是快多了呢！！！<br>寫法：@mixin 命名名稱，需要載入的話就是用「+」來載入mixin名稱</p>
+<h4 id="情境二"><a href="#情境二" class="headerlink" title="情境二"></a>情境二</h4><blockquote>
+<p> 設計師說：背景顏色要隨著網站活動變更，整體網站顏色可能會每隔三四個月都要改一次，你會傻傻的一個一個找header改嗎？當然不！拿起我們的秘密武器Mixin吧<br>在Mixin裡建立變數</p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-variable">$font</span>-size: <span class="hljs-number">13px</span><br><span class="hljs-variable">$linkcolor</span>: <span class="hljs-number">#d6b161</span><br><span class="hljs-variable">$textcolor</span>: <span class="hljs-number">#eee</span><br><span class="hljs-comment">// 在Mixin裡建立變數，並帶入</span><br><span class="hljs-keyword">@mixin</span> bg(<span class="hljs-variable">$bgcolor</span>)<br>	<span class="hljs-attribute">background</span>: <span class="hljs-variable">$bgcolor</span><br>	<span class="hljs-attribute">font-size</span>: <span class="hljs-variable">$font</span>-size<br><span class="hljs-selector-class">.header</span><br>	+bg(<span class="hljs-variable">$linkcolor</span>)<br><span class="hljs-selector-class">.content</span><br>	+bg(<span class="hljs-variable">$textcolor</span>)<br></code></pre></td></tr></table></figure>
+<p>SASS轉譯成CSS後，原始碼會變這樣</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.header</span> &#123;<br>	<span class="hljs-attribute">background</span>: <span class="hljs-number">#d6b161</span>;<br>	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">13px</span>;<br>&#125;<br><span class="hljs-selector-class">.content</span> &#123;<br>	<span class="hljs-attribute">background</span>: white;<br>	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">13px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>這樣我們可以直接在帶入變數，隨時更改顏色！超方便！</p>
+<blockquote>
+<ul>
+<li>情境三<br>設計師：「我們再來大改吧！包含RWD也要一起動哦」<br>前端工程師：「天啊！我今晚又無法準時下班啦」</li>
+</ul>
+</blockquote>
+<h3 id="關於Responsive-Web-Design"><a href="#關於Responsive-Web-Design" class="headerlink" title="關於Responsive Web Design"></a>關於Responsive Web Design</h3><p>RWD的@media 動則就是寫上千行，想辦法從min 768px裡找出要改的樣式，是件非常超級麻煩的事，一樣來用Mixin來大量減輕負擔吧</p>
+<ul>
+<li>傳統寫法</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">980px</span>) &#123;<br>	<span class="hljs-selector-class">.box1</span> &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">50px</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.box2</span> &#123;<br>	    <span class="hljs-attribute">margin</span>: <span class="hljs-number">30px</span>;<br>	&#125;<br>&#125;<br><span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">768px</span>) &#123;<br>	<span class="hljs-selector-class">.box1</span> &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.box2</span> &#123;<br>	    <span class="hljs-attribute">margin</span>: <span class="hljs-number">15px</span>;<br>	&#125;<br>&#125;<br><span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">996px</span>) <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">1200px</span>) &#123;<br>	<span class="hljs-selector-class">.box1</span> &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">100px</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.box2</span> &#123;<br>	    <span class="hljs-attribute">margin</span>: <span class="hljs-number">75px</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>是的，我以前就是這樣寫，當我要找桌機版的.box1去修改時</p>
+<ol>
+<li>要先找到<code>@media min-width:996px and max-width: 1200px</code></li>
+<li>再從裡面找到class box1</li>
+</ol>
+<p>你會找老半天，有可能還會看錯改到平板模式的樣式<br>整體非常沒有效率也很耗時，你還會很傷眼力。<br>有個辦法：把三個@media查詢樣式時整合寫在一起，既好寫又好找！</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-class">.box1</span> &#123;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">980px</span>) &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">50px</span><br>	&#125;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">768px</span>) &#123;<br>        <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;<br>    &#125;<br>   <span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">996px</span>) <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">1200px</span>) &#123;<br>        <span class="hljs-attribute">margin</span>: <span class="hljs-number">100px</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="運用Mixin和變數幫助你減輕眼力負擔"><a href="#運用Mixin和變數幫助你減輕眼力負擔" class="headerlink" title="運用Mixin和變數幫助你減輕眼力負擔"></a>運用Mixin和變數幫助你減輕眼力負擔</h4><ul>
+<li>先針對media設變數，設定各裝置的寬度width<br>  <code>$pc-width: 996px;</code><br>  <code>$pad-width: 768pz;</code></li>
+<li>新增一位叫「pc-width」的mixin，把@media公式代進去，會變更的值填入變數$pc-width</li>
+<li>在.box1裡用@include來呼叫Mixin：pc-width<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-variable">$pc-width</span>: <span class="hljs-number">996px</span>;<br><span class="hljs-variable">$pad-width</span>: <span class="hljs-number">768px</span>;<br><span class="hljs-variable">$pcs-width</span>: <span class="hljs-number">995px</span>;<br><br><span class="hljs-keyword">@mixin</span> pc-width()&#123;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-variable">$pc-width</span>) &#123;<br>		<span class="hljs-keyword">@content</span>;<br>	&#125;<br>&#125;<br><span class="hljs-keyword">@mixin</span> pad-width()&#123;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-variable">$pad-width</span>) <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-variable">$pcs-width</span>) &#123;<br>		<span class="hljs-keyword">@content</span>;<br>	&#125;<br>&#125;<br><span class="hljs-comment">// 代入後長這樣</span><br><span class="hljs-selector-class">.box1</span> &#123;<br>	<span class="hljs-keyword">@include</span> pc-width &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;<br>	&#125;<br>	<span class="hljs-keyword">@include</span> pad-width &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">15px</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+程式碼呢就會長這樣</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-selector-class">.box1</span> &#123;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">996px</span>) &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;<br>	&#125;<br>	<span class="hljs-keyword">@media</span> all <span class="hljs-keyword">and</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">768px</span>) <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">995px</span>) &#123;<br>		<span class="hljs-attribute">margin</span>: <span class="hljs-number">15px</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>是不是少掉很多的程式碼！！！</p>
+<h4 id="顏色想要深一點？懶得挑色碼？這也沒問題"><a href="#顏色想要深一點？懶得挑色碼？這也沒問題" class="headerlink" title="顏色想要深一點？懶得挑色碼？這也沒問題"></a>顏色想要深一點？懶得挑色碼？這也沒問題</h4><blockquote>
+<p>用darken(顏色, 深度)</p>
+</blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-variable">$link</span>: <span class="hljs-number">#d6b161</span>;<br><span class="hljs-selector-class">.box1</span> &#123;<br>	<span class="hljs-attribute">background</span>: darken(<span class="hljs-variable">$link</span>, <span class="hljs-number">15%</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.hellosanta.com.tw/%E7%B6%B2%E7%AB%99%E8%A8%AD%E8%A8%88/%E5%89%8D%E7%AB%AF/%E4%BD%BF%E7%94%A8sass-mixin%E4%BE%86%E9%96%8B%E7%99%BCresponsive%E7%B6%B2%E7%AB%99">使用sass mixin來開發responsive網站</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Front-end/">Front-end</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Sass/">Sass</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Mixin/">Mixin</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Git-%E7%AD%86%E8%A8%98%EF%BC%9A%E6%88%91%E6%83%B3%E5%9B%9E%E5%88%B0%E9%81%8E%E5%8E%BB%EF%BC%8C%E5%88%B0%E5%BA%95%E8%A6%81%E6%80%8E%E9%BA%BC%E5%9D%90%E6%99%82%E5%85%89%E6%A9%9F%EF%BC%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git 筆記：我想回到過去，到底要怎麼坐時光機？</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/VS-Code-%E4%BD%BF%E7%94%A8erb%E9%A1%9E%E5%9E%8B%E6%AA%94%E6%A1%88%E6%99%82%EF%BC%8CEmmet%E5%BF%AB%E6%8D%B7%E6%89%93html%E6%A8%99%E7%B1%A4%E8%B7%B3%E4%B8%8D%E5%87%BA%E4%BE%86/">
+                        <span class="hidden-mobile">VS Code 使用erb類型檔案時，Emmet快捷打html標籤跳不出來</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%83%E7%9A%84%EF%BC%9ASass-Mixin%E7%A5%9E%E5%99%A8/';
+          this.page.identifier = '/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%83%E7%9A%84%EF%BC%9ASass-Mixin%E7%A5%9E%E5%99%A8/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
