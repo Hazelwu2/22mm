@@ -47,6 +47,11 @@ Todo.findAll({
 Model.findAll({ attributes: ['firstName'] })
 // 查詢指令並加上 WHERE，等同於 SELECT * FROM user WHERE userId = 2;
 Model.findAll({ where: userId: 2 })
+
+// 用條件查詢一筆資料
+Model.findOne({ where: { email } })
+// 用 id 查詢一筆資料
+Model.findByPk()
 ```
 
 ## Reference
