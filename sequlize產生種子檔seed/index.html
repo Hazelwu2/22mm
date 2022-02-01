@@ -16,15 +16,15 @@
   <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
   <meta name="author" content="Hazel Wu">
   <meta name="keywords" content="">
-  <meta name="description" content="Seequelize 指令123456789101112131415161718192021# 安裝 sequelize-cli$ npm install --save-dev sequelize-cli# 建立 User Model，屬性 firstName, lastName, email$ npx sequelize-cli model:generate --name User --attr">
+  <meta name="description" content="初始化使用 Sequelize CLI 時，會用 npx sequelize init 完成初始化12$ npm install --save-dev sequelize-cli$ npx sequelize init為什麼會使用 npx 來呼叫，而非 npm？如果我們在專案內呼叫 sequelize，會從專案內的 node_modules 裡的 .bin 資料夾找 sequelie 相關執行檔，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sequlize 筆記">
 <meta property="og:url" content="http://wualnz.com/sequlize%E7%94%A2%E7%94%9F%E7%A8%AE%E5%AD%90%E6%AA%94seed/index.html">
 <meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="Seequelize 指令123456789101112131415161718192021# 安裝 sequelize-cli$ npm install --save-dev sequelize-cli# 建立 User Model，屬性 firstName, lastName, email$ npx sequelize-cli model:generate --name User --attr">
+<meta property="og:description" content="初始化使用 Sequelize CLI 時，會用 npx sequelize init 完成初始化12$ npm install --save-dev sequelize-cli$ npx sequelize init為什麼會使用 npx 來呼叫，而非 npm？如果我們在專案內呼叫 sequelize，會從專案內的 node_modules 裡的 .bin 資料夾找 sequelie 相關執行檔，">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-31T10:15:38.000Z">
-<meta property="article:modified_time" content="2022-01-31T16:30:49.820Z">
+<meta property="article:modified_time" content="2022-02-01T13:57:23.617Z">
 <meta property="article:author" content="Hazel Wu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -207,7 +207,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.5k 字
     </span>
   
 
@@ -216,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分鐘
+      5 分鐘
     </span>
   
 
@@ -248,10 +248,13 @@
             <h1 style="display: none">sequlize 筆記</h1>
             
             <div class="markdown-body">
-              <h2 id="Seequelize-指令"><a href="#Seequelize-指令" class="headerlink" title="Seequelize 指令"></a>Seequelize 指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安裝 sequelize-cli</span><br>$ npm install --save-dev sequelize-cli<br><br><span class="hljs-comment"># 建立 User Model，屬性 firstName, lastName, email</span><br>$ npx sequelize-cli model:generate --name User --attributes firstName:string, lastName:string, email:string<br><br><span class="hljs-comment"># 跑 Migration</span><br>$ npx sequelize-cli db:migrate<br><span class="hljs-comment"># Migration 倒退</span><br>$ npx sequelize-cli db:migrate:undo<br><span class="hljs-comment"># Migration 退回指定版本</span><br>$ npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js<br><br><span class="hljs-comment"># 產生 Seed</span><br>$ npx sequelize-cli seed:generate --name default-data<br><span class="hljs-comment"># 執行所有 Seed 檔</span><br>$ npx sequelize db:seed:all<br><span class="hljs-comment"># 加上 Undo 執行 Down 動作，復原</span><br>$ npx sequelize db:seed:undo:all<br><span class="hljs-comment"># Undo 復原取消產生某一個 Seed</span><br>$ npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data<br></code></pre></td></tr></table></figure>
+              <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>使用 Sequelize CLI 時，會用 npx sequelize init 完成初始化<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>npm install --save-dev sequelize-cli<br><span class="hljs-variable">$ </span>npx sequelize init<br></code></pre></td></tr></table></figure><br>為什麼會使用 npx 來呼叫，而非 npm？<br>如果我們在專案內呼叫 sequelize，會從專案內的 <code>node_modules 裡的 .bin</code> 資料夾找 sequelie 相關執行檔，也就是 <code>node_modules/.bin/sequelize</code> </p>
+<p>安裝 npm 5.2版開始，也會附帶安裝 npx 工具包，npx的功用是「自動定位套件真正的安裝路徑」。<br>每個人電腦環境設定不同，有些人設定套件執行檔並非安裝在 <code>node_modules/.bin</code>上，在執行 sequelize 前必須先搞懂套件安裝的路徑在哪裡，才能去呼叫，因此才有了 <code>npx</code> 的工具存在。<br>以下介紹的指令皆會由 npx 來呼叫</p>
+<h2 id="Seequelize-指令"><a href="#Seequelize-指令" class="headerlink" title="Seequelize 指令"></a>Seequelize 指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安裝 sequelize-cli</span><br>$ npm install --save-dev sequelize-cli<br><br><span class="hljs-comment"># 建立 User Model，屬性 firstName, lastName, email</span><br>$ npx sequelize-cli model:generate --name User --attributes firstName:string, lastName:string, email:string<br><br><span class="hljs-comment"># 跑 Migration</span><br>$ npx sequelize-cli db:migrate<br><span class="hljs-comment"># Migration 倒退</span><br>$ npx sequelize-cli db:migrate:undo<br><span class="hljs-comment"># Migration 退回指定版本</span><br>$ npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js<br><br><span class="hljs-comment"># 產生 Seed</span><br>$ npx sequelize-cli seed:generate --name default-data<br><span class="hljs-comment"># 執行所有 Seed 檔</span><br>$ npx sequelize db:seed:all<br><span class="hljs-comment"># 加上 Undo 執行 Down 動作，復原</span><br>$ npx sequelize db:seed:undo:all<br><span class="hljs-comment"># Undo 復原取消產生某一個 Seed</span><br>$ npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data<br></code></pre></td></tr></table></figure>
 <h2 id="Model-Querying-查詢"><a href="#Model-Querying-查詢" class="headerlink" title="Model Querying 查詢"></a>Model Querying 查詢</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 建立一筆資料</span><br><span class="hljs-keyword">const</span> hazel = <span class="hljs-keyword">await</span> User.create(&#123; <span class="hljs-attr">firstName</span>: <span class="hljs-string">&#x27;Hazel&#x27;</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">&#x27;Wu&#x27;</span> &#125;)<br><br><span class="hljs-comment">// 查詢多筆資料，raw: true, nest: true，將多筆資料轉換物件</span><br>Todo.findAll(&#123;<br>  <span class="hljs-attr">raw</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">nest</span>: <span class="hljs-literal">true</span><br>&#125;)<br><br><span class="hljs-comment">// 查詢特定屬性，等同於 SELECT firstName from ...</span><br>Model.findAll(&#123; <span class="hljs-attr">attributes</span>: [<span class="hljs-string">&#x27;firstName&#x27;</span>] &#125;)<br><span class="hljs-comment">// 查詢指令並加上 WHERE，等同於 SELECT * FROM user WHERE userId = 2;</span><br>Model.findAll(&#123; <span class="hljs-attr">where</span>: userId: <span class="hljs-number">2</span> &#125;)<br><br><span class="hljs-comment">// 用條件查詢一筆資料</span><br>Model.findOne(&#123; <span class="hljs-attr">where</span>: &#123; email &#125; &#125;)<br><span class="hljs-comment">// 用 id 查詢一筆資料</span><br>Model.findByPk()<br></code></pre></td></tr></table></figure>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://sequelize.org/master/manual/model-querying-finders.html">官方文件 Model Querying - Finders</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/02/npx.html">阮一峰-npx 使用教程</a></li>
 </ul>
 
             </div>
@@ -279,6 +282,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/nodejs-express-session%E7%99%BB%E5%85%A5%E6%A9%9F%E5%88%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">nodejs-express-session登入機制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

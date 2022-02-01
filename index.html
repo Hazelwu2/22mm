@@ -204,6 +204,54 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/nodejs-express-session%E7%99%BB%E5%85%A5%E6%A9%9F%E5%88%B6/" target="_self">
+          nodejs-express-session登入機制
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/nodejs-express-session%E7%99%BB%E5%85%A5%E6%A9%9F%E5%88%B6/" target="_self">
+          
+          
+            
+          
+          安裝通常 exress 實作登入機制時都會使用知名的 express-session，按照下列指令來安裝套件1npm i express-session --save
+設定 express-session在 express 專案的 app.js 引入 express-session
+1const session = require(&#x27;express-session&#x27;)
+並且用 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-01 20:46" pubdate>
+              2022-02-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/express/">express</a>
+            
+              <a href="/categories/express/expresss-session/">expresss-session</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/sequlize%E7%94%A2%E7%94%9F%E7%A8%AE%E5%AD%90%E6%AA%94seed/" target="_self">
           sequlize 筆記
         </a>
@@ -215,7 +263,7 @@
           
             
           
-          Seequelize 指令123456789101112131415161718192021# 安裝 sequelize-cli$ npm install --save-dev sequelize-cli# 建立 User Model，屬性 firstName, lastName, email$ npx sequelize-cli model:generate --name User --attr
+          初始化使用 Sequelize CLI 時，會用 npx sequelize init 完成初始化12$ npm install --save-dev sequelize-cli$ npx sequelize init為什麼會使用 npx 來呼叫，而非 npm？如果我們在專案內呼叫 sequelize，會從專案內的 node_modules 裡的 .bin 資料夾找 sequelie 相關執行檔，
         </a>
       </p>
 
@@ -295,6 +343,10 @@ MySQL 建立 Todo 資料庫123drop database if exists
             <i class="iconfont icon-category"></i>
             
               <a href="/categories/nodejs/">nodejs</a>
+            
+              <a href="/categories/nodejs/sequelie/">sequelie</a>
+            
+              <a href="/categories/nodejs/sequelie/mysql/">mysql</a>
             
           </div>
         
@@ -595,52 +647,6 @@ Vue 自行定義的屬性
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/vue/">vue</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Postman-%E8%A8%AD%E5%AE%9A-JWT-Token-%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8/" target="_self">
-          [Postman] 設定 JWT Token 環境變數
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Postman-%E8%A8%AD%E5%AE%9A-JWT-Token-%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8/" target="_self">
-          
-          
-            
-          
-          Postman Test 設定Login API 選擇 TEST 設定
-1pm.environment.set(&#x27;accessToken&#x27;, pm.response.json().token)
-根據你的 API 吐回的 Token 設定到 Postman 環境變數裡設定好之後，每次打登入，API吐回的 token 會寫進 Postman 環境變數 accessToken 裡。
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-20 00:33" pubdate>
-              2021-10-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/postman/">postman</a>
             
           </div>
         
