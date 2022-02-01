@@ -4,6 +4,8 @@ date: 2022-01-31 12:57:23
 tags:
 category:
 - nodejs
+- sequelie
+- mysql
 ---
 建立資料庫連線
 

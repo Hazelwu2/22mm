@@ -5,6 +5,18 @@ tags:
 category:
 - sequlize
 ---
+## 初始化
+使用 Sequelize CLI 時，會用 npx sequelize init 完成初始化
+```
+$ npm install --save-dev sequelize-cli
+$ npx sequelize init
+```
+為什麼會使用 npx 來呼叫，而非 npm？
+如果我們在專案內呼叫 sequelize，會從專案內的 `node_modules 裡的 .bin` 資料夾找 sequelie 相關執行檔，也就是 `node_modules/.bin/sequelize` 
+
+安裝 npm 5.2版開始，也會附帶安裝 npx 工具包，npx的功用是「自動定位套件真正的安裝路徑」。
+每個人電腦環境設定不同，有些人設定套件執行檔並非安裝在 `node_modules/.bin`上，在執行 sequelize 前必須先搞懂套件安裝的路徑在哪裡，才能去呼叫，因此才有了 `npx` 的工具存在。
+以下介紹的指令皆會由 npx 來呼叫
 
 ## Seequelize 指令
 
@@ -56,3 +68,4 @@ Model.findByPk()
 
 ## Reference
 - [官方文件 Model Querying - Finders](https://sequelize.org/master/manual/model-querying-finders.html)
+- [阮一峰-npx 使用教程](http://www.ruanyifeng.com/blog/2019/02/npx.html)
