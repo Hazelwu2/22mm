@@ -138,3 +138,4 @@ Hazel 專案設定 app.js 之外，另外建立了 server.js，主要是用來�
 ### Reference
 - [How to add Swagger UI to an existing Node.js and Express.js project](https://levelup.gitconnected.com/how-to-add-swagger-ui-to-existing-node-js-and-express-js-project-2c8bad9364ce)
 - [註解寫在Code內生成swagger UI](https://easonwang.gitbook.io/web_advance/api-ce-shi/swagger/zhu-jie-xie-zai-code-nei-sheng-cheng-swagger-uii)
+- [使用 Swagger 自動生成 API 文件](https://israynotarray.com/nodejs/20201229/1974873838/)
