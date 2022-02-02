@@ -131,6 +131,22 @@ paths:
                 items: 
                   type: string
 ```
+### 客製化 CSS
+Swagger UI 也有提供客製化功能
+``` js
+const cssOptions = {
+  customCss: `
+  .topbar-wrapper img {content:url(https://img.icons8.com/doodle/2x/-freelancefirm.png); width:50px; height:auto;}
+  .swagger-ui table { margin-left: 20px;
+    margin-top: 30px; }
+  .swagger-ui .model { font-size: 14px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; }
+  .swagger-ui .topbar { background-color: #000000; border-bottom: 20px solid #5dc6d1; }`,
+  customSiteTitle: "API文件 | Hazel"
+};
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, cssOptions));
+```
 
 ### 踩坑紀錄
 Hazel 專案設定 app.js 之外，另外建立了 server.js，主要是用來連接 mongoose 資料庫及啟動伺服器 `app.listen`，我用上述方法寫在 server.js 沒有成功，到 localhost/apidoc會顯示找不到路由，但將 code 引入到 app.js 就成功了...原因不得而知
