@@ -1,5 +1,5 @@
 ---
-title: Vue使用Lodash Throttle
+title: Vue使用 Lodash Throttle，動態設定秒數
 date: 2022-02-07 10:37:40
 tags:
 category:
