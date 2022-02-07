@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="前言此篇介紹怎麼串接 Line Notify，使用 Vue 來示範，也會寫下我踩過的坑紀錄下來，因為那些坑搞了我快兩個小時…串接 Line Notify 總共會打三隻 API，接下來的 API 路徑會省略 https:&#x2F;&#x2F;notify-api.line.me，直接說是 oauth&#x2F;authorize 或 &#x2F;oauth&#x2F;token，以方便閱讀。  GET https:&#x2F;&#x2F;notify-bot.lin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue串接LineNotify">
+<meta property="og:url" content="http://wualnz.com/LineNotify%E4%B8%B2%E6%8E%A5/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="前言此篇介紹怎麼串接 Line Notify，使用 Vue 來示範，也會寫下我踩過的坑紀錄下來，因為那些坑搞了我快兩個小時…串接 Line Notify 總共會打三隻 API，接下來的 API 路徑會省略 https:&#x2F;&#x2F;notify-api.line.me，直接說是 oauth&#x2F;authorize 或 &#x2F;oauth&#x2F;token，以方便閱讀。  GET https:&#x2F;&#x2F;notify-bot.lin">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-02-05T01:22:39.000Z">
+<meta property="article:modified_time" content="2022-02-07T03:20:17.271Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Vue串接LineNotify - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue串接LineNotify">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-05 09:22" pubdate>
+        2022年2月5日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue串接LineNotify</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>此篇介紹怎麼串接 Line Notify，使用 Vue 來示範，也會寫下我踩過的坑紀錄下來，因為那些坑搞了我快兩個小時…<br>串接 Line Notify 總共會打三隻 API，接下來的 API 路徑會省略 <code>https://notify-api.line.me</code>，直接說是 <code>oauth/authorize</code> 或 <code>/oauth/token</code>，以方便閱讀。</p>
+<ol>
+<li>GET <code>https://notify-bot.line.me/oauth/authorize</code></li>
+<li>POST <code>https://notify-bot.line.me/oauth/token</code></li>
+<li>POST <code>https://notify-api.line.me/api/notify</code></li>
+</ol>
+<h2 id="步驟一：請求-authorize"><a href="#步驟一：請求-authorize" class="headerlink" title="步驟一：請求 authorize"></a>步驟一：請求 authorize</h2><p>第一步驟 GET 請求 <code>/oauth/authorize</code>，請求參數 client_id 可從 Line Notify 後台取得<br>較為敏感的參數可以設定在 .env，透過 <code>process.env</code> 來取得<br>由於是在 vue 設定，環境變數開頭必須以 <code>VUE_APP</code> 來命名，否則會抓取不到</p>
+<p>較為特別的是直接設定 <code>window.open</code> 來開啟連結，需另外設定 redirect_uri 的網址<br>當使用者成功登入後，Line 會將使用者跳轉回來的目標網址，順利請求成功會回傳 code、state</p>
+<p>踩到的坑：redirect_uri 不可設定 line、notify 等相關單字，會導致導向回來變成 404 Not Found的畫面<br>我的路由都設定為 <code>localhost:9527/line</code> 或 <code>localhost:9527/notify</code>，由於這個關係（腦袋單字不多ORZ）我卡住了兩個小時……<br>最後導向回來的 redirect_uri 設定為 <code>localhost:9527/auth-line</code>，才成功，希望看了這篇文章的讀者可以避免這個坑</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;template&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">v-btn</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;!isLogin&quot;</span> <span class="hljs-attr">elevation</span>=<span class="hljs-string">&quot;2&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;loginEvent()&quot;</span>&gt;</span>Line登入<span class="hljs-tag">&lt;/<span class="hljs-name">v-btn</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-comment">// 請求登入授權</span><br>    <span class="hljs-function"><span class="hljs-title">login</span>(<span class="hljs-params"></span>)</span> &#123;<br>      <span class="hljs-comment">// 必填</span><br>      <span class="hljs-keyword">let</span> loginUrl = <span class="hljs-string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><br>      loginUrl += <span class="hljs-string">&#x27;response_type=code&#x27;</span><br>      loginUrl += <span class="hljs-string">`&amp;client_id=<span class="hljs-subst">$&#123;process.env.VUE_APP_LINE_CHANNEL_ID&#125;</span>`</span><br>      loginUrl += <span class="hljs-string">`&amp;redirect_uri=<span class="hljs-subst">$&#123;process.env.VUE_APP_LINE_REDIRECT_URL&#125;</span>`</span> <span class="hljs-comment">// 要接收回傳訊息的網址</span><br>      loginUrl += <span class="hljs-string">`&amp;state=<span class="hljs-subst">$&#123;<span class="hljs-built_in">this</span>.stateCode&#125;</span>`</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;scope=openid%20profile&#x27;</span><br>      <span class="hljs-comment">// 選填</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;nonce=helloWorld&#x27;</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;prompt=consent&#x27;</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;max_age=3600&#x27;</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;ui_locales=zh-TW&#x27;</span><br>      loginUrl += <span class="hljs-string">&#x27;&amp;bot_prompt=normal&#x27;</span><br><br>      <span class="hljs-built_in">window</span>.open(loginUrl, <span class="hljs-string">&#x27;_self&#x27;</span>) <span class="hljs-comment">// 轉跳到該網址</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="步驟二：請求-token"><a href="#步驟二：請求-token" class="headerlink" title="步驟二：請求 token"></a>步驟二：請求 token</h2><p>在上一個步驟時請求成功會順利拿到 <code>code</code>，需要將此參數也放入進去<br>第二步驟 POST 請求 <code>/oauth/token</code>，比較需要注意的是 content-type 需要設定為 <code>application/x-www-form-urlencoded</code></p>
+<p>我使用的是 axios，header <code>application/x-www-form-urlencoded</code> 格式需要另外處理<br>axios 數據都是 json 格式，要使用 <code>application/x-www-form-urlencoded</code> 格式要安裝 Qs 套件，用 <code>Qs.stringify()</code> 方法來轉換參數</p>
+<ol>
+<li><p>安裝 Qs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i qs --save<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>引用 Qs、使用方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Qs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;qs&#x27;</span><br><span class="hljs-comment">// 示範</span><br><span class="hljs-keyword">const</span> params = Qs.stringify(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;hazel&#x27;</span><br>&#125;)<br><br><span class="hljs-built_in">console</span>.log(params)<br></code></pre></td></tr></table></figure>
+<p>以上是 Qs 使用範例</p>
+</li>
+</ol>
+<p>繼續回到專案範例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> params = Qs.stringify(&#123;<br>  <span class="hljs-attr">grant_type</span>: <span class="hljs-string">&#x27;authorization_code&#x27;</span>,<br>  <span class="hljs-attr">code</span>: <span class="hljs-built_in">this</span>.query.code,<br>  <span class="hljs-attr">redirect_uri</span>: process.env.VUE_APP_LINE_REDIRECT_URL,<br>  <span class="hljs-attr">client_id</span>: process.env.VUE_APP_LINE_CHANNEL_ID,<br>  <span class="hljs-attr">client_secret</span>: process.env.VUE_APP_LINE_CHANNEL_SECRET,<br>&#125;)<br><br></code></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://jeremysu0131.github.io/axios-%E8%99%95%E7%90%86-x-www-form-urlencoded-%E6%A0%BC%E5%BC%8F%E5%95%8F%E9%A1%8C/">[axios] 處理 x-www-form-urlencoded 格式問題</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/vue/">vue</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Vue%E4%BD%BF%E7%94%A8Lodash-Throttle/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vue使用Lodash Throttle</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%9E%B6%E8%A8%ADSwagger/">
+                        <span class="hidden-mobile">架設Swagger在 nodejs express</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/LineNotify%E4%B8%B2%E6%8E%A5/';
+          this.page.identifier = '/LineNotify%E4%B8%B2%E6%8E%A5/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
