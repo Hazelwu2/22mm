@@ -44,7 +44,7 @@ export default {
 
 ## 解決方案
 最後嘗試了很久，要改為在生命週期宣告一個變數並用 function 儲存進去，這樣的寫法才能帶入動態秒數
-從 API 取得的秒數，我儲存在 vuex getters 裡，`getters.settings.click_interval
+從 API 取得的秒數，我儲存在 vuex getters 裡，`getters.settings.click_interval`
 
 - methods 宣告 debouncer function，並什麼都不寫
 - 宣告原本欲要請求 API 的方法 `this.clickToTransferIn()`，動態帶入 API取得的 click_interval，並在 function 裡執行 clickToTransferIn
