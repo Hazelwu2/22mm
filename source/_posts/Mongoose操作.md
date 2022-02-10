@@ -1,5 +1,5 @@
 ---
-title: [Mongo] Mongoose操作
+title: Mongoose操作
 date: 2022-02-05 18:37:20
 tags:
 category:
@@ -185,3 +185,24 @@ app.post('/posts/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 ```
+
+
+## 更新某一筆資料的特定欄位 Array $push
+MongoDB 有 `$push` 方法，語法如下
+``` sql
+{ $push:{ <field1>:<value1>,<field2>:<value2> } }
+```
+
+Express 操作範例
+``` js
+person.friends.push(friend);
+person.save(done);
+
+Model.update(
+    { _id: person._id }, 
+    { $push: { friends: friend } }
+);
+```
+
+文件
+- [官方文件 MongoDB $push](https://docs.mongodb.com/manual/reference/operator/update/push/#up._S_push)
