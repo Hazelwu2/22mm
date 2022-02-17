@@ -24,7 +24,7 @@
 <meta property="og:description" content="findByIdAndUpdateMongoose 的 findByIdAndUpdate，會呼叫 MongoDB findAndModify 方法  new: 設定 true 表示會返回修改後的 item ，而非原始 item runValidators: 若設定 true 將會觸發 Model Schema 重新驗證 upsert：若設定 true，如果 object 不存在會新建，預設值是">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-02-05T10:37:20.000Z">
-<meta property="article:modified_time" content="2022-02-10T15:06:48.642Z">
+<meta property="article:modified_time" content="2022-02-16T12:25:20.135Z">
 <meta property="article:author" content="Hazel Wu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -207,7 +207,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      4.1k 字
     </span>
   
 
@@ -216,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分鐘
+      13 分鐘
     </span>
   
 
@@ -284,6 +284,15 @@
 <li>移除資料，post.remove()</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js">app.post(<span class="hljs-string">&#x27;/posts/:id/delete&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> id = req.params.id<br>  <span class="hljs-keyword">return</span> Post.findById(id)<br>    .then(<span class="hljs-function"><span class="hljs-params">post</span> =&gt;</span> post.remove())<br>    .then(<span class="hljs-function">() =&gt;</span> &#123;<br>      res.status(<span class="hljs-number">200</span>).json(&#123;<br>        <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;success&#x27;</span>,<br>        <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;刪除成功&#x27;</span>,<br>        <span class="hljs-attr">data</span>: post<br>      &#125;)<br>    &#125;)<br>    .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(error))<br>&#125;)<br></code></pre></td></tr></table></figure>
+<h2 id="更新某一筆資料的特定欄位-Array-push"><a href="#更新某一筆資料的特定欄位-Array-push" class="headerlink" title="更新某一筆資料的特定欄位 Array $push"></a>更新某一筆資料的特定欄位 Array $push</h2><p>MongoDB 有 <code>$push</code> 方法，語法如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">&#123; $push:&#123; <span class="hljs-operator">&lt;</span>field1<span class="hljs-operator">&gt;</span>:<span class="hljs-operator">&lt;</span>value1<span class="hljs-operator">&gt;</span>,<span class="hljs-operator">&lt;</span>field2<span class="hljs-operator">&gt;</span>:<span class="hljs-operator">&lt;</span>value2<span class="hljs-operator">&gt;</span> &#125; &#125;<br></code></pre></td></tr></table></figure></p>
+<p>Express 操作範例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">person.friends.push(friend);<br>person.save(done);<br><br>Model.update(<br>    &#123; <span class="hljs-attr">_id</span>: person._id &#125;, <br>    &#123; <span class="hljs-attr">$push</span>: &#123; <span class="hljs-attr">friends</span>: friend &#125; &#125;<br>);<br></code></pre></td></tr></table></figure></p>
+<p>文件</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/operator/update/push/#up._S_push">官方文件 MongoDB $push</a></li>
+</ul>
+<h2 id="查詢一筆資料顯示特定欄位"><a href="#查詢一筆資料顯示特定欄位" class="headerlink" title="查詢一筆資料顯示特定欄位"></a>查詢一筆資料顯示特定欄位</h2><p>找 Model: UserTrackNftList，抓出 apple 資料，並只顯示 name, last_data 欄位</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> items = <span class="hljs-keyword">await</span> UserTrackNftList.find(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;apple&#x27;</span> &#125;, <span class="hljs-string">&#x27;name last_data&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="資料庫找出所有資料，並-run-forEach"><a href="#資料庫找出所有資料，並-run-forEach" class="headerlink" title="資料庫找出所有資料，並 run forEach"></a>資料庫找出所有資料，並 run forEach</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">await</span> Post.find().exec(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, result</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err)<br><br>  result.forEach(<span class="hljs-function"><span class="hljs-params">post</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(post)<br>  &#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
