@@ -206,3 +206,21 @@ Model.update(
 
 文件
 - [官方文件 MongoDB $push](https://docs.mongodb.com/manual/reference/operator/update/push/#up._S_push)
+
+## 查詢一筆資料顯示特定欄位
+找 Model: UserTrackNftList，抓出 apple 資料，並只顯示 name, last_data 欄位
+
+``` js
+const items = await UserTrackNftList.find({ name: 'apple' }, 'name last_data')
+```
+
+## 資料庫找出所有資料，並 run forEach
+``` js
+await Post.find().exec(function (err, result) {
+  if (err) console.log(err)
+
+  result.forEach(post => {
+    console.log(post)
+  })
+})
+```
