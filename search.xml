@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>vue-console</title>
+      <link href="//vue-console/"/>
+      <url>//vue-console/</url>
+      
+        <content type="html"><![CDATA[<p>獨立 console 檔案，做成 Plugin 來引用。在 Vue 專案內只要呼叫 this.$log, this.$error, this.$warn 即可 debug，也不用擔心忘記移除 log 上到生產環境</p><p>.env.stage, .env.master, .env.dev 個別設定變數 VUE_APP_OPEN_CONSOLE，console 印出根據 VUE_APP_OPEN_CONSOLE 環境變數設置  true 或 false，要注意的是 process.env.VUE_APP_OPEN_CONSOLE 取得的是字串 ‘true’ 而非 Boolean</p><p>console.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> Console = &#123;<br>  <span class="hljs-attr">$log</span>: <span class="hljs-function">(<span class="hljs-params">...params</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(...params),<br>  <span class="hljs-attr">$error</span>: <span class="hljs-function">(<span class="hljs-params">...params</span>) =&gt;</span> <span class="hljs-built_in">console</span>.error(...params),<br>  <span class="hljs-attr">$warn</span>: <span class="hljs-function">(<span class="hljs-params">...params</span>) =&gt;</span> <span class="hljs-built_in">console</span>.warn(...params)<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-function"><span class="hljs-title">install</span>(<span class="hljs-params">Vue</span>)</span> &#123;<br>    <span class="hljs-built_in">Object</span>.keys(Console).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> &#123;<br>      Vue.prototype[key] = <span class="hljs-function">(<span class="hljs-params">...params</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (process.env.VUE_APP_OPEN_CONSOLE !== <span class="hljs-string">&#x27;true&#x27;</span>) &#123;<br>          <span class="hljs-keyword">return</span> Console[key](...params)<br>        &#125;<br>      &#125;<br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p><p>接著回到 main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Console <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/console&#x27;</span><br>Vue.use(Console)<br></code></pre></td></tr></table></figure></p><p>未來在元件上 debug，可以像下面這樣寫<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-function"><span class="hljs-title">created</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.$log(<span class="hljs-string">&#x27;console.log&#x27;</span>)<br>    <span class="hljs-built_in">this</span>.$warn(<span class="hljs-string">&#x27;console.warn&#x27;</span>)<br>    <span class="hljs-built_in">this</span>.$error(<span class="hljs-string">&#x27;consoe.error)</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">&#125;</span><br></code></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>nodejs-排程工具node-schedule</title>
       <link href="//nodejs-%E6%8E%92%E7%A8%8B%E5%B7%A5%E5%85%B7node-schedule/"/>
       <url>//nodejs-%E6%8E%92%E7%A8%8B%E5%B7%A5%E5%85%B7node-schedule/</url>
