@@ -265,3 +265,7 @@ Console 環境
 
 ## 結語
 還蠻有趣的，透過 Geth 建立私有鏈，也使用了許多 Geth 的基礎用法，做了建立帳戶、查詢餘額、進行交易前先解鎖帳戶、挖礦、停止挖礦
+
+## 參考連結
+- [Ethereum 開發筆記 2–2：Geth 基礎用法及架設 Muti-Nodes 私有鏈](https://blog.fukuball.com/ethereum-%E9%96%8B%E7%99%BC%E7%AD%86%E8%A8%98-22geth-%E5%9F%BA%E7%A4%8E%E7%94%A8%E6%B3%95%E5%8F%8A%E6%9E%B6%E8%A8%AD-muti-nodes-%E7%A7%81%E6%9C%89%E9%8F%88/)
+- [KryptoCamp](https://chihaolu.gitbook.io/kryptocamp-office-hour/season-1-2022-1/oh-week1-overview)
