@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-touch-icon.png">
+  <link rel="icon" href="/images/icon/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
+  <meta name="author" content="Hazel Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="Mongodb 屬於 NoSQL，哪些適合用 NoSQL 存取各種不  系統儀表板、聊天室、即時股票資訊、遊戲的個人狀態列  Mongo 侷限  Document 不可超過 16M  安裝 Mongo、GUI Mongo 安裝 GUI Compass 安裝  開啟 mongo 資料庫 新增存放 Mongo DB 的 data 資料夾、log 檔案 mkdir data touch data&#x2F;mon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB">
+<meta property="og:url" content="http://wualnz.com/MongoDB/index.html">
+<meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
+<meta property="og:description" content="Mongodb 屬於 NoSQL，哪些適合用 NoSQL 存取各種不  系統儀表板、聊天室、即時股票資訊、遊戲的個人狀態列  Mongo 侷限  Document 不可超過 16M  安裝 Mongo、GUI Mongo 安裝 GUI Compass 安裝  開啟 mongo 資料庫 新增存放 Mongo DB 的 data 資料夾、log 檔案 mkdir data touch data&#x2F;mon">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-04-08T12:32:32.000Z">
+<meta property="article:modified_time" content="2022-04-14T14:36:43.555Z">
+<meta property="article:author" content="Hazel Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>MongoDB - Hazel Wu | 22&#39;mm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wualnz.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-109679233-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hazel Wu | 22mm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                封存
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                交換連結
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/bg/bg.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MongoDB">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-08 20:32" pubdate>
+        2022年4月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MongoDB</h1>
+            
+            <div class="markdown-body">
+              <p>Mongodb 屬於 NoSQL，哪些適合用 NoSQL 存取<br>各種不</p>
+<ul>
+<li>系統儀表板、聊天室、即時股票資訊、遊戲的個人狀態列</li>
+</ul>
+<p>Mongo 侷限</p>
+<ul>
+<li>Document 不可超過 16M</li>
+</ul>
+<h2 id="安裝-Mongo、GUI"><a href="#安裝-Mongo、GUI" class="headerlink" title="安裝 Mongo、GUI"></a>安裝 Mongo、GUI</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community">Mongo 安裝</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/compass">GUI Compass 安裝</a></li>
+</ul>
+<h2 id="開啟-mongo-資料庫"><a href="#開啟-mongo-資料庫" class="headerlink" title="開啟 mongo 資料庫"></a>開啟 mongo 資料庫</h2><ul>
+<li>新增存放 Mongo DB 的 data 資料夾、log 檔案<ul>
+<li>mkdir data</li>
+<li>touch data/mongodb.log </li>
+</ul>
+</li>
+<li>執行指令<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">$ mongod --dbpath [data資料夾] --logpath [log資料夾]<br>$ mongod --dbpath <span class="hljs-regexp">/Users/</span>hazel<span class="hljs-regexp">/vhost/</span>side-<span class="hljs-keyword">project</span><span class="hljs-regexp">/mongodb/</span>data --logpath <span class="hljs-regexp">/Users/</span>hazel<span class="hljs-regexp">/vhost/</span>side-<span class="hljs-keyword">project</span><span class="hljs-regexp">/mongodb/</span>data/mongo.log<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>資料庫顯示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs bash">mongo <span class="hljs-comment"># 進入 Mongo 指令</span><br>show dbs <span class="hljs-comment"># 顯示資料庫 </span><br><span class="hljs-comment"># 切換資料庫</span><br>use [資料庫名稱]<br>use hotels <span class="hljs-comment"># 切換資料庫 hotels</span><br>show collections <span class="hljs-comment"># 顯示 DB 內所有的 Collections</span><br><br><span class="hljs-comment"># 新增 Collections rooms</span><br>db.createCollection(collection名稱);<br>db.createCollection(<span class="hljs-string">&#x27;rooms&#x27;</span>);<br><br><span class="hljs-comment"># 新增單筆資料 insertOne</span><br>db.rooms.insertOne(<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;單人房&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: 1200, <span class="hljs-string">&quot;rating&quot;</span>: 4.5 &#125;<br>)<br><span class="hljs-comment"># 新增多筆資料 insertMany</span><br>db.rooms.insertMany(<br>  [<br>    &#123;<br>      <span class="hljs-string">&quot;rating&quot;</span>: 4.2,<br>      <span class="hljs-string">&quot;price&quot;</span>: 4500,<br>      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;豪華單人房&quot;</span><br>    &#125;,<br>    &#123;<br>      <span class="hljs-string">&quot;rating&quot;</span>: 4.5,<br>      <span class="hljs-string">&quot;price&quot;</span>: 3000,<br>      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;雙人房&quot;</span><br>    &#125;<br>  ]<br>)<br><span class="hljs-comment"># updateOne 修改部分欄位，第一個參數 filter，第二個參數：變更值</span><br>db.rooms.updateOne(<br>  &#123; _id: ObjectId(6250303fc1795946f9371a7f)&#125;,<br>  &#123; <span class="hljs-variable">$set</span>: &#123; name: <span class="hljs-string">&quot;修改成超級豪滑雙人房&quot;</span> &#125; &#125;<br>)<br><span class="hljs-comment"># updateMany</span><br>db.rooms.updateMany(<br>  &#123; <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;group&quot;</span> &#125;<br>  &#123; <span class="hljs-variable">$set</span>: &#123; content: <span class="hljs-string">&quot;測試&quot;</span> &#125;&#125;<br>)<br><span class="hljs-comment"># replaceOne 覆蓋全部欄位(替換整個Document)，updateOne: 允許更新欄位</span><br><span class="hljs-comment"># 替換整個文檔：replaceOne、replaceMany</span><br>db.rooms.replaceOne(<br>  &#123; <span class="hljs-string">&quot;_id&quot;</span>:ObjectId(<span class="hljs-string">&quot;621edf99a20aa7506a116f9a&quot;</span>) &#125;,<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Hazel&quot;</span> &#125;<br>)<br><br><span class="hljs-comment"># 刪除 Collection 所有資料</span><br>db.rooms.deleteMany(&#123;&#125;)<br><span class="hljs-comment"># 刪除多個文件 deleteMany (filter)</span><br>db.rooms.deleteMany(<br>  &#123; rating: &#123; <span class="hljs-variable">$gte</span>: 4.3 &#125; <br>&#125;)<br></code></pre></td></tr></table></figure></p>
+<h2 id="find-用法"><a href="#find-用法" class="headerlink" title="find 用法"></a>find 用法</h2><ul>
+<li>$eq: 等於</li>
+<li>$ne: 不等於</li>
+<li>$gt: 大於</li>
+<li>$lt: 小於</li>
+<li>$gte: 大於等於</li>
+<li>$lte: 小於等於</li>
+<li>$in: 存在某個值</li>
+<li>$nin: 不存在某個值</li>
+</ul>
+<h3 id="邏輯運算子-or-、-and"><a href="#邏輯運算子-or-、-and" class="headerlink" title="邏輯運算子 or 、 and"></a>邏輯運算子 or 、 and</h3><ul>
+<li>$or: find({ $or: [{}, {}] })</li>
+<li>$and: find({ $and: [ {}, {}]})</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">db.rooms.find(<br>  &#123;<br>    <span class="hljs-attr">$and</span>: [<br>      &#123; <span class="hljs-attr">price</span>: &#123; <span class="hljs-attr">$lte</span>: <span class="hljs-number">1500</span> &#125;&#125;,<br>      &#123; <span class="hljs-attr">rating</span>: &#123; <span class="hljs-attr">$gte</span>: <span class="hljs-number">4.5</span> &#125;&#125;<br>    ]<br>  &#125;<br>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 模糊搜尋  name 裡面含有 c 字元的 document</span><br>db.collections.find(&#123; name: /c/ &#125;)<br><span class="hljs-comment"># Project 保護欄位，隱藏 _id</span><br>db.posts.find(&#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Hazel&quot;</span> &#125;,&#123;<span class="hljs-string">&quot;_id&quot;</span>:0&#125;)<br><span class="hljs-comment"># 搜尋陣列裡面的值</span><br>db.posts.find(&#123;<span class="hljs-string">&quot;payment&quot;</span>:&#123; <span class="hljs-variable">$in</span>:[<span class="hljs-string">&quot;信用卡&quot;</span>] &#125;&#125;)<br><br><span class="hljs-comment"># 查詢 陣列裡的值，有 謎因 或(or) 幹話 的 document 列表</span><br>db.posts.find(&#123;<br>  <span class="hljs-variable">$or</span>: [<br>    &#123; tags: &#123; <span class="hljs-variable">$in</span>: [<span class="hljs-string">&quot;謎因&quot;</span>]&#125;&#125;,<br>    &#123; tags: &#123; <span class="hljs-variable">$in</span>: [<span class="hljs-string">&quot;幹話&quot;</span>]&#125;&#125;<br>  ]<br>&#125;)<br><br><span class="hljs-comment"># 查詢 comments 有超過 500(含)以上的 document 列表</span><br>db.posts.find(&#123; comments: &#123; <span class="hljs-variable">$gte</span>: 500 &#125;&#125;)<br><span class="hljs-comment"># 查詢`name` 欄位為 `&quot;Hazel&quot;` ，filter 篩選出介於 500~1000(含) 個讚</span><br>db.posts.find(<br>  &#123; <span class="hljs-variable">$and</span>: [<br>    &#123; name: <span class="hljs-string">&quot;Hazel&quot;</span> &#125;,<br>    &#123; likes: &#123; <span class="hljs-variable">$gte</span>: 500 &#125;&#125;,<br>    &#123; likes: &#123; <span class="hljs-variable">$lte</span>: 1000 &#125;&#125;<br>  ]&#125;<br>)<br><span class="hljs-comment"># 查詢 name: Hazel，排序由新到舊</span><br>db.posts<br>  .find(&#123; name: <span class="hljs-string">&quot;Hazel&quot;</span> &#125;)<br>  .sort(&#123; createdAt: -1&#125;)<br><br><span class="hljs-comment"># name: Hazel，只顯示前 30 筆資料</span><br>db.posts.find(&#123; name: <span class="hljs-string">&quot;Hazel&quot;</span> &#125;).<span class="hljs-built_in">limit</span>(30)<br><span class="hljs-comment"># 移除 tags 陣列裡的情緒資料 $pull</span><br>db.posts.updateMany(<br>  &#123; tags: &#123; <span class="hljs-variable">$in</span>: [<span class="hljs-string">&quot;感情&quot;</span>] &#125;&#125;,<br>  &#123; <span class="hljs-variable">$pull</span>: &#123; <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-string">&quot;感情&quot;</span> &#125;&#125;<br>)<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Mongodb/">Mongodb</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Node%E6%A8%A1%E7%B5%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nodejs模組</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Dapp-Wagmi%E4%B8%B2%E6%8E%A5/">
+                        <span class="hidden-mobile">Dapp Wagmi串接</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://wualnz.com/MongoDB/';
+          this.page.identifier = '/MongoDB/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">載入天數...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            總訪問量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            總訪客數 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-109679233-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
