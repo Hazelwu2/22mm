@@ -75,3 +75,6 @@ Arguments: ls-remote --tags --heads ssh://git@github.com/ethereumjs/ethereumjs-a
 // after
 "resolved": "git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0"
 ```
+
+## Reference
+- [ethereumjs-abi Error can not install](https://github.com/ethereumjs/ethereumjs-abi/issues/67)
