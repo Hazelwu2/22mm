@@ -16,20 +16,21 @@
   <meta name="description" content="在開發戰場上混亂之餘，做的功課隨手寫下並commit，於是有了這裡 22 ‘mm">
   <meta name="author" content="Hazel Wu">
   <meta name="keywords" content="">
-  <meta name="description" content="[Vercel] Vercel 部署失敗，Host key verification failed 解決方式前幾天在用 sideproject，透過 vercel 部署，前幾次都成功，直到有次部署翻船了，出現錯誤訊息 Host key verification failed這篇紀錄詳細解決方式、問題發生原因 完整錯誤訊息如下：123456789101112131415161718192021222">
+  <meta name="description" content="Vscode 有個功能，Launching from the command line，在終端機移動到專案資料夾，輸入 code .，即可開啟 vscode 該專案目錄 最近遇到一個問題很煩人，每次重開機，終端機輸入 code .，會失效，需要重新安裝，找到解決方案，在此寫下這篇文章 解決方式終端機會有常用習慣的 bash 或 zsh 等，例黑手常用的是 Mac iterm2 使用 zsh，可以直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vercel 部署失敗，Host key verification failed">
-<meta property="og:url" content="http://wualnz.com/Vercel-%E9%83%A8%E7%BD%B2%E5%A4%B1%E6%95%97%EF%BC%8CHost-key-verification-failed/index.html">
+<meta property="og:title" content="Vscode code重開機後指令失效">
+<meta property="og:url" content="http://wualnz.com/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/index.html">
 <meta property="og:site_name" content="Hazel Wu | 22&#39;mm">
-<meta property="og:description" content="[Vercel] Vercel 部署失敗，Host key verification failed 解決方式前幾天在用 sideproject，透過 vercel 部署，前幾次都成功，直到有次部署翻船了，出現錯誤訊息 Host key verification failed這篇紀錄詳細解決方式、問題發生原因 完整錯誤訊息如下：123456789101112131415161718192021222">
+<meta property="og:description" content="Vscode 有個功能，Launching from the command line，在終端機移動到專案資料夾，輸入 code .，即可開啟 vscode 該專案目錄 最近遇到一個問題很煩人，每次重開機，終端機輸入 code .，會失效，需要重新安裝，找到解決方案，在此寫下這篇文章 解決方式終端機會有常用習慣的 bash 或 zsh 等，例黑手常用的是 Mac iterm2 使用 zsh，可以直">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-06-13T16:43:14.000Z">
-<meta property="article:modified_time" content="2022-06-13T16:54:03.715Z">
+<meta property="og:image" content="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png">
+<meta property="article:published_time" content="2022-06-15T09:35:45.000Z">
+<meta property="article:modified_time" content="2022-06-15T09:49:33.395Z">
 <meta property="article:author" content="Hazel Wu">
-<meta property="article:tag" content="cercel">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png">
   
-  <title>Vercel 部署失敗，Host key verification failed - Hazel Wu | 22&#39;mm</title>
+  <title>Vscode code重開機後指令失效 - Hazel Wu | 22&#39;mm</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -187,7 +188,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Vercel 部署失敗，Host key verification failed">
+            <span class="h2" id="subtitle" title="Vscode code重開機後指令失效">
               
             </span>
 
@@ -197,8 +198,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-14 00:43" pubdate>
-        2022年6月14日 凌晨
+      <time datetime="2022-06-15 17:35" pubdate>
+        2022年6月15日 下午
       </time>
     </span>
   
@@ -208,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      1k 字
     </span>
   
 
@@ -217,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7 分鐘
+      3 分鐘
     </span>
   
 
@@ -246,20 +247,23 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Vercel 部署失敗，Host key verification failed</h1>
+            <h1 style="display: none">Vscode code重開機後指令失效</h1>
             
             <div class="markdown-body">
-              <h1 id="Vercel-Vercel-部署失敗，Host-key-verification-failed-解決方式"><a href="#Vercel-Vercel-部署失敗，Host-key-verification-failed-解決方式" class="headerlink" title="[Vercel] Vercel 部署失敗，Host key verification failed 解決方式"></a>[Vercel] Vercel 部署失敗，Host key verification failed 解決方式</h1><p>前幾天在用 sideproject，透過 vercel 部署，前幾次都成功，直到有次部署翻船了，出現錯誤訊息 Host key verification failed<br>這篇紀錄詳細解決方式、問題發生原因</p>
-<p>完整錯誤訊息如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash">Cloning github.com/Hazelwu2/CoolProposal (Branch: <span class="hljs-built_in">test</span>/cicd, Commit: b868754)<br>Cloning completed: 464.111ms<br>Looking up build cache...<br>Build Cache not found<br>Running <span class="hljs-string">&quot;vercel build&quot;</span><br>Vercel CLI 25.1.0 build (beta) — https://vercel.com/feedback<br>Installing dependencies...<br>yarn install v1.22.17<br>warning package.json: No license field<br>warning ../package.json: No license field<br>warning package-lock.json found. Your project contains lock files generated by tools other than Yarn. It is advised not to mix package managers <span class="hljs-keyword">in</span> order to avoid resolution inconsistencies caused by unsynchronized lock files. To clear this warning, remove package-lock.json.<br>warning f2e@0.1.0: No license field<br>[1/4] Resolving packages...<br>[2/4] Fetching packages...<br>error Command failed.<br>Exit code: 128<br>Command: git<br>Arguments: ls-remote --tags --heads ssh://git@github.com/ethereumjs/ethereumjs-abi.git<br>Directory: /vercel/path0/f2e<br>Output:<br>Host key verification failed.<br>fatal: Could not <span class="hljs-built_in">read</span> from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br>info Visit https://yarnpkg.com/en/docs/cli/install <span class="hljs-keyword">for</span> documentation about this <span class="hljs-built_in">command</span>.<br>Error! Command <span class="hljs-string">&quot;yarn install&quot;</span> exited with 128<br><br>Error: Command <span class="hljs-string">&quot;vercel build&quot;</span> exited with 1<br><br></code></pre></td></tr></table></figure></p>
-<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">Host <span class="hljs-keyword">key</span> verification failed.<br><span class="hljs-symbol">fatal:</span> Could <span class="hljs-built_in">not</span> read <span class="hljs-keyword">from</span> remote repository.<br></code></pre></td></tr></table></figure>
-<p>看到 Log 上面兩行，本以為是 ssh key 設定錯誤導致權限不足，做了幾個改變，像是邀請其他人到我的 github 專案協作，但問題依舊沒有解決！</p>
-<p>耐心重看一遍 Log，找到了癥結點<br>Log訊息出現<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Arguments: ls-remote --tags --heads ssh:<span class="hljs-regexp">//gi</span>t@github.com<span class="hljs-regexp">/ethereumjs/</span>ethereumjs-abi.git<br></code></pre></td></tr></table></figure><br>在我的案例中安裝了 <code>ethers.js</code> 套件，也有另外安裝依賴的套件 <code>ethereumjs-abi</code><br>在安裝 <code>ethereumjs-abi</code> 發生問題！查了 Google 發現超多人有這個案例，只要透過 CICD 部署，不管是 Vercel、Gitlab 等等部署工具，只要用 <code>npm install</code> 跑過，部署就會出現以上的問題</p>
-<h2 id="解決方式"><a href="#解決方式" class="headerlink" title="解決方式"></a>解決方式</h2><p>將 <code>yarn.lock</code> 或 <code>package.lock</code> 移除，並改用 <code>yarn</code> 安裝，不要使用 <code>npm install</code></p>
-<p>之所以會發生此問題，我另外一位協作者是 Windows 系統，電腦沒有安裝 Yarn，為了求快速是用 npm 來安裝套件，沒想到就這樣翻船了…<br>結論：同一專案協作者還是要說好，使用同一套的系統，yarn或npm</p>
-<p>另一個解決方式是，開啟 <code>yarn.lock</code> 或 <code>package.lock</code>，找到 <code>ethereumjs-abi</code>，將 <code>https://</code> 取代 <code>git+ssh://</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// before</span><br><span class="hljs-string">&quot;resolved&quot;</span>: <span class="hljs-string">&quot;https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz&quot;</span><br><span class="hljs-comment">// after</span><br><span class="hljs-string">&quot;resolved&quot;</span>: <span class="hljs-string">&quot;git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0&quot;</span><br></code></pre></td></tr></table></figure>
+              <p>Vscode 有個功能，Launching from the command line，在終端機移動到專案資料夾，輸入 <code>code .</code>，即可開啟 vscode 該專案目錄<br><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" srcset="/img/loading.gif" lazyload alt="Vscode Shell Command"></p>
+<p>最近遇到一個問題很煩人，每次重開機，終端機輸入 <code>code .</code>，會失效，需要重新安裝，找到解決方案，在此寫下這篇文章</p>
+<h2 id="解決方式"><a href="#解決方式" class="headerlink" title="解決方式"></a>解決方式</h2><p>終端機會有常用習慣的 <code>bash</code> 或 <code>zsh</code> 等，例黑手常用的是 Mac iterm2 使用 <code>zsh</code>，可以直接開啟 <code>zshrc</code> 或 <code>zprofile</code> 手動設定指令</p>
+<p>指令來自<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">Vscode官方文件</a></p>
+<h3 id="zsh-是什麼？"><a href="#zsh-是什麼？" class="headerlink" title="zsh 是什麼？"></a>zsh 是什麼？</h3><p>大多數人使用 mac 都會用 zsh 而非 bash，因為 oh-my-zsh 這個工具兼容了 bash之外，還擴充了自動補全、背景主題好看的樣式等功能<br><a target="_blank" rel="noopener" href="https://ohmyz.sh/">zsh官網</a></p>
+<p>Mac 通常 .bashrc, .zshrc 等檔案皆會放在 <code>~/</code> 目錄下，例如 <code>/.zshrc</code>,  <code>~/.bashrc</code></p>
+<h3 id="zsh-設定"><a href="#zsh-設定" class="headerlink" title="zsh 設定"></a>zsh 設定</h3><p>在終端機輸入以下指令，會將 export PATH 自動加入在 <code>~/.zprofile</code> 內<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat &lt;&lt; <span class="hljs-string">EOF &gt;&gt; ~/.zprofile</span><br><span class="hljs-string"># Add Visual Studio Code (code)</span><br><span class="hljs-string">export PATH=&quot;\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin&quot;</span><br><span class="hljs-string">EOF</span><br></code></pre></td></tr></table></figure></p>
+<h3 id="bash-設定"><a href="#bash-設定" class="headerlink" title="bash 設定"></a>bash 設定</h3><p>在終端機輸入以下指令，會將 export PATH 自動加入在 <code>~/.bash_profile</code> 內<br><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">cat <span class="hljs-symbol">&lt;&lt; EOF &gt;&gt;</span> ~/.bash_profile<br># <span class="hljs-keyword">Add</span> Visual Studio Code (code)<br>export <span class="hljs-type">PATH</span>=&quot;\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin&quot;<br>EOF<br></code></pre></td></tr></table></figure></p>
+<p>輸入完後，可以測試看看，重新開機後在終端機輸入 <code>code .</code>，設定成功的話便會成功開啟 Vscode 囉 </p>
+<p>如果問題還沒有解決，參考別人的案例，也有可能是 Vscode 不是安裝在應用程式(Application)資料夾下，而是安裝在 下載(Download)資料夾，導致無法開啟。</p>
+<p>將 Vscode 重新安裝，並移動到 Application，也許可以解決你的問題</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/ethereumjs/ethereumjs-abi/issues/67">ethereumjs-abi Error can not install</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">Launching from the command line</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/42051">VSCode Shell Commands not retaining install status in $PATH after restart </a></li>
 </ul>
 
             </div>
@@ -267,20 +271,6 @@
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/vercel/">vercel</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/cercel/">cercel</a>
-                    
-                  </div>
                 
               </div>
               
@@ -295,18 +285,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vscode code重開機後指令失效</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Express-%E6%96%B0%E6%89%8B%E6%95%99%E5%AD%B8%EF%BC%8C%E8%B5%B7%E6%AD%A5%E8%B5%B0/">
-                        <span class="hidden-mobile">Express 新手教學，起步走</span>
+                      <a href="/Vercel-%E9%83%A8%E7%BD%B2%E5%A4%B1%E6%95%97%EF%BC%8CHost-key-verification-failed/">
+                        <span class="hidden-mobile">Vercel 部署失敗，Host key verification failed</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -328,8 +312,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'http://wualnz.com/Vercel-%E9%83%A8%E7%BD%B2%E5%A4%B1%E6%95%97%EF%BC%8CHost-key-verification-failed/';
-          this.page.identifier = '/Vercel-%E9%83%A8%E7%BD%B2%E5%A4%B1%E6%95%97%EF%BC%8CHost-key-verification-failed/';
+          this.page.url = 'http://wualnz.com/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/';
+          this.page.identifier = '/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
