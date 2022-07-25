@@ -4,6 +4,32 @@
   
   
   <entry>
+    <title>VxeTable導出xlsx</title>
+    <link href="/VxeTable%E5%B0%8E%E5%87%BAxlsx-1/"/>
+    <url>/VxeTable%E5%B0%8E%E5%87%BAxlsx-1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VxeTable導出xlsx</title>
+    <link href="/VxeTable%E5%B0%8E%E5%87%BAxlsx/"/>
+    <url>/VxeTable%E5%B0%8E%E5%87%BAxlsx/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VexTable"><a href="#VexTable" class="headerlink" title="VexTable"></a>VexTable</h1><p>Vue2 搭配 VexTable 並導出 data，但 VxeTable 的導出功能 exportData 不支援 xlsx<br>本以為沒事照樣導出 csv，但後面導出的 csv 發現 number型態會額外被多加一段空白<br>死當活馬醫的心態，改裝套件 xlsx</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Vscode code重開機後指令失效</title>
     <link href="/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/"/>
     <url>/Vscode-code%E9%87%8D%E9%96%8B%E6%A9%9F%E5%BE%8C%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/</url>
@@ -535,7 +561,7 @@
     <link href="/Git-%E5%AF%AB%E4%B8%80%E5%80%8B%E5%A5%BD%E7%9A%84-Commit-Message/"/>
     <url>/Git-%E5%AF%AB%E4%B8%80%E5%80%8B%E5%A5%BD%E7%9A%84-Commit-Message/</url>
     
-    <content type="html"><![CDATA[<ul><li>區分標題(Subject)與內容(body)，用一個斷行符合隔開</li></ul><h2 id="Subject-標題"><a href="#Subject-標題" class="headerlink" title="Subject 標題"></a>Subject 標題</h2><ol><li>首字大寫</li><li>標題不要超過 50 字，若超過50字，表示你這次 commit 太多東西，最好分拆開來</li><li>標題結尾不需要用句號來結尾</li></ol><h2 id="Body-內容"><a href="#Body-內容" class="headerlink" title="Body 內容"></a>Body 內容</h2><ol><li>每一行的內容控制在 72 字內</li><li>用內容來詳細解釋這個 commit 做了什麼</li></ol>]]></content>
+    <content type="html"><![CDATA[<ul><li>區分標題(Subject)與內容(body)，用一個斷行符合隔開</li></ul><h2 id="Commit-分類"><a href="#Commit-分類" class="headerlink" title="Commit 分類"></a>Commit 分類</h2><ul><li>feat：功能，例：feat: 完成登入功能</li><li>fix：bug，例：fix: 修復登入頁面顯示錯誤</li><li>hotfix: 緊急，例：hotfix: 緊急修復無法登入</li><li>docs: 文檔，例：docs: 修改 README</li><li>style: 不影響程式碼的前提下修改，像是空格、格式、斷行、缺少分號等。例：style: 刪除空格、斷行、刪除 console</li><li>perf: 提高性能程式碼</li><li>test: 添加缺少測試或糾正現有測試，例：test: 添加登入頁測試</li><li>build: 修改打包的部分，例：build: 修改 vercel 打包設定</li><li>ci: 修改 CI 的設定，例：ci: 修改 drone.yml 檔</li><li>refactor: 重構程式碼，不修改錯誤、功能。例：refactor: 添加 .gitignore</li><li>revert: 還原到之前的紀錄。例: revert: #62</li></ul><h2 id="多行-commit"><a href="#多行-commit" class="headerlink" title="多行 commit"></a>多行 commit</h2><p>git commit -m 用單引號來換行<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">git commit -m &#x27;<br><span class="hljs-bullet">1.</span> feat: 完成註冊切版<br><span class="hljs-bullet">2.</span> feat: 完成註冊串接API<br>&#x27;<br></code></pre></td></tr></table></figure></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul><li><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a></li><li><a href="https://juejin.cn/post/6844904014983725064">git规范</a></li><li><a href="https://blog.csdn.net/qq_37858386/article/details/82768598">GIT如何使用 git commit -m 命令写多行注释的方法</a></li><li><a href="https://www.rockyourcode.com/til-about-adding-a-new-line-to-git-commit-m/">TIL About Adding a New Line to “git commit -m”</a></li></ul>]]></content>
     
     
     
